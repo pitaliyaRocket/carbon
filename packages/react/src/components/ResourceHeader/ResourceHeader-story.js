@@ -16,7 +16,7 @@ const props = {
   }),
 };
 
-storiesOf('ResourceHeader', module)
+storiesOf('Pattern|ResourceHeader', module)
   .addDecorator(withKnobs)
   .add(
     'Page Header',

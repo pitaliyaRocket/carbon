@@ -30,7 +30,7 @@ const props = {
 
 SplitButton.displayName = 'Button';
 
-storiesOf('Button - SplitButton', module)
+storiesOf('Pattern|SplitButton', module)
   .addDecorator(withKnobs)
   .add(
     'Default',

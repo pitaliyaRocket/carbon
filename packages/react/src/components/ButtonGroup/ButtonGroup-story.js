@@ -28,7 +28,7 @@ const props = {
   },
 };
 
-storiesOf('ButtonGroup', module)
+storiesOf('Pattern|ButtonGroup', module)
   .addDecorator(withKnobs)
   .add(
     'Default',
