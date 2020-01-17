@@ -10,7 +10,7 @@ import { configure, addDecorator, addParameters } from '@storybook/react';
 import addons from '@storybook/addons';
 import { withInfo } from '@storybook/addon-info';
 import { configureActions } from '@storybook/addon-actions';
-// import { checkA11y } from 'storybook-addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 import {
   CARBON_CURRENT_THEME,
   CARBON_TYPE_TOKEN,
@@ -21,14 +21,11 @@ const customPropertyPrefix = 'cds';
 
 addDecorator(
   withInfo({
-    // styles: {
-    //   children: {
-    //     width: '100%',
-    //   },
-    // },
     maxPropStringLength: 200, // Displays the first 200 characters in the default prop string
   })
 );
+
+addDecorator(withA11y);
 
 addParameters({
   options: {

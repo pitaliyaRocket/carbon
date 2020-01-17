@@ -2,7 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
-import { withA11y } from '@storybook/addon-a11y';
 import SplitButton from '../SplitButton';
 import OverflowMenuItem from '../OverflowMenuItem';
 
@@ -32,7 +31,6 @@ const props = {
 SplitButton.displayName = 'Button';
 
 storiesOf('Button - SplitButton', module)
-  .addDecorator(withA11y)
   .addDecorator(withKnobs)
   .add(
     'Default',
