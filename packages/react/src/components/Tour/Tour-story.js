@@ -63,7 +63,7 @@ const steps = {
   ],
 };
 
-storiesOf('Experimental|Tour', module)
+storiesOf('Pattern|Tour', module)
   .add('default', () => (
     <>
       {targets}

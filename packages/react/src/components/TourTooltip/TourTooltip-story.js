@@ -14,7 +14,7 @@ const props = {
   }),
 };
 
-storiesOf('Experimental|TourTooltip', module)
+storiesOf('Pattern|TourTooltip', module)
   .addDecorator(withKnobs)
   .add('default', () => <TourTooltip {...props.default()} />)
   .add('custom labels', () => (
