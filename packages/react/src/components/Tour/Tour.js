@@ -1,5 +1,5 @@
 import React from 'react';
-import { Walktour } from 'walktour';
+import { Walktour } from '@rocketsoftware/walktour';
 import TourTooltip from '../TourTooltip';
 import PropTypes from 'prop-types';
 

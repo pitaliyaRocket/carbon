@@ -434,7 +434,7 @@
   - [❌carbon-header [mixin]](#carbon-header-mixin)
   - [❌carbon-navigation [mixin]](#carbon-navigation-mixin)
   - [❌product-switcher [mixin]](#product-switcher-mixin)
-  - [❌text-overflow [mixin]](#text-overflow-mixin)
+  - [❌shell-text-overflow [mixin]](#shell-text-overflow-mixin)
   - [❌expanded [mixin]](#expanded-mixin)
   - [❌carbon-side-nav [mixin]](#carbon-side-nav-mixin)
   - [❌carbon-switcher [mixin]](#carbon-switcher-mixin)
@@ -15202,7 +15202,6 @@ Data table core styles
 
 - **Group**: [data-table](#data-table)
 - **Requires**:
-  - [text-overflow [mixin]](#text-overflow-mixin)
   - [prefix [variable]](#prefix-variable)
   - [spacing-01 [variable]](#spacing-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -24768,7 +24767,7 @@ UI shell product switcher
   - [shell-header-link [variable]](#shell-header-link-variable)
   - [shell-header-text-02 [variable]](#shell-header-text-02-variable)
 
-### ❌text-overflow [mixin]
+### ❌shell-text-overflow [mixin]
 
 Helper to add in text overflow styles to a particular node. Useful if we don't
 want to have display-inline: block from the text helper classes
@@ -24777,7 +24776,7 @@ want to have display-inline: block from the text helper classes
 <summary>Source code</summary>
 
 ```scss
-@mixin text-overflow() {
+@mixin shell-text-overflow() {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -24801,7 +24800,6 @@ want to have display-inline: block from the text helper classes
 
 - **Group**: [ui-shell](#ui-shell)
 - **Used by**:
-  - [data-table-core [mixin]](#data-table-core-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ❌expanded [mixin]
@@ -25005,7 +25003,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__title {
-    @include text-overflow();
+    @include shell-text-overflow();
 
     // TODO: sync with type styles
     font-size: rem(14px);
@@ -25188,7 +25186,7 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__submenu-title {
-    @include text-overflow();
+    @include shell-text-overflow();
     text-align: left;
   }
 
@@ -25323,7 +25321,7 @@ UI shell side nav
   .#{$prefix}--side-nav
     a.#{$prefix}--header__menu-item[role='menuitem']
     .#{$prefix}--text-truncate-end {
-    @include text-overflow();
+    @include shell-text-overflow();
     color: $text-04;
     font-size: rem(14px);
     letter-spacing: 0.1px;
@@ -25511,7 +25509,7 @@ UI shell side nav
 - **Requires**:
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [expanded [mixin]](#expanded-mixin)
-  - [text-overflow [mixin]](#text-overflow-mixin)
+  - [shell-text-overflow [mixin]](#shell-text-overflow-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [text-04 [variable]](#text-04-variable)

@@ -2725,6 +2725,11 @@
   dependencies:
     "@rocketsoftware/icon-helpers" "0.0.7"
 
+"@rocketsoftware/walktour@^4.3.2":
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/walktour/-/walktour-4.3.2.tgz#f8af9c01521715576f69ac41109c273756335f32"
+  integrity sha512-QI/NDCsmiHKyjG1o2iRlUkZiMLKboi8qsFy+a40Sa+kukG19cwqdV8EhfR1nnvejPRLfk9vJWWioJnTMIwHP+A==
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -23903,11 +23908,6 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
-
-walktour@^4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/walktour/-/walktour-4.3.1.tgz#18d765e087687b15fccaf5b98e15256b2fccc018"
-  integrity sha512-ip/O8RPQWLZaimCv+b2YPyDYhewNS8ck3h24QW8g68urpjc0bmf+scrWMflK3WFIVlLKMqhSrlkYRuGrcsMzGw==
 
 warning-symbol@^0.1.0:
   version "0.1.0"
