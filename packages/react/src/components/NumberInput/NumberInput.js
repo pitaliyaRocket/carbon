@@ -82,6 +82,10 @@ class NumberInput extends Component {
      */
     label: PropTypes.node,
     /**
+     * Specify whether you want the user input to be restricted to [min, max]
+     */
+    enforceValidation: PropTypes.bool,
+    /**
      * The maximum value.
      */
     max: PropTypes.number,
@@ -159,6 +163,7 @@ class NumberInput extends Component {
   static defaultProps = {
     disabled: false,
     hideLabel: false,
+    enforceValidation: false,
     iconDescription: 'choose a number',
     label: ' ',
     step: 1,
@@ -190,11 +195,18 @@ class NumberInput extends Component {
   }
 
   handleChange = evt => {
-    const { disabled, onChange } = this.props;
+    const { disabled, onChange, min, max, enforceValidation } = this.props;
     if (!disabled) {
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
-      const value = evt.target.value;
+      let value = evt.target.value;
+      if (enforceValidation) {
+        if (value > max) {
+          value = max;
+        } else if (value < min) {
+          value = min;
+        }
+      }
       this.setState(
         {
           value,
@@ -255,6 +267,7 @@ class NumberInput extends Component {
     const {
       className,
       disabled,
+      enforceValidation,
       iconDescription, // eslint-disable-line
       id,
       hideLabel,
@@ -292,6 +305,7 @@ class NumberInput extends Component {
       id,
       max,
       min,
+      enforceValidation,
       step,
       onChange: this.handleChange,
       value:
