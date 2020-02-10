@@ -14,6 +14,7 @@ import TooltipDefinition from '../TooltipDefinition';
 const directions = {
   'Bottom (bottom)': 'bottom',
   'Top (top)': 'top',
+  'Middle (middle)': 'middle',
 };
 
 const alignments = {

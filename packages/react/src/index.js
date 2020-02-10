@@ -13,6 +13,7 @@ export Card from './components/Card';
 export CardActionItem from './components/CardActionItem';
 export CardActions from './components/CardActions';
 export CardContent from './components/CardContent';
+export CardContentItem from './components/CardContentItem';
 export CardFooter from './components/CardFooter';
 export CardStatus from './components/CardStatus';
 export Checkbox from './components/Checkbox';

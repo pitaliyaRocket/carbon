@@ -224,6 +224,10 @@
       top: 50%;
       left: 0;
     }
+    @if ($position == 'middle') {
+      top: 0;
+      left: 0;
+    }
   }
 
   &::before {
@@ -295,6 +299,17 @@
       left: -$body-spacing;
       transform: translate(-100%, -50%);
     }
+    @if ($position == 'middle') {
+      left: 0;
+      transform: translate(0, 0);
+      white-space: nowrap;
+      max-width: unset;
+    }
+  }
+
+  .#{$prefix}--definition-text__span {
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   // @todo simplify on next major release to move the ::before pseudo element within the tooltip instead of the trigger

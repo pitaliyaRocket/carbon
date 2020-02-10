@@ -21,6 +21,7 @@ const TooltipDefinition = ({
   direction,
   align,
   tooltipText,
+  assistiveTextClassName,
   ...rest
 }) => {
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
@@ -39,15 +40,17 @@ const TooltipDefinition = ({
       [`${prefix}--tooltip--align-${align}`]: align,
     }
   );
+
+  const assistiveTextClasses = cx(
+    `${prefix}--assistive-text`,
+    assistiveTextClassName
+  );
   return (
     <div {...rest} className={tooltipClassName}>
       <button className={tooltipTriggerClasses} aria-describedby={tooltipId}>
         {children}
       </button>
-      <div
-        className={`${prefix}--assistive-text`}
-        id={tooltipId}
-        role="tooltip">
+      <div className={assistiveTextClasses} id={tooltipId} role="tooltip">
         {tooltipText}
       </div>
     </div>
@@ -59,7 +62,8 @@ TooltipDefinition.propTypes = {
    * Specify the tooltip trigger text that is rendered to the UI for the user to
    * interact with in order to display the tooltip.
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    .isRequired,
 
   /**
    * The CSS class name of the trigger element
@@ -69,7 +73,7 @@ TooltipDefinition.propTypes = {
   /**
    * Specify the direction of the tooltip. Can be either top or bottom.
    */
-  direction: PropTypes.oneOf(['top', 'bottom']),
+  direction: PropTypes.oneOf(['top', 'bottom', 'middle']),
 
   /**
    * Specify the alignment (to the trigger button) of the tooltip.
@@ -88,6 +92,11 @@ TooltipDefinition.propTypes = {
    * TODO: rename this prop (will be a breaking change)
    */
   tooltipText: PropTypes.node.isRequired,
+
+  /**
+   * The class name to be added to the assistive popup text
+   */
+  assistiveTextClassName: PropTypes.string,
 };
 
 TooltipDefinition.defaultProps = {

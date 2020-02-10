@@ -521,6 +521,23 @@
     }
   }
 
+  .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition.#{$prefix}--tooltip--middle {
+    @include tooltip--trigger('definition', 'middle');
+    @include tooltip--placement('definition', 'middle', 'start');
+
+    &.#{$prefix}--tooltip--align-start {
+      @include tooltip--placement('definition', 'middle', 'start');
+    }
+
+    &.#{$prefix}--tooltip--align-center {
+      @include tooltip--placement('definition', 'middle', 'start');
+    }
+
+    &.#{$prefix}--tooltip--align-end {
+      @include tooltip--placement('definition', 'middle', 'start');
+    }
+  }
+
   // Tooltip Icon
 
   /* begin tooltip icon (TODO: deprecate) */

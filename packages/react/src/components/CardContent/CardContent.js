@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon';
+
 const CardContent = ({
   className,
   children,
@@ -9,9 +10,12 @@ const CardContent = ({
   cardTitle,
   cardLink,
   cardInfo,
+  cardContentItems,
   iconDescription,
   ...other
 }) => {
+  const cardContentRef = useRef(null);
+
   const cardContentClasses = classNames({
     'bx--card__card-overview': true,
     [className]: className,
@@ -33,11 +37,19 @@ const CardContent = ({
       ))
     : '';
 
+  const cardItems = cardContentItems
+    ? React.Children.map(cardContentItems, item => {
+        if (React.isValidElement(item)) {
+          return React.cloneElement(item, { cardContentRef });
+        }
+      })
+    : null;
+
   const cardLinkContentArray = Object.keys(cardLinkContent);
   const cardInfoContentArray = Object.keys(cardInfoContent);
 
   return (
-    <div {...other} className={cardContentClasses}>
+    <div {...other} ref={cardContentRef} className={cardContentClasses}>
       {children}
       <div className="bx--card-overview__about">
         {cardIcon !== null ? (
@@ -56,6 +68,7 @@ const CardContent = ({
           </p>
           {cardLinkContentArray.map((info, key) => cardLinkContent[key])}
           {cardInfoContentArray.map((info, key) => cardInfoContent[key])}
+          {cardItems}
         </div>
       </div>
     </div>
@@ -75,6 +88,10 @@ CardContent.propTypes = {
   cardInfo: PropTypes.array,
   className: PropTypes.string,
   iconDescription: PropTypes.string,
+  cardContentItems: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 CardContent.defaultProps = {

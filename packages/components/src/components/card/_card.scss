@@ -186,4 +186,12 @@
     fill: $ui-05;
     cursor: pointer;
   }
+  .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition.#{$prefix}--tooltip--middle.#{$prefix}--card-text__overflow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+    border-bottom: hidden;
+    letter-spacing: 0;
+  }
 }

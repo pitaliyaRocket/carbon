@@ -27,6 +27,7 @@ describe('Carbon Components React', () => {
         "CardActionItem",
         "CardActions",
         "CardContent",
+        "CardContentItem",
         "CardFooter",
         "CardStatus",
         "Checkbox",
