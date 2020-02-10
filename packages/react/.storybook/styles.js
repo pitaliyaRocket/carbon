@@ -47,3 +47,4 @@ import '@rocketsoftware/carbon-components/src/components/resource-header/_resour
 import '@rocketsoftware/carbon-components/src/components/tour-tooltip/_tour-tooltip.scss';
 import '@rocketsoftware/carbon-components/src/components/split-button/_split-button.scss';
 import '@rocketsoftware/carbon-components/src/components/button-group/_button-group.scss';
+import '@rocketsoftware/carbon-components/src/components/footer-wrapper/_footer-wrapper.scss';
