@@ -48,3 +48,4 @@ import '@rocketsoftware/carbon-components/src/components/tour-tooltip/_tour-tool
 import '@rocketsoftware/carbon-components/src/components/split-button/_split-button.scss';
 import '@rocketsoftware/carbon-components/src/components/button-group/_button-group.scss';
 import '@rocketsoftware/carbon-components/src/components/footer-wrapper/_footer-wrapper.scss';
+import '@rocketsoftware/carbon-components/src/components/flat-progress-indicator/_flat-progress-indicator.scss';

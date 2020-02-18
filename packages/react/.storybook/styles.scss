@@ -77,6 +77,7 @@ $prefix: 'bx';
 @import '~@rocketsoftware/carbon-components/src/components/tour-tooltip/_tour-tooltip';
 @import '~@rocketsoftware/carbon-components/src/components/split-button/_split-button';
 @import '~@rocketsoftware/carbon-components/src/components/button-group/_button-group';
+@import '~@rocketsoftware/carbon-components/src/components/flat-progress-indicator/_flat-progress-indicator';
 
 @if feature-flag-enabled('enable-css-custom-properties') {
   :root {
