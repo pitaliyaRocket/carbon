@@ -78,7 +78,6 @@ exports[`Dropdown should render 1`] = `
           id="dropdown-1"
           onClick={[Function]}
           onKeyDown={[Function]}
-          role="listbox"
           tabIndex="-1"
         >
           <ListBoxField
@@ -253,7 +252,6 @@ exports[`Dropdown should render custom item components 1`] = `
           id="dropdown-5"
           onClick={[Function]}
           onKeyDown={[Function]}
-          role="listbox"
           tabIndex="-1"
         >
           <ListBoxField
@@ -587,7 +585,6 @@ exports[`Dropdown should render with strings as items 1`] = `
           id="dropdown-4"
           onClick={[Function]}
           onKeyDown={[Function]}
-          role="listbox"
           tabIndex="-1"
         >
           <ListBoxField
