@@ -310,8 +310,13 @@ export default class DataTable extends React.Component {
 
     // Otherwise, we're working on `TableSelectAll` which handles toggling the
     // selection state of all rows.
-    const rowCount = this.state.rowIds.length;
-    const selectedRowCount = this.getSelectedRows().length;
+    const filterValue = this.state.filterInputValue;
+    const rowCount = filterValue
+      ? this.getFilteredRowIds().length
+      : this.state.rowIds.length;
+    const selectedRowCount = filterValue
+      ? this.getFilteredAndSelectedRowIds().length
+      : this.getSelectedRows().length;
     const checked = rowCount > 0 && selectedRowCount === rowCount;
     const indeterminate =
       rowCount > 0 && selectedRowCount > 0 && selectedRowCount !== rowCount;
@@ -375,13 +380,24 @@ export default class DataTable extends React.Component {
 
   /**
    * Helper utility to get all the currently selected rows
-   * @returns {Array<string>} the array of rowIds that are currently selected
+   * returns {Array<string>} the array of rowIds that are currently selected
    */
   getSelectedRows = () =>
     this.state.rowIds.filter(id => {
       const row = this.state.rowsById[id];
       return row.isSelected;
     });
+
+  /**
+   * Helper utility to get all the currently selected rows after applying the filter
+   * @returns {Array<string>} the array of rowIds that are currently included by filter and selected
+   */
+  getFilteredAndSelectedRowIds = () => {
+    return this.getFilteredRowIds().filter(id => {
+      const row = this.state.rowsById[id];
+      return row.isSelected;
+    });
+  };
 
   /**
    * Helper utility to get all of the available rows after applying the filter
@@ -412,6 +428,19 @@ export default class DataTable extends React.Component {
   getTablePrefix = () => `data-table-${this.instanceId}`;
 
   /**
+   * Helper to determine the correct selected state to toggle a specific Item to
+   * @param {object} item a row object
+   * @param {boolean} isSelected bool for what desired state is
+   * @param {Array<string>} filteredRowIds array containing the currently filtered ids
+   * @returns {boolean} the isSelected State for a particular item
+   */
+  getSelectedState = (item, isSelected, filteredRowIds) => {
+    return !item.disabled && filteredRowIds.includes(item.id)
+      ? isSelected
+      : item.isSelected;
+  };
+
+  /**
    * Helper for toggling all selected items in a state. Does not call
    * setState, so use it when setting state.
    * @param {object} initialState
@@ -425,10 +454,11 @@ export default class DataTable extends React.Component {
           ...acc,
           [id]: {
             ...initialState.rowsById[id],
-            isSelected:
-              !initialState.rowsById[id].disabled &&
-              filteredRowIds.includes(id) &&
+            isSelected: this.getSelectedState(
+              initialState.rowsById[id],
               isSelected,
+              filteredRowIds
+            ),
           },
         }),
         {}
@@ -457,7 +487,9 @@ export default class DataTable extends React.Component {
       const filteredRowIds = this.getFilteredRowIds();
       const { rowsById } = state;
       const isSelected = !(
-        Object.values(rowsById).filter(row => row.isSelected == true).length > 0
+        Object.values(rowsById).filter(
+          row => row.isSelected == true && filteredRowIds.includes(row.id)
+        ).length > 0
       );
       return {
         shouldShowBatchActions: isSelected,
