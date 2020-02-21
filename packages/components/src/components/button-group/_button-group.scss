@@ -11,7 +11,7 @@
 @import 'mixins';
 
 .#{$prefix}--btn-group {
-  display: flex;
+  display: inline-flex;
   .#{$prefix}--overflow-menu {
     height: unset;
     width: unset;

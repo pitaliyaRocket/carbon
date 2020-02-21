@@ -36,7 +36,7 @@ storiesOf('Pattern|ButtonGroup', module)
       const regularProps = props.regular();
       return (
         <ButtonGroup {...regularProps}>
-          <OverflowMenuItem itemText={'Item 1'} />
+          <OverflowMenuItem primaryFocus itemText={'Item 1'} />
           <OverflowMenuItem itemText={'Item 2'} />
           <OverflowMenuItem itemText={'Item 3'} />
         </ButtonGroup>
