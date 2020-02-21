@@ -14,7 +14,7 @@
 @import '../overflow-menu/overflow-menu';
 
 .#{$prefix}--btn--split--container {
-  display: flex;
+  display: inline-flex;
 
   .#{$prefix}--btn--split--overflow {
     width: 3rem;
