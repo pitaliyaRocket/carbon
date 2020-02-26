@@ -390,6 +390,7 @@
   - [❌pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [❌pagination-nav [mixin]](#pagination-nav-mixin)
 - [progress-indicator](#progress-indicator)
+  - [❌flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [❌progress-indicator [mixin]](#progress-indicator-mixin)
 - [radio-button](#radio-button)
   - [❌radio-button [mixin]](#radio-button-mixin)
@@ -3222,6 +3223,7 @@ $carbon--spacing-03: 0.5rem;
   - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
@@ -3285,6 +3287,7 @@ $carbon--spacing-05: 1rem;
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [slider [mixin]](#slider-mixin)
@@ -3317,6 +3320,7 @@ $carbon--spacing-06: 1.5rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [lists [mixin]](#lists-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
 
@@ -5883,6 +5887,7 @@ $interactive-01: if(
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
@@ -6115,6 +6120,7 @@ $ui-03: if(
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -6191,6 +6197,7 @@ $ui-05: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
@@ -6238,6 +6245,7 @@ $text-01: if(
   - [multiselect [mixin]](#multiselect-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
@@ -6496,6 +6504,7 @@ $link-01: if(
   - [button [mixin]](#button-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
 
 ### ✅inverse-link [variable]
@@ -6626,6 +6635,7 @@ $inverse-01: if(
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tags [mixin]](#tags-mixin)
   - [tooltip--icon [mixin]](#tooltip--icon-mixin)
@@ -6698,6 +6708,7 @@ $support-01: if(
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [select [mixin]](#select-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -10155,6 +10166,7 @@ $prefix: 'bx';
   - [pagination [mixin]](#pagination-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
@@ -20173,6 +20185,300 @@ Pagination nav base styles
 
 ## progress-indicator
 
+### ❌flat-progress-indicator [mixin]
+
+Progress indicator styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin flat-progress-indicator() {
+  .#{$prefix}--flat-progress {
+    @include reset;
+    display: flex;
+    list-style: none;
+  }
+
+  .#{$prefix}--flat-progress-step {
+    position: relative;
+    display: inline-flex;
+    flex-direction: row;
+    min-width: 7rem;
+    width: rem(128px);
+    overflow: visible;
+
+    .#{$prefix}--tooltip__label {
+      display: block;
+    }
+  }
+
+  li.#{$prefix}--flat-progress-step:last-of-type
+    > div.#{$prefix}--flat-progress-step-button
+    > span.#{$prefix}--flat-progress-line {
+    display: none;
+  }
+
+  .#{$prefix}--flat-progress-line {
+    position: absolute;
+    left: 0;
+    height: 1px;
+    width: calc(100% - 12px);
+    margin-left: 14px;
+    border: $progress-indicator-bar-width;
+  }
+
+  .#{$prefix}--flat-progress-step svg {
+    position: relative;
+    z-index: 1;
+    width: $carbon--spacing-05;
+    height: $carbon--spacing-05;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    margin-top: -7px;
+    fill: $interactive-01;
+  }
+
+  .#{$prefix}--flat-progress-label {
+    @include type-style('body-short-01');
+    line-height: 1.45;
+    max-width: rem(112px);
+    margin: $carbon--spacing-03 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: box-shadow $duration--fast-02 motion(standard, productive), color
+        $duration--fast-02 motion(standard, productive);
+    margin-left: -0.875rem;
+
+    &::before {
+      content: '';
+      display: block;
+    }
+  }
+
+  .#{$prefix}--flat-progress-label:hover {
+    color: $link-01;
+    cursor: pointer;
+    box-shadow: 0 rem(1px) $link-01;
+  }
+
+  .#{$prefix}--flat-progress-label:focus {
+    outline: none;
+    color: $link-01;
+    box-shadow: 0 rem(3px) 0 0 $link-01;
+  }
+
+  .#{$prefix}--flat-progress-label:active {
+    color: $interactive-01;
+    box-shadow: 0 rem(3px) 0 0 $interactive-01;
+  }
+
+  //OVERFLOW STYLING
+  .#{$prefix}--flat-progress-label-overflow:hover ~ .#{$prefix}--tooltip,
+  .#{$prefix}--flat-progress-label-overflow:focus ~ .#{$prefix}--tooltip {
+    visibility: visible;
+  }
+
+  .#{$prefix}--flat-progress-step
+    .#{$prefix}--tooltip
+    .#{$prefix}--tooltip__caret {
+    margin-left: rem(10px);
+  }
+
+  .#{$prefix}--tooltip__text {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+  }
+
+  //single line tooltip
+  .#{$prefix}--flat-progress-step .#{$prefix}--tooltip {
+    @include type-style('body-long-01');
+    min-width: rem(115px);
+    width: rem(125px);
+    min-height: $carbon--spacing-06;
+    margin-left: rem(22px);
+    margin-top: rem(40px);
+    padding: $carbon--spacing-03 $carbon--spacing-05;
+    display: block;
+    visibility: hidden;
+    color: $inverse-01;
+  }
+
+  //multiline tooltip
+  .#{$prefix}--flat-progress-step .#{$prefix}--tooltip_multi {
+    @include type-style('body-long-01');
+    width: rem(150px);
+    height: auto;
+    color: $inverse-01;
+  }
+
+  //OPTIONAL HELPER TEXT STYLING
+  .#{$prefix}--flat-progress-optional {
+    @include type-style('label-01');
+    position: absolute;
+    left: 0;
+    margin-left: rem(3.2px);
+    margin-top: rem(28px);
+    color: $text-01;
+  }
+
+  //CURRENT STYLING
+  .#{$prefix}--flat-progress-step--current {
+    .#{$prefix}--flat-progress-line {
+      background-color: $interactive-01;
+    }
+  }
+
+  .#{$prefix}--flat-flat-progress-step--current svg {
+    width: 14px;
+    height: 14px;
+    fill: $interactive-01;
+    margin-top: -7px;
+  }
+
+  //INCOMPLETE STYLING
+  .#{$prefix}--flat-progress-step--incomplete {
+    svg {
+      fill: $ui-05;
+    }
+
+    .#{$prefix}--flat-progress-line {
+      background-color: $ui-03;
+    }
+  }
+
+  //COMPLETED STYLING
+  .#{$prefix}--flat-progress-step--complete {
+    .#{$prefix}--flat-progress-line {
+      background-color: $interactive-01;
+    }
+  }
+
+  //interactive button
+  .#{$prefix}--flat-progress-step-button {
+    display: flex;
+  }
+
+  //unclickable button
+  .#{$prefix}--flat-progress-step-button--unclickable {
+    outline: none;
+  }
+
+  //DISABLED STYLING
+  .#{$prefix}--flat-progress-step--disabled {
+    cursor: not-allowed;
+
+    svg {
+      fill: $disabled;
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--flat-progress-label,
+    .#{$prefix}--flat-progress-label:hover {
+      color: $disabled;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--flat-progress-label:focus,
+    .#{$prefix}--flat-progress-label:active {
+      outline: none;
+      box-shadow: none;
+    }
+
+    .#{$prefix}--flat-progress-line {
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--flat-progress-label-overflow:hover
+      ~ .#{$prefix}--tooltip--definition
+      .#{$prefix}--tooltip--definition__bottom {
+      display: none;
+    }
+  }
+
+  //ERROR STYLING
+  .#{$prefix}--flat-progress__warning > path {
+    fill: $support-01;
+  }
+
+  // Skeleton State
+  .#{$prefix}--flat-progress.#{$prefix}--skeleton
+    .#{$prefix}--flat-progress-label {
+    @include skeleton;
+    height: rem(12px);
+    width: rem(40px);
+  }
+
+  .#{$prefix}--flat-progress--vertical {
+    display: block;
+  }
+
+  .#{$prefix}--flat-progress--vertical .#{$prefix}--flat-progress-step {
+    display: list-item;
+    min-height: 6rem;
+    width: initial;
+    min-width: initial;
+
+    svg {
+      display: inline-block;
+      margin: 0.1rem 0.5rem;
+    }
+  }
+
+  .#{$prefix}--flat-progress--vertical
+    .#{$prefix}--flat-progress-step--current
+    svg {
+    margin-left: 0.563rem;
+  }
+
+  .#{$prefix}--flat-progress--vertical .#{$prefix}--flat-progress-label {
+    display: inline-block;
+    width: initial;
+    max-width: none;
+    vertical-align: top;
+    margin: 0;
+  }
+
+  .#{$prefix}--flat-progress--vertical
+    .#{$prefix}--flat-progress-step
+    .bx--tooltip {
+    margin-top: 0.5rem;
+  }
+
+  .#{$prefix}--flat-progress--vertical .#{$prefix}--flat-progress-optional {
+    margin-top: auto;
+    position: initial;
+    margin-left: 2.25rem;
+  }
+
+  .#{$prefix}--flat-progress--vertical .#{$prefix}--flat-progress-line {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+  }
+}
+```
+
+</details>
+
+- **Group**: [progress-indicator](#progress-indicator)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [link-01 [variable]](#link-01-variable)
+  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [support-01 [variable]](#support-01-variable)
+
 ### ❌progress-indicator [mixin]
 
 Progress indicator styles
@@ -23785,6 +24091,23 @@ Tooltip styles
 
     &.#{$prefix}--tooltip--align-end {
       @include tooltip--placement('definition', 'bottom', 'end');
+    }
+  }
+
+  .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition.#{$prefix}--tooltip--middle {
+    @include tooltip--trigger('definition', 'middle');
+    @include tooltip--placement('definition', 'middle', 'start');
+
+    &.#{$prefix}--tooltip--align-start {
+      @include tooltip--placement('definition', 'middle', 'start');
+    }
+
+    &.#{$prefix}--tooltip--align-center {
+      @include tooltip--placement('definition', 'middle', 'start');
+    }
+
+    &.#{$prefix}--tooltip--align-end {
+      @include tooltip--placement('definition', 'middle', 'start');
     }
   }
 
