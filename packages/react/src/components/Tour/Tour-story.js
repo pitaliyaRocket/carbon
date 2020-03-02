@@ -21,7 +21,39 @@ const targets = (
     <Button id="two" style={{ position: 'relative', left: 200 }}>
       I am a button!
     </Button>
-
+    <div
+      id="four"
+      style={{
+        position: 'absolute',
+        left: 20,
+        top: 280,
+        background: 'green',
+        width: 340,
+        height: 40,
+      }}
+    />
+    <div
+      id="five"
+      style={{
+        position: 'absolute',
+        left: -410,
+        top: 30,
+        background: 'red',
+        width: 180,
+        height: 180,
+      }}
+    />
+    <div
+      id="six"
+      style={{
+        position: 'absolute',
+        left: 670,
+        top: 20,
+        background: 'orange',
+        width: 40,
+        height: 350,
+      }}
+    />
     <div
       id="three"
       style={{
@@ -59,6 +91,23 @@ const steps = {
     {
       selector: '#three',
       description: 'You can scroll to ofscreen elements',
+    },
+  ],
+  secondaryTargets: () => [
+    {
+      selector: '#one',
+      title: 'Welcome To The Tour',
+      description: 'Use this component to point out new or important features.',
+      hidePrev: true,
+      secondarySelectors: ['#four', '#five'],
+    },
+    {
+      selector: '#two',
+      movingTarget: true,
+      title: 'Interaction',
+      description: 'You can interact with the elements being highlighted.',
+      hideNext: true,
+      secondarySelectors: ['#one', '#four', '#six'],
     },
   ],
 };
@@ -100,6 +149,19 @@ storiesOf('Pattern|Tour', module)
         enableFlip
         steps={steps.default()}
         flippedTitle={'Flipped Title'}
+        flippedDescription={
+          'Secondary description on the back side of the card. Currently, this is the same for all steps'
+        }
+      />
+    </>
+  ))
+  .add('with secondary selectors and flip before close', () => (
+    <>
+      {targets}
+      <Tour
+        flipBeforeClose
+        steps={steps.secondaryTargets()}
+        flippedTitle={'Thanks for touring'}
         flippedDescription={
           'Secondary description on the back side of the card. Currently, this is the same for all steps'
         }

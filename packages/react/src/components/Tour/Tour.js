@@ -12,7 +12,12 @@ export default class Tour extends React.Component {
   }
 
   render() {
-    const { flippedTitle, flippedDescription, enableFlip } = this.props;
+    const {
+      flippedTitle,
+      flippedDescription,
+      enableFlip,
+      flipBeforeClose,
+    } = this.props;
     return (
       <Walktour
         {...this.props}
@@ -28,6 +33,9 @@ export default class Tour extends React.Component {
             description,
             disableNext,
             disablePrev,
+            hideNext,
+            hidePrev,
+            hideClose,
             nextLabel,
             prevLabel,
           } = logic.stepContent;
@@ -40,6 +48,7 @@ export default class Tour extends React.Component {
               })}
               flippedTitle={flippedTitle}
               flippedDescription={flippedDescription}
+              flipBeforeClose={flipBeforeClose}
               {...this.props}
               onNext={logic.next}
               onPrev={logic.prev}
@@ -48,6 +57,9 @@ export default class Tour extends React.Component {
               title={title}
               disableNext={disableNext}
               disablePrev={disablePrev}
+              hideNext={hideNext}
+              hidePrev={hidePrev}
+              hideClose={hideClose}
               nextLabel={nextLabel}
               prevLabel={prevLabel}
             />
@@ -71,6 +83,9 @@ Tour.propTypes = {
       prevLabel: PropTypes.string,
       disableNext: PropTypes.bool,
       disablePrev: PropTypes.bool,
+      hideNext: PropTypes.bool,
+      hidePrev: PropTypes.bool,
+      hideClose: PropTypes.bool,
       customNextFunc: PropTypes.func,
       customPrevFunc: PropTypes.func,
       disableAutoScroll: PropTypes.bool,
@@ -193,6 +208,12 @@ Tour.propTypes = {
    * Secondary body content, visible when the tooltip is flipped. Access flip functionality with "enableFlip"
    */
   flippedDescription: PropTypes.string,
+
+  /**
+   * Supports an alternative use case for the flipped case where it will first flip to that face and then close
+   * on second click.
+   */
+  flipBeforeClose: PropTypes.bool,
 
   /**
    * Accessibility label text for the "close" button

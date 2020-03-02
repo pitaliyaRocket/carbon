@@ -28,12 +28,14 @@ class TourTooltip extends React.Component {
       disablePrev,
       hideNext,
       hidePrev,
+      hideClose,
       enableFlip,
       flipped,
       onFlip,
       flippedTitle,
       flippedDescription,
       flipButtonAriaLabel,
+      flipBeforeClose,
     } = this.props;
 
     const next = disableNext ? undefined : onNext;
@@ -53,8 +55,10 @@ class TourTooltip extends React.Component {
           })}>
           <TooltipFace
             flip={flipTooltip}
+            flipBeforeClose={flipBeforeClose}
             enableFlip={enableFlip}
             close={close}
+            hideClose={hideClose}
             flipButtonAriaLabel={flipButtonAriaLabel}
             closeButtonAriaLabel={closeButtonAriaLabel}
             front={true}
@@ -82,10 +86,11 @@ class TourTooltip extends React.Component {
             )}
           </TooltipFace>
 
-          {enableFlip && (
+          {(enableFlip || flipBeforeClose) && (
             <TooltipFace
               enableFlip={enableFlip}
               flip={flipTooltip}
+              flipBeforeClose={flipBeforeClose}
               close={close}
               flipButtonAriaLabel={flipButtonAriaLabel}
               closeButtonAriaLabel={closeButtonAriaLabel}
@@ -105,11 +110,13 @@ const TooltipFace = props => {
     enableFlip,
     front,
     flip,
+    flipBeforeClose,
     flipButtonAriaLabel,
     close,
     closeButtonAriaLabel,
     title,
     body,
+    hideClose,
   } = props;
   return (
     <div
@@ -118,13 +125,15 @@ const TooltipFace = props => {
         `${prefix}--tour-tooltip--${front ? 'front' : 'back'}`
       )}>
       <div className={`${prefix}--tour-tooltip__header`}>
-        <button
-          className={`${prefix}--tour-tooltip__close-button`}
-          type="button"
-          onClick={close}
-          aria-label={closeButtonAriaLabel}>
-          <Close20 className={`${prefix}--tour-tooltip__close--icon`} />
-        </button>
+        {!hideClose && (
+          <button
+            className={`${prefix}--tour-tooltip__close-button`}
+            type="button"
+            onClick={front && flipBeforeClose ? flip : close}
+            aria-label={closeButtonAriaLabel}>
+            <Close20 className={`${prefix}--tour-tooltip__close--icon`} />
+          </button>
+        )}
         {enableFlip && (
           <button
             className={`${prefix}--tour-tooltip__flip-button`}
@@ -234,6 +243,12 @@ TourTooltip.propTypes = {
    * Secondary tooltip content, visible when tooltip is flipped.
    */
   flippedDescription: PropTypes.string,
+
+  /**
+   * Supports an alternative use case for the flipped case where it will first flip to that face and then close
+   * on second click.
+   */
+  flipBeforeClose: PropTypes.bool,
 };
 
 TourTooltip.defaultProps = {
@@ -244,6 +259,7 @@ TourTooltip.defaultProps = {
   hideNext: false,
   hidePrev: false,
   hideClose: false,
+  flipBeforeClose: false,
 };
 
 export default TourTooltip;
