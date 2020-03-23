@@ -2725,10 +2725,10 @@
   dependencies:
     "@rocketsoftware/icon-helpers" "0.0.7"
 
-"@rocketsoftware/walktour@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@rocketsoftware/walktour/-/walktour-4.4.0.tgz#5b35279a8f95fdbc8fde355c5ce099a86069bd30"
-  integrity sha512-QGz9fiEGK2cXou7OONR5vWKYkWwQGae36d4m3L32iai6rthNDRvYjiwgNqcsrB3g4lNDEWdCVqxMpMJyFx27xA==
+"@rocketsoftware/walktour@4.4.3":
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/@rocketsoftware/walktour/-/walktour-4.4.3.tgz#91d166aa54ba751db557204f2b4745a3550e0755"
+  integrity sha512-ozTtWbAPGROeGYRGcuJQRwABoc6JDuEgwNx3eUZA+7OHP7wNE7nXjIH6MRo3NO4XhH9BUdyRUGaU+Oi6a0Vm+g==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
