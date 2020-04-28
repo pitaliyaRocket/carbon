@@ -173,7 +173,6 @@ export IconSkeleton from './components/Icon/Icon.Skeleton';
 export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
 export Tour from './components/Tour';
 export TourTooltip from './components/TourTooltip';
-export * from './components/UIShell';
 export SplitButton from './components/SplitButton';
 export ButtonGroup from './components/ButtonGroup';
 export {
@@ -181,3 +180,33 @@ export {
   FlatProgressStep,
 } from './components/FlatProgressIndicator';
 export FlatProgressIndicatorSkeleton from './components/FlatProgressIndicator/FlatProgressIndicator.Skeleton';
+export {
+  Content,
+  Header,
+  HeaderContainer,
+  HeaderGlobalAction,
+  HeaderGlobalBar,
+  HeaderMenu,
+  HeaderMenuButton,
+  HeaderMenuItem,
+  HeaderName,
+  HeaderNavigation,
+  HeaderPanel,
+  HeaderSideNavItems,
+  Switcher,
+  SwitcherItem,
+  SwitcherDivider,
+  SkipToContent,
+  SideNav,
+  SideNavDetails,
+  SideNavFooter,
+  SideNavHeader,
+  SideNavIcon,
+  SideNavItem,
+  SideNavItems,
+  SideNavLink,
+  SideNavLinkText,
+  SideNavMenu,
+  SideNavMenuItem,
+  SideNavSwitcher,
+} from './components/UIShell';

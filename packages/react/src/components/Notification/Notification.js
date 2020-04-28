@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
-import { settings } from '@rocketsofware/carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import {
   Close20,
   ErrorFilled20,

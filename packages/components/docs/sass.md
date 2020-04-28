@@ -1726,89 +1726,6 @@ Generate the CSS for a grid for the given breakpoints and gutters
   - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [prefix [variable]](#prefix-variable)
 
-### ✅prefix [variable]
-
-Namespace prefix
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$prefix: 'bx';
-```
-
-</details>
-
-- **Group**: [@carbon/grid](#carbongrid)
-- **Type**: `String`
-- **Used by**:
-  - [carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
-  - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
-  - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
-  - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
-  - [carbon--grid [mixin]](#carbon--grid-mixin)
-  - [custom-property [mixin]](#custom-property-mixin)
-  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
-  - [accordion [mixin]](#accordion-mixin)
-  - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [button [mixin]](#button-mixin)
-  - [button-base [mixin]](#button-base-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
-  - [snippet [mixin]](#snippet-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
-  - [content-switcher [mixin]](#content-switcher-mixin)
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
-  - [form [mixin]](#form-mixin)
-  - [inline-loading [mixin]](#inline-loading-mixin)
-  - [link [mixin]](#link-mixin)
-  - [lists [mixin]](#lists-mixin)
-  - [listbox [mixin]](#listbox-mixin)
-  - [loading [mixin]](#loading-mixin)
-  - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [inline-notification--color [mixin]](#inline-notification--color-mixin)
-  - [notification--experimental [mixin]](#notification--experimental-mixin)
-  - [toast-notifications [mixin]](#toast-notifications-mixin)
-  - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
-  - [pagination [mixin]](#pagination-mixin)
-  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
-  - [pagination-nav [mixin]](#pagination-nav-mixin)
-  - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [radio-button [mixin]](#radio-button-mixin)
-  - [search [mixin]](#search-mixin)
-  - [select [mixin]](#select-mixin)
-  - [slider [mixin]](#slider-mixin)
-  - [tabs [mixin]](#tabs-mixin)
-  - [tag-theme [mixin]](#tag-theme-mixin)
-  - [tags [mixin]](#tags-mixin)
-  - [text-area [mixin]](#text-area-mixin)
-  - [text-input [mixin]](#text-input-mixin)
-  - [tile [mixin]](#tile-mixin)
-  - [time-picker [mixin]](#time-picker-mixin)
-  - [toggle [mixin]](#toggle-mixin)
-  - [toolbar [mixin]](#toolbar-mixin)
-  - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
-  - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
-  - [carbon-content [mixin]](#carbon-content-mixin)
-  - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
-  - [carbon-header [mixin]](#carbon-header-mixin)
-  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
-  - [product-switcher [mixin]](#product-switcher-mixin)
-  - [expanded [mixin]](#expanded-mixin)
-  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
-  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
-
 ## @carbon/icons
 
 ### ✅carbon--icons [mixin]
@@ -10828,6 +10745,7 @@ $prefix: 'bx';
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [tag-theme [mixin]](#tag-theme-mixin)
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -19894,8 +19812,8 @@ Modal styles
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
-  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [text-02 [variable]](#text-02-variable)
   - [spacing-02 [variable]](#spacing-02-variable)
@@ -27162,13 +27080,6 @@ UI shell side nav
     }
   }
 
-<<<<<<< HEAD
-  a.#{$prefix}--side-nav__link--current > span.#{$prefix}--side-nav__link-text {
-    color: $text-04;
-    font-weight: 600;
-  }
-=======
->>>>>>> v10.11.3
   //----------------------------------------------------------------------------
   // Side-nav > Link
   //----------------------------------------------------------------------------
@@ -27208,14 +27119,8 @@ UI shell side nav
   }
 
   a.#{$prefix}--side-nav__link:focus,
-<<<<<<< HEAD
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item[role='menuitem']:focus {
-    outline: 2px solid $inverse-focus-ui;
-    outline-offset: -2px;
-=======
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
->>>>>>> v10.11.3
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
@@ -27412,6 +27317,7 @@ UI shell side nav
   - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
+  - [shell-side-nav-bg-04 [variable]](#shell-side-nav-bg-04-variable)
   - [icon-03 [variable]](#icon-03-variable)
   - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
 
@@ -27969,6 +27875,8 @@ $shell-side-nav-bg-04: #e5e5e5;
 
 - **Group**: [ui-shell](#ui-shell)
 - **Type**: `Color`
+- **Used by**:
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ❌shell-side-nav-bg-05 [variable]
 

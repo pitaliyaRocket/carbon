@@ -9,9 +9,9 @@
 
 'use strict';
 
-const CarbonIconsReact = require('@carbon/icons-react');
+const CarbonIconsReact = require('@rocketsoftware/icons-react');
 
-describe('@carbon/icons-react', () => {
+describe('@rocketsoftware/icons-react', () => {
   it('should not update exports without a semver change', () => {
     expect(Object.keys(CarbonIconsReact).sort()).toMatchSnapshot();
   });

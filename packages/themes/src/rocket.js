@@ -1,6 +1,7 @@
 import {
   blue60,
   red60,
+  gray20,
   gray60,
   // Tools
   rgba,
@@ -24,6 +25,7 @@ export const text02 = '#595959';
 export const text03 = '#bcbcbc';
 export const text04 = '#ffffff';
 export const text05 = gray60;
+export const textError = red60;
 
 export const icon01 = '#333333';
 export const icon02 = '#595959';
@@ -71,6 +73,7 @@ export const activeTertiary = '#012e29';
 export const hoverUI = '#e5e5e5';
 export const activeUI = '#bebebe';
 export const selectedUI = '#dcdcdc';
+export const selectedLightUI = gray20;
 export const inverseHoverUI = '#e5e5e5';
 
 export const hoverSelectedUI = '#cacaca';
@@ -87,6 +90,8 @@ export const disabled02 = '#bebebe';
 export const disabled03 = '#bcbcbc';
 
 export const highlight = '#c9deff';
+
+export const decorative01 = gray20;
 
 export const skeleton01 = '#e5e5e5';
 export const skeleton02 = '#bebebe';

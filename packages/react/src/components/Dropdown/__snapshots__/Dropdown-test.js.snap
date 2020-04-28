@@ -386,10 +386,6 @@ exports[`Dropdown should render custom item components 1`] = `
           id="test-dropdown"
           onClick={[Function]}
           onKeyDown={[Function]}
-<<<<<<< HEAD
-          tabIndex="-1"
-=======
->>>>>>> v10.11.3
         >
           <ListBoxField
             aria-disabled={false}
@@ -719,10 +715,6 @@ exports[`Dropdown should render with strings as items 1`] = `
           id="test-dropdown"
           onClick={[Function]}
           onKeyDown={[Function]}
-<<<<<<< HEAD
-          tabIndex="-1"
-=======
->>>>>>> v10.11.3
         >
           <ListBoxField
             aria-disabled={false}

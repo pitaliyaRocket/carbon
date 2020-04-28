@@ -120,7 +120,7 @@ const getFloatingPosition = ({
   /**
    * TODO: temp fix, should resolve getViewport and container implementations
    */
-  if (!container) {
+  if (Object.keys(viewportOffset).length != 0) {
     return {
       [DIRECTION_LEFT]: () => ({
         left: refLeft - width + scrollX - left - viewportLeft,

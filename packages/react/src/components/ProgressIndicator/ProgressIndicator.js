@@ -14,6 +14,7 @@ import {
   Warning16,
   RadioButton16,
   CircleFilled16,
+  CircleDash16,
 } from '@rocketsoftware/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 
@@ -74,9 +75,9 @@ export function ProgressStep({
     }
     if (skip) {
       return (
-        <CircleDash32>
+        <CircleDash16>
           <title>{description}</title>
-        </CircleDash32>
+        </CircleDash16>
       );
     }
     if (current) {

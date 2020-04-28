@@ -9,7 +9,7 @@
 
 import Color from 'color';
 import { adjustLightness } from '../tools';
-import { blue60 } from '@carbon/colors';
+import { blue60 } from '@rocketsoftware/colors';
 
 describe('tools', () => {
   describe('adjustLightness', () => {

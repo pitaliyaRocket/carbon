@@ -8,7 +8,7 @@
 'use strict';
 
 const meta = require('@rocketsoftware/icons/build-info.json');
-const { reporter } = require('@rocketsoftware/cli-reporter');
+const { reporter } = require('@carbon/cli-reporter');
 const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
 const virtual = require('./plugins/virtual');

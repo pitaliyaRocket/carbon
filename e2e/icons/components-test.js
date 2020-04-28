@@ -15,7 +15,7 @@ const { Metadata } = require('../../packages/icon-build-helpers');
 const ICONS_PACKAGE_DIR = path.resolve(__dirname, '../../packages/icons');
 const sizes = [16, 20, 24, 32];
 
-describe('@carbon/icons', () => {
+describe('@rocketsoftware/icons', () => {
   let metadata;
 
   beforeAll(async () => {
@@ -30,8 +30,8 @@ describe('@carbon/icons', () => {
   });
 
   it('should export each SVG asset', async () => {
-    const CarbonIconsCommonJS = require('@carbon/icons');
-    const CarbonIconsESM = await import('@carbon/icons');
+    const CarbonIconsCommonJS = require('@rocketsoftware/icons');
+    const CarbonIconsESM = await import('@rocketsoftware/icons');
 
     for (const icon of metadata.icons) {
       const { moduleName } = icon;

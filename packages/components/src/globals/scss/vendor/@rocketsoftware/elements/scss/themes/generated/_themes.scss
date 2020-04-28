@@ -22,6 +22,7 @@ $carbon--theme--white: (
   text-03: #a8a8a8,
   text-04: #ffffff,
   text-05: #6f6f6f,
+  text-error: #da1e28,
   icon-01: #161616,
   icon-02: #525252,
   icon-03: #ffffff,
@@ -53,9 +54,10 @@ $carbon--theme--white: (
   hover-ui: #e5e5e5,
   active-ui: #c6c6c6,
   selected-ui: #e0e0e0,
+  selected-light-ui: #e0e0e0,
   inverse-hover-ui: #4c4c4c,
   hover-selected-ui: #cacaca,
-  hover-danger: #ba1b23,
+  hover-danger: #b81921,
   active-danger: #750e13,
   hover-row: #e5e5e5,
   visited-link: #8a3ffc,
@@ -63,6 +65,7 @@ $carbon--theme--white: (
   disabled-02: #c6c6c6,
   disabled-03: #8d8d8d,
   highlight: #d0e2ff,
+  decorative-01: #e0e0e0,
   skeleton-01: #e5e5e5,
   skeleton-02: #c6c6c6,
   brand-01: #0f62fe,
@@ -523,6 +526,7 @@ $carbon--theme--g90: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
+    text-error: #ffb3b8,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -531,7 +535,7 @@ $carbon--theme--g90: map-merge(
     field-02: #525252,
     inverse-01: #161616,
     inverse-02: #f4f4f4,
-    support-01: #fa4d56,
+    support-01: #ff8389,
     support-02: #42be65,
     support-04: #4589ff,
     inverse-support-01: #da1e28,
@@ -548,13 +552,16 @@ $carbon--theme--g90: map-merge(
     hover-ui: #4c4c4c,
     active-ui: #6f6f6f,
     selected-ui: #525252,
+    selected-light-ui: #6f6f6f,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #656565,
     hover-row: #4c4c4c,
     visited-link: #be95ff,
     disabled-01: #393939,
     disabled-02: #6f6f6f,
+    disabled-03: #a8a8a8,
     highlight: #0043ce,
+    decorative-01: #6f6f6f,
     skeleton-01: #353535,
     skeleton-02: #525252,
     brand-02: #6f6f6f,
@@ -584,6 +591,7 @@ $carbon--theme--g100: map-merge(
     text-02: #c6c6c6,
     text-03: #6f6f6f,
     text-05: #8d8d8d,
+    text-error: #ff8389,
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
@@ -609,14 +617,15 @@ $carbon--theme--g100: map-merge(
     hover-ui: #353535,
     active-ui: #525252,
     selected-ui: #393939,
+    selected-light-ui: #525252,
     inverse-hover-ui: #e5e5e5,
     hover-selected-ui: #4c4c4c,
     hover-row: #353535,
     visited-link: #be95ff,
     disabled-01: #262626,
     disabled-02: #525252,
-    disabled-03: #6f6f6f,
     highlight: #002d9c,
+    decorative-01: #525252,
     skeleton-01: #353535,
     skeleton-02: #393939,
     brand-02: #6f6f6f,
@@ -634,8 +643,8 @@ $carbon--theme--v9: map-merge(
   $carbon--theme--white,
   (
     interactive-01: #3d70b2,
-    interactive-02: #5a6872,
-    interactive-03: #5a6872,
+    interactive-02: #4d5358,
+    interactive-03: #3d70b2,
     interactive-04: #3d70b2,
     ui-background: #f4f7fb,
     ui-01: #ffffff,
@@ -647,6 +656,7 @@ $carbon--theme--v9: map-merge(
     text-02: #5a6872,
     text-03: #cdd1d4,
     text-05: #5a6872,
+    text-error: #e0182d,
     icon-01: #3d70b2,
     icon-02: #5a6872,
     link-01: #3d70b2,
@@ -675,6 +685,7 @@ $carbon--theme--v9: map-merge(
     hover-ui: #eef4fc,
     active-ui: #dfeafa,
     selected-ui: #eef4fc,
+    selected-light-ui: #eef4fc,
     hover-selected-ui: #dfeafa,
     hover-danger: #c70014,
     active-danger: #ad1625,
@@ -684,11 +695,12 @@ $carbon--theme--v9: map-merge(
     disabled-02: #dfe3e6,
     disabled-03: #cdd1d4,
     highlight: #f4f7fb,
+    decorative-01: #eef4fc,
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
-    brand-02: #5a6872,
-    brand-03: #5a6872,
+    brand-02: #4d5358,
+    brand-03: #3d70b2,
     active-01: #dfeafa,
     hover-field: #eef4fc,
   )
@@ -847,6 +859,12 @@ $carbon--theme: (
       global-variable-exists('text-05'),
       $text-05,
       map-get($carbon--theme--white, 'text-05')
+    ),
+  text-error:
+    if(
+      global-variable-exists('text-error'),
+      $text-error,
+      map-get($carbon--theme--white, 'text-error')
     ),
   icon-01:
     if(
@@ -1034,6 +1052,12 @@ $carbon--theme: (
       $selected-ui,
       map-get($carbon--theme--white, 'selected-ui')
     ),
+  selected-light-ui:
+    if(
+      global-variable-exists('selected-light-ui'),
+      $selected-light-ui,
+      map-get($carbon--theme--white, 'selected-light-ui')
+    ),
   hover-selected-ui:
     if(
       global-variable-exists('hover-selected-ui'),
@@ -1093,6 +1117,12 @@ $carbon--theme: (
       global-variable-exists('highlight'),
       $highlight,
       map-get($carbon--theme--white, 'highlight')
+    ),
+  decorative-01:
+    if(
+      global-variable-exists('decorative-01'),
+      $decorative-01,
+      map-get($carbon--theme--white, 'decorative-01')
     ),
   skeleton-01:
     if(

@@ -154,6 +154,13 @@
     - sleep
     - rest
     - dark
+- name: atomic
+  friendly_name: Atomic
+  aliases:
+    - atomic
+  sizes:
+    - 16
+    - 32
 - name: attachment
   friendly_name: Attachment
   aliases:
@@ -180,6 +187,13 @@
     - up
     - scroll up
   sizes:
+    - 32
+- name: bookmark
+  friendly_name: Bookmark
+  aliases:
+    - bookmark
+  sizes:
+    - 16
     - 32
 - name: calendar
   friendly_name: Calendar
@@ -308,6 +322,16 @@
     - 'yes'
     - valid
     - status
+- name: chevron--double--down
+  friendly_name: Chevron double down
+  sizes:
+    - 16
+    - 32  
+- name: chevron--double--up
+  friendly_name: Chevron double up
+  sizes:
+    - 16
+    - 32
 - name: chevron--down
   friendly_name: Chevron down
   sizes:
@@ -929,6 +953,15 @@
     - close
     - error
     - don't
+- name: misuse--no-circle
+  friendly_name: Misuse no circle
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - close
+    - error
+    - don't
 - name: misuse--alt
   friendly_name: Misuse alt
   sizes:
@@ -1077,6 +1110,13 @@
     - play
     - music
     - control
+- name: physical-hierarchy
+  friendly_name: Physical hierarchy
+  aliases:
+    - hierarchy
+  sizes:
+    - 16
+    - 32
 - name: play
   friendly_name: Play
   aliases:
@@ -1274,6 +1314,13 @@
     - rating
     - saved
     - starred
+- name: start-here
+  friendly_name: Start here
+  sizes:
+    - 16
+    - 32
+  aliases:
+    - start-here
 - name: stop
   friendly_name: Stop
   aliases:
@@ -4291,6 +4338,11 @@
   aliases:
     - refine
     - funnel
+- name: filter--filled
+  friendly_name: Filter filled
+  sizes:
+    - 16
+    - 32
 - name: finance
   friendly_name: Finance
   aliases:
@@ -6685,6 +6737,13 @@
     - music
     - sound
     - control
+- name: relationship
+  friendly_name: Relationship
+  aliases:
+    - relationship
+  sizes:
+    - 16
+    - 32
 - name: reminder
   friendly_name: Reminder
   aliases:

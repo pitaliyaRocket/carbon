@@ -57,7 +57,6 @@ exports[`ModalWrapper should render 1`] = `
       primaryButtonText="Save"
       secondaryButtonText="Cancel"
       selectorPrimaryFocus="[data-modal-primary-focus]"
-      trapMouse={false}
     >
       <div
         aria-label="test modal"
