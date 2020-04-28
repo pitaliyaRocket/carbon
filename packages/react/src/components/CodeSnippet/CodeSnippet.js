@@ -6,8 +6,9 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
+import useResizeObserver from 'use-resize-observer/polyfilled';
 import { ChevronDown16 } from '@rocketsoftware/icons-react';
 import { settings } from '@rocketsoftware/carbon-components';
 import Copy from '../Copy';
@@ -36,12 +37,15 @@ function CodeSnippet({
   const { current: uid } = useRef(getUniqueId());
   const codeContentRef = useRef();
 
-  useLayoutEffect(() => {
-    if (codeContentRef.current) {
-      const { height } = codeContentRef.current.getBoundingClientRect();
-      setShouldShowMoreLessBtn(type === 'multi' && height > 255);
-    }
-  }, [children, type]);
+  useResizeObserver({
+    ref: codeContentRef,
+    onResize: () => {
+      if (codeContentRef.current) {
+        const { height } = codeContentRef.current.getBoundingClientRect();
+        setShouldShowMoreLessBtn(type === 'multi' && height > 255);
+      }
+    },
+  });
 
   const codeSnippetClasses = classNames(className, {
     [`${prefix}--snippet`]: true,
@@ -69,8 +73,8 @@ function CodeSnippet({
   return (
     <div {...rest} className={codeSnippetClasses}>
       <div
-        role="textbox"
-        tabIndex={0}
+        role={type === 'single' ? 'textbox' : null}
+        tabIndex={type === 'single' ? 0 : null}
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}>
         <code>
@@ -78,7 +82,6 @@ function CodeSnippet({
         </code>
       </div>
       <CopyButton
-        className={`${prefix}--snippet-button`}
         onClick={onClick}
         feedback={feedback}
         iconDescription={copyButtonDescription}

@@ -268,6 +268,17 @@ class Dropdown extends mixin(
           }
         });
       }
+
+      const menuListNode = this.element.querySelector(
+        this.options.selectorMenu
+      );
+      if (menuListNode) {
+        menuListNode.tabIndex = this.element.classList.contains(
+          this.options.classOpen
+        )
+          ? '0'
+          : '-1';
+      }
     }
   }
 
@@ -465,7 +476,7 @@ class Dropdown extends mixin(
    * Enum for navigating backward/forward.
    * @readonly
    * @member Dropdown.NAVIGATE
-   * @type {Object}
+   * @type {object}
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */

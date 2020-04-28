@@ -98,6 +98,11 @@ class Tooltip extends Component {
     tooltipId: PropTypes.string,
 
     /**
+     * The ID of the tooltip body content.
+     */
+    tooltipBodyId: PropTypes.string,
+
+    /**
      * Optional starting value for uncontrolled state
      */
     defaultOpen: PropTypes.bool,
@@ -210,13 +215,17 @@ class Tooltip extends Component {
    */
   _tooltipEl = null;
 
+  /**
+   * The element ref of the tooltip's trigger button.
+   * @type {React.RefObject<Element>}
+   * @private
+   */
+  _triggerRef = React.createRef();
+
   componentDidMount() {
     if (!this._debouncedHandleFocus) {
       this._debouncedHandleFocus = debounce(this._handleFocus, 200);
     }
-    requestAnimationFrame(() => {
-      this.getTriggerPosition();
-    });
 
     document.addEventListener('keydown', this.handleEscKeyPress, false);
   }
@@ -251,13 +260,6 @@ class Tooltip extends Component {
     });
   };
 
-  getTriggerPosition = () => {
-    if (this.triggerEl) {
-      const triggerPosition = this.triggerEl.getBoundingClientRect();
-      this.setState({ triggerPosition });
-    }
-  };
-
   /**
    * Handles `focus`/`blur` event.
    * @param {string} state `over` to show the tooltip, `out` to hide the tooltip.
@@ -266,15 +268,15 @@ class Tooltip extends Component {
   _handleFocus = (state, evt) => {
     const { relatedTarget } = evt;
     if (state === 'over') {
-      this.getTriggerPosition();
       this._handleUserInputOpenClose(evt, { open: true });
     } else {
       // Note: SVGElement in IE11 does not have `.contains()`
+      const { current: triggerEl } = this._triggerRef;
       const shouldPreventClose =
         relatedTarget &&
-        ((this.triggerEl &&
-          this.triggerEl.contains &&
-          this.triggerEl.contains(relatedTarget)) ||
+        ((triggerEl &&
+          triggerEl.contains &&
+          triggerEl.contains(relatedTarget)) ||
           (this._tooltipEl && this._tooltipEl.contains(relatedTarget)));
       if (!shouldPreventClose) {
         this._handleUserInputOpenClose(evt, { open: false });
@@ -292,10 +294,13 @@ class Tooltip extends Component {
   /**
    * @returns {Element} The DOM element where the floating menu is placed in.
    */
-  _getTarget = () =>
-    (this.triggerEl &&
-      this.triggerEl.closest('[data-floating-menu-container]')) ||
-    document.body;
+  _getTarget = () => {
+    const { current: triggerEl } = this._triggerRef;
+    return (
+      (triggerEl && triggerEl.closest('[data-floating-menu-container]')) ||
+      document.body
+    );
+  };
 
   handleMouse = evt => {
     evt.persist();
@@ -312,9 +317,6 @@ class Tooltip extends Component {
       const shouldOpen = this.isControlled
         ? !this.props.open
         : !this.state.open;
-      if (shouldOpen) {
-        this.getTriggerPosition();
-      }
       this._handleUserInputOpenClose(evt, { open: shouldOpen });
     } else if (
       state &&
@@ -331,7 +333,7 @@ class Tooltip extends Component {
       evt.target &&
       this._tooltipEl &&
       this._tooltipEl.contains(evt.target);
-    if (!shouldPreventClose) {
+    if (!shouldPreventClose && this.state.open) {
       this._handleUserInputOpenClose(evt, { open: false });
     }
   };
@@ -348,9 +350,6 @@ class Tooltip extends Component {
       const shouldOpen = this.isControlled
         ? !this.props.open
         : !this.state.open;
-      if (shouldOpen) {
-        this.getTriggerPosition();
-      }
       this._handleUserInputOpenClose(event, { open: shouldOpen });
     }
   };
@@ -374,6 +373,7 @@ class Tooltip extends Component {
         `__carbon-tooltip_${Math.random()
           .toString(36)
           .substr(2)}`),
+      tooltipBodyId,
       children,
       className,
       triggerClassName,
@@ -403,10 +403,7 @@ class Tooltip extends Component {
       triggerClassName
     );
 
-    const refProp = mergeRefs(ref, node => {
-      this.triggerEl = node;
-    });
-
+    const refProp = mergeRefs(this._triggerRef, ref);
     const iconProperties = { name: iconName, role: null, description: null };
 
     const properties = {
@@ -418,7 +415,7 @@ class Tooltip extends Component {
       onMouseOut: this.handleMouse,
       onFocus: this.handleMouse,
       onBlur: this.handleMouse,
-      'aria-haspopup': 'true',
+      'aria-controls': !open ? undefined : tooltipId,
       'aria-expanded': open,
       'aria-describedby': open ? tooltipId : null,
       // if the user provides property `triggerText`,
@@ -457,7 +454,7 @@ class Tooltip extends Component {
         {open && (
           <FloatingMenu
             target={this._getTarget}
-            menuPosition={this.state.triggerPosition}
+            triggerRef={this._triggerRef}
             menuDirection={direction}
             menuOffset={menuOffset}
             getViewport={getViewport}
@@ -476,7 +473,14 @@ class Tooltip extends Component {
               onContextMenu={this.handleMouse}
               role="tooltip">
               <span className={`${prefix}--tooltip__caret`} />
-              {children}
+              <div
+                className={`${prefix}--tooltip__content`}
+                tabIndex="-1"
+                role="dialog"
+                aria-describedby={tooltipBodyId}
+                aria-labelledby={triggerId}>
+                {children}
+              </div>
             </div>
           </FloatingMenu>
         )}

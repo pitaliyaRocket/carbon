@@ -10,10 +10,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import window from 'window-or-global';
+import { settings } from 'carbon-components';
+import OptimizedResize from './OptimizedResize';
+
+const { prefix } = settings;
 
 /**
  * The structure for the position of floating menu.
- * @typedef {Object} FloatingMenu~position
+ * @typedef {object} FloatingMenu~position
  * @property {number} left The left position.
  * @property {number} top The top position.
  * @property {number} right The right position.
@@ -22,16 +26,23 @@ import window from 'window-or-global';
 
 /**
  * The structure for the size of floating menu.
- * @typedef {Object} FloatingMenu~size
+ * @typedef {object} FloatingMenu~size
  * @property {number} width The width.
  * @property {number} height The height.
  */
 
 /**
  * The structure for the position offset of floating menu.
- * @typedef {Object} FloatingMenu~offset
+ * @typedef {object} FloatingMenu~offset
  * @property {number} top The top position.
  * @property {number} left The left position.
+ */
+
+/**
+ * The structure for the target container.
+ * @typedef {object} FloatingMenu~container
+ * @property {DOMRect} rect Return of element.getBoundingClientRect()
+ * @property {string} position Position style (static, absolute, relative...)
  */
 
 export const DIRECTION_LEFT = 'left';
@@ -69,17 +80,19 @@ const hasChangeInOffset = (oldMenuOffset = {}, menuOffset = {}) => {
  * @param {string} [params.direction=bottom] The menu direction.
  * @param {number} [params.scrollX=0] The scroll position of the viewport.
  * @param {number} [params.scrollY=0] The scroll position of the viewport.
+ * @param {FloatingMenu~container} [params.container] The size and position type of target element.
  * @returns {FloatingMenu~offset} The position of the menu, relative to the top-left corner of the viewport.
  * @private
  */
 const getFloatingPosition = ({
   menuSize,
-  refPosition,
+  refPosition = {},
   offset = {},
   viewportOffset = {},
   direction = DIRECTION_BOTTOM,
   scrollX = 0,
   scrollY = 0,
+  container,
 }) => {
   const {
     left: refLeft = 0,
@@ -87,6 +100,16 @@ const getFloatingPosition = ({
     right: refRight = 0,
     bottom: refBottom = 0,
   } = refPosition;
+  const relativeDiff =
+    container.position !== 'static'
+      ? {
+          top: container.rect.top,
+          left: container.rect.left,
+        }
+      : {
+          top: 0,
+          left: 0,
+        };
 
   const { width, height } = menuSize;
   const { top = 0, left = 0 } = offset;
@@ -94,24 +117,52 @@ const getFloatingPosition = ({
   const refCenterHorizontal = (refLeft + refRight) / 2;
   const refCenterVertical = (refTop + refBottom) / 2;
 
-  return {
-    [DIRECTION_LEFT]: () => ({
-      left: refLeft - width + scrollX - left - viewportLeft,
-      top: refCenterVertical - height / 2 + scrollY + top - viewportTop,
-    }),
-    [DIRECTION_TOP]: () => ({
-      left: refCenterHorizontal - width / 2 + scrollX + left - viewportLeft,
-      top: refTop - height + scrollY - top - viewportTop,
-    }),
-    [DIRECTION_RIGHT]: () => ({
-      left: refRight + scrollX + left - viewportLeft,
-      top: refCenterVertical - height / 2 + scrollY + top - viewportTop,
-    }),
-    [DIRECTION_BOTTOM]: () => ({
-      left: refCenterHorizontal - width / 2 + scrollX + left - viewportLeft,
-      top: refBottom + scrollY + top - viewportTop,
-    }),
-  }[direction]();
+  /**
+   * TODO: temp fix, should resolve getViewport and container implementations
+   */
+  if (!container) {
+    return {
+      [DIRECTION_LEFT]: () => ({
+        left: refLeft - width + scrollX - left - viewportLeft,
+        top: refCenterVertical - height / 2 + scrollY + top - viewportTop,
+      }),
+      [DIRECTION_TOP]: () => ({
+        left: refCenterHorizontal - width / 2 + scrollX + left - viewportLeft,
+        top: refTop - height + scrollY - top - viewportTop,
+      }),
+      [DIRECTION_RIGHT]: () => ({
+        left: refRight + scrollX + left - viewportLeft,
+        top: refCenterVertical - height / 2 + scrollY + top - viewportTop,
+      }),
+      [DIRECTION_BOTTOM]: () => ({
+        left: refCenterHorizontal - width / 2 + scrollX + left - viewportLeft,
+        top: refBottom + scrollY + top - viewportTop,
+      }),
+    }[direction]();
+  } else {
+    return {
+      [DIRECTION_LEFT]: () => ({
+        left: refLeft - width + scrollX - left - relativeDiff.left,
+        top:
+          refCenterVertical - height / 2 + scrollY + top - 9 - relativeDiff.top,
+      }),
+      [DIRECTION_TOP]: () => ({
+        left:
+          refCenterHorizontal - width / 2 + scrollX + left - relativeDiff.left,
+        top: refTop - height + scrollY - top - relativeDiff.top,
+      }),
+      [DIRECTION_RIGHT]: () => ({
+        left: refRight + scrollX + left - relativeDiff.left,
+        top:
+          refCenterVertical - height / 2 + scrollY + top + 3 - relativeDiff.top,
+      }),
+      [DIRECTION_BOTTOM]: () => ({
+        left:
+          refCenterHorizontal - width / 2 + scrollX + left - relativeDiff.left,
+        top: refBottom + scrollY + top - relativeDiff.top,
+      }),
+    }[direction]();
+  }
 };
 
 /**
@@ -129,16 +180,6 @@ class FloatingMenu extends React.Component {
      * The query selector indicating where the floating menu body should be placed.
      */
     target: PropTypes.func,
-
-    /**
-     * The position in the viewport of the trigger button.
-     */
-    menuPosition: PropTypes.shape({
-      top: PropTypes.number,
-      right: PropTypes.number,
-      bottom: PropTypes.number,
-      left: PropTypes.number,
-    }),
 
     /**
      * Where to put the tooltip, relative to the trigger button.
@@ -183,7 +224,6 @@ class FloatingMenu extends React.Component {
   };
 
   static defaultProps = {
-    menuPosition: {},
     menuOffset: {},
     menuDirection: DIRECTION_BOTTOM,
   };
@@ -221,7 +261,6 @@ class FloatingMenu extends React.Component {
    * Calculates the position in the viewport of floating menu,
    * once this component is mounted or updated upon change in the following props:
    *
-   * * `menuPosition` (The position in the viewport of the trigger button)
    * * `menuOffset` (The adjustment that should be applied to the calculated floating menu's position)
    * * `menuDirection` (Where the floating menu menu should be placed relative to the trigger button)
    *
@@ -238,33 +277,25 @@ class FloatingMenu extends React.Component {
     }
 
     const {
-      menuPosition: oldRefPosition = {},
       menuOffset: oldMenuOffset = {},
       menuDirection: oldMenuDirection,
       getViewport: oldGetViewport,
     } = prevProps;
-    const {
-      menuPosition: refPosition = {},
-      menuOffset = {},
-      menuDirection,
-      getViewport,
-    } = this.props;
+    const { menuOffset = {}, menuDirection, getViewport } = this.props;
 
     if (
-      oldRefPosition.top !== refPosition.top ||
-      oldRefPosition.right !== refPosition.right ||
-      oldRefPosition.bottom !== refPosition.bottom ||
-      oldRefPosition.left !== refPosition.left ||
       hasChangeInOffset(oldMenuOffset, menuOffset) ||
       oldMenuDirection !== menuDirection ||
       (oldGetViewport && oldGetViewport()) !== (getViewport && getViewport())
     ) {
+      const { flipped, triggerRef } = this.props;
+      const { current: triggerEl } = triggerRef;
       const menuSize = menuBody.getBoundingClientRect();
-      const { menuEl, flipped } = this.props;
+      const refPosition = triggerEl && triggerEl.getBoundingClientRect();
       const offset =
         typeof menuOffset !== 'function'
           ? menuOffset
-          : menuOffset(menuBody, menuDirection, menuEl, flipped);
+          : menuOffset(menuBody, menuDirection, triggerEl, flipped);
 
       const viewport = getViewport && getViewport();
       const viewportSize = viewport && viewport.getBoundingClientRect();
@@ -287,11 +318,25 @@ class FloatingMenu extends React.Component {
             },
             scrollX: viewport ? viewport.scrollLeft : window.pageXOffset,
             scrollY: viewport ? viewport.scrollTop : window.pageYOffset,
+            container: {
+              rect: this.props.target().getBoundingClientRect(),
+              position: getComputedStyle(this.props.target()).position,
+            },
           }),
         });
       }
     }
   };
+
+  componentWillUnmount() {
+    this.hResize.release();
+  }
+
+  componentDidMount() {
+    this.hResize = OptimizedResize.add(() => {
+      this._updateMenuSize();
+    });
+  }
 
   componentDidUpdate(prevProps) {
     this._updateMenuSize(prevProps);
@@ -354,7 +399,25 @@ class FloatingMenu extends React.Component {
     if (typeof document !== 'undefined') {
       const { target } = this.props;
       return ReactDOM.createPortal(
-        this._getChildrenWithProps(),
+        <>
+          {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
+          <span
+            ref={this.startSentinel}
+            tabIndex="0"
+            role="link"
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </span>
+          {this._getChildrenWithProps()}
+          {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
+          <span
+            ref={this.endSentinel}
+            tabIndex="0"
+            role="link"
+            className={`${prefix}--visually-hidden`}>
+            Focus sentinel
+          </span>
+        </>,
         !target ? document.body : target()
       );
     }

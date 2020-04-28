@@ -1,3 +1,4 @@
+<!--alex disable just-->
 <p align="center">
     <img alt="Carbon Design System" src="https://user-images.githubusercontent.com/3901764/57545698-ce5f2380-7320-11e9-8682-903df232d7b0.png" width="100%" />
 </p>
@@ -14,7 +15,7 @@
   <a href="https://circleci.com/gh/RocketSoftware/carbon">
     <img src="https://circleci.com/gh/RocketSoftware/carbon.svg?style=shield" alt="Build Status" />
   </a>
-  <a href="https://lernajs.io/">
+  <a href="https://lerna.js.org/">
     <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
   </a>
   <a href="https://github.com/RocketSoftware/carbon/blob/master/.github/CONTRIBUTING.md">
@@ -56,7 +57,7 @@ we support!
 ## :books: Documentation
 
 - See our documentation site
-  [here](http://carbondesignsystem.com/getting-started/developers) for full
+  [here](https://www.carbondesignsystem.com/get-started/develop/react) for full
   how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo.

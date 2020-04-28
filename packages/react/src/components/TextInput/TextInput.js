@@ -29,6 +29,7 @@ const TextInput = React.forwardRef(function TextInput(
     invalidText,
     helperText,
     light,
+    size,
     ...other
   },
   ref
@@ -37,6 +38,7 @@ const TextInput = React.forwardRef(function TextInput(
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
+    [`${prefix}--text-input--${size}`]: size,
   });
   const sharedTextInputProps = {
     id,
@@ -54,6 +56,7 @@ const TextInput = React.forwardRef(function TextInput(
     type,
     ref,
     className: textInputClasses,
+    title: placeholder,
     ...other,
   };
   const labelClasses = classNames(`${prefix}--label`, {
@@ -142,6 +145,11 @@ TextInput.propTypes = {
    * Specify the placeholder attribute for the <input>
    */
   placeholder: PropTypes.string,
+
+  /**
+   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
+   */
+  size: PropTypes.oneOf(['sm', 'xl']),
 
   /**
    * Specify the type of the <input>

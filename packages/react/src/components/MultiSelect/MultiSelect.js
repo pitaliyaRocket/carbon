@@ -13,14 +13,15 @@ import isEqual from 'lodash.isequal';
 import { settings } from '@rocketsoftware/carbon-components';
 import { WarningFilled16 } from '@rocketsoftware/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
-import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
 const noop = () => undefined;
+const getInstanceId = setupGetInstanceId();
 
 export default class MultiSelect extends React.Component {
   static propTypes = {
@@ -125,6 +126,11 @@ export default class MultiSelect extends React.Component {
      * Additional props passed to Downshift
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
+     * Specify the direction of the multiselect dropdown. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -152,10 +158,12 @@ export default class MultiSelect extends React.Component {
     title: false,
     open: false,
     selectionFeedback: 'top-after-reopen',
+    direction: 'bottom',
   };
 
   constructor(props) {
     super(props);
+    this.multiSelectInstanceId = getInstanceId();
     this.state = {
       highlightedIndex: null,
       isOpen: props.open,
@@ -185,7 +193,9 @@ export default class MultiSelect extends React.Component {
       case Downshift.stateChangeTypes.keyDownArrowDown:
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.itemMouseEnter:
-        this.setState({ highlightedIndex: changes.highlightedIndex });
+        this.setState({
+          highlightedIndex: changes.highlightedIndex,
+        });
         break;
       case Downshift.stateChangeTypes.keyDownEscape:
       case Downshift.stateChangeTypes.mouseUp:
@@ -218,7 +228,6 @@ export default class MultiSelect extends React.Component {
   render() {
     const { highlightedIndex, isOpen } = this.state;
     const {
-      ariaLabel,
       className: containerClassName,
       id,
       items,
@@ -238,6 +247,7 @@ export default class MultiSelect extends React.Component {
       useTitleInItem,
       translateWithId,
       downshiftProps,
+      direction,
     } = this.props;
     const inline = type === 'inline';
     const wrapperClasses = cx(
@@ -254,16 +264,23 @@ export default class MultiSelect extends React.Component {
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
+    const helperId = !helperText
+      ? undefined
+      : `multiselect-helper-text-${this.multiSelectInstanceId}`;
+    const labelId = `multiselect-label-${this.multiSelectInstanceId}`;
+    const fieldLabelId = `multiselect-field-label-${this.multiSelectInstanceId}`;
     const title = titleText ? (
-      <label htmlFor={id} className={titleClasses}>
+      <span id={labelId} className={titleClasses}>
         {titleText}
-      </label>
+      </span>
     ) : null;
     const helperClasses = cx(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
 
     const input = (
@@ -298,8 +315,13 @@ export default class MultiSelect extends React.Component {
                   [`${prefix}--multi-select--inline`]: inline,
                   [`${prefix}--multi-select--selected`]:
                     selectedItem.length > 0,
+                  [`${prefix}--list-box--up`]: direction === 'top',
                 }
               );
+              const buttonProps = {
+                ...getButtonProps({ disabled }),
+                'aria-label': undefined,
+              };
               return (
                 <ListBox
                   id={id}
@@ -322,8 +344,9 @@ export default class MultiSelect extends React.Component {
                     tabIndex="0"
                     disabled={disabled}
                     aria-disabled={disabled}
-                    translateWithId={translateWithId}
-                    {...getButtonProps({ disabled })}>
+                    aria-labelledby={`${labelId} ${fieldLabelId}`}
+                    aria-describedby={helperId}
+                    {...buttonProps}>
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={!disabled ? clearSelection : noop}
@@ -332,7 +355,9 @@ export default class MultiSelect extends React.Component {
                         disabled={disabled}
                       />
                     )}
-                    <span className={`${prefix}--list-box__label`}>
+                    <span
+                      id={fieldLabelId}
+                      className={`${prefix}--list-box__label`}>
                       {label}
                     </span>
                     <ListBox.MenuIcon
@@ -340,45 +365,51 @@ export default class MultiSelect extends React.Component {
                       translateWithId={translateWithId}
                     />
                   </ListBox.Field>
-                  {isOpen && (
-                    <ListBox.Menu aria-label={ariaLabel} id={id}>
-                      {sortItems(items, {
-                        selectedItems: {
-                          top: selectedItems,
-                          fixed: [],
-                          'top-after-reopen': this.state.topItems,
-                        }[this.props.selectionFeedback],
-                        itemToString,
-                        compareItems,
-                        locale: 'en',
-                      }).map((item, index) => {
-                        const itemProps = getItemProps({ item });
-                        const itemText = itemToString(item);
-                        const isChecked =
-                          selectedItem.filter(selected =>
-                            isEqual(selected, item)
-                          ).length > 0;
-                        return (
-                          <ListBox.MenuItem
-                            key={itemProps.id}
-                            isActive={isChecked}
-                            isHighlighted={highlightedIndex === index}
-                            {...itemProps}>
-                            <Checkbox
-                              id={`${itemProps.id}__checkbox`}
+                  <ListBox.Menu
+                    aria-multiselectable="true"
+                    aria-labelledby={`${labelId}`}
+                    id={id}>
+                    {sortItems(items, {
+                      selectedItems: {
+                        top: selectedItems,
+                        fixed: [],
+                        'top-after-reopen': this.state.topItems,
+                      }[this.props.selectionFeedback],
+                      itemToString,
+                      compareItems,
+                      locale: 'en',
+                    }).map((item, index) => {
+                      const itemProps = getItemProps({ item });
+                      const itemText = itemToString(item);
+                      const isChecked =
+                        selectedItem.filter(selected => isEqual(selected, item))
+                          .length > 0;
+                      return (
+                        <ListBox.MenuItem
+                          key={itemProps.id}
+                          isActive={isChecked}
+                          role="option"
+                          aria-selected={isChecked}
+                          tabIndex={-1}
+                          isHighlighted={highlightedIndex === index}
+                          title={itemText}
+                          {...itemProps}>
+                          <div className={`${prefix}--checkbox-wrapper`}>
+                            <span
                               title={useTitleInItem ? itemText : null}
-                              name={itemText}
-                              checked={isChecked}
-                              disabled={disabled}
-                              readOnly={true}
-                              tabIndex="-1"
-                              labelText={itemText}
-                            />
-                          </ListBox.MenuItem>
-                        );
-                      })}
-                    </ListBox.Menu>
-                  )}
+                              className={`${prefix}--checkbox-label`}
+                              data-contained-checkbox-state={isChecked}
+                              id={`${itemProps.id}__checkbox`}>
+                              <span
+                                className={`${prefix}--checkbox-label-text`}>
+                                {itemText}
+                              </span>
+                            </span>
+                          </div>
+                        </ListBox.MenuItem>
+                      );
+                    })}
+                  </ListBox.Menu>
                 </ListBox>
               );
             }}

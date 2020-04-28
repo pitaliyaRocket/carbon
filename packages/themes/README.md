@@ -1,3 +1,5 @@
+<!--alex disable color white -->
+
 # @rocketsoftware/themes
 
 > Themes for applying color in the Carbon Design System
@@ -26,7 +28,7 @@ are pre-defined for a specific theme. Currently, we offer the following color
 themes: white, gray 10, gray 90, gray 100 .
 
 You can preview all of the token values for this on the
-[Carbon Design System website](https://next.carbondesignsystem.com/guidelines/color/usage)
+[Carbon Design System website](https://www.carbondesignsystem.com/guidelines/color/usage)
 .
 
 ### Sass

@@ -19,66 +19,39 @@ exports[`SideNav should render 1`] = `
     className="bx--side-nav__navigation bx--side-nav bx--side-nav--ux"
     onBlur={[Function]}
     onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
-    <h2>
-      Navigation
-    </h2>
-    <SideNavFooter
-      assistiveText="Open"
-      expanded={false}
-      onToggle={[Function]}
+    <SideNavLink
+      element="a"
+      href="/"
+      large={false}
     >
-      <footer
-        className="bx--side-nav__footer"
+      <SideNavItem
+        large={false}
       >
-        <button
-          className="bx--side-nav__toggle"
-          onClick={[Function]}
-          title="Open"
-          type="button"
+        <li
+          className="bx--side-nav__item"
         >
-          <div
-            className="bx--side-nav__icon"
+          <Link
+            className="bx--side-nav__link"
+            element="a"
+            href="/"
           >
-            <ForwardRef(ChevronRight20)>
-              <Icon
-                height={20}
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 32 32"
-                width={20}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <svg
-                  aria-hidden={true}
-                  focusable="false"
-                  height={20}
-                  preserveAspectRatio="xMidYMid meet"
-                  style={
-                    Object {
-                      "willChange": "transform",
-                    }
-                  }
-                  viewBox="0 0 32 32"
-                  width={20}
-                  xmlns="http://www.w3.org/2000/svg"
+            <a
+              className="bx--side-nav__link"
+              href="/"
+            >
+              <SideNavLinkText>
+                <span
+                  className="bx--side-nav__link-text"
                 >
-                  <path
-                    d="M22 16L12 26 10.6 24.6 19.2 16 10.6 7.4 12 6z"
-                  />
-                </svg>
-              </Icon>
-            </ForwardRef(ChevronRight20)>
-          </div>
-          <span
-            className="bx--assistive-text"
-          >
-            Open
-          </span>
-        </button>
-      </footer>
-    </SideNavFooter>
+                  Navigation
+                </span>
+              </SideNavLinkText>
+            </a>
+          </Link>
+        </li>
+      </SideNavItem>
+    </SideNavLink>
   </nav>
 </ForwardRef(SideNav)>
 `;

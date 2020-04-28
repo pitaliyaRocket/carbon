@@ -54,17 +54,12 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                         focusable="false"
                         height={16}
                         preserveAspectRatio="xMidYMid meet"
-                        style={
-                          Object {
-                            "willChange": "transform",
-                          }
-                        }
                         viewBox="0 0 16 16"
                         width={16}
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path
-                          d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                        <polygon
+                          points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
                         />
                       </svg>
                     </Icon>
@@ -74,15 +69,21 @@ exports[`DataTable.TableExpandRow should render 1`] = `
             </TableCell>
           </tr>
         </TableExpandRow>
-        <TableExpandedRow>
+        <TableExpandedRow
+          colSpan={1}
+        >
           <tr
             className="bx--expandable-row"
             data-child-row={true}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
-            <TableCell>
-              <td>
+            <TableCell
+              colSpan={1}
+            >
+              <td
+                colSpan={1}
+              >
                 <div
                   className="bx--child-row-inner-container"
                 />

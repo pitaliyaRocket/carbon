@@ -15,7 +15,6 @@ import FloatingMenu, {
   DIRECTION_TOP,
   DIRECTION_BOTTOM,
 } from '../../internal/FloatingMenu';
-import OptimizedResize from '../../internal/OptimizedResize';
 import { OverflowMenuVertical16 } from '@rocketsoftware/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
@@ -34,7 +33,7 @@ const on = (element, ...args) => {
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
- * @type {Object<string, string>}
+ * @type {object<string, string>}
  */
 const triggerButtonPositionProps = {
   [DIRECTION_TOP]: 'bottom',
@@ -43,7 +42,7 @@ const triggerButtonPositionProps = {
 
 /**
  * Determines how the position of arrow should affect the floating menu position.
- * @type {Object<string, number>}
+ * @type {object<string, number>}
  */
 const triggerButtonPositionFactors = {
   [DIRECTION_TOP]: -2,
@@ -245,29 +244,17 @@ class OverflowMenu extends Component {
    */
   _hBlurTimeout;
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.open && !this.state.open) {
-      requestAnimationFrame(() => {
-        this.getMenuPosition();
-      });
-      return false; // Let `.getMenuPosition()` cause render
-    }
-
-    return true;
-  }
-
-  componentDidMount() {
-    requestAnimationFrame(() => {
-      this.getMenuPosition();
-    });
-    this.hResize = OptimizedResize.add(() => {
-      this.getMenuPosition();
-    });
-  }
+  /**
+   * The element ref of the tooltip's trigger button.
+   * @type {React.RefObject<Element>}
+   * @private
+   */
+  _triggerRef = React.createRef();
 
   getPrimaryFocusableElement = () => {
-    if (this.menuEl) {
-      const primaryFocusPropEl = this.menuEl.querySelector(
+    const { current: triggerEl } = this._triggerRef;
+    if (triggerEl) {
+      const primaryFocusPropEl = triggerEl.querySelector(
         '[data-floating-menu-primary-focus]'
       );
       if (primaryFocusPropEl) {
@@ -306,15 +293,7 @@ class OverflowMenu extends Component {
       clearTimeout(this._hBlurTimeout);
       this._hBlurTimeout = undefined;
     }
-    this.hResize.release();
   }
-
-  getMenuPosition = () => {
-    if (this.menuEl) {
-      const menuPosition = this.menuEl.getBoundingClientRect();
-      this.setState({ menuPosition });
-    }
-  };
 
   handleClick = evt => {
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
@@ -352,7 +331,10 @@ class OverflowMenu extends Component {
   };
 
   handleClickOutside = evt => {
-    if (!this._menuBody || !this._menuBody.contains(evt.target)) {
+    if (
+      this.state.open &&
+      (!this._menuBody || !this._menuBody.contains(evt.target))
+    ) {
       this.closeMenu();
     }
   };
@@ -367,13 +349,10 @@ class OverflowMenu extends Component {
     });
   };
 
-  bindMenuEl = menuEl => {
-    this.menuEl = menuEl;
-  };
-
   focusMenuEl = () => {
-    if (this.menuEl) {
-      this.menuEl.focus();
+    const { current: triggerEl } = this._triggerRef;
+    if (triggerEl) {
+      triggerEl.focus();
     }
   };
 
@@ -430,9 +409,10 @@ class OverflowMenu extends Component {
         focusinEventName,
         event => {
           const { target } = event;
+          const { current: triggerEl } = this._triggerRef;
           if (
             !menuBody.contains(target) &&
-            this.menuEl &&
+            triggerEl &&
             !target.matches(
               `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
             )
@@ -450,8 +430,9 @@ class OverflowMenu extends Component {
    * @returns {Element} The DOM element where the floating menu is placed in.
    */
   _getTarget = () => {
+    const { current: triggerEl } = this._triggerRef;
     return (
-      (this.menuEl && this.menuEl.closest('[data-floating-menu-container]')) ||
+      (triggerEl && triggerEl.closest('[data-floating-menu-container]')) ||
       document.body
     );
   };
@@ -528,12 +509,11 @@ class OverflowMenu extends Component {
 
     const wrappedMenuBody = (
       <FloatingMenu
-        menuPosition={this.state.menuPosition}
+        triggerRef={this._triggerRef}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
         getViewport={getViewport}
         menuRef={this._bindMenuBody}
-        menuEl={this.menuEl}
         flipped={this.props.flipped}
         target={this._getTarget}
         onPlace={this._handlePlace}>
@@ -563,7 +543,7 @@ class OverflowMenu extends Component {
           aria-label={ariaLabel}
           id={id}
           tabIndex={tabIndex}
-          ref={mergeRefs(ref, this.bindMenuEl)}>
+          ref={mergeRefs(this._triggerRef, ref)}>
           <IconElement {...iconProps}>
             {iconDescription && <title>{iconDescription}</title>}
           </IconElement>

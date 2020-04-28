@@ -87,8 +87,8 @@
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    padding-left: $spacing-04;
-    padding-right: $spacing-04;
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
     vertical-align: top;
     text-align: left;
   }
@@ -120,7 +120,7 @@
     color: $text-02;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
-    padding: rem(14px) $spacing-04;
+    padding: rem(14px) $spacing-05;
     padding-bottom: rem(13px);
 
     & + td:first-of-type {
@@ -155,13 +155,17 @@
     padding-bottom: 0;
   }
 
-  .#{$prefix}--data-table
-    td.#{$prefix}--table-column-menu
-    .#{$prefix}--overflow-menu[aria-expanded='false']:hover {
-    background: $ui-03;
+  // Overflow Menu Overrides
+  .#{$prefix}--data-table td button.#{$prefix}--overflow-menu {
+    margin: rem(-7px) 0 rem(-8px);
   }
 
-  // Overflow Menu Overrides
+  .#{$prefix}--data-table.#{$prefix}--data-table--compact
+    td
+    .#{$prefix}--overflow-menu {
+    margin: 0;
+  }
+
   .#{$prefix}--data-table
     td.#{$prefix}--table-column-menu
     .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
@@ -183,6 +187,13 @@
       .#{$prefix}--overflow-menu__icon {
       opacity: 0;
     }
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--visible-overflow-menu
@@ -214,6 +225,13 @@
     top: rem(
       3px
     ); //used to center svg without setting display flex //display block needed for overflow text truncation
+  }
+
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $hover-selected-ui;
+    }
   }
 
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
@@ -266,7 +284,7 @@
     padding-bottom: 0;
   }
 
-  th.#{$prefix}--table-column-checkbox:hover {
+  .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
     background: $data-table-column-hover;
   }
 
@@ -343,7 +361,8 @@
   // Compact
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--compact thead tr,
-  .#{$prefix}--data-table--compact tbody tr {
+  .#{$prefix}--data-table--compact tbody tr,
+  .#{$prefix}--data-table--compact tbody tr th {
     height: rem(24px);
   }
 
@@ -351,7 +370,8 @@
     padding: rem(2px) 0;
   }
 
-  .#{$prefix}--data-table--compact td {
+  .#{$prefix}--data-table--compact td,
+  .#{$prefix}--data-table--compact tbody tr th {
     padding-top: rem(2px);
     padding-bottom: rem(2px);
   }
@@ -383,7 +403,8 @@
   // Short
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--short thead tr,
-  .#{$prefix}--data-table--short tbody tr {
+  .#{$prefix}--data-table--short tbody tr,
+  .#{$prefix}--data-table--short tbody tr th {
     height: rem(32px);
   }
 
@@ -391,7 +412,8 @@
     padding: rem(7px) 0;
   }
 
-  .#{$prefix}--data-table--short td {
+  .#{$prefix}--data-table--short td,
+  .#{$prefix}--data-table--short tbody tr th {
     padding-top: rem(7px);
     padding-bottom: rem(6px);
   }
@@ -415,7 +437,8 @@
   // Tall
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--tall thead tr,
-  .#{$prefix}--data-table--tall tbody tr {
+  .#{$prefix}--data-table--tall tbody tr,
+  .#{$prefix}--data-table--tall tbody tr th {
     height: rem(64px);
   }
 
@@ -423,7 +446,8 @@
     padding: rem(16px) 0;
   }
 
-  .#{$prefix}--data-table--tall td {
+  .#{$prefix}--data-table--tall td,
+  .#{$prefix}--data-table--tall tbody tr th {
     padding-top: 1rem;
   }
 
@@ -450,7 +474,6 @@
   // -------------
   .#{$prefix}--data-table_inner-container {
     background-color: $ui-03;
-    padding-top: rem(48px);
     transform: translateZ(0);
   }
 
@@ -468,7 +491,8 @@
     }
 
     thead {
-      position: fixed;
+      position: sticky;
+      z-index: 1;
       top: 0;
       width: 100%;
       overflow: scroll;
@@ -526,7 +550,7 @@
     }
   }
 
-  @include sticky-header($max-width: rem(900px));
+  @include sticky-header($max-width: 100%);
 }
 
 @include exports('data-table-v2-core') {

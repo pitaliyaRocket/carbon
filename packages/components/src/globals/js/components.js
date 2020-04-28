@@ -44,6 +44,9 @@ export {
 export { default as Toolbar } from '../../components/toolbar/toolbar';
 export { default as Tooltip } from '../../components/tooltip/tooltip';
 export {
+  default as TooltipSimple,
+} from '../../components/tooltip/tooltip--simple';
+export {
   default as ProgressIndicator,
 } from '../../components/progress-indicator/progress-indicator';
 export {

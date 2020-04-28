@@ -8,6 +8,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import {
+  findListBoxNode,
   findMenuNode,
   findMenuItemNode,
   openMenu,
@@ -182,7 +183,9 @@ describe('ComboBox', () => {
     it('should not let the user expand the menu', () => {
       const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);
       openMenu(wrapper);
-      expect(findMenuNode(wrapper).length).toBe(0);
+      expect(findListBoxNode(wrapper).hasClass('bx--list-box--expanded')).toBe(
+        false
+      );
     });
   });
 
@@ -203,14 +206,10 @@ describe('ComboBox', () => {
     it('should set `inputValue` to an empty string if a falsey-y value is given', () => {
       const wrapper = mount(<ComboBox {...mockProps} />);
 
-      wrapper
-        .instance()
-        .handleOnStateChange({ inputValue: 'foo' }, downshiftActions);
+      wrapper.instance().handleOnInputValueChange('foo', downshiftActions);
       expect(wrapper.state('inputValue')).toBe('foo');
 
-      wrapper
-        .instance()
-        .handleOnStateChange({ inputValue: null }, downshiftActions);
+      wrapper.instance().handleOnInputValueChange(null, downshiftActions);
       expect(wrapper.state('inputValue')).toBe('');
     });
   });

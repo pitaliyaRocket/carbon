@@ -1,3 +1,5 @@
+<!--alex disable color-->
+
 # `src/globals/scss`
 
 **IMPORTANT NOTE**: Most of deprecated variables, mixins and functions will be
@@ -140,7 +142,7 @@ No change
 
 ## `_layer.scss`
 
-No change
+- Removed, replaced with `box-shadow` mixin
 
 ### Internal
 

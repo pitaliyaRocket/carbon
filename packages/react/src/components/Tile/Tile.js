@@ -14,6 +14,7 @@ import {
   ChevronDown16,
 } from '@rocketsoftware/icons-react';
 import { keys, matches } from '../../internal/keyboard';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -146,7 +147,6 @@ export class ClickableTile extends Component {
     } = this.props;
 
     const classes = classNames(
-      `${prefix}--link`,
       `${prefix}--tile`,
       `${prefix}--tile--clickable`,
       {
@@ -218,7 +218,11 @@ export class SelectableTile extends Component {
     /**
      * The description of the checkmark icon.
      */
-    iconDescription: PropTypes.string,
+    iconDescription: deprecate(
+      PropTypes.string,
+      'The `iconDescription` prop for `RadioTile` is no longer needed and has ' +
+        'been deprecated. It will be moved in the next major release.'
+    ),
 
     /**
      * Specify the tab index of the wrapper element
@@ -235,48 +239,12 @@ export class SelectableTile extends Component {
   static defaultProps = {
     value: 'value',
     title: 'title',
-    iconDescription: 'Tile checkmark',
     selected: false,
     handleClick: () => {},
     handleKeyDown: () => {},
     onChange: () => {},
     tabIndex: 0,
     light: false,
-  };
-
-  handleClick = evt => {
-    evt.preventDefault();
-    evt.persist();
-    const isInput = evt.target === this.input;
-    if (!isInput) {
-      this.setState(
-        {
-          selected: !this.state.selected,
-        },
-        () => {
-          this.props.handleClick(evt);
-        }
-      );
-    } else {
-      this.props.handleClick(evt);
-    }
-  };
-
-  handleKeyDown = evt => {
-    evt.persist();
-    if (matches(evt, [keys.Enter, keys.Space])) {
-      evt.preventDefault();
-      this.setState(
-        {
-          selected: !this.state.selected,
-        },
-        () => {
-          this.props.handleKeyDown(evt);
-        }
-      );
-    } else {
-      this.props.handleKeyDown(evt);
-    }
   };
 
   static getDerivedStateFromProps({ selected }, state) {
@@ -289,6 +257,43 @@ export class SelectableTile extends Component {
         };
   }
 
+  handleClick = evt => {
+    evt.preventDefault();
+    evt.persist();
+    this.setState(
+      {
+        selected: !this.state.selected,
+      },
+      () => {
+        this.props.handleClick(evt);
+        this.props.onChange(evt);
+      }
+    );
+  };
+
+  handleKeyDown = evt => {
+    evt.persist();
+    if (matches(evt, [keys.Enter, keys.Space])) {
+      evt.preventDefault();
+      this.setState(
+        {
+          selected: !this.state.selected,
+        },
+        () => {
+          this.props.handleKeyDown(evt);
+          this.props.onChange(evt);
+        }
+      );
+    } else {
+      this.props.handleKeyDown(evt);
+    }
+  };
+
+  handleOnChange = event => {
+    this.setState({ selected: event.target.checked });
+    this.props.onChange(event);
+  };
+
   render() {
     const {
       children,
@@ -297,10 +302,12 @@ export class SelectableTile extends Component {
       value,
       name,
       title,
+      // eslint-disable-next-line no-unused-vars
       iconDescription,
       className,
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
+      // eslint-disable-next-line no-unused-vars
       onChange,
       light,
       ...other
@@ -326,7 +333,7 @@ export class SelectableTile extends Component {
           id={id}
           className={`${prefix}--tile-input`}
           value={value}
-          onChange={onChange}
+          onChange={this.handleOnChange}
           type="checkbox"
           name={name}
           title={title}
@@ -340,9 +347,7 @@ export class SelectableTile extends Component {
           onClick={this.handleClick}
           onKeyDown={this.handleKeyDown}>
           <span className={`${prefix}--tile__checkmark`}>
-            <CheckmarkFilled aria-label={iconDescription}>
-              {iconDescription && <title>{iconDescription}</title>}
-            </CheckmarkFilled>
+            <CheckmarkFilled />
           </span>
           <span className={`${prefix}--tile-content`}>{children}</span>
         </label>
@@ -537,15 +542,16 @@ export class ExpandableTile extends Component {
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-      <div
+      <button
         ref={tile => {
           this.tile = tile;
         }}
         style={tileStyle}
         className={classes}
+        aria-expanded={isExpanded}
+        title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...other}
         onClick={this.handleClick}
-        onKeyPress={this.handleKeyDown}
         tabIndex={tabIndex}>
         <div
           ref={tileContent => {
@@ -558,17 +564,12 @@ export class ExpandableTile extends Component {
             className={`${prefix}--tile-content`}>
             {childrenAsArray[0]}
           </div>
-          <button
-            aria-expanded={isExpanded}
-            aria-label={
-              isExpanded ? tileExpandedIconText : tileCollapsedIconText
-            }
-            className={`${prefix}--tile__chevron`}>
+          <div className={`${prefix}--tile__chevron`}>
             <ChevronDown16 />
-          </button>
+          </div>
           <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>
         </div>
-      </div>
+      </button>
     );
   }
 }

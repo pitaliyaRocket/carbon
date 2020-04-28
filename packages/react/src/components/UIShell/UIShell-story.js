@@ -176,7 +176,9 @@ storiesOf('UI Shell', module)
                 [Platform]
               </HeaderName>
               <HeaderNavigation aria-label="IBM [Platform]">
-                <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+                <HeaderMenuItem isCurrentPage="true" href="#">
+                  Link 1
+                </HeaderMenuItem>
                 <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
                 <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
                 <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
@@ -593,7 +595,7 @@ storiesOf('UI Shell', module)
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         <HeaderPanel aria-label="Header Panel" expanded>
-          <Switcher role="menu" aria-label="Switcher Container">
+          <Switcher aria-label="Switcher Container">
             <SwitcherItem isSelected aria-label="Link 1" href="#">
               Link 1
             </SwitcherItem>

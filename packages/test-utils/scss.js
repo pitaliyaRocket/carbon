@@ -51,7 +51,7 @@ function createImporter(cwd) {
         },
         pathFilter(pkg, path, relativePath) {
           // Transforms `scss/filename` to `scss/_filename.scss`
-          return relativePath.replace(/^(scss\/)([a-z-]+)/, '$1_$2.scss');
+          return relativePath.replace(/^(scss[\\/])([a-z-]+)/, '$1_$2.scss');
         },
       });
       done({ file });
@@ -127,6 +127,9 @@ function createSassRenderer(cwd, initialData = '') {
       if (
         !error.message.includes('Function breakpoint finished without @return')
       ) {
+        if (error.formatted) {
+          throw new Error(error.formatted);
+        }
         throw error;
       }
       renderError = error;

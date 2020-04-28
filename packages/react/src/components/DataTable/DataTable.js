@@ -106,6 +106,11 @@ export default class DataTable extends React.Component {
     translateWithId: PropTypes.func,
 
     /**
+     * `normal` Change the row height of table
+     */
+    size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+
+    /**
      * Specify whether the control should be a radio button or inline checkbox
      */
     radio: PropTypes.bool,
@@ -126,6 +131,7 @@ export default class DataTable extends React.Component {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
     locale: 'en',
+    size: 'normal',
     translateWithId,
   };
 
@@ -335,6 +341,14 @@ export default class DataTable extends React.Component {
     };
   };
 
+  getToolbarProps = (props = {}) => {
+    const { size } = this.props;
+    return {
+      ...props,
+      size: size === 'compact' || size === 'short' ? 'small' : 'normal',
+    };
+  };
+
   getBatchActionProps = (props = {}) => {
     const { shouldShowBatchActions } = this.state;
     const totalSelected = this.getSelectedRows().length;
@@ -385,7 +399,7 @@ export default class DataTable extends React.Component {
   getSelectedRows = () =>
     this.state.rowIds.filter(id => {
       const row = this.state.rowsById[id];
-      return row.isSelected;
+      return row.isSelected && !row.disabled;
     });
 
   /**
@@ -454,11 +468,9 @@ export default class DataTable extends React.Component {
           ...acc,
           [id]: {
             ...initialState.rowsById[id],
-            isSelected: this.getSelectedState(
-              initialState.rowsById[id],
-              isSelected,
-              filteredRowIds
-            ),
+            ...(!initialState.rowsById[id].disabled && {
+              isSelected: filteredRowIds.includes(id) && isSelected,
+            }),
           },
         }),
         {}
@@ -487,9 +499,8 @@ export default class DataTable extends React.Component {
       const filteredRowIds = this.getFilteredRowIds();
       const { rowsById } = state;
       const isSelected = !(
-        Object.values(rowsById).filter(
-          row => row.isSelected == true && filteredRowIds.includes(row.id)
-        ).length > 0
+        Object.values(rowsById).filter(row => row.isSelected && !row.disabled)
+          .length > 0
       );
       return {
         shouldShowBatchActions: isSelected,
@@ -613,9 +624,13 @@ export default class DataTable extends React.Component {
    *
    * @param {Event} event
    */
-  handleOnInputValueChange = event => {
+  handleOnInputValueChange = (event, defaultValue) => {
     if (event.target) {
       this.setState({ filterInputValue: event.target.value });
+    }
+
+    if (defaultValue) {
+      this.setState({ filterInputValue: defaultValue });
     }
   };
 
@@ -642,6 +657,7 @@ export default class DataTable extends React.Component {
       getExpandHeaderProps: this.getExpandHeaderProps,
       getRowProps: this.getRowProps,
       getSelectionProps: this.getSelectionProps,
+      getToolbarProps: this.getToolbarProps,
       getBatchActionProps: this.getBatchActionProps,
       getTableProps: this.getTableProps,
       getTableContainerProps: this.getTableContainerProps,

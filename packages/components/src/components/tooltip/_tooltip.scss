@@ -6,8 +6,8 @@
 //
 
 @import '../../globals/scss/vars';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/layout';
 @import '../../globals/scss/tooltip';
 @import '../../globals/scss/vendor/@rocketsoftware/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
@@ -53,7 +53,7 @@
   }
 
   &::after {
-    @include layer('overlay');
+    @include box-shadow;
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
@@ -164,7 +164,7 @@
 
   .#{$prefix}--tooltip--definition__bottom,
   .#{$prefix}--tooltip--definition__top {
-    @include layer('overlay');
+    @include box-shadow;
     position: absolute;
     z-index: 1;
     display: none;
@@ -349,7 +349,7 @@
   }
 
   .#{$prefix}--tooltip {
-    @include layer('overlay');
+    @include box-shadow;
     @include reset;
     position: absolute;
     display: none;

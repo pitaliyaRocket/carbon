@@ -30,6 +30,7 @@ const colors = [
   'text03',
   'text04',
   'text05',
+  'textError',
 
   'icon01',
   'icon02',
@@ -77,6 +78,7 @@ const colors = [
   'activeUI',
 
   'selectedUI',
+  'selectedLightUI',
   'hoverSelectedUI',
   'inverseHoverUI',
 
@@ -92,6 +94,8 @@ const colors = [
   'disabled03',
 
   'highlight',
+
+  'decorative01',
 
   'skeleton01',
   'skeleton02',
@@ -174,6 +178,7 @@ export const unstable__meta = {
         'text03',
         'text04',
         'text05',
+        'textError',
         'link01',
         'icon01',
         'icon02',
@@ -213,6 +218,7 @@ export const unstable__meta = {
         'activeUI',
         'activeDanger',
         'selectedUI',
+        'selectedLightUI',
         'highlight',
         'skeleton01',
         'skeleton02',
@@ -223,6 +229,7 @@ export const unstable__meta = {
         'inverseHoverUI',
         'active01',
         'hoverField',
+        'decorative01',
       ],
     },
   ],
