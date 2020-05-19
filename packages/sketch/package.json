@@ -24,12 +24,12 @@
     "skpm:link": "skpm-link"
   },
   "dependencies": {
-"@babel/polyfill": "^7.7.0",
-    "@rocketsoftware/colors": "^0.3.0",
-    "@rocketsoftware/icon-helpers": "^0.3.0",
-    "@rocketsoftware/icons": "^0.3.0",
-    "@rocketsoftware/themes": "^0.3.0",
-    "@rocketsoftware/type": "^0.3.0",
+    "@babel/polyfill": "^7.7.0",
+    "@rocketsoftware/colors": "^0.6.0",
+    "@rocketsoftware/icon-helpers": "^0.6.0",
+    "@rocketsoftware/icons": "^0.6.0",
+    "@rocketsoftware/themes": "^0.6.0",
+    "@rocketsoftware/type": "^0.6.0",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",
     "skpm": "^1.2.0"
