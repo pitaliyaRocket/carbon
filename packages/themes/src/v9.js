@@ -8,8 +8,8 @@
 import { white, red60 } from '@rocketsoftware/colors';
 
 export const interactive01 = '#3d70b2';
-export const interactive02 = '#5a6872';
-export const interactive03 = '#5a6872';
+export const interactive02 = '#4d5358';
+export const interactive03 = '#3d70b2';
 export const interactive04 = '#3d70b2';
 export const uiBackground = '#f4f7fb';
 
@@ -24,6 +24,7 @@ export const text02 = '#5a6872';
 export const text03 = '#cdd1d4';
 export const text04 = white;
 export const text05 = '#5a6872';
+export const textError = '#e0182d';
 
 export const icon01 = '#3d70b2';
 export const icon02 = '#5a6872';
@@ -71,6 +72,7 @@ export const activeTertiary = '#414f59';
 export const hoverUI = '#EEF4FC';
 export const activeUI = '#DFEAFA';
 export const selectedUI = '#EEF4FC';
+export const selectedLightUI = '#EEF4FC';
 export const inverseHoverUI = '#4c4c4c';
 
 export const hoverSelectedUI = '#DFEAFA';
@@ -87,6 +89,8 @@ export const disabled02 = '#dfe3e6';
 export const disabled03 = '#cdd1d4';
 
 export const highlight = '#f4f7fb';
+
+export const decorative01 = '#EEF4FC';
 
 export const skeleton01 = 'rgba(61, 112, 178, .1)';
 export const skeleton02 = 'rgba(61, 112, 178, .1)';

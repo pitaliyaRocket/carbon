@@ -27,6 +27,7 @@ export default function PasswordInput({
   tooltipAlignment = 'center',
   hidePasswordLabel = 'Hide password',
   showPasswordLabel = 'Show password',
+  size,
   ...other
 }) {
   const [inputType, setInputType] = useState('password');
@@ -40,6 +41,7 @@ export default function PasswordInput({
     {
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--text-input--invalid`]: invalid,
+      [`${prefix}--text-input--${size}`]: size,
     }
   );
   const sharedTextInputProps = {
@@ -227,6 +229,11 @@ PasswordInput.propTypes = {
    * "Show password" tooltip text on password visibility toggle
    */
   showPasswordLabel: PropTypes.string,
+
+  /**
+   * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size
+   */
+  size: PropTypes.string,
 };
 
 PasswordInput.defaultProps = {
@@ -238,4 +245,5 @@ PasswordInput.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
+  size: '',
 };

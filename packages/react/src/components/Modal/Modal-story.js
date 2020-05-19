@@ -32,7 +32,6 @@ const props = () => ({
     'Enter key to submit (shouldSubmitOnEnter)',
     false
   ),
-  focusTrap: boolean('Trap focus (focusTrap)', false),
   hasScrollingContent: boolean(
     'Modal contains scrollable content (hasScrollingContent)',
     false
@@ -56,10 +55,7 @@ const props = () => ({
     '[data-modal-primary-focus]'
   ),
   size: select('Size (size)', sizes),
-  iconDescription: text(
-    'Close icon description (iconDescription)',
-    'Close the modal'
-  ),
+  iconDescription: text('Close icon description (iconDescription)', 'Close'),
   onBlur: action('onBlur'),
   onClick: action('onClick'),
   onFocus: action('onFocus'),
@@ -94,10 +90,7 @@ const titleOnlyProps = () => {
       'Secondary Button'
     ),
     size: select('Size (size)', sizes, 'sm'),
-    iconDescription: text(
-      'Close icon description (iconDescription)',
-      'Close the modal'
-    ),
+    iconDescription: text('Close icon description (iconDescription)', 'Close'),
     onBlur: action('onBlur'),
     onClick: action('onClick'),
     onFocus: action('onFocus'),

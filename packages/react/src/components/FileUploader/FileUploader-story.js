@@ -20,7 +20,6 @@ import {
 } from '@storybook/addon-knobs';
 import FileUploader, { FileUploaderButton } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
-import Button from '../Button';
 import { settings } from '@rocketsoftware/carbon-components';
 import FileUploaderItem from './FileUploaderItem';
 import FileUploaderDropContainer from './FileUploaderDropContainer';
@@ -34,7 +33,11 @@ const buttonKinds = {
   'Danger Primary (danger--primary)': 'danger--primary',
   'Tertiary (tertiary)': 'tertiary',
 };
-
+const sizes = {
+  Default: 'default',
+  Field: 'field',
+  Small: 'small',
+};
 const filenameStatuses = {
   'Edit (edit)': 'edit',
   'Complete (complete)': 'complete',
@@ -51,6 +54,7 @@ const props = {
       multiple: boolean('Supports multiple files (multiple)', true),
       disabled: boolean('Disabled (disabled)', false),
       buttonKind: buttonKind || 'primary',
+      size: select('Button size (size)', sizes, 'default'),
       disableLabelChanges: boolean(
         'Prevent the label from being replaced with file selected file (disableLabelChanges)',
         false
@@ -60,26 +64,38 @@ const props = {
       onChange: action('onChange'),
     };
   },
-  fileUploader: () => ({
-    labelTitle: text('The label title (labelTitle)', 'Upload'),
-    labelDescription: text(
-      'The label description (labelDescription)',
-      'only .jpg files at 500mb or less'
-    ),
-    buttonLabel: text('The button label (buttonLabel)', 'Add files'),
-    filenameStatus: select(
-      'Status for file name (filenameStatus)',
-      filenameStatuses,
-      'edit'
-    ),
-    accept: array('Accepted file extensions (accept)', ['.jpg', '.png'], ','),
-    name: text('Form item name: (name)', ''),
-    multiple: boolean('Supports multiple files (multiple)', true),
-    iconDescription: text(
-      'Close button icon description (iconDescription)',
-      'Clear file'
-    ),
-  }),
+  fileUploader: () => {
+    const buttonKind = select(
+      'Button kind (buttonKind)',
+      {
+        'Primary (primary)': 'primary',
+        'Tertiary (tertiary)': 'tertiary',
+      },
+      ''
+    );
+    return {
+      labelTitle: text('The label title (labelTitle)', 'Upload'),
+      labelDescription: text(
+        'The label description (labelDescription)',
+        'only .jpg files at 500mb or less'
+      ),
+      buttonLabel: text('The button label (buttonLabel)', 'Add files'),
+      buttonKind: buttonKind || 'primary',
+      size: select('Button size (size)', sizes, 'default'),
+      filenameStatus: select(
+        'Status for file name (filenameStatus)',
+        filenameStatuses,
+        'edit'
+      ),
+      accept: array('Accepted file extensions (accept)', ['.jpg', '.png'], ','),
+      name: text('Form item name: (name)', ''),
+      multiple: boolean('Supports multiple files (multiple)', true),
+      iconDescription: text(
+        'Close button icon description (iconDescription)',
+        'Clear file'
+      ),
+    };
+  },
   fileUploaderItem: () => ({
     name: text('Filename (name)', 'README.md'),
     status: select('Status for file name (status)', filenameStatuses, 'edit'),
@@ -99,6 +115,7 @@ const props = {
     ),
   }),
   fileUploaderDropContainer: () => ({
+    size: select('Filename height (size)', sizes, 'default'),
     labelText: text(
       'Label text (labelText)',
       'Drag and drop files here or click to upload'
@@ -133,22 +150,9 @@ storiesOf('FileUploader', module)
   .add(
     'FileUploader',
     () => {
-      let fileUploader;
       return (
         <div className={`${prefix}--file__container`}>
-          <FileUploader
-            {...props.fileUploader()}
-            ref={node => (fileUploader = node)}
-          />
-          <Button
-            kind="secondary"
-            size="small"
-            style={{ marginTop: '1rem' }}
-            onClick={() => {
-              fileUploader.clearFiles();
-            }}>
-            Clear File
-          </Button>
+          <FileUploader {...props.fileUploader()} />
         </div>
       );
     },

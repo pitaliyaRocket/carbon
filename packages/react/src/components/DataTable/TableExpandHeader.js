@@ -6,6 +6,8 @@
  */
 
 import cx from 'classnames';
+import PropTypes from 'prop-types';
+import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
 import React from 'react';
 import { ChevronRight16 } from '@rocketsoftware/icons-react';
 import { settings } from '@rocketsoftware/carbon-components';
@@ -19,6 +21,7 @@ const TableExpandHeader = ({
   isExpanded,
   onExpand,
   expandIconDescription,
+  children,
   ...rest
 }) => {
   const className = cx(`${prefix}--table-expand`, headerClassName);
@@ -42,8 +45,36 @@ const TableExpandHeader = ({
           />
         </button>
       )}
+      {children}
     </th>
   );
+};
+
+TableExpandHeader.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+
+  /**
+   * Specify the string read by a voice reader when the expand trigger is
+   * focused
+   */
+  ariaLabel: requiredIfGivenPropExists('enableExpando', PropTypes.string),
+
+  /**
+   * Specify whether this row is expanded or not. This helps coordinate data
+   * attributes so that `TableExpandRow` and `TableExapndedRow` work together
+   */
+  isExpanded: requiredIfGivenPropExists('enableExpando', PropTypes.bool),
+
+  /**
+   * Hook for when a listener initiates a request to expand the given row
+   */
+  onExpand: requiredIfGivenPropExists('enableExpando', PropTypes.func),
+
+  /**
+   * The description of the chevron right icon, to be put in its SVG `<title>` element.
+   */
+  expandIconDescription: PropTypes.string,
 };
 
 export default TableExpandHeader;

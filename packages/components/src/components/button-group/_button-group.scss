@@ -16,7 +16,9 @@
     height: unset;
     width: unset;
   }
-
+  .#{$prefix}--overflow-menu-options::after {
+    display: none;
+  }
   .#{$prefix}--btn__icon {
     transition: transform $duration--fast-01 motion(standard, productive);
   }

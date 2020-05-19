@@ -32,13 +32,12 @@ exports[`SideNavMenu should render 1`] = `
                 focusable="false"
                 height="20"
                 preserveAspectRatio="xMidYMid meet"
-                style="will-change: transform;"
                 viewBox="0 0 32 32"
                 width="20"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M16 22L6 12 7.4 10.6 16 19.2 24.6 10.6 26 12z"
+                <polygon
+                  points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"
                 />
               </svg>
             </div>
@@ -62,6 +61,7 @@ exports[`SideNavMenu should render 1`] = `
 >
   <li
     className="bx--side-nav__item bx--side-nav__item--icon custom-classname"
+    onKeyDown={[Function]}
   >
     <button
       aria-expanded={false}
@@ -108,17 +108,12 @@ exports[`SideNavMenu should render 1`] = `
                 focusable="false"
                 height={20}
                 preserveAspectRatio="xMidYMid meet"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
                 viewBox="0 0 32 32"
                 width={20}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M16 22L6 12 7.4 10.6 16 19.2 24.6 10.6 26 12z"
+                <polygon
+                  points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12"
                 />
               </svg>
             </Icon>
@@ -128,7 +123,6 @@ exports[`SideNavMenu should render 1`] = `
     </button>
     <ul
       className="bx--side-nav__menu"
-      role="menu"
     >
       text
     </ul>

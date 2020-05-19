@@ -68,6 +68,7 @@ export Form from './components/Form';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
+export { Grid, Row, Column } from './components/Grid';
 export Icon from './components/Icon';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
@@ -155,6 +156,7 @@ export CodeSnippetSkeleton from './components/CodeSnippet/CodeSnippet.Skeleton';
 export DropdownSkeleton from './components/Dropdown/Dropdown.Skeleton';
 export FileUploaderSkeleton from './components/FileUploader/FileUploader.Skeleton';
 export NumberInputSkeleton from './components/NumberInput/NumberInput.Skeleton';
+export PaginationSkeleton from './components/Pagination/Pagination.Skeleton';
 export ProgressIndicatorSkeleton from './components/ProgressIndicator/ProgressIndicator.Skeleton';
 export RadioButtonSkeleton from './components/RadioButton/RadioButton.Skeleton';
 export SearchSkeleton from './components/Search/Search.Skeleton';
@@ -171,7 +173,6 @@ export IconSkeleton from './components/Icon/Icon.Skeleton';
 export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
 export Tour from './components/Tour';
 export TourTooltip from './components/TourTooltip';
-export * from './components/UIShell';
 export SplitButton from './components/SplitButton';
 export ButtonGroup from './components/ButtonGroup';
 export {
@@ -179,3 +180,33 @@ export {
   FlatProgressStep,
 } from './components/FlatProgressIndicator';
 export FlatProgressIndicatorSkeleton from './components/FlatProgressIndicator/FlatProgressIndicator.Skeleton';
+export {
+  Content,
+  Header,
+  HeaderContainer,
+  HeaderGlobalAction,
+  HeaderGlobalBar,
+  HeaderMenu,
+  HeaderMenuButton,
+  HeaderMenuItem,
+  HeaderName,
+  HeaderNavigation,
+  HeaderPanel,
+  HeaderSideNavItems,
+  Switcher,
+  SwitcherItem,
+  SwitcherDivider,
+  SkipToContent,
+  SideNav,
+  SideNavDetails,
+  SideNavFooter,
+  SideNavHeader,
+  SideNavIcon,
+  SideNavItem,
+  SideNavItems,
+  SideNavLink,
+  SideNavLinkText,
+  SideNavMenu,
+  SideNavMenuItem,
+  SideNavSwitcher,
+} from './components/UIShell';

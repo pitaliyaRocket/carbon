@@ -1,3 +1,5 @@
+<!--alex disable simple just hooks hook-->
+
 # `DataTable` component
 
 > A set of table primitives to help teams build simple, flexible, and WAI-ARIA
@@ -611,21 +613,23 @@ In practice, this looks like the following:
         {/* pass in `onInputChange` change here to make filtering work */}
         <TableToolbarSearch onChange={onInputChange} />
         <TableToolbarContent>
-          <TableToolbarAction
-            icon={iconDownload}
-            iconDescription="Download"
-            onClick={action('TableToolbarAction - Download')}
-          />
-          <TableToolbarAction
-            icon={iconEdit}
-            iconDescription="Edit"
-            onClick={action('TableToolbarAction - Edit')}
-          />
-          <TableToolbarAction
-            icon={iconSettings}
-            iconDescription="Settings"
-            onClick={action('TableToolbarAction - Settings')}
-          />
+          <TableToolbarMenu>
+            <TableToolbarAction
+              icon={iconDownload}
+              iconDescription="Download"
+              onClick={action('TableToolbarAction - Download')}
+            />
+            <TableToolbarAction
+              icon={iconEdit}
+              iconDescription="Edit"
+              onClick={action('TableToolbarAction - Edit')}
+            />
+            <TableToolbarAction
+              icon={iconSettings}
+              iconDescription="Settings"
+              onClick={action('TableToolbarAction - Settings')}
+            />
+          </TableToolbarMenu>
           <Button onClick={action('Add new row')} small kind="primary">
             Add new
           </Button>
@@ -707,21 +711,23 @@ In practice, this looks like the following:
         </TableBatchActions>
         <TableToolbarSearch onChange={onInputChange} />
         <TableToolbarContent>
-          <TableToolbarAction
-            icon={iconDownload}
-            iconDescription="Download"
-            onClick={action('TableToolbarAction - Download')}
-          />
-          <TableToolbarAction
-            icon={iconEdit}
-            iconDescription="Edit"
-            onClick={action('TableToolbarAction - Edit')}
-          />
-          <TableToolbarAction
-            icon={iconSettings}
-            iconDescription="Settings"
-            onClick={action('TableToolbarAction - Settings')}
-          />
+          <TableToolbarMenu>
+            <TableToolbarAction
+              icon={iconDownload}
+              iconDescription="Download"
+              onClick={action('TableToolbarAction - Download')}
+            />
+            <TableToolbarAction
+              icon={iconEdit}
+              iconDescription="Edit"
+              onClick={action('TableToolbarAction - Edit')}
+            />
+            <TableToolbarAction
+              icon={iconSettings}
+              iconDescription="Settings"
+              onClick={action('TableToolbarAction - Settings')}
+            />
+          </TableToolbarMenu>
           <Button onClick={action('Add new row')} small kind="primary">
             Add new
           </Button>

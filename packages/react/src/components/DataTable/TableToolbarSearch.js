@@ -36,20 +36,36 @@ const TableToolbarSearch = ({
   persistent,
   persistant,
   id,
+  tabIndex,
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
-  const [expandedState, setExpandedState] = useState(defaultExpanded);
+  const [expandedState, setExpandedState] = useState(
+    defaultExpanded || defaultValue
+  );
   const expanded = controlled ? expandedProp : expandedState;
   const searchRef = useRef(null);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useMemo(getInstanceId, []);
 
+  const [focusTarget, setFocusTarget] = useState(null);
+
   useEffect(() => {
-    if (!controlled && expandedState && searchRef.current) {
-      searchRef.current.querySelector('input').focus();
+    if (focusTarget) {
+      focusTarget.current.querySelector('input').focus();
+      setFocusTarget(null);
     }
-  }, [controlled, expandedState]);
+  }, [focusTarget]);
+
+  useEffect(
+    () => {
+      if (defaultValue) {
+        onChangeProp('', defaultValue);
+      }
+    },
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const searchContainerClasses = cx({
     [searchContainerClass]: searchContainerClass,
@@ -64,10 +80,17 @@ const TableToolbarSearch = ({
   const handleExpand = (event, value = !expanded) => {
     if (!controlled && (!persistent || (!persistent && !persistant))) {
       setExpandedState(value);
+      if (value && !expanded) {
+        setFocusTarget(searchRef);
+      }
     }
     if (onExpand) {
       onExpand(event, value);
     }
+  };
+
+  const onClick = e => {
+    handleExpand(e, true);
   };
 
   const onChange = e => {
@@ -79,17 +102,16 @@ const TableToolbarSearch = ({
 
   return (
     <div
-      tabIndex={expandedState ? '-1' : '0'}
-      role="search"
+      tabIndex={expandedState ? '-1' : tabIndex}
       ref={searchRef}
-      onClick={event => handleExpand(event, true)}
+      onClick={event => onClick(event)}
       onFocus={event => handleExpand(event, true)}
       onBlur={event => !value && handleExpand(event, false)}
       className={searchContainerClasses}>
       <Search
         size="sm"
+        tabIndex={expandedState ? tabIndex : '-1'}
         className={className}
-        defaultValue={defaultValue}
         value={value}
         id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         aria-hidden={!expanded}
@@ -148,6 +170,11 @@ TableToolbarSearch.propTypes = {
   translateWithId: PropTypes.func.isRequired,
 
   /**
+   * Optional prop to specify the tabIndex of the <Search> (in expanded state) or the container (in collapsed state)
+   */
+  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+  /**
    * Whether the search should be allowed to expand
    */
   persistent: PropTypes.bool,
@@ -158,6 +185,7 @@ TableToolbarSearch.propTypes = {
 };
 
 TableToolbarSearch.defaultProps = {
+  tabIndex: '0',
   translateWithId,
   persistent: false,
 };

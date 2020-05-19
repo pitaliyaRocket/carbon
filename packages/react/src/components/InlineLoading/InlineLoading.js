@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { CheckmarkFilled16, Error20 } from '@rocketsoftware/icons-react';
+import { CheckmarkFilled16, ErrorFilled16 } from '@rocketsoftware/icons-react';
 import { settings } from '@rocketsoftware/carbon-components';
 import deprecate from '../../prop-types/deprecate';
 import Loading from '../Loading';
@@ -28,7 +28,7 @@ export default function InlineLoading({
   const loadingClasses = classNames(`${prefix}--inline-loading`, className);
   const getLoading = () => {
     if (status === 'error') {
-      return <Error20 className={`${prefix}--inline-loading--error`} />;
+      return <ErrorFilled16 className={`${prefix}--inline-loading--error`} />;
     }
     if (status === 'finished') {
       setTimeout(() => {

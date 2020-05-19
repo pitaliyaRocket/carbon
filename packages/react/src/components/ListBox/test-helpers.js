@@ -10,6 +10,7 @@ import { settings } from '@rocketsoftware/carbon-components';
 const { prefix } = settings;
 
 // Finding nodes in a ListBox
+export const findListBoxNode = wrapper => wrapper.find(`.${prefix}--list-box`);
 export const findMenuNode = wrapper =>
   wrapper.find(`.${prefix}--list-box__menu`);
 export const findMenuItemNode = (wrapper, index) =>
@@ -32,7 +33,6 @@ export const assertMenuOpen = (wrapper, mockProps) => {
     expect.objectContaining({
       'aria-expanded': true,
       'aria-haspopup': true,
-      'aria-label': 'Close menu',
     })
   );
 };
@@ -47,7 +47,6 @@ export const assertMenuClosed = wrapper => {
     expect.objectContaining({
       'aria-expanded': false,
       'aria-haspopup': true,
-      'aria-label': 'Open menu',
     })
   );
 };

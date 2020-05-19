@@ -16,6 +16,7 @@ $prefix: 'bx';
 @import '~@rocketsoftware/carbon-components/scss/globals/scss/vars';
 @import '~@rocketsoftware/carbon-components/scss/globals/scss/colors';
 @import '~@rocketsoftware/carbon-components/scss/globals/scss/theme';
+@import '~@rocketsoftware/carbon-components/scss/globals/scss/component-tokens';
 @import '~@rocketsoftware/carbon-components/scss/globals/scss/mixins';
 @import '~@rocketsoftware/carbon-components/scss/globals/scss/layout';
 @import '~@rocketsoftware/carbon-components/scss/globals/scss/layer';
@@ -81,19 +82,27 @@ $prefix: 'bx';
 
 @if feature-flag-enabled('enable-css-custom-properties') {
   :root {
-    @include carbon--theme($carbon--theme--white, true);
+    @include carbon--theme($carbon--theme--white, true) {
+      @include emit-component-tokens($tag-colors);
+    }
   }
 
   :root[storybook-carbon-theme='g10'] {
-    @include carbon--theme($carbon--theme--g10, true);
+    @include carbon--theme($carbon--theme--g10, true) {
+      @include emit-component-tokens($tag-colors);
+    }
   }
 
   :root[storybook-carbon-theme='g90'] {
-    @include carbon--theme($carbon--theme--g90, true);
+    @include carbon--theme($carbon--theme--g90, true) {
+      @include emit-component-tokens($tag-colors);
+    }
   }
 
   :root[storybook-carbon-theme='g100'] {
-    @include carbon--theme($carbon--theme--g100, true);
+    @include carbon--theme($carbon--theme--g100, true) {
+      @include emit-component-tokens($tag-colors);
+    }
   }
 
   :root[storybook-carbon-theme='rocket'] {

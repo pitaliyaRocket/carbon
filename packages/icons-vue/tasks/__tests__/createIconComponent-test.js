@@ -36,7 +36,10 @@ const babelConfig = {
 
 async function getModuleFromString(
   string,
-  { external = ['@carbon/icon-helpers'], name = '<MockIconModule>' } = {}
+  {
+    external = ['@rocketsoftware/icon-helpers'],
+    name = '<MockIconModule>',
+  } = {}
 ) {
   const bundle = await rollup({
     input: '__entrypoint__.js',

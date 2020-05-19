@@ -14,8 +14,8 @@ import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 
-// The modal is the 0th child inside the wrapper on account of ft-react
-const getModal = wrapper => wrapper.childAt(0);
+// The modal is the 0th child inside the wrapper on account of focus-trap-react
+const getModal = wrapper => wrapper.find('.bx--modal');
 
 describe('Modal', () => {
   describe('Renders as expected', () => {
@@ -49,7 +49,7 @@ describe('Modal', () => {
     });
 
     it('has the expected default iconDescription', () => {
-      expect(mounted.props().iconDescription).toEqual('close the modal');
+      expect(mounted.props().iconDescription).toEqual('Close');
     });
 
     it('adds new iconDescription when passed via props', () => {

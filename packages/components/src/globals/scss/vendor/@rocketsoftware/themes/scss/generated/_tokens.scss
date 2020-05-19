@@ -170,6 +170,16 @@ $text-05: if(
   #6f6f6f
 ) !default;
 
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$text-error: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'text-error'),
+  map-get($carbon--theme, 'text-error'),
+  #da1e28
+) !default;
+
 /// Primary icons
 /// @type {undefined}
 /// @access public
@@ -508,6 +518,16 @@ $selected-ui: if(
   #e0e0e0
 ) !default;
 
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$selected-light-ui: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'selected-light-ui'),
+  map-get($carbon--theme, 'selected-light-ui'),
+  #e0e0e0
+) !default;
+
 /// Data table selected row hover
 /// @type {undefined}
 /// @access public
@@ -537,7 +557,7 @@ $hover-danger: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'hover-danger'),
   map-get($carbon--theme, 'hover-danger'),
-  #ba1b23
+  #b81921
 ) !default;
 
 /// Danger active; `$support-01` active
@@ -615,6 +635,16 @@ $highlight: if(
     map-has-key($carbon--theme, 'highlight'),
   map-get($carbon--theme, 'highlight'),
   #d0e2ff
+) !default;
+
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$decorative-01: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'decorative-01'),
+  map-get($carbon--theme, 'decorative-01'),
+  #e0e0e0
 ) !default;
 
 /// Skeleton state of graphics

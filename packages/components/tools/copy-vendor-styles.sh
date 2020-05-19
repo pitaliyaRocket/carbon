@@ -21,7 +21,7 @@ root_path=$PWD
 echo "Cleaning vendor directory..."
 
 VENDOR_DIR="$PWD/src/globals/scss/vendor"
-rm -rf $VENDOR_DIR
+rm -rf "$VENDOR_DIR"
 
 for package in node_modules/@rocketsoftware/*; do
   PKG_NAME="@rocketsoftware/$(basename $package)"

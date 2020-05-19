@@ -129,14 +129,15 @@ describe('Tile', () => {
   });
 
   describe('Renders selectable tile as expected', () => {
-    const wrapper = mount(
-      <SelectableTile className="extra-class">
-        <div className="child">Test</div>
-      </SelectableTile>
-    );
+    let wrapper;
     let label;
 
     beforeEach(() => {
+      wrapper = mount(
+        <SelectableTile className="extra-class">
+          <div className="child">Test</div>
+        </SelectableTile>
+      );
       wrapper.state().selected = false;
       label = wrapper.find('label');
     });
@@ -199,6 +200,25 @@ describe('Tile', () => {
       wrapper.setProps({ light: true });
       expect(wrapper.props().light).toEqual(true);
       expect(wrapper.childAt(1).hasClass('bx--tile--light')).toEqual(true);
+    });
+
+    it('should call onChange when the checkbox value changes', () => {
+      const onChange = jest.fn();
+      const wrapper = mount(
+        <SelectableTile onChange={onChange}>
+          <span id="test-id">test</span>
+        </SelectableTile>
+      );
+
+      const content = wrapper.find('#test-id');
+
+      // Tile becomes selected
+      content.simulate('click');
+      expect(onChange).toHaveBeenCalledTimes(1);
+
+      // Tile becomes un-selected
+      content.simulate('click');
+      expect(onChange).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -270,17 +290,14 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find('button').getElements()[0]
-        .props['aria-label'];
+      const collapsedDescription = wrapper.find('button').prop('title');
       expect(collapsedDescription).toEqual(defaultCollapsedIconText);
 
       // click on the item to expand it.
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find('button').getElements()[0].props[
-        'aria-label'
-      ];
+      const expandedDescription = wrapper.find('button').prop('title');
       expect(expandedDescription).toEqual(defaultExpandedIconText);
     });
 
@@ -293,17 +310,15 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find('button').getElements()[0]
-        .props['aria-label'];
+      const collapsedDescription = wrapper.find('button').prop('title');
+
       expect(collapsedDescription).toEqual(tileCollapsedIconText);
 
       // click on the item to expand it.
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find('button').getElements()[0].props[
-        'aria-label'
-      ];
+      const expandedDescription = wrapper.find('button').prop('title');
       expect(expandedDescription).toEqual(tileExpandedIconText);
     });
 

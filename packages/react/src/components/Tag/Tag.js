@@ -10,9 +10,10 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
 import { Close16 } from '@rocketsoftware/icons-react';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-
+const getInstanceId = setupGetInstanceId();
 const TYPES = {
   red: 'Red',
   magenta: 'Magenta',
@@ -29,27 +30,45 @@ const TYPES = {
 const Tag = ({
   children,
   className,
+  id,
   type,
   filter,
   title,
   disabled,
+  onClose,
   ...other
 }) => {
-  const tagClass = `${prefix}--tag--${type}`;
-  const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
+  const tagId = id || `tag-${getInstanceId()}`;
+  const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
+    [`${prefix}--tag--${type}`]: type,
   });
+  const handleClose = event => {
+    event.stopPropagation();
+    onClose(event);
+  };
   return filter ? (
-    <span
-      role="button"
+    <div
       className={tagClasses}
-      title={title || 'Clear filter'}
-      tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      aria-label={
+        title !== undefined
+          ? `${title} ${children}`
+          : `Clear filter ${children}`
+      }
+      id={tagId}
+      disabled={disabled}
       {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-      <Close16 aria-label={title || 'Clear filter'} />
-    </span>
+      <span className={`${prefix}--tag__label`}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
+      <button
+        className={`${prefix}--tag__close-icon`}
+        onClick={handleClose}
+        aria-labelledby={tagId}>
+        <Close16 />
+      </button>
+    </div>
   ) : (
     <span className={tagClasses} {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
@@ -71,7 +90,7 @@ Tag.propTypes = {
   /**
    * Specify the type of the <Tag>
    */
-  type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
+  type: PropTypes.oneOf(Object.keys(TYPES)),
 
   /**
    * Specify if the <Tag> is disabled
@@ -87,6 +106,11 @@ Tag.propTypes = {
    * Text to show on clear filters
    */
   title: PropTypes.string,
+
+  /**
+   * Click handler for filter tag close button.
+   */
+  onClose: PropTypes.func,
 };
 
 export const types = Object.keys(TYPES);

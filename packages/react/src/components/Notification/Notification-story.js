@@ -26,14 +26,14 @@ const notificationProps = () => ({
   lowContrast: boolean('Use low contrast variant (lowContrast)', false),
   role: text('ARIA role (role)', 'alert'),
   title: text('Title (title)', 'Notification title'),
-  subtitle: (
-    <span>
-      Subtitle text goes here. <a href="#example">Example link</a>
-    </span>
-  ),
+  subtitle: text('Subtitle (subtitle)', 'Subtitle text goes here.'),
   iconDescription: text(
     'Icon description (iconDescription)',
     'describes the close button'
+  ),
+  statusIconDescription: text(
+    'Status icon description (statusIconDescription)',
+    'describes the status icon'
   ),
   hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
   onCloseButtonClick: action('onCloseButtonClick'),
@@ -44,7 +44,7 @@ storiesOf('Notifications', module)
   .add('Toast', () => (
     <ToastNotification
       {...notificationProps()}
-      caption={text('Caption (caption)', 'Time stamp [00:00:00]')}
+      caption={text('Caption (caption)', '00:00:00 AM')}
       style={{ minWidth: '30rem', marginBottom: '.5rem' }}
     />
   ))
