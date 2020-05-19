@@ -1,7 +1,6 @@
 import React from 'react';
 import ButtonGroup from '../ButtonGroup';
 import OverflowMenuItem from '../OverflowMenuItem';
-import OverflowMenu from '../OverflowMenu';
 import Button from '../Button';
 import { mount } from 'enzyme';
 
@@ -20,7 +19,7 @@ describe('SplitButton', () => {
     });
 
     it('renders all children as expected', () => {
-      const menu = wrapper.find(OverflowMenu);
+      const menu = wrapper.find(Button);
 
       menu.simulate('click');
 

@@ -6763,39 +6763,8 @@ Map {
     },
   },
   "ButtonGroup" => Object {
-    "defaultProps": Object {
-      "kind": "primary",
-      "size": "default",
-    },
-    "propTypes": Object {
-      "buttonLabel": Object {
-        "type": "string",
-      },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "primary",
-            "secondary",
-            "danger",
-            "ghost",
-            "danger--primary",
-            "tertiary",
-          ],
-        ],
-        "isRequired": true,
-        "type": "oneOf",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "default",
-            "field",
-            "small",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "FlatProgressIndicator" => Object {
     "defaultProps": Object {
