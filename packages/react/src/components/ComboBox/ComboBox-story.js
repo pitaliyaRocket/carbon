@@ -116,6 +116,26 @@ storiesOf('ComboBox', module)
     }
   )
   .add(
+    'with shouldFilterItem',
+    () => (
+      <div style={{ width: 300 }}>
+        <ComboBox
+          items={items}
+          itemToString={item => (item ? item.text : '')}
+          {...props()}
+          shouldFilterItem={({ inputValue, item, itemToString }) =>
+            itemToString(item).includes(inputValue)
+          }
+        />
+      </div>
+    ),
+    {
+      info: {
+        text: `Utilizes the shouldFilterItem prop to filter out options based on input rather than just highlighting the closest match.`,
+      },
+    }
+  )
+  .add(
     'application-level control for selection',
     () => <ControlledComboBoxApp {...props()} />,
     {
