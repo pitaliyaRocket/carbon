@@ -69,7 +69,7 @@ const baseConfig = {
 
 const umdExternalDependencies = Object.keys(
   packageJson.peerDependencies
-).filter(dependency => dependency !== 'carbon-components');
+).filter(dependency => dependency !== '@rocketsoftware/carbon-components');
 
 const umdBundleConfig = {
   input: baseConfig.input,

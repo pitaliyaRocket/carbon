@@ -6,7 +6,7 @@
  */
 
 import { render, cleanup } from '@carbon/test-utils/react';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import React from 'react';
 import { Column } from '../';
 

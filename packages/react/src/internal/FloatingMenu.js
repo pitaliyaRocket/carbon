@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import window from 'window-or-global';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import OptimizedResize from './OptimizedResize';
 
 const { prefix } = settings;

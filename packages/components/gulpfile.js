@@ -365,7 +365,7 @@ const buildStyles = prod => {
       .pipe(
         rename(filePath => {
           if (filePath.basename === 'styles') {
-            filePath.basename = 'carbon-components';
+            filePath.basename = '@rocketsoftware/carbon-components';
           }
           if (prod) {
             filePath.extname = `.min${filePath.extname}`;
