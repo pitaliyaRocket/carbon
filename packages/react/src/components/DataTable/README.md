@@ -105,17 +105,17 @@ function App() {
           <Table>
             <TableHead>
               <TableRow>
-                {headers.map(header => (
-                  <TableHeader {...getHeaderProps({ header })}>
+                {headers.map((header) => (
+                  <TableHeader key={header.key} {...getHeaderProps({ header })}>
                     {header.header}
                   </TableHeader>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map(row => (
+              {rows.map((row) => (
                 <TableRow key={row.id}>
-                  {row.cells.map(cell => (
+                  {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
                 </TableRow>
@@ -291,17 +291,17 @@ const renderProp = ({ rows, headers, getHeaderProps }) => (
     <Table>
       <TableHead>
         <TableRow>
-          {headers.map(header => (
-            <TableHeader {...getHeaderProps({ header })}>
+          {headers.map((header) => (
+            <TableHeader key={header.key} {...getHeaderProps({ header })}>
               {header.header}
             </TableHeader>
           ))}
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows.map(row => (
+        {rows.map((row) => (
           <TableRow key={row.id}>
-            {row.cells.map(cell => (
+            {row.cells.map((cell) => (
               <TableCell key={cell.id}>{cell.value}</TableCell>
             ))}
           </TableRow>
@@ -398,17 +398,17 @@ following:
       <Table>
         <TableHead>
           <TableRow>
-            {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+            {headers.map((header) => (
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          {rows.map((row) => (
             <TableRow key={row.id}>
-              {row.cells.map(cell => (
+              {row.cells.map((cell) => (
                 <TableCell key={cell.id}>{cell.value}</TableCell>
               ))}
             </TableRow>
@@ -480,7 +480,7 @@ In practice, the combination of these components looks like the following:
             {/* add the expand header before all other headers */}
             <TableExpandHeader />
             {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
@@ -552,7 +552,7 @@ In practice, it looks like the following in a `DataTable`:
           <TableRow>
             <TableSelectAll {...getSelectionProps()} />
             {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
@@ -638,17 +638,17 @@ In practice, this looks like the following:
       <Table>
         <TableHead>
           <TableRow>
-            {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+            {headers.map((header) => (
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          {rows.map((row) => (
             <TableRow key={row.id}>
-              {row.cells.map(cell => (
+              {row.cells.map((cell) => (
                 <TableCell key={cell.id}>{cell.value}</TableCell>
               ))}
             </TableRow>
@@ -738,7 +738,7 @@ In practice, this looks like the following:
           <TableRow>
             <TableSelectAll {...getSelectionProps()} />
             {headers.map(header => (
-              <TableHeader {...getHeaderProps({ header })}>
+              <TableHeader key={header.key} {...getHeaderProps({ header })}>
                 {header.header}
               </TableHeader>
             ))}

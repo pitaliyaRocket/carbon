@@ -9,14 +9,6 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const prettier = require('prettier');
-const lerna = require('../lerna.json');
-const packageJson = require('../package.json');
-
-const prettierOptions = {
-  ...packageJson.prettier,
-  parser: 'markdown',
-};
 
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const REPO_URL_BASE =
@@ -81,7 +73,7 @@ function sortFields(a, b) {
 
 async function sync() {
   const packagePaths = await Promise.all(
-    (await fs.readdir(PACKAGES_DIR)).map(async pkg => {
+    (await fs.readdir(PACKAGES_DIR)).map(async (pkg) => {
       const packageJsonPath = path.join(PACKAGES_DIR, pkg, 'package.json');
       return {
         basename: pkg,
@@ -102,7 +94,7 @@ async function sync() {
       };
 
       if (Array.isArray(file.keywords)) {
-        const keywordsToAdd = DEFAULT_KEYWORDS.filter(keyword => {
+        const keywordsToAdd = DEFAULT_KEYWORDS.filter((keyword) => {
           return file.keywords.indexOf(keyword) === -1;
         });
         if (keywordsToAdd.length > 0) {
@@ -141,13 +133,13 @@ async function sync() {
     '**/tasks/**',
   ];
   await Promise.all(
-    packages.map(async ({ packageJson, packagePath }) => {
+    packages.map(async ({ packagePath }) => {
       const ignorePath = path.join(packagePath, '.npmignore');
       const ignorePatterns = [...defaultIgnorePatterns];
 
       if (await fs.pathExists(ignorePath)) {
         const ignoreFile = await fs.readFile(ignorePath, 'utf8');
-        const localIgnorePatterns = ignoreFile.split('\n').filter(pattern => {
+        const localIgnorePatterns = ignoreFile.split('\n').filter((pattern) => {
           return ignorePatterns.indexOf(pattern) === -1;
         });
 
@@ -159,4 +151,4 @@ async function sync() {
   );
 }
 
-sync().catch(error => console.error(error));
+sync().catch((error) => console.error(error));

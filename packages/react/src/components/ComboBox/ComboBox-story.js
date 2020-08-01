@@ -5,35 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
-import Button from '../Button';
 
 const items = [
   {
     id: 'option-0',
-    text: 'Option 1',
+    text:
+      'An example option that is really long to show what should be done to handle long text',
   },
   {
     id: 'option-1',
-    text: 'Option 2',
+    text: 'Option 1',
   },
   {
     id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
     text: 'Option 3',
     selected: true,
   },
   {
-    id: 'option-3',
+    id: 'option-4',
     text: 'Option 4',
   },
   {
-    id: 'option-4',
-    text:
-      'An example option that is really long to show what should be done to handle long text',
+    id: 'option-5',
+    text: 'Option 5',
   },
 ];
 
@@ -62,40 +65,6 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-const ControlledComboBoxApp = props => {
-  const [selectedItem, setSelectedItem] = useState(items[0]);
-  let uid = items.length;
-  return (
-    <>
-      <ComboBox
-        {...props}
-        items={items}
-        itemToString={item => (item ? item.text : '')}
-        onChange={({ selectedItem }) => setSelectedItem(selectedItem)}
-        initialSelectedItem={items[0]}
-        selectedItem={selectedItem}
-      />
-      <Button
-        style={{ marginTop: '1rem' }}
-        onClick={() => {
-          items.push({
-            id: `id-${uid++}`,
-            text: `Option ${uid}`,
-          });
-          setSelectedItem(items[items.length - 1]);
-        }}>
-        Add new item
-      </Button>
-    </>
-  );
-};
-ControlledComboBoxApp.__docgenInfo = {
-  ...ComboBox.__docgenInfo,
-  props: {
-    ...ComboBox.__docgenInfo.props,
-  },
-};
-
 storiesOf('ComboBox', module)
   .addDecorator(withKnobs)
   .add(
@@ -104,7 +73,7 @@ storiesOf('ComboBox', module)
       <div style={{ width: 300 }}>
         <ComboBox
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
           {...props()}
         />
       </div>
@@ -121,7 +90,7 @@ storiesOf('ComboBox', module)
       <div style={{ width: 300 }}>
         <ComboBox
           items={items}
-          itemToString={item => (item ? item.text : '')}
+          itemToString={(item) => (item ? item.text : '')}
           {...props()}
           shouldFilterItem={({ inputValue, item, itemToString }) =>
             itemToString(item).includes(inputValue)
@@ -132,15 +101,6 @@ storiesOf('ComboBox', module)
     {
       info: {
         text: `Utilizes the shouldFilterItem prop to filter out options based on input rather than just highlighting the closest match.`,
-      },
-    }
-  )
-  .add(
-    'application-level control for selection',
-    () => <ControlledComboBoxApp {...props()} />,
-    {
-      info: {
-        text: `Controlled ComboBox example application`,
       },
     }
   );

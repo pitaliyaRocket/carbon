@@ -48,17 +48,17 @@ const ToggleSmall = ({
         type="checkbox"
         id={id}
         className={`${prefix}--toggle-input ${prefix}--toggle-input--small`}
-        onChange={evt => {
+        onChange={(evt) => {
           onChange && onChange(evt);
           onToggle(input.checked, id, evt);
         }}
-        ref={el => {
+        ref={(el) => {
           input = el;
         }}
-        onKeyUp={evt => {
+        onKeyUp={(evt) => {
           if (match(evt, keys.Enter)) {
             input.checked = !input.checked;
-            onChange(evt);
+            onChange && onChange(evt);
             onToggle(input.checked, id, evt);
           }
         }}

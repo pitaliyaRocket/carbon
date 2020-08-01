@@ -2,7 +2,7 @@
   "name": "@carbon/sketch",
   "private": true,
   "description": "Tooling for generating a sketch plugin to bring code to design",
-  "version": "10.11.2",
+  "version": "10.13.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/sketch",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
@@ -24,7 +24,7 @@
     "skpm:link": "skpm-link"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.7.0",
+    "@babel/polyfill": "^7.8.7",
     "@rocketsoftware/colors": "^0.6.0",
     "@rocketsoftware/icon-helpers": "^0.6.0",
     "@rocketsoftware/icons": "^0.6.0",

@@ -165,6 +165,33 @@ $custom-property-prefix: 'cds';
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
+### ❌custom-property [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin custom-property() {
+  @if type-of($value) == map {
+    @each $property, $property-value in $value {
+      // Only support one-level of depth for values that are maps. This is to
+      // avoid bringing properties like `breakpoints` on type tokens
+      @if type-of($property-value) != map {
+        @include custom-property('#{$name}-#{$property}', $property-value);
+      }
+    }
+  } @else {
+    --#{$prefix}-#{$name}: #{$value};
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ❌should-emit [function]
 
 <details>
@@ -2858,7 +2885,7 @@ $text-02: if(
       'text-02'
     ),
   map-get($carbon--theme, 'text-02'),
-  #393939
+  #525252
 );
 ```
 
@@ -4588,7 +4615,7 @@ $productive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 1.625rem,
+    line-height: 1.75rem,
     letter-spacing: 0,
   )
 );
@@ -4784,7 +4811,7 @@ $expressive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 130%,
+    line-height: 140%,
     letter-spacing: 0,
     breakpoints: (
       xlg: (

@@ -29,7 +29,7 @@
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.7.0",
+    "@carbon/bundler": "^10.9.0",
     "rimraf": "^3.0.0"
   },
   "sideEffects": false

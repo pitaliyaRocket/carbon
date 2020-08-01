@@ -96,7 +96,7 @@ export class ClickableTile extends Component {
     light: false,
   };
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     evt.persist();
     this.setState(
       {
@@ -108,7 +108,7 @@ export class ClickableTile extends Component {
     );
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
       this.setState(
@@ -257,7 +257,7 @@ export class SelectableTile extends Component {
         };
   }
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     evt.preventDefault();
     evt.persist();
     this.setState(
@@ -271,7 +271,7 @@ export class SelectableTile extends Component {
     );
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
@@ -289,7 +289,7 @@ export class SelectableTile extends Component {
     }
   };
 
-  handleOnChange = event => {
+  handleOnChange = (event) => {
     this.setState({ selected: event.target.checked });
     this.props.onChange(event);
   };
@@ -326,7 +326,7 @@ export class SelectableTile extends Component {
     return (
       <>
         <input
-          ref={input => {
+          ref={(input) => {
             this.input = input;
           }}
           tabIndex={-1}
@@ -449,30 +449,35 @@ export class ExpandableTile extends Component {
   }
 
   componentDidMount = () => {
-    const getStyle = window.getComputedStyle(this.tile, null);
+    if (this.tile) {
+      const getStyle = window.getComputedStyle(this.tile, null);
 
-    if (this.aboveTheFold) {
+      if (this.aboveTheFold) {
+        this.setState({
+          tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
+          tilePadding:
+            parseInt(getStyle.getPropertyValue('padding-top'), 10) +
+            parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
+        });
+      }
+    }
+  };
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.expanded !== this.props.expanded) this.setMaxHeight();
+  };
+
+  setMaxHeight = () => {
+    if (this.state.expanded ? this.tileContent : this.aboveTheFold) {
       this.setState({
-        tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
-        tilePadding:
-          parseInt(getStyle.getPropertyValue('padding-top'), 10) +
-          parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
+        tileMaxHeight: this.state.expanded
+          ? this.tileContent.getBoundingClientRect().height
+          : this.aboveTheFold.getBoundingClientRect().height,
       });
     }
   };
 
-  componentDidUpdate = prevProps => {
-    if (prevProps.expanded !== this.props.expanded) this.setMaxHeight();
-  };
-
-  setMaxHeight = () =>
-    this.setState({
-      tileMaxHeight: this.state.expanded
-        ? this.tileContent.getBoundingClientRect().height
-        : this.aboveTheFold.getBoundingClientRect().height,
-    });
-
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (!this.props.onBeforeClick(evt)) return;
     evt.persist();
     this.setState(
@@ -486,7 +491,7 @@ export class ExpandableTile extends Component {
     );
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.persist();
       this.setState(
@@ -543,7 +548,7 @@ export class ExpandableTile extends Component {
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
       <button
-        ref={tile => {
+        ref={(tile) => {
           this.tile = tile;
         }}
         style={tileStyle}
@@ -554,11 +559,11 @@ export class ExpandableTile extends Component {
         onClick={this.handleClick}
         tabIndex={tabIndex}>
         <div
-          ref={tileContent => {
+          ref={(tileContent) => {
             this.tileContent = tileContent;
           }}>
           <div
-            ref={aboveTheFold => {
+            ref={(aboveTheFold) => {
               this.aboveTheFold = aboveTheFold;
             }}
             className={`${prefix}--tile-content`}>

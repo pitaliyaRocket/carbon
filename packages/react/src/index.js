@@ -65,6 +65,7 @@ export FileUploader, {
   FileUploaderItem,
 } from './components/FileUploader';
 export Form from './components/Form';
+export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
@@ -180,33 +181,10 @@ export {
   FlatProgressStep,
 } from './components/FlatProgressIndicator';
 export FlatProgressIndicatorSkeleton from './components/FlatProgressIndicator/FlatProgressIndicator.Skeleton';
+export * from './components/UIShell';
+
+// experimental
 export {
-  Content,
-  Header,
-  HeaderContainer,
-  HeaderGlobalAction,
-  HeaderGlobalBar,
-  HeaderMenu,
-  HeaderMenuButton,
-  HeaderMenuItem,
-  HeaderName,
-  HeaderNavigation,
-  HeaderPanel,
-  HeaderSideNavItems,
-  Switcher,
-  SwitcherItem,
-  SwitcherDivider,
-  SkipToContent,
-  SideNav,
-  SideNavDetails,
-  SideNavFooter,
-  SideNavHeader,
-  SideNavIcon,
-  SideNavItem,
-  SideNavItems,
-  SideNavLink,
-  SideNavLinkText,
-  SideNavMenu,
-  SideNavMenuItem,
-  SideNavSwitcher,
-} from './components/UIShell';
+  PageSelector,
+  Unstable_Pagination,
+} from './components/Pagination/Unstable_Pagination';

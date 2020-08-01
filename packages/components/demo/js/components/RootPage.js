@@ -30,7 +30,7 @@ const themeSwitcherItems = [
   },
 ];
 
-const checkStatus = response => {
+const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 400) {
     return response;
   }
@@ -44,10 +44,10 @@ const checkStatus = response => {
  * @param {Array<object>} componentItems List of Fractal Component instance data.
  * @returns {Array<object>} List of Fractal Component instance data with the contents of all components cleared.
  */
-const clearContent = componentItems =>
-  componentItems.map(item => ({
+const clearContent = (componentItems) =>
+  componentItems.map((item) => ({
     ...item,
-    items: item.items.map(subItem => ({
+    items: item.items.map((subItem) => ({
       ...subItem,
       renderedContent: undefined,
     })),
@@ -62,7 +62,7 @@ const clearContent = componentItems =>
  */
 const applyContent = (componentItems, id, content) => {
   if (Object(content) === content) {
-    return componentItems.map(item => {
+    return componentItems.map((item) => {
       if (item.id !== id) {
         return item;
       }
@@ -73,7 +73,7 @@ const applyContent = (componentItems, id, content) => {
           }
         : {
             ...item,
-            items: item.items.map(subItem =>
+            items: item.items.map((subItem) =>
               !content[subItem.handle]
                 ? subItem
                 : {
@@ -84,7 +84,7 @@ const applyContent = (componentItems, id, content) => {
           };
     });
   }
-  return componentItems.map(item =>
+  return componentItems.map((item) =>
     item.id !== id
       ? item
       : {
@@ -98,8 +98,8 @@ const applyContent = (componentItems, id, content) => {
  * @param {Array<object>} componentItems List of Fractal Component instance data.
  * @returns {Array<object>} The component data with `isHidden` moved to `meta.isDefaultHidden`.
  */
-const preserveDefaultHidden = componentItems =>
-  componentItems.map(item => {
+const preserveDefaultHidden = (componentItems) =>
+  componentItems.map((item) => {
     const { items: subItems, meta = {} } = item;
     return {
       ...item,
@@ -122,7 +122,7 @@ const preserveDefaultHidden = componentItems =>
  * @returns {Array<object>} The component data with `isHidden` calculated with `meta.isDefaultHidden` and `isComponentsX`.
  */
 const applyComponentsX = (componentItems, isComponentsX) =>
-  componentItems.map(item => {
+  componentItems.map((item) => {
     const { items: subItems, meta = {} } = item;
     return {
       ...item,
@@ -190,7 +190,7 @@ class RootPage extends Component {
 
   constructor() {
     super();
-    window.addEventListener('popstate', evt => {
+    window.addEventListener('popstate', (evt) => {
       this.switchTo(evt.state.name);
     });
   }
@@ -253,7 +253,7 @@ class RootPage extends Component {
       const name =
         nameInQueryArg || (pathnameTokens && pathnameTokens[1]) || '';
       const selectedNavItem =
-        (name && componentItems.find(item => item.name === name)) ||
+        (name && componentItems.find((item) => item.name === name)) ||
         componentItems[0];
       if (selectedNavItem) {
         this.switchTo(selectedNavItem.id);
@@ -284,13 +284,13 @@ class RootPage extends Component {
   /**
    * The handler for the `click` event on the side nav for changing selection.
    */
-  onSideNavItemClick = evt => {
+  onSideNavItemClick = (evt) => {
     const link = eventMatches(evt, '[data-nav-id]');
     if (link) {
       const { componentItems } = this.state;
       const selectedNavItem =
         componentItems &&
-        componentItems.find(item => item.id === link.dataset.navId);
+        componentItems.find((item) => item.id === link.dataset.navId);
       if (selectedNavItem) {
         this.switchTo(selectedNavItem.id);
       }
@@ -304,7 +304,7 @@ class RootPage extends Component {
     const { componentItems, selectedNavItemId } = this.state;
     return (
       componentItems &&
-      componentItems.find(item => item.id === selectedNavItemId)
+      componentItems.find((item) => item.id === selectedNavItemId)
     );
   }
 
@@ -313,7 +313,7 @@ class RootPage extends Component {
    * @param {object} evt The event.
    * @private
    */
-  _handleBrowserSyncEvent = evt => {
+  _handleBrowserSyncEvent = (evt) => {
     if (evt.basename === 'demo.css') {
       this._inspectLinkTag();
     }
@@ -324,7 +324,7 @@ class RootPage extends Component {
    * @param {object} evt The event.
    * @private
    */
-  _switchExperimental = evt => {
+  _switchExperimental = (evt) => {
     const { portSassBuild } = this.props;
     fetch(
       `http://localhost:${portSassBuild}/${
@@ -347,7 +347,7 @@ class RootPage extends Component {
     this.hStyleInspectionTimeout = setTimeout(() => {
       const links = Array.prototype.filter.call(
         document.querySelectorAll('link[type="text/css"]'),
-        link => /\/demo\.css/i.test(link.getAttribute('href'))
+        (link) => /\/demo\.css/i.test(link.getAttribute('href'))
       );
       const lastLink = links[links.length - 1];
       if (lastLink.sheet) {
@@ -367,17 +367,17 @@ class RootPage extends Component {
     const { componentItems, selectedNavItemId } = this.state;
     const metadata =
       componentItems &&
-      componentItems.find(item => item.id === selectedNavItemId);
+      componentItems.find((item) => item.id === selectedNavItemId);
     const subItems = metadata.items || [];
     const hasRenderedContent =
       !metadata.isCollection && subItems.length <= 1
         ? metadata.renderedContent
-        : subItems.every(item => item.renderedContent);
+        : subItems.every((item) => item.renderedContent);
     if (!hasRenderedContent) {
       fetch(`/code/${metadata.name}`)
         .then(checkStatus)
-        .then(response => response.json())
-        .then(responseContent => {
+        .then((response) => response.json())
+        .then((responseContent) => {
           // Re-evaluate `this.state.componentItems` as it may have been changed during loading contents
           this.setState(({ componentItems: prevComponentItems }) => ({
             componentItems: applyContent(
@@ -416,7 +416,7 @@ class RootPage extends Component {
     const { isComponentsX: oldIsComponentsX, componentItems } = this.state;
     const isComponentsX = Array.prototype.some.call(
       link.sheet.cssRules,
-      rule =>
+      (rule) =>
         /^\.bx--body$/.test(rule.selectorText) &&
         /^rgb\(255,\s*255,\s*255\)$/.test(
           rule.style.getPropertyValue('background-color')
@@ -444,7 +444,7 @@ class RootPage extends Component {
    */
   _handleChangeThemeSwitcherDropdown = ({ value }) => {
     this.setState({ currentTheme: value }, () => {
-      themeSwitcherItems.forEach(item => {
+      themeSwitcherItems.forEach((item) => {
         document.documentElement.classList.toggle(
           `demo--theme--${item.id}`,
           item.id === value
@@ -463,7 +463,7 @@ class RootPage extends Component {
       const { componentItems } = this.state;
       const selectedNavItem =
         componentItems &&
-        componentItems.find(item => item.id === selectedNavItemId);
+        componentItems.find((item) => item.id === selectedNavItemId);
       const { name } = selectedNavItem || {};
       if (name) {
         window.history.pushState(
@@ -517,7 +517,7 @@ class RootPage extends Component {
         <div className="demo--theme-switcher--dropdown">
           <Dropdown
             items={themeSwitcherItems}
-            itemToString={item => (item ? item.text : '')}
+            itemToString={(item) => (item ? item.text : '')}
             value={currentTheme}
             onChange={this._handleChangeThemeSwitcherDropdown}>
             {themeSwitcherItems.map(({ id, text }) => (
