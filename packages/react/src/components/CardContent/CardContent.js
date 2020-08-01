@@ -38,7 +38,7 @@ const CardContent = ({
     : '';
 
   const cardItems = cardContentItems
-    ? React.Children.map(cardContentItems, item => {
+    ? React.Children.map(cardContentItems, (item) => {
         if (React.isValidElement(item)) {
           return React.cloneElement(item, { cardContentRef });
         }

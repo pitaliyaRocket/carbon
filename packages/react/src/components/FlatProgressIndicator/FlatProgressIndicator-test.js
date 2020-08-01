@@ -101,30 +101,21 @@ describe('FlatProgressIndicator', () => {
       });
 
       it('should render with a label', () => {
-        expect(
-          mountedList
-            .find(FlatProgressStep)
-            .at(0)
-            .prop('label')
-        ).toEqual('label');
+        expect(mountedList.find(FlatProgressStep).at(0).prop('label')).toEqual(
+          'label'
+        );
       });
 
       it('should render with a description', () => {
         expect(
-          mountedList
-            .find(FlatProgressStep)
-            .at(0)
-            .prop('description')
+          mountedList.find(FlatProgressStep).at(0).prop('description')
         ).toEqual('Step 1: Getting Started with Node.js');
       });
 
       it('should render description in <title> node', () => {
-        expect(
-          mountedList
-            .find('FlatProgressStep title')
-            .at(0)
-            .text()
-        ).toEqual('Step 1: Getting Started with Node.js');
+        expect(mountedList.find('FlatProgressStep title').at(0).text()).toEqual(
+          'Step 1: Getting Started with Node.js'
+        );
       });
 
       describe('current', () => {
@@ -139,12 +130,9 @@ describe('FlatProgressIndicator', () => {
         });
 
         it('should render a current FlatProgressStep with correct props', () => {
-          expect(
-            mountedList
-              .find(FlatProgressStep)
-              .at(3)
-              .prop('current')
-          ).toBe(true);
+          expect(mountedList.find(FlatProgressStep).at(3).prop('current')).toBe(
+            true
+          );
         });
       });
 
@@ -159,12 +147,7 @@ describe('FlatProgressIndicator', () => {
           ).toEqual(true);
         });
         it('should render any completed FlatProgressSteps with correct props', () => {
-          expect(
-            list
-              .find(FlatProgressStep)
-              .at(0)
-              .prop('complete')
-          ).toBe(true);
+          expect(list.find(FlatProgressStep).at(0).prop('complete')).toBe(true);
         });
       });
 
@@ -179,12 +162,9 @@ describe('FlatProgressIndicator', () => {
           ).toEqual(true);
         });
         it('should render any incompleted FlatProgressSteps with correct props', () => {
-          expect(
-            list
-              .find(FlatProgressStep)
-              .at(5)
-              .prop('complete')
-          ).toBe(false);
+          expect(list.find(FlatProgressStep).at(5).prop('complete')).toBe(
+            false
+          );
         });
 
         it('should render any clickable FlatProgressSteps with correct classname', () => {

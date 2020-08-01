@@ -228,6 +228,21 @@ class FloatingMenu extends React.Component {
      * Optional callback used to obtain a custom 'viewport' that differs from the window.
      */
     getViewport: PropTypes.func,
+
+    /**
+     * `true` if the menu alignment should be flipped.
+     */
+    flipped: PropTypes.bool,
+
+    /**
+     * The element ref of the tooltip's trigger button.
+     */
+    triggerRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
   };
 
   static defaultProps = {

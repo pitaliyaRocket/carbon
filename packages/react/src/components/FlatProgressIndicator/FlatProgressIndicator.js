@@ -10,7 +10,7 @@ import {
 import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
-const defaultRenderLabel = props => <p {...props} />;
+const defaultRenderLabel = (props) => <p {...props} />;
 export const FlatProgressStep = ({ ...props }) => {
   const {
     label,
@@ -35,7 +35,7 @@ export const FlatProgressStep = ({ ...props }) => {
     [className]: className,
   });
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (matches(e, [keys.Enter, keys.Space])) {
       onClick();
     }

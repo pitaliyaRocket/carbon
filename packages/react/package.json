@@ -41,7 +41,7 @@
     "@rocketsoftware/icons-react": "^0.6.0",
     "@rocketsoftware/walktour": "4.4.4",
     "classnames": "2.2.6",
-    "downshift": "5.0.5",
+    "downshift": "5.2.1",
     "flatpickr": "4.6.1",
     "ft-react": "^1.0.0",
     "invariant": "^2.2.3",

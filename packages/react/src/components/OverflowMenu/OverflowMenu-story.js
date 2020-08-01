@@ -47,7 +47,28 @@ const props = {
   }),
 };
 
-OverflowMenu.displayName = 'OverflowMenu';
+const OverflowMenuExample = ({ overflowMenuProps, overflowMenuItemProps }) => (
+  <OverflowMenu {...overflowMenuProps}>
+    <OverflowMenuItem
+      {...overflowMenuItemProps}
+      itemText="Option 1"
+      primaryFocus
+    />
+    <OverflowMenuItem
+      {...overflowMenuItemProps}
+      itemText="Option 2 is an example of a really long string and how we recommend handling this"
+      requireTitle
+    />
+    <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
+    <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
+    <OverflowMenuItem
+      {...overflowMenuItemProps}
+      itemText="Danger option"
+      hasDivider
+      isDelete
+    />
+  </OverflowMenu>
+);
 
 OverflowMenu.displayName = 'OverflowMenu';
 
@@ -150,6 +171,7 @@ storiesOf('OverflowMenu', module)
           ...props.menu(),
           ariaLabel: null,
           style: { width: 'auto' },
+          // eslint-disable-next-line react/display-name
           renderIcon: () => <div style={{ padding: '0 1rem' }}>Menu</div>,
         }}>
         <OverflowMenuItem

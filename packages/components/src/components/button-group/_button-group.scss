@@ -8,7 +8,6 @@
 @import '../../globals/scss/vendor/@rocketsoftware/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/css--font-face';
-@import 'mixins';
 
 .#{$prefix}--btn-group {
   display: inline-flex;

@@ -24,17 +24,11 @@ describe('SplitButton', () => {
 
     it('renders extra classes as expected', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
+      expect(wrapper.find(Button).shallow().hasClass('extra-class')).toEqual(
+        true
+      );
       expect(
-        wrapper
-          .find(Button)
-          .shallow()
-          .hasClass('extra-class')
-      ).toEqual(true);
-      expect(
-        wrapper
-          .find(OverflowMenu)
-          .shallow()
-          .hasClass('extra-class')
+        wrapper.find(OverflowMenu).shallow().hasClass('extra-class')
       ).toEqual(true);
     });
   });

@@ -105,7 +105,7 @@ class TourTooltip extends React.Component {
   }
 }
 
-const TooltipFace = props => {
+const TooltipFace = (props) => {
   const {
     enableFlip,
     front,

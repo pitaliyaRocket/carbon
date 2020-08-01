@@ -25,7 +25,7 @@ const HeaderContainer = ({
     setIsSideNavExpandedState(!isSideNavExpandedState);
   }, [isSideNavExpandedState, setIsSideNavExpandedState]);
 
-  const handleChangeGlobalAction = globalAction => {
+  const handleChangeGlobalAction = (globalAction) => {
     setActiveGlobalActionState(globalAction);
   };
 
