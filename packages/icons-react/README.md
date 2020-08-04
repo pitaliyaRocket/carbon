@@ -1,7 +1,6 @@
 # @rocketsoftware/icons-react
 
-> React components for icons in digital and software products using the Carbon
-> Design System
+> React components for icons
 
 ## Getting started
 

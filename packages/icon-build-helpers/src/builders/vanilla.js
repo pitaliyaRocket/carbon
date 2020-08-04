@@ -37,6 +37,10 @@ const babelConfig = {
 async function builder(metadata, { output }) {
   const modules = metadata.icons.flatMap((icon) => {
     return icon.output.map((size) => {
+      if (size == null || size == undefined || size == '') {
+        console.log('ERROR HERE');
+        console.log(size);
+      }
       const source = `export default ${JSON.stringify(size.descriptor)};`;
       return {
         source,

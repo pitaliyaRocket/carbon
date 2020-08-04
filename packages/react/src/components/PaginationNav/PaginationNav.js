@@ -12,8 +12,8 @@ import {
   CaretRight16,
   CaretLeft16,
   OverflowMenuHorizontal16,
-} from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+} from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 import Button from '../Button';
 
 const { prefix } = settings;

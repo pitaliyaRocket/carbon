@@ -15,7 +15,6 @@
 /// @access private
 /// @group progress-indicator
 @mixin flat-progress-indicator {
-  
   .#{$prefix}--flat-progress {
     @include reset;
     display: flex;
@@ -62,7 +61,6 @@
   }
 
   .#{$prefix}--flat-progress-label {
-    
     @include type-style('body-short-01');
     line-height: 1.45;
     max-width: rem(112px);
@@ -117,7 +115,6 @@
 
   //single line tooltip
   .#{$prefix}--flat-progress-step .#{$prefix}--tooltip {
-    
     @include type-style('body-long-01');
     min-width: rem(115px);
     width: rem(125px);
@@ -132,7 +129,6 @@
 
   //multiline tooltip
   .#{$prefix}--flat-progress-step .#{$prefix}--tooltip_multi {
-    
     @include type-style('body-long-01');
     width: rem(150px);
     height: auto;
@@ -141,7 +137,6 @@
 
   //OPTIONAL HELPER TEXT STYLING
   .#{$prefix}--flat-progress-optional {
-    
     @include type-style('label-01');
     position: absolute;
     left: 0;
@@ -233,7 +228,6 @@
   // Skeleton State
   .#{$prefix}--flat-progress.#{$prefix}--skeleton
     .#{$prefix}--flat-progress-label {
-    
     @include skeleton;
     height: rem(12px);
     width: rem(40px);

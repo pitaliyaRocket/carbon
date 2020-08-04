@@ -1,5 +1,3 @@
-<!--alex disable color-->
-
 # @carbon/pictograms-react
 
 > React components for pictograms in digital and software products using the

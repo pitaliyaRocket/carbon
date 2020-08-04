@@ -10,7 +10,7 @@ import { useSelect } from 'downshift';
 import { settings } from '@rocketsoftware/carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
+import { Checkmark16, WarningFilled16 } from '@rocketsoftware/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 

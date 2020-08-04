@@ -9,8 +9,8 @@ import {
   Close16,
   WarningFilled16,
   CheckmarkFilled16,
-} from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+} from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Loading from '../Loading';

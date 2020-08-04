@@ -8,8 +8,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
-import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
+import { CaretRight16, CaretLeft16 } from '@rocketsoftware/icons-react';
 import Button from '../../Button';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';

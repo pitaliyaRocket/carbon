@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { builders } = require('@rocketsoftware/icon-build-helpers');
+const { builders } = require('@carbon/icon-build-helpers');
 const metadata = require('@rocketsoftware/icons/metadata.json');
 
 async function build() {

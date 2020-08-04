@@ -1,5 +1,4 @@
 @mixin app-status($status) {
-  
   @include reset;
   font-size: 0.75rem;
   display: none;

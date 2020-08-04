@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled16 } from '@rocketsoftware/icons-react';
 import { settings } from '@rocketsoftware/carbon-components';
 import cx from 'classnames';
 import Downshift, { useSelect } from 'downshift';

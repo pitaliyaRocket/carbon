@@ -1,5 +1,4 @@
-<!--alex disable color white -->
-
+<!-- alex disable white -->
 # @rocketsoftware/themes
 
 > Themes for applying color in the Carbon Design System

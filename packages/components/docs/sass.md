@@ -1728,90 +1728,6 @@ Generate the CSS for a grid for the given breakpoints and gutters
   - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [prefix [variable]](#prefix-variable)
 
-### ✅prefix [variable]
-
-Namespace prefix
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$prefix: 'bx';
-```
-
-</details>
-
-- **Group**: [@carbon/grid](#carbongrid)
-- **Type**: `String`
-- **Used by**:
-  - [carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
-  - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
-  - [carbon--no-gutter [mixin]](#carbon--no-gutter-mixin)
-  - [carbon--hang [mixin]](#carbon--hang-mixin)
-  - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
-  - [carbon--grid [mixin]](#carbon--grid-mixin)
-  - [custom-property [mixin]](#custom-property-mixin)
-  - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
-  - [accordion [mixin]](#accordion-mixin)
-  - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [button [mixin]](#button-mixin)
-  - [button-base [mixin]](#button-base-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
-  - [snippet [mixin]](#snippet-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
-  - [content-switcher [mixin]](#content-switcher-mixin)
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
-  - [form [mixin]](#form-mixin)
-  - [inline-loading [mixin]](#inline-loading-mixin)
-  - [link [mixin]](#link-mixin)
-  - [lists [mixin]](#lists-mixin)
-  - [listbox [mixin]](#listbox-mixin)
-  - [loading [mixin]](#loading-mixin)
-  - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [inline-notification--color [mixin]](#inline-notification--color-mixin)
-  - [notification--experimental [mixin]](#notification--experimental-mixin)
-  - [toast-notifications [mixin]](#toast-notifications-mixin)
-  - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
-  - [pagination [mixin]](#pagination-mixin)
-  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
-  - [pseudo-underline [mixin]](#pseudo-underline-mixin)
-  - [pagination-nav [mixin]](#pagination-nav-mixin)
-  - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [radio-button [mixin]](#radio-button-mixin)
-  - [search [mixin]](#search-mixin)
-  - [select [mixin]](#select-mixin)
-  - [slider [mixin]](#slider-mixin)
-  - [tabs [mixin]](#tabs-mixin)
-  - [tag-theme [mixin]](#tag-theme-mixin)
-  - [tags [mixin]](#tags-mixin)
-  - [text-area [mixin]](#text-area-mixin)
-  - [text-input [mixin]](#text-input-mixin)
-  - [tile [mixin]](#tile-mixin)
-  - [time-picker [mixin]](#time-picker-mixin)
-  - [toggle [mixin]](#toggle-mixin)
-  - [toolbar [mixin]](#toolbar-mixin)
-  - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
-  - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
-  - [carbon-content [mixin]](#carbon-content-mixin)
-  - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
-  - [carbon-header [mixin]](#carbon-header-mixin)
-  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
-  - [product-switcher [mixin]](#product-switcher-mixin)
-  - [expanded [mixin]](#expanded-mixin)
-  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
-  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
-
 ## @carbon/icons
 
 ### ✅carbon--icons [mixin]
@@ -6724,8 +6640,8 @@ $ui-03: if(
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
-  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
@@ -6802,8 +6718,8 @@ $ui-05: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [pagination [mixin]](#pagination-mixin)
-  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
@@ -7139,8 +7055,8 @@ $link-01: if(
   - [button [mixin]](#button-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [link [mixin]](#link-mixin)
-  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
 
 ### ✅inverse-link [variable]
@@ -10888,6 +10804,7 @@ $prefix: 'bx';
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [pagination-nav [mixin]](#pagination-nav-mixin)
   - [flat-progress-indicator [mixin]](#flat-progress-indicator-mixin)
@@ -18994,10 +18911,6 @@ List box styles
     max-height: rem(176px);
   }
 
-  .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
-    max-height: rem(140px);
-  }
-
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
     @include type-style('body-short-01');
@@ -19639,7 +19552,7 @@ Modal styles
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-09; // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-09;
       }
     }
   }
@@ -19665,7 +19578,7 @@ Modal styles
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-09; // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-09;
       }
     }
 
@@ -21727,7 +21640,6 @@ Progress indicator styles
 @mixin flat-progress-indicator() {
   .#{$prefix}--flat-progress {
     @include reset;
-
     display: flex;
     list-style: none;
   }
@@ -21745,12 +21657,13 @@ Progress indicator styles
     }
   }
 
-  .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
-    min-width: 8rem;
-    flex-grow: 1;
+  li.#{$prefix}--flat-progress-step:last-of-type
+    > div.#{$prefix}--flat-progress-step-button
+    > span.#{$prefix}--flat-progress-line {
+    display: none;
   }
 
-  .#{$prefix}--progress-line {
+  .#{$prefix}--flat-progress-line {
     position: absolute;
     left: 0;
     height: 1px;
@@ -21759,15 +21672,9 @@ Progress indicator styles
     border: $progress-indicator-bar-width;
   }
 
-  .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
-    min-width: rem(128px);
-    width: 100%;
-  }
-
-  .#{$prefix}--progress-step svg {
+  .#{$prefix}--flat-progress-step svg {
     position: relative;
     z-index: 1;
-    flex-shrink: 0;
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
@@ -21778,8 +21685,6 @@ Progress indicator styles
 
   .#{$prefix}--flat-progress-label {
     @include type-style('body-short-01');
-
-    color: $text-01;
     line-height: 1.45;
     max-width: rem(112px);
     margin: $carbon--spacing-03 0 0 0;
@@ -21808,12 +21713,7 @@ Progress indicator styles
     box-shadow: 0 rem(3px) 0 0 $link-01;
   }
 
-  .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
-    max-width: 100%;
-    margin-right: 0.75rem;
-  }
-
-  .#{$prefix}--progress-label:active {
+  .#{$prefix}--flat-progress-label:active {
     color: $interactive-01;
     box-shadow: 0 rem(3px) 0 0 $interactive-01;
   }
@@ -21839,7 +21739,6 @@ Progress indicator styles
   //single line tooltip
   .#{$prefix}--flat-progress-step .#{$prefix}--tooltip {
     @include type-style('body-long-01');
-
     min-width: rem(115px);
     width: rem(125px);
     min-height: $carbon--spacing-06;
@@ -21854,7 +21753,6 @@ Progress indicator styles
   //multiline tooltip
   .#{$prefix}--flat-progress-step .#{$prefix}--tooltip_multi {
     @include type-style('body-long-01');
-
     width: rem(150px);
     height: auto;
     color: $inverse-01;
@@ -21863,7 +21761,6 @@ Progress indicator styles
   //OPTIONAL HELPER TEXT STYLING
   .#{$prefix}--flat-progress-optional {
     @include type-style('label-01');
-
     position: absolute;
     left: 0;
     margin-left: rem(3.2px);
@@ -21906,34 +21803,16 @@ Progress indicator styles
   //interactive button
   .#{$prefix}--flat-progress-step-button {
     display: flex;
-    text-align: left;
   }
 
   //unclickable button
   .#{$prefix}--flat-progress-step-button--unclickable {
-  .#{$prefix}--progress-step-button--unclickable {
-    cursor: default;
     outline: none;
-  }
-
-  .#{$prefix}--progress-step-button--unclickable
-    .#{$prefix}--progress-label:hover {
-    color: $text-01;
-    cursor: default;
-    box-shadow: none;
-  }
-
-  .#{$prefix}--progress-step-button--unclickable
-    .#{$prefix}--tooltip__label:hover {
-    color: $link-01;
-    cursor: pointer;
-    box-shadow: 0 rem(1px) $link-01;
   }
 
   //DISABLED STYLING
   .#{$prefix}--flat-progress-step--disabled {
     cursor: not-allowed;
-    pointer-events: none;
 
     svg {
       fill: $disabled;
@@ -21984,13 +21863,6 @@ Progress indicator styles
   .#{$prefix}--flat-progress--vertical .#{$prefix}--flat-progress-step {
     display: list-item;
     min-height: 6rem;
-  }
-  
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
-    flex-wrap: wrap;
-    align-content: flex-start;
-    min-height: 3.625rem;
     width: initial;
     min-width: initial;
 
@@ -22062,6 +21934,7 @@ Progress indicator styles
 @mixin progress-indicator() {
   .#{$prefix}--progress {
     @include reset;
+
     display: flex;
     list-style: none;
   }
@@ -22079,6 +21952,11 @@ Progress indicator styles
     }
   }
 
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
+    min-width: 8rem;
+    flex-grow: 1;
+  }
+
   .#{$prefix}--progress-line {
     position: absolute;
     left: 0;
@@ -22087,9 +21965,15 @@ Progress indicator styles
     border: $progress-indicator-bar-width;
   }
 
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
+    min-width: rem(128px);
+    width: 100%;
+  }
+
   .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
+    flex-shrink: 0;
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
     border-radius: 50%;
@@ -22099,6 +21983,7 @@ Progress indicator styles
 
   .#{$prefix}--progress-label {
     @include type-style('body-short-01');
+
     color: $text-01;
     line-height: 1.45;
     max-width: rem(88px);
@@ -22127,6 +22012,11 @@ Progress indicator styles
     box-shadow: 0 rem(3px) 0 0 $link-01;
   }
 
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
+    max-width: 100%;
+    margin-right: 0.75rem;
+  }
+
   .#{$prefix}--progress-label:active {
     color: $interactive-01;
     box-shadow: 0 rem(3px) 0 0 $interactive-01;
@@ -22151,6 +22041,7 @@ Progress indicator styles
   //single line tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip {
     @include type-style('body-long-01');
+
     min-width: rem(115px);
     width: rem(125px);
     min-height: $carbon--spacing-06;
@@ -22165,6 +22056,7 @@ Progress indicator styles
   //multiline tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
     @include type-style('body-long-01');
+
     width: rem(150px);
     height: auto;
     color: $inverse-01;
@@ -22173,6 +22065,7 @@ Progress indicator styles
   //OPTIONAL HELPER TEXT STYLING
   .#{$prefix}--progress-optional {
     @include type-style('label-01');
+
     position: absolute;
     left: 0;
     margin-left: $carbon--spacing-06;
@@ -22211,6 +22104,7 @@ Progress indicator styles
     @include button-reset();
 
     display: flex;
+    text-align: left;
   }
 
   //unclickable button
@@ -22236,6 +22130,7 @@ Progress indicator styles
   //DISABLED STYLING
   .#{$prefix}--progress-step--disabled {
     cursor: not-allowed;
+    pointer-events: none;
 
     svg {
       fill: $disabled;
@@ -22288,7 +22183,8 @@ Progress indicator styles
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
-    display: list-item;
+    flex-wrap: wrap;
+    align-content: flex-start;
     min-height: 3.625rem;
     width: initial;
     min-width: initial;
@@ -27409,11 +27305,6 @@ UI shell side nav
     height: mini-units(6);
   }
 
-  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
-    background-color: $gray-90;
-    color: $text-04;
-  }
-
   .#{$prefix}--side-nav__item--active
     .#{$prefix}--side-nav__submenu[aria-expanded='false'] {
     background-color: $gray-70;
@@ -27715,9 +27606,9 @@ UI shell side nav
   - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
+  - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
   - [shell-side-nav-bg-04 [variable]](#shell-side-nav-bg-04-variable)
   - [icon-03 [variable]](#icon-03-variable)
-  - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
 
 ### ❌carbon-switcher [mixin]
 

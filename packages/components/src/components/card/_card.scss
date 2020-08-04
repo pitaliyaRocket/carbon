@@ -12,9 +12,8 @@
 
 @include exports('cloud-card') {
   .#{$prefix}--card {
-    
     @include reset;
-    
+
     @include layer('raised');
     display: flex;
     flex-direction: column;
@@ -23,13 +22,11 @@
     background-color: $ui-01;
 
     &:focus {
-      
       @include focus-outline('border');
     }
   }
 
   .#{$prefix}--card__card-overview {
-    
     @include reset;
     position: relative;
     display: flex;
@@ -61,13 +58,11 @@
     font-size: 0.875rem;
 
     &:focus {
-      
       @include focus-outline('border');
     }
   }
 
   .#{$prefix}--card-overview__about {
-    
     @include reset;
     display: flex;
     flex: 1;
@@ -84,7 +79,7 @@
 
   .#{$prefix}--about__title--name {
     font-size: 1.125rem;
-    
+
     @include text-overflow(rem(180px));
     overflow-y: hidden;
     font-weight: 400;
@@ -98,7 +93,7 @@
 
   .#{$prefix}--about__title--link {
     font-size: 0.75rem;
-    
+
     @include text-overflow(rem(180px));
     display: inline;
     font-weight: 400;
@@ -119,7 +114,6 @@
   }
 
   .#{$prefix}--about__icon {
-    
     @include reset;
     display: flex;
     align-items: center;
@@ -139,7 +133,6 @@
 
   // APP CARD STYLES
   .#{$prefix}--card-footer__app-status {
-    
     @include reset;
 
     .active {
@@ -148,22 +141,18 @@
   }
 
   .#{$prefix}--card-footer__app-status--running {
-    
     @include app-status('running');
   }
 
   .#{$prefix}--card-footer__app-status--not-running {
-    
     @include app-status('not-running');
   }
 
   .#{$prefix}--card-footer__app-status--stopped {
-    
     @include app-status('stopped');
   }
 
   .#{$prefix}--card-footer__app-status--limited {
-    
     @include app-status('limited');
   }
 
@@ -188,7 +177,6 @@
     }
 
     &:focus {
-      
       @include focus-outline('border');
     }
   }
