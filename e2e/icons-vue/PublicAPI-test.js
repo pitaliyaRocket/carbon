@@ -9,9 +9,9 @@
 
 'use strict';
 
-const CarbonIconsVue = require('@carbon/icons-vue');
+const CarbonIconsVue = require('@rocketsoftware/icons-vue');
 
-describe('@carbon/icons-vue', () => {
+describe('@rocketsoftware/icons-vue', () => {
   it('should not update exports without a semver change', () => {
     expect(Object.keys(CarbonIconsVue).sort()).toMatchSnapshot();
   });

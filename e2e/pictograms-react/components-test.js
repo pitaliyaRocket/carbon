@@ -9,7 +9,7 @@
 
 'use strict';
 
-const { Metadata } = require('@rocketsoftware/icon-build-helpers');
+const { Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
 const PACKAGE_DIR = path.resolve(__dirname, '../../packages/pictograms-react');
