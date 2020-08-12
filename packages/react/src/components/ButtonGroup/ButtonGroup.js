@@ -201,7 +201,7 @@ class ButtonGroup extends Component {
       triggerEl.focus();
     }
   };
-
+  /* eslint-disable react/prop-types */
   handleOverflowMenuItemFocus = (index) => {
     const i = (() => {
       switch (index) {
@@ -220,7 +220,7 @@ class ButtonGroup extends Component {
       overflowMenuItem.current.focus();
     }
   };
-
+  /* eslint-enable react/prop-types */
   /**
    * Handles the floating menu being unmounted or non-floating menu being
    * mounted or unmounted.
@@ -281,7 +281,7 @@ class ButtonGroup extends Component {
       document.body
     );
   };
-
+  /* eslint-disable react/prop-types */
   render() {
     const {
       ariaLabel,
@@ -296,7 +296,7 @@ class ButtonGroup extends Component {
       getViewport,
       ...other
     } = this.props;
-
+    /* eslint-enable react/prop-types */
     const { open } = this.state;
 
     const iconClasses = classNames(`${prefix}--btn-group-icon`, {

@@ -63,6 +63,7 @@ export function ProgressStep({
     }
   };
 
+  /* eslint-disable react/prop-types */
   const SVGIcon = ({
     complete,
     current,
@@ -71,6 +72,7 @@ export function ProgressStep({
     skip,
     prefix,
   }) => {
+    /* eslint-enable react/prop-types */
     if (invalid) {
       return <Warning16 className={`${prefix}--progress__warning`} />;
     }

@@ -28,7 +28,7 @@ class TourTooltip extends React.Component {
       disablePrev,
       hideNext,
       hidePrev,
-      hideClose,
+      hideClose, // eslint-disable-line react/prop-types
       enableFlip,
       flipped,
       onFlip,
@@ -106,6 +106,7 @@ class TourTooltip extends React.Component {
 }
 
 const TooltipFace = (props) => {
+  /* eslint-disable react/prop-types */
   const {
     enableFlip,
     front,
@@ -118,6 +119,7 @@ const TooltipFace = (props) => {
     body,
     hideClose,
   } = props;
+  /* eslint-enable react/prop-types */
   return (
     <div
       className={cx(
@@ -146,7 +148,9 @@ const TooltipFace = (props) => {
         <div className={`${prefix}--tour-tooltip__title`}>{title}</div>
       </div>
       <div className={`${prefix}--tour-tooltip__body`}>{body}</div>
-      {props.children}
+      {
+        props.children // eslint-disable-line react/prop-types
+      }
     </div>
   );
 };

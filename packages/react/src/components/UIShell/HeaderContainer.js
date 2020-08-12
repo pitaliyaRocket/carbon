@@ -10,7 +10,7 @@ import React, { useState, useCallback } from 'react';
 
 const HeaderContainer = ({
   isSideNavExpanded,
-  render: Children,
+  render: Children, //eslint-disable-line react/prop-types
   activeGlobalAction,
 }) => {
   //state for expandable sidenav

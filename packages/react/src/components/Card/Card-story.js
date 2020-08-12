@@ -37,11 +37,13 @@ storiesOf('Card', module)
             cardInfo={[
               'Lorem ipsum sit amet, consectetur adipisicing elit, sed do eiusmod tempor',
             ]}
+            /* eslint-disable react/jsx-key, jsx-a11y/anchor-is-valid */
             cardLink={[
-              <a href="#" class="bx--link bx--card-footer__link">
+              <a href="#" className="bx--link bx--card-footer__link">
                 Link
               </a>,
-            ]}>
+            ]} /* eslint-enable react/jsx-key, jsx-a11y/anchor-is-valid */
+          >
             <OverflowMenu>
               <OverflowMenuItem itemText="Stop App" />
               <OverflowMenuItem itemText="Restart App" />
@@ -84,8 +86,9 @@ storiesOf('Card', module)
             cardInfo={[
               'Lorem ipsum sit amet, consectetur adipisicing elit, sed do eiusmod tempor',
             ]}
+            /* eslint-disable react/jsx-key, jsx-a11y/anchor-is-valid */
             cardLink={[
-              <a href="#" class="bx--link bx--card-footer__link">
+              <a href="#" className="bx--link bx--card-footer__link">
                 Link
               </a>,
             ]}
@@ -96,7 +99,8 @@ storiesOf('Card', module)
                 }
                 maxWidth={'10rem'}
               />,
-            ]}>
+            ]} /* eslint-enable react/jsx-key, jsx-a11y/anchor-is-valid */
+          >
             <OverflowMenu>
               <OverflowMenuItem itemText="Stop App" />
               <OverflowMenuItem itemText="Restart App" />

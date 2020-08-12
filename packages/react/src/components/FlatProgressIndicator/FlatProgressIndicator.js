@@ -40,7 +40,7 @@ export const FlatProgressStep = ({ ...props }) => {
       onClick();
     }
   };
-
+  /* eslint-disable react/prop-types */
   const SVGIcon = ({
     complete,
     current,
@@ -49,6 +49,7 @@ export const FlatProgressStep = ({ ...props }) => {
     skip,
     prefix,
   }) => {
+    /* eslint-enable react/prop-types */
     if (invalid) {
       return <Warning16 className={`${prefix}--flat-progress__warning`} />;
     }
@@ -83,6 +84,7 @@ export const FlatProgressStep = ({ ...props }) => {
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/role-supports-aria-props
     <li className={classes} aria-disabled={disabled}>
       <div
         className={classnames(`${prefix}--flat-progress-step-button`, {
