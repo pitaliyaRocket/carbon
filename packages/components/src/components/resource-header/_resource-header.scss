@@ -8,6 +8,7 @@
 // @import '../../globals/scss/css--typography';
 
 @include exports('cloud-resource-header') {
+  /* stylelint-disable declaration-empty-line-before */
   .#{$prefix}--resource-header {
     width: 100%;
     background-color: $ui-02;
