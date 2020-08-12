@@ -15,7 +15,7 @@ const path = require('path');
 const PACKAGE_DIR = path.resolve(__dirname, '../../packages/icons-vue');
 const ICONS_PACKAGE_DIR = path.resolve(__dirname, '../../packages/icons');
 
-describe('@carbon/icons-vue', () => {
+describe('@rocketsoftware/icons-vue', () => {
   let metadata;
 
   beforeAll(async () => {
@@ -34,8 +34,8 @@ describe('@carbon/icons-vue', () => {
   });
 
   it('should export each SVG asset', async () => {
-    const CarbonIconsVueCommonJS = require('@carbon/icons-vue');
-    const CarbonIconsVueESM = await import('@carbon/icons-vue');
+    const CarbonIconsVueCommonJS = require('@rocketsoftware/icons-vue');
+    const CarbonIconsVueESM = await import('@rocketsoftware/icons-vue');
 
     for (const asset of metadata.icons) {
       for (const icon of asset.output) {
