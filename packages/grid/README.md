@@ -1,4 +1,4 @@
-<!--alex disable savage-->
+<!-- alex disable primitive -->
 
 # @rocketsoftware/grid
 

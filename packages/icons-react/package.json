@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/icons-react",
-  "bugs": "https://github.com/RocketSoftware/carbon/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-react",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
     "lib",
@@ -19,7 +19,8 @@
     "carbon-elements",
     "carbon-design-system",
     "components",
-    "react"
+    "react",
+    "ibm"
   ],
   "publishConfig": {
     "access": "public"
@@ -32,7 +33,7 @@
     "@rocketsoftware/icon-helpers": "^0.6.0"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.5.2",
+    "@carbon/icon-build-helpers": "^0.8.0",
     "@rocketsoftware/icons": "^0.6.0"
   },
   "sideEffects": false

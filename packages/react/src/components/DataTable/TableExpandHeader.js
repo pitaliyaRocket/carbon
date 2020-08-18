@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import React from 'react';
 import { ChevronRight16 } from '@rocketsoftware/icons-react';
 import { settings } from '@rocketsoftware/carbon-components';
@@ -55,21 +55,26 @@ TableExpandHeader.propTypes = {
   children: PropTypes.node,
 
   /**
+   * Specify whether an expand all button should be displayed
+   */
+  enableExpando: PropTypes.bool,
+
+  /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: requiredIfGivenPropExists('enableExpando', PropTypes.string),
+  ariaLabel: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
 
   /**
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExapndedRow` work together
    */
-  isExpanded: requiredIfGivenPropExists('enableExpando', PropTypes.bool),
+  isExpanded: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.bool),
 
   /**
    * Hook for when a listener initiates a request to expand the given row
    */
-  onExpand: requiredIfGivenPropExists('enableExpando', PropTypes.func),
+  onExpand: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.func),
 
   /**
    * The description of the chevron right icon, to be put in its SVG `<title>` element.

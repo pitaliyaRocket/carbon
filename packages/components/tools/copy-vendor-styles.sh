@@ -27,6 +27,14 @@ for package in node_modules/@rocketsoftware/*; do
   PKG_NAME="@rocketsoftware/$(basename $package)"
   TARGET_DIR="$VENDOR_DIR/$PKG_NAME"
   SCSS_FILES="$package/scss"
+
+  # TODO: this script currently looks up all @carbon packages even if
+  # carbon-components does not have a dependency on it. We should update this
+  # script to only include direct dependencies
+  if [ "$PKG_NAME" = '@carbon/feature-flags' ]; then
+    continue
+  fi
+
   if [ -d "$SCSS_FILES" ]; then
     if [ "$PKG_NAME" != "@rocketsoftware/carbon-components" ] && [ "$PKG_NAME" != "@rocketsoftware/components" ]; then
       echo "Copying scss files for package: $PKG_NAME to $TARGET_DIR"
@@ -42,6 +50,13 @@ for symlink in $(find ../../node_modules/@rocketsoftware -type l -maxdepth 1); d
   PKG_NAME="@rocketsoftware/$(basename $package)"
   TARGET_DIR="$VENDOR_DIR/$PKG_NAME"
   SCSS_FILES="$package/scss"
+
+  # TODO: this script currently looks up all @carbon packages even if
+  # carbon-components does not have a dependency on it. We should update this
+  # script to only include direct dependencies
+  if [ "$PKG_NAME" = '@carbon/feature-flags' ]; then
+    continue
+  fi
 
   if [ -d "$SCSS_FILES" ]; then
     if [ "$PKG_NAME" != "@rocketsoftware/carbon-components" ] && [ "$PKG_NAME" != "@rocketsoftware/components" ]; then

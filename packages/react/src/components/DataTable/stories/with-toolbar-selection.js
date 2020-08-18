@@ -26,8 +26,8 @@ import DataTable, {
 } from '..';
 
 import { initialRowsLarge, headers } from './shared';
-
-export default props => (
+// eslint-disable-next-line react/display-name
+export default (props) => (
   <DataTable
     rows={initialRowsLarge}
     headers={headers}
@@ -63,7 +63,8 @@ export default props => (
           <TableHead>
             <TableRow>
               <TableSelectAll {...getSelectionProps()} />
-              {headers.map(header => (
+              {headers.map((header) => (
+                // eslint-disable-next-line react/jsx-key
                 <TableHeader {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
@@ -71,10 +72,12 @@ export default props => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
+              // eslint-disable-next-line react/jsx-key
               <TableRow {...getRowProps({ row })}>
                 <TableSelectRow {...getSelectionProps({ row })} />
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
+                  // eslint-disable-next-line react/jsx-key
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
               </TableRow>

@@ -135,7 +135,7 @@ $text-02: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'text-02'),
   map-get($carbon--theme, 'text-02'),
-  #393939
+  #525252
 ) !default;
 
 /// Placeholder text
@@ -647,6 +647,16 @@ $decorative-01: if(
   #e0e0e0
 ) !default;
 
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$hover-light-ui: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'hover-light-ui'),
+  map-get($carbon--theme, 'hover-light-ui'),
+  #e5e5e5
+) !default;
+
 /// Skeleton state of graphics
 /// @type {undefined}
 /// @access public
@@ -941,7 +951,7 @@ $productive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 1.625rem,
+    line-height: 1.75rem,
     letter-spacing: 0,
   )
 ) !default;
@@ -1046,7 +1056,7 @@ $expressive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 130%,
+    line-height: 140%,
     letter-spacing: 0,
     breakpoints: (
       xlg: (

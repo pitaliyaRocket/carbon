@@ -1,4 +1,4 @@
-<!--alex disable color white -->
+<!-- alex disable white -->
 
 # @rocketsoftware/themes
 

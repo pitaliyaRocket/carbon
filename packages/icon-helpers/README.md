@@ -1,7 +1,6 @@
 # @rocketsoftware/icon-helpers
 
-> Helpers used alongside icons for digital and software products using the
-> Carbon Design System
+> Icon Helpers
 
 ## Getting started
 

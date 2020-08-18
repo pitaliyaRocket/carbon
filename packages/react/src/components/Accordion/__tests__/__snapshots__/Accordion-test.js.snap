@@ -22,7 +22,6 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Expand/Collapse"
           type="button"
         >
           <button
@@ -31,16 +30,14 @@ exports[`Accordion should render 1`] = `
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Expand/Collapse"
             type="button"
           >
             <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
               className="bx--accordion__arrow"
             >
               <Icon
-                aria-label="Expand/Collapse"
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 16 16"
@@ -48,18 +45,18 @@ exports[`Accordion should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <svg
-                  aria-label="Expand/Collapse"
+                  aria-hidden={true}
                   className="bx--accordion__arrow"
+                  fill="currentColor"
                   focusable="false"
                   height={16}
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
                   viewBox="0 0 16 16"
                   width={16}
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <polygon
-                    points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+                  <path
+                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                   />
                 </svg>
               </Icon>
@@ -93,7 +90,6 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Expand/Collapse"
           type="button"
         >
           <button
@@ -102,16 +98,14 @@ exports[`Accordion should render 1`] = `
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Expand/Collapse"
             type="button"
           >
             <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
               className="bx--accordion__arrow"
             >
               <Icon
-                aria-label="Expand/Collapse"
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 16 16"
@@ -119,18 +113,18 @@ exports[`Accordion should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <svg
-                  aria-label="Expand/Collapse"
+                  aria-hidden={true}
                   className="bx--accordion__arrow"
+                  fill="currentColor"
                   focusable="false"
                   height={16}
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
                   viewBox="0 0 16 16"
                   width={16}
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <polygon
-                    points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+                  <path
+                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                   />
                 </svg>
               </Icon>
@@ -164,7 +158,6 @@ exports[`Accordion should render 1`] = `
           className="bx--accordion__heading"
           onClick={[Function]}
           onKeyDown={[Function]}
-          title="Expand/Collapse"
           type="button"
         >
           <button
@@ -173,16 +166,14 @@ exports[`Accordion should render 1`] = `
             className="bx--accordion__heading"
             onClick={[Function]}
             onKeyDown={[Function]}
-            title="Expand/Collapse"
             type="button"
           >
             <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
               className="bx--accordion__arrow"
             >
               <Icon
-                aria-label="Expand/Collapse"
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 16 16"
@@ -190,18 +181,18 @@ exports[`Accordion should render 1`] = `
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <svg
-                  aria-label="Expand/Collapse"
+                  aria-hidden={true}
                   className="bx--accordion__arrow"
+                  fill="currentColor"
                   focusable="false"
                   height={16}
                   preserveAspectRatio="xMidYMid meet"
-                  role="img"
                   viewBox="0 0 16 16"
                   width={16}
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <polygon
-                    points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+                  <path
+                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                   />
                 </svg>
               </Icon>

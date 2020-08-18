@@ -10,7 +10,7 @@ import {
 import { keys, matches } from '../../internal/keyboard';
 
 const { prefix } = settings;
-const defaultRenderLabel = props => <p {...props} />;
+const defaultRenderLabel = (props) => <p {...props} />;
 export const FlatProgressStep = ({ ...props }) => {
   const {
     label,
@@ -35,12 +35,12 @@ export const FlatProgressStep = ({ ...props }) => {
     [className]: className,
   });
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (matches(e, [keys.Enter, keys.Space])) {
       onClick();
     }
   };
-
+  /* eslint-disable react/prop-types */
   const SVGIcon = ({
     complete,
     current,
@@ -49,6 +49,7 @@ export const FlatProgressStep = ({ ...props }) => {
     skip,
     prefix,
   }) => {
+    /* eslint-enable react/prop-types */
     if (invalid) {
       return <Warning16 className={`${prefix}--flat-progress__warning`} />;
     }
@@ -83,6 +84,7 @@ export const FlatProgressStep = ({ ...props }) => {
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/role-supports-aria-props
     <li className={classes} aria-disabled={disabled}>
       <div
         className={classnames(`${prefix}--flat-progress-step-button`, {

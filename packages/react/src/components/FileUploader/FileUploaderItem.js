@@ -41,14 +41,14 @@ function FileUploaderItem({
           iconDescription={iconDescription}
           status={status}
           invalid={invalid}
-          onKeyDown={evt => {
+          onKeyDown={(evt) => {
             if (matches(evt, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
                 onDelete(evt, { uuid: id });
               }
             }
           }}
-          onClick={evt => {
+          onClick={(evt) => {
             if (status === 'edit') {
               onDelete(evt, { uuid: id });
             }
@@ -86,6 +86,12 @@ FileUploaderItem.propTypes = {
    * Status of the file upload
    */
   status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
+
+  /**
+   * Specify the size of the uploaded items, from a list of available
+   * sizes. For `default` size, this prop can remain unspecified.
+   */
+  size: PropTypes.oneOf(['default', 'field', 'small']),
 
   /**
    * Description of status icon (displayed in native tooltip)

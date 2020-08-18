@@ -1,7 +1,6 @@
 # @rocketsoftware/motion
 
-> Motion helpers for digital and software products using the Carbon Design
-> System
+> Motion helpers
 
 ## Getting started
 

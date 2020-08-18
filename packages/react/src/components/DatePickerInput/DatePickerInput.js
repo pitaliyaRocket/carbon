@@ -68,9 +68,38 @@ export default class DatePickerInput extends Component {
     invalid: PropTypes.bool,
 
     /**
+     * Specify the text to be rendered when the input is invalid
+     */
+    invalidText: PropTypes.string,
+
+    /**
+     * Specify if the label should be hidden
+     */
+    hideLabel: PropTypes.bool,
+
+    /**
+     * Specify the placeholder text
+     */
+    placeholder: PropTypes.string,
+
+    /**
+     * The type of the date picker:
+     *
+     * * `simple` - Without calendar dropdown.
+     * * `single` - With calendar dropdown and single date.
+     * * `range` - With calendar dropdown and a date range.
+     */
+    datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
+
+    /**
      * Provide a function to be called when the input field is clicked
      */
     onClick: PropTypes.func,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    openCalendar: PropTypes.func,
 
     /**
      * Specify an `onChange` handler that is called whenever a change in the
@@ -110,12 +139,12 @@ export default class DatePickerInput extends Component {
 
     const datePickerInputProps = {
       id,
-      onChange: evt => {
+      onChange: (evt) => {
         if (!disabled) {
           onChange(evt);
         }
       },
-      onClick: evt => {
+      onClick: (evt) => {
         if (!disabled) {
           onClick(evt);
         }
@@ -168,7 +197,7 @@ export default class DatePickerInput extends Component {
         {...other}
         {...datePickerInputProps}
         disabled={disabled}
-        ref={input => {
+        ref={(input) => {
           this.input = input;
         }}
         data-invalid
@@ -176,7 +205,7 @@ export default class DatePickerInput extends Component {
       />
     ) : (
       <input
-        ref={input => {
+        ref={(input) => {
           this.input = input;
         }}
         {...other}

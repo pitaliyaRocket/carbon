@@ -21,13 +21,13 @@ export default class Tour extends React.Component {
     return (
       <Walktour
         {...this.props}
-        customCloseFunc={logic => {
+        customCloseFunc={(logic) => {
           if (this.props.onClose) {
             this.props.onClose(logic.stepIndex);
           }
           logic.close();
         }}
-        customTooltipRenderer={logic => {
+        customTooltipRenderer={(logic) => {
           const {
             title,
             description,

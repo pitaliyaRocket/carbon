@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/icons-vue",
-  "bugs": "https://github.com/RocketSoftware/carbon/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-vue",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "rocketsoftware",
     "elements",
@@ -14,7 +14,8 @@
     "carbon-elements",
     "carbon-design-system",
     "components",
-    "react"
+    "react",
+    "ibm"
   ],
   "publishConfig": {
     "access": "public"
@@ -30,7 +31,7 @@
     "@carbon/cli-reporter": "^10.3.0",
     "@rocketsoftware/icons": "^0.6.0",
     "fs-extra": "^8.1.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.5",
     "rimraf": "^3.0.0",
     "rollup": "^1.15.1",
     "vue": "^2.6.8"

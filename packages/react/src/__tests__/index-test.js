@@ -63,6 +63,7 @@ describe('Carbon Components React', () => {
         "FlatProgressIndicator",
         "FlatProgressIndicatorSkeleton",
         "FlatProgressStep",
+        "FluidForm",
         "Form",
         "FormGroup",
         "FormItem",
@@ -100,6 +101,7 @@ describe('Carbon Components React', () => {
         "OrderedList",
         "OverflowMenu",
         "OverflowMenuItem",
+        "PageSelector",
         "Pagination",
         "PaginationSkeleton",
         "PrimaryButton",
@@ -204,6 +206,7 @@ describe('Carbon Components React', () => {
         "Tour",
         "TourTooltip",
         "UnorderedList",
+        "Unstable_Pagination",
       ]
     `);
   });

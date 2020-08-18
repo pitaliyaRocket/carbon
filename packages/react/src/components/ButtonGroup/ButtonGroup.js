@@ -25,7 +25,7 @@ const on = (element, ...args) => {
   };
 };
 
-const getOffset = trigger => {
+const getOffset = (trigger) => {
   const { top } = trigger.getBoundingClientRect();
 
   return {
@@ -144,19 +144,19 @@ class ButtonGroup extends Component {
     }
   }
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
     }
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     if (keyCodeMatches(evt, [keys.ArrowDown])) {
       this.setState({ open: !this.state.open });
     }
   };
 
-  handleKeyPress = evt => {
+  handleKeyPress = (evt) => {
     if (
       this.state.open &&
       keyCodeMatches(evt, [
@@ -177,7 +177,7 @@ class ButtonGroup extends Component {
     }
   };
 
-  handleClickOutside = evt => {
+  handleClickOutside = (evt) => {
     if (
       this.state.open &&
       (!this._menuBody || !this._menuBody.contains(evt.target))
@@ -201,8 +201,8 @@ class ButtonGroup extends Component {
       triggerEl.focus();
     }
   };
-
-  handleOverflowMenuItemFocus = index => {
+  /* eslint-disable react/prop-types */
+  handleOverflowMenuItemFocus = (index) => {
     const i = (() => {
       switch (index) {
         case -1:
@@ -220,14 +220,14 @@ class ButtonGroup extends Component {
       overflowMenuItem.current.focus();
     }
   };
-
+  /* eslint-enable react/prop-types */
   /**
    * Handles the floating menu being unmounted or non-floating menu being
    * mounted or unmounted.
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _bindMenuBody = menuBody => {
+  _bindMenuBody = (menuBody) => {
     if (!menuBody) {
       this._menuBody = menuBody;
     }
@@ -241,7 +241,7 @@ class ButtonGroup extends Component {
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _handlePlace = menuBody => {
+  _handlePlace = (menuBody) => {
     if (menuBody) {
       this._menuBody = menuBody;
       const primaryFocus =
@@ -253,7 +253,7 @@ class ButtonGroup extends Component {
       this._hFocusIn = on(
         menuBody.ownerDocument,
         focusinEventName,
-        event => {
+        (event) => {
           const { target } = event;
           const { current: triggerEl } = this._triggerRef;
           if (
@@ -281,7 +281,7 @@ class ButtonGroup extends Component {
       document.body
     );
   };
-
+  /* eslint-disable react/prop-types */
   render() {
     const {
       ariaLabel,
@@ -296,7 +296,7 @@ class ButtonGroup extends Component {
       getViewport,
       ...other
     } = this.props;
-
+    /* eslint-enable react/prop-types */
     const { open } = this.state;
 
     const iconClasses = classNames(`${prefix}--btn-group-icon`, {
@@ -316,7 +316,7 @@ class ButtonGroup extends Component {
           closeMenu: this.closeMenu,
           onKeyDown: this.handleKeyPress,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
-          ref: e => {
+          ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
           },
           index,

@@ -12,6 +12,7 @@ import ReactDOM from 'react-dom';
 import window from 'window-or-global';
 import { settings } from '@rocketsoftware/carbon-components';
 import OptimizedResize from './OptimizedResize';
+import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 
 const { prefix } = settings;
 
@@ -203,6 +204,12 @@ class FloatingMenu extends React.Component {
     ]),
 
     /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the Modal opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
+
+    /**
      * The additional styles to put to the floating menu.
      */
     styles: PropTypes.object,
@@ -221,6 +228,21 @@ class FloatingMenu extends React.Component {
      * Optional callback used to obtain a custom 'viewport' that differs from the window.
      */
     getViewport: PropTypes.func,
+
+    /**
+     * `true` if the menu alignment should be flipped.
+     */
+    flipped: PropTypes.bool,
+
+    /**
+     * The element ref of the tooltip's trigger button.
+     */
+    triggerRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
   };
 
   static defaultProps = {
@@ -338,16 +360,43 @@ class FloatingMenu extends React.Component {
     });
   }
 
+  /**
+   * Set focus on floating menu content after menu placement.
+   * @param {Element} menuBody The DOM element of the menu body.
+   * @private
+   */
+  _focusMenuContent = (menuBody) => {
+    const primaryFocusNode = menuBody.querySelector(
+      this.props.selectorPrimaryFocus || null
+    );
+    const tabbableNode = menuBody.querySelector(selectorTabbable);
+    const focusableNode = menuBody.querySelector(selectorFocusable);
+    const focusTarget =
+      primaryFocusNode || // User defined focusable node
+      tabbableNode || // First sequentially focusable node
+      focusableNode || // First programmatic focusable node
+      menuBody;
+    focusTarget.focus();
+    if (focusTarget === menuBody && __DEV__) {
+      warning(
+        focusableNode === null,
+        'Floating Menus must have at least a programmatically focusable child. ' +
+          'This can be accomplished by adding tabIndex="-1" to the content element.'
+      );
+    }
+  };
+
   componentDidUpdate(prevProps) {
     this._updateMenuSize(prevProps);
     const { onPlace } = this.props;
-    if (
-      this._placeInProgress &&
-      this.state.floatingPosition &&
-      typeof onPlace === 'function'
-    ) {
-      onPlace(this._menuBody);
-      this._placeInProgress = false;
+    if (this._placeInProgress && this.state.floatingPosition) {
+      if (this._menuBody && !this._menuBody.contains(document.activeElement)) {
+        this._focusMenuContent(this._menuBody);
+      }
+      if (typeof onPlace === 'function') {
+        onPlace(this._menuBody);
+        this._placeInProgress = false;
+      }
     }
   }
 
@@ -355,7 +404,7 @@ class FloatingMenu extends React.Component {
    * A callback for called when menu body is mounted or unmounted.
    * @param {Element} menuBody The menu body being mounted. `null` if the menu body is being unmounted.
    */
-  _menuRef = menuBody => {
+  _menuRef = (menuBody) => {
     const { menuRef } = this.props;
     this._placeInProgress = !!menuBody;
     menuRef && menuRef((this._menuBody = menuBody));

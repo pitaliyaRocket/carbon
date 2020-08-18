@@ -129,7 +129,7 @@ describe('ToastNotification', () => {
     it('interpolates matching className based on kind prop', () => {
       const kinds = ['error', 'info', 'success', 'warning'];
 
-      kinds.forEach(kind => {
+      kinds.forEach((kind) => {
         toast.setProps({ kind });
         expect(
           toast.hasClass(`${prefix}--toast-notification--${kind}`)
@@ -240,7 +240,7 @@ describe('InlineNotification', () => {
     it('interpolates matching className based on kind prop', () => {
       const kinds = ['error', 'info', 'success', 'warning'];
 
-      kinds.forEach(kind => {
+      kinds.forEach((kind) => {
         inline.setProps({ kind });
         expect(
           inline.find(`.${prefix}--inline-notification--${kind}`).exists()

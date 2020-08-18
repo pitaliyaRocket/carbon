@@ -24,6 +24,7 @@
     @include reset;
     @include type-style('body-short-01');
     @include focus-outline('reset');
+
     background-color: $field-01;
     width: 100%;
     height: rem(40px);
@@ -56,7 +57,7 @@
     padding-right: $carbon--spacing-08;
   }
 
-  .#{$prefix}--text-input::-webkit-input-placeholder {
+  .#{$prefix}--text-input::placeholder {
     @include placeholder-colors;
   }
 
@@ -141,8 +142,9 @@
   // Disabled
   //-----------------------------
   .#{$prefix}--text-input:disabled {
+    @include focus-outline('reset');
+
     cursor: not-allowed;
-    outline: none;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
     color: $disabled-02;
@@ -162,6 +164,7 @@
   //-----------------------------
   .#{$prefix}--text-input--invalid {
     @include focus-outline('invalid');
+
     box-shadow: none;
 
     .#{$prefix}--text-input--password__visibility,
@@ -169,6 +172,108 @@
     .#{$prefix}--text-input--password__visibility__toggle {
       right: $carbon--spacing-08;
     }
+  }
+
+  //-----------------------------
+  // Fluid Text Input
+  //-----------------------------
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
+    position: relative;
+    background: $field-01;
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--label {
+    position: absolute;
+    top: rem(13px);
+    left: $carbon--spacing-05;
+    z-index: 1;
+    margin: 0;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input {
+    min-height: rem(64px);
+    padding: rem(32px) $carbon--spacing-05 rem(13px);
+  }
+
+  .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__divider {
+    display: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid {
+    border-bottom: none;
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input__divider {
+    display: block;
+    margin: 0 1rem;
+    border-style: solid;
+    border-bottom: none;
+    border-color: $ui-03;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
+    top: rem(80px);
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
+    background: $field-02;
+  }
+
+  //-----------------------------
+  // Inline Text Input
+  //-----------------------------
+
+  .#{$prefix}--text-input-wrapper--inline {
+    flex-flow: row wrap;
+  }
+
+  .#{$prefix}--label--inline {
+    flex: 1;
+    margin: rem(13px) 0 0 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--label--inline--sm {
+    margin-top: rem(9px);
+  }
+
+  .#{$prefix}--label--inline--xl {
+    margin-top: rem(17px);
+  }
+
+  .#{$prefix}--text-input__label-helper-wrapper {
+    flex: 2;
+    flex-direction: column;
+    margin-right: rem(24px);
+    max-width: rem(128px);
+    overflow-wrap: break-word;
+  }
+
+  .#{$prefix}--form__helper-text--inline {
+    margin-top: rem(2px);
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper--inline {
+    flex: 8;
+    flex-direction: column;
   }
 }
 

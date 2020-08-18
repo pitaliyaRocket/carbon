@@ -5,8 +5,8 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/icon-helpers",
-  "bugs": "https://github.com/RocketSoftware/carbon/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icon-helpers",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
     "lib",
@@ -19,7 +19,8 @@
     "carbon-elements",
     "carbon-design-system",
     "components",
-    "react"
+    "react",
+    "ibm"
   ],
   "publishConfig": {
     "access": "public"
@@ -29,7 +30,7 @@
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.7.0",
+    "@carbon/bundler": "^10.9.0",
     "rimraf": "^3.0.0"
   },
   "sideEffects": false

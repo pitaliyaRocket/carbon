@@ -94,6 +94,9 @@ const props = {
         'Close button icon description (iconDescription)',
         'Clear file'
       ),
+      onChange: action('onChange'),
+      onClick: action('onClick'),
+      onDelete: action('onDelete'),
     };
   },
   fileUploaderItem: () => ({
@@ -113,6 +116,7 @@ const props = {
       'Error body (errorBody)',
       '500kb max file size. Select a new file and try again.'
     ),
+    size: select('FileUploaderItem height (size)', sizes, 'default'),
   }),
   fileUploaderDropContainer: () => ({
     size: select('Filename height (size)', sizes, 'default'),

@@ -9,11 +9,8 @@ demo/hot
 !demo/index.js
 !demo/components.js
 dist
-<<<<<<< HEAD
 Carbon
-=======
 docs/js
->>>>>>> v10.11.3
 
 # Test reports
 tests/a11y-results

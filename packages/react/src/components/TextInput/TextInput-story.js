@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import TextInput from '../TextInput';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
+import FluidForm from '../FluidForm/FluidForm';
 
 const types = {
   None: '',
@@ -25,23 +26,26 @@ const sizes = {
   'Small size (sm)': 'sm',
 };
 
-function ControlledPasswordInputApp(props) {
-  const [type, setType] = useState('password');
-  const togglePasswordVisibility = () => {
-    setType(type === 'password' ? 'text' : 'password');
-  };
-  return (
-    <>
-      <TextInput.ControlledPasswordInput
-        type={type}
-        togglePasswordVisibility={togglePasswordVisibility}
-        {...props}
-      />
-      <button onClick={() => setType('text')}>Show password</button>
-      <button onClick={() => setType('password')}>Hide password</button>
-    </>
-  );
-}
+const ControlledPasswordInputApp = React.forwardRef(
+  function ControlledPasswordInputApp(props, ref) {
+    const [type, setType] = useState('password');
+    const togglePasswordVisibility = () => {
+      setType(type === 'password' ? 'text' : 'password');
+    };
+    return (
+      <>
+        <TextInput.ControlledPasswordInput
+          type={type}
+          togglePasswordVisibility={togglePasswordVisibility}
+          ref={ref}
+          {...props}
+        />
+        <button onClick={() => setType('text')}>Show password</button>
+        <button onClick={() => setType('password')}>Hide password</button>
+      </>
+    );
+  }
+);
 
 const props = {
   TextInputProps: () => ({
@@ -52,7 +56,7 @@ const props = {
       'This is not a default value'
     ),
     size: select('Field size (size)', sizes, undefined) || undefined,
-    labelText: text('Label text (labelText)', 'Text Input label'),
+    labelText: text('Label text (labelText)', 'Text input label'),
     placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
     light: boolean('Light variant (light)', false),
     disabled: boolean('Disabled (disabled)', false),
@@ -62,7 +66,8 @@ const props = {
       'Form validation UI content (invalidText)',
       'A valid value is required'
     ),
-    helperText: text('Helper text (helperText)', 'Optional helper text.'),
+    helperText: text('Helper text (helperText)', 'Optional help text'),
+    inline: boolean('Inline variant (inline)', false),
     onClick: action('onClick'),
     onChange: action('onChange'),
   }),
@@ -99,6 +104,27 @@ storiesOf('TextInput', module)
         type={select('Form control type (type)', types, 'text')}
         {...props.TextInputProps()}
       />
+    ),
+    {
+      info: {
+        text: `
+            Text fields enable the user to interact with and input data. A single line
+            field is used when the input anticipated by the user is a single line of
+            text as opposed to a paragraph.
+            The default type is 'text' and its value can be either 'string' or 'number'.
+          `,
+      },
+    }
+  )
+  .add(
+    'Fluid',
+    () => (
+      <FluidForm>
+        <TextInput
+          type={select('Form control type (type)', types, 'text')}
+          {...props.TextInputProps()}
+        />
+      </FluidForm>
     ),
     {
       info: {
@@ -161,7 +187,7 @@ storiesOf('TextInput', module)
         aria-label="loading text input"
         aria-live="assertive"
         role="status"
-        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
       >
         <TextInputSkeleton />
         <br />

@@ -373,5 +373,5 @@ export const initialRowsLarge = [
   },
 ];
 
-export const batchActionClick = selectedRows => () =>
+export const batchActionClick = (selectedRows) => () =>
   action('batch action click')(selectedRows);

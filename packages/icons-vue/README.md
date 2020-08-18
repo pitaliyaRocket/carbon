@@ -1,22 +1,21 @@
-# @carbon/icons-vue
+# @rocketsoftware/icons-vue
 
-> Vue components for icons in digital and software products using the Carbon
-> Design System
+> Vue components for icons
 
 ## Getting started
 
-To install `@carbon/icons-vue` in your project, you will need to run the
+To install `@rocketsoftware/icons-vue` in your project, you will need to run the
 following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S @carbon/icons-vue
+npm install -S @rocketsoftware/icons-vue
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/icons-vue
+yarn add @rocketsoftware/icons-vue
 ```
 
 ## Usage
@@ -40,7 +39,7 @@ Vue.use(CarbonIconsVue, {
 });
 
 new Vue({
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');
 ```
 
@@ -81,8 +80,8 @@ labels, custom classes, event handlers, and more. For example:
 
 ## 📚 Examples
 
-If you're looking for more examples on how to use `@carbon/icons-vue`, we have
-some examples that you can check out:
+If you're looking for more examples on how to use `@rocketsoftware/icons-vue`,
+we have some examples that you can check out:
 
 - [vue-cli](./examples/vue-cli)
 

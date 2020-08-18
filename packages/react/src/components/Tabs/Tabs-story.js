@@ -67,7 +67,7 @@ const props = {
   }),
 };
 
-const CustomLabel = ({ text }) => <>{text}</>;
+const CustomLabel = ({ text }) => text;
 
 const CodeSnippetExample = () => (
   <CodeSnippet type="multi">
@@ -134,7 +134,8 @@ storiesOf('Tabs', module)
         <Tab
           id="tab-4"
           {...props.tab()}
-          label="Tab label 4"
+          label="Tab label 4 shows truncation"
+          title="Tab label 4 shows truncation"
           renderContent={TabContentRenderedOnlyWhenSelected}>
           <div className="some-content">
             <p>Content for fourth tab goes here.</p>
@@ -182,7 +183,8 @@ storiesOf('Tabs', module)
         <Tab
           id="tab-3"
           {...props.tab()}
-          label="Tab label 3"
+          label="Tab label 3 renders content only when selected"
+          title="Tab label 3 renders content only when selected"
           renderContent={TabContentRenderedOnlyWhenSelected}>
           <div className="some-content">
             <p>Content for third tab goes here.</p>

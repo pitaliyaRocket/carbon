@@ -4,8 +4,8 @@
   "version": "0.6.0",
   "license": "Apache-2.0",
   "main": "index.js",
-  "repository": "https://github.com/RocketSoftware/carbon/tree/master/packages/icons-handlebars",
-  "bugs": "https://github.com/RocketSoftware/carbon/issues",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-handlebars",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "rocketsoftware",
     "elements",
@@ -13,7 +13,8 @@
     "carbon-elements",
     "carbon-design-system",
     "components",
-    "react"
+    "react",
+    "ibm"
   ],
   "publishConfig": {
     "access": "public"

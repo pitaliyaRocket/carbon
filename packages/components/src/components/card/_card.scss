@@ -11,8 +11,10 @@
 @import 'mixins';
 
 @include exports('cloud-card') {
+  /* stylelint-disable declaration-empty-line-before */
   .#{$prefix}--card {
     @include reset;
+
     @include layer('raised');
     display: flex;
     flex-direction: column;
@@ -78,6 +80,7 @@
 
   .#{$prefix}--about__title--name {
     font-size: 1.125rem;
+
     @include text-overflow(rem(180px));
     overflow-y: hidden;
     font-weight: 400;
@@ -86,11 +89,12 @@
     line-height: 1.2;
 
     max-height: 2.4em;
-    white-space: unset;
+    white-space: unset; /* stylelint-disable-line declaration-property-value-blacklist */
   }
 
   .#{$prefix}--about__title--link {
     font-size: 0.75rem;
+
     @include text-overflow(rem(180px));
     display: inline;
     font-weight: 400;

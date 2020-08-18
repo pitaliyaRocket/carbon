@@ -147,6 +147,16 @@ export default class Slider extends PureComponent {
      * `true` to use the light version.
      */
     light: PropTypes.bool,
+
+    /**
+     * `true` to specify if the control is required.
+     */
+    required: PropTypes.bool,
+
+    /**
+     * `true` to specify if the control is invalid.
+     */
+    invalid: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -171,19 +181,23 @@ export default class Slider extends PureComponent {
    * Sets up initial slider position and value in response to component mount.
    */
   componentDidMount() {
-    const { value, left } = this.calcValue({ useRawValue: true });
-    this.setState({ value, left });
+    if (this.element) {
+      const { value, left } = this.calcValue({
+        useRawValue: true,
+      });
+      this.setState({ value, left });
+    }
   }
 
   /**
    * Handles firing of `onChange` and `onRelease` callbacks to parent in
    * response to state changes.
    *
-   * @param {*} _ Unused (prevProps)
+   * @param {*} prevProps prevProps
    * @param {*} prevState The previous Slider state, used to see if callbacks
    * should be called.
    */
-  componentDidUpdate(_, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
     if (
@@ -191,6 +205,7 @@ export default class Slider extends PureComponent {
       prevState.value !== this.state.value &&
       typeof this.props.onChange === 'function'
     ) {
+      // TODO: pass event object as first param (breaking change/feat for v11)
       this.props.onChange({ value: this.state.value });
     }
 
@@ -199,10 +214,23 @@ export default class Slider extends PureComponent {
       this.state.needsOnRelease &&
       typeof this.props.onRelease === 'function'
     ) {
+      // TODO: pass event object as first param (breaking change/feat for v11)
       this.props.onRelease({ value: this.state.value });
       // Reset the flag
       this.setState({ needsOnRelease: false });
     }
+
+    // If value from props does not change, do nothing here.
+    // Otherwise, do prop -> state sync without "value capping".
+    if (prevProps.value === this.props.value) {
+      return;
+    }
+    this.setState(
+      this.calcValue({
+        value: this.props.value,
+        useRawValue: true,
+      })
+    );
   }
 
   /**
@@ -225,19 +253,19 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  onDragStart = evt => {
+  onDragStart = (evt) => {
     // Do nothing if component is disabled
     if (this.props.disabled) {
       return;
     }
 
     // Register drag stop handlers
-    DRAG_STOP_EVENT_TYPES.forEach(element => {
+    DRAG_STOP_EVENT_TYPES.forEach((element) => {
       this.element.ownerDocument.addEventListener(element, this.onDragStop);
     });
 
     // Register drag handlers
-    DRAG_EVENT_TYPES.forEach(element => {
+    DRAG_EVENT_TYPES.forEach((element) => {
       this.element.ownerDocument.addEventListener(element, this.onDrag);
     });
 
@@ -257,12 +285,12 @@ export default class Slider extends PureComponent {
     }
 
     // Remove drag stop handlers
-    DRAG_STOP_EVENT_TYPES.forEach(element => {
+    DRAG_STOP_EVENT_TYPES.forEach((element) => {
       this.element.ownerDocument.removeEventListener(element, this.onDragStop);
     });
 
     // Remove drag handlers
-    DRAG_EVENT_TYPES.forEach(element => {
+    DRAG_EVENT_TYPES.forEach((element) => {
       this.element.ownerDocument.removeEventListener(element, this.onDrag);
     });
 
@@ -276,7 +304,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  _onDrag = evt => {
+  _onDrag = (evt) => {
     // Do nothing if component is disabled or we have no event
     if (this.props.disabled || !evt) {
       return;
@@ -315,7 +343,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  onKeyDown = evt => {
+  onKeyDown = (evt) => {
     // Do nothing if component is disabled or we don't have a valid event
     if (this.props.disabled || !('which' in evt)) {
       return;
@@ -358,7 +386,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  onChange = evt => {
+  onChange = (evt) => {
     // Do nothing if component is disabled
     if (this.props.disabled) {
       return;
@@ -424,12 +452,15 @@ export default class Slider extends PureComponent {
       if (value == null) {
         value = this.state.value;
       }
-      leftPercent = value / (range - this.props.min);
+      leftPercent = (value - this.props.min) / range;
     }
 
     if (useRawValue) {
       // Adjusts only for min/max of thumb position
-      return { value, left: Math.min(1, Math.max(0, leftPercent)) * 100 };
+      return {
+        value,
+        left: Math.min(1, Math.max(0, leftPercent)) * 100,
+      };
     }
 
     let steppedValue = Math.round(leftPercent * totalSteps) * this.props.step;
@@ -451,9 +482,7 @@ export default class Slider extends PureComponent {
       hideTextInput,
       id = (this.inputId =
         this.inputId ||
-        `__carbon-slider_${Math.random()
-          .toString(36)
-          .substr(2)}`),
+        `__carbon-slider_${Math.random().toString(36).substr(2)}`),
       min,
       minLabel,
       max,
@@ -515,7 +544,7 @@ export default class Slider extends PureComponent {
           </span>
           <div
             className={sliderClasses}
-            ref={node => {
+            ref={(node) => {
               this.element = node;
             }}
             onMouseDown={this.onDragStart}
@@ -536,7 +565,7 @@ export default class Slider extends PureComponent {
             />
             <div
               className={`${prefix}--slider__track`}
-              ref={node => {
+              ref={(node) => {
                 this.track = node;
               }}
             />

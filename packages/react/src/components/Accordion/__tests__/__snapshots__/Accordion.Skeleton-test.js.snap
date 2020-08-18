@@ -20,6 +20,7 @@ exports[`AccordionSkeleton should render 1`] = `
         >
           <Icon
             className="bx--accordion__arrow"
+            fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 16 16"
@@ -29,6 +30,7 @@ exports[`AccordionSkeleton should render 1`] = `
             <svg
               aria-hidden={true}
               className="bx--accordion__arrow"
+              fill="currentColor"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
@@ -36,8 +38,8 @@ exports[`AccordionSkeleton should render 1`] = `
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
-              <polygon
-                points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+              <path
+                d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
               />
             </svg>
           </Icon>
@@ -123,6 +125,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <Icon
               className="bx--accordion__arrow"
+              fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 16 16"
@@ -132,6 +135,7 @@ exports[`AccordionSkeleton should render 1`] = `
               <svg
                 aria-hidden={true}
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
@@ -139,8 +143,8 @@ exports[`AccordionSkeleton should render 1`] = `
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <polygon
-                  points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+                <path
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </Icon>
@@ -178,6 +182,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <Icon
               className="bx--accordion__arrow"
+              fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 16 16"
@@ -187,6 +192,7 @@ exports[`AccordionSkeleton should render 1`] = `
               <svg
                 aria-hidden={true}
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
@@ -194,8 +200,8 @@ exports[`AccordionSkeleton should render 1`] = `
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <polygon
-                  points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+                <path
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </Icon>
@@ -233,6 +239,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <Icon
               className="bx--accordion__arrow"
+              fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 16 16"
@@ -242,6 +249,7 @@ exports[`AccordionSkeleton should render 1`] = `
               <svg
                 aria-hidden={true}
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
@@ -249,8 +257,8 @@ exports[`AccordionSkeleton should render 1`] = `
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <polygon
-                  points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3"
+                <path
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
                 />
               </svg>
             </Icon>

@@ -1,7 +1,6 @@
 # @rocketsoftware/layout
 
-> Layout helpers for digital and software products using the Carbon Design
-> System
+> Layout helpers
 
 ## Getting started
 

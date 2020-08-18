@@ -96,19 +96,15 @@ const Select = React.forwardRef(function Select(
             {labelText}
           </label>
         )}
-        {!inline && helper}
         {inline && (
-          <>
-            <div className={`${prefix}--select-input--inline__wrapper`}>
-              <div
-                className={`${prefix}--select-input__wrapper`}
-                data-invalid={invalid || null}>
-                {input}
-              </div>
-              {error}
+          <div className={`${prefix}--select-input--inline__wrapper`}>
+            <div
+              className={`${prefix}--select-input__wrapper`}
+              data-invalid={invalid || null}>
+              {input}
             </div>
-            {helper}
-          </>
+            {error}
+          </div>
         )}
         {!inline && (
           <div
@@ -117,7 +113,7 @@ const Select = React.forwardRef(function Select(
             {input}
           </div>
         )}
-        {!inline && error}
+        {!inline && error ? error : helper}
       </div>
     </div>
   );

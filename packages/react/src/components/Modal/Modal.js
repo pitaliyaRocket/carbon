@@ -13,7 +13,7 @@ import { Close20 } from '@rocketsoftware/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import deprecate from '../../prop-types/deprecate';
-import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
@@ -74,12 +74,12 @@ export default class Modal extends Component {
     /**
      * Specify the text for the secondary button
      */
-    secondaryButtonText: PropTypes.string,
+    secondaryButtonText: PropTypes.node,
 
     /**
      * Specify the text for the primary button
      */
-    primaryButtonText: PropTypes.string,
+    primaryButtonText: PropTypes.node,
 
     /**
      * Specify whether the Modal is currently open
@@ -162,7 +162,7 @@ export default class Modal extends Component {
     /**
      * Required props for the accessibility label of the header
      */
-    ['aria-label']: requiredIfGivenPropExists(
+    ['aria-label']: requiredIfGivenPropIsTruthy(
       'hasScrollingContent',
       PropTypes.string
     ),
@@ -190,7 +190,7 @@ export default class Modal extends Component {
   modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
   modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     if (this.props.open) {
       if (evt.which === 27) {
         this.props.onRequestClose(evt);
@@ -201,7 +201,7 @@ export default class Modal extends Component {
     }
   };
 
-  handleMousedown = evt => {
+  handleMousedown = (evt) => {
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target) &&
@@ -247,7 +247,7 @@ export default class Modal extends Component {
     );
   }
 
-  initialFocus = focusContainerElement => {
+  initialFocus = (focusContainerElement) => {
     const containerElement = focusContainerElement || this.innerModal.current;
     const primaryFocusElement = containerElement
       ? containerElement.querySelector(this.props.selectorPrimaryFocus)
@@ -260,7 +260,7 @@ export default class Modal extends Component {
     return this.button && this.button.current;
   };
 
-  focusButton = focusContainerElement => {
+  focusButton = (focusContainerElement) => {
     const target = this.initialFocus(focusContainerElement);
     if (target) {
       target.focus();
@@ -283,7 +283,7 @@ export default class Modal extends Component {
     this.focusButton(this.innerModal.current);
   }
 
-  handleTransitionEnd = evt => {
+  handleTransitionEnd = (evt) => {
     if (
       evt.target === evt.currentTarget && // Not to handle `onTransitionEnd` on child DOM nodes
       this.outerModal.current &&

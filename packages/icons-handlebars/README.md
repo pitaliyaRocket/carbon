@@ -1,7 +1,6 @@
 # @rocketsoftware/icons-handlebars
 
-> Handlebars helpers for IBM Design Language icons in digital and software
-> products using the Carbon Design System
+> Handlebars helpers for icons
 
 ## Getting started
 

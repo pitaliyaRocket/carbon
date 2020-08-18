@@ -6,13 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
 import { WarningFilled16 } from '@rocketsoftware/icons-react';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
+import { FormContext } from '../FluidForm';
 
 const { prefix } = settings;
 const TextInput = React.forwardRef(function TextInput(
@@ -30,6 +31,7 @@ const TextInput = React.forwardRef(function TextInput(
     helperText,
     light,
     size,
+    inline,
     ...other
   },
   ref
@@ -42,12 +44,12 @@ const TextInput = React.forwardRef(function TextInput(
   });
   const sharedTextInputProps = {
     id,
-    onChange: evt => {
+    onChange: (evt) => {
       if (!other.disabled) {
         onChange(evt);
       }
     },
-    onClick: evt => {
+    onClick: (evt) => {
       if (!other.disabled) {
         onClick(evt);
       }
@@ -59,13 +61,30 @@ const TextInput = React.forwardRef(function TextInput(
     title: placeholder,
     ...other,
   };
+  const inputWrapperClasses = classNames(
+    `${prefix}--form-item`,
+    `${prefix}--text-input-wrapper`,
+    {
+      [`${prefix}--text-input-wrapper--light`]: light,
+      [`${prefix}--text-input-wrapper--inline`]: inline,
+    }
+  );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: other.disabled,
+    [`${prefix}--label--inline`]: inline,
+    [`${prefix}--label--inline--${size}`]: inline && !!size,
   });
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
+    [`${prefix}--form__helper-text--inline`]: inline,
   });
+  const fieldOuterWrapperClasses = classNames(
+    `${prefix}--text-input__field-outer-wrapper`,
+    {
+      [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
+    }
+  );
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
       {labelText}
@@ -83,19 +102,35 @@ const TextInput = React.forwardRef(function TextInput(
     <div className={helperTextClasses}>{helperText}</div>
   ) : null;
 
+  const { isFluid } = useContext(FormContext);
+
   return (
-    <div className={`${prefix}--form-item ${prefix}--text-input-wrapper`}>
-      {label}
-      {helper}
-      <div
-        className={`${prefix}--text-input__field-wrapper`}
-        data-invalid={invalid || null}>
-        {invalid && (
-          <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
-        )}
-        {input}
+    <div className={inputWrapperClasses}>
+      {!inline ? (
+        label
+      ) : (
+        <div className={`${prefix}--text-input__label-helper-wrapper`}>
+          {label}
+          {!isFluid && helper}
+        </div>
+      )}
+      <div className={fieldOuterWrapperClasses}>
+        <div
+          className={`${prefix}--text-input__field-wrapper`}
+          data-invalid={invalid || null}>
+          {invalid && (
+            <WarningFilled16
+              className={`${prefix}--text-input__invalid-icon`}
+            />
+          )}
+          {input}
+          {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+          {/* <hr className={`${prefix}--text-input__divider`} /> */}
+          {isFluid && !inline && error}
+        </div>
+        {!isFluid && error}
+        {!invalid && !isFluid && !inline && helper}
       </div>
-      {error}
     </div>
   );
 });
@@ -185,6 +220,10 @@ TextInput.propTypes = {
    * `true` to use the light version.
    */
   light: PropTypes.bool,
+  /**
+   * `true` to use the inline version.
+   */
+  inline: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
@@ -196,6 +235,7 @@ TextInput.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
+  inline: false,
 };
 
 export default TextInput;
