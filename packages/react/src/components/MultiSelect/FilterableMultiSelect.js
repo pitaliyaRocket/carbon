@@ -18,6 +18,7 @@ import Selection from '../../internal/Selection';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import { defaultValidateUserInput } from './tools/validation';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
@@ -123,6 +124,12 @@ export default class FilterableMultiSelect extends React.Component {
      * Callback function for translating ListBoxMenuIcon SVG title
      */
     translateWithId: PropTypes.func,
+
+    /**
+     * Validate user input
+     * returns bool based on validity of input
+     */
+    validateUserInput: PropTypes.func,
 
     /**
      * Additional props passed to Downshift
@@ -241,9 +248,11 @@ export default class FilterableMultiSelect extends React.Component {
             inputValue: '',
           };
         }
+        let isValid = defaultValidateUserInput(inputValue);
         return {
           inputValue: inputValue || '',
           isOpen: Boolean(inputValue) || this.state.isOpen,
+          invalid: isValid,
         };
       });
   };
