@@ -8,6 +8,8 @@ exports[`MultiSelect.Filterable should render 1`] = `
   filterItems={[Function]}
   id="test-filterable-multiselect"
   initialSelectedItems={Array []}
+  invalidSearchEmpty={true}
+  invalidSearchEmptyText="Filter returns no items"
   itemToString={[Function]}
   items={
     Array [
@@ -83,6 +85,8 @@ exports[`MultiSelect.Filterable should render 1`] = `
           aria-owns={null}
           className="bx--multi-select bx--combo-box bx--multi-select--filterable"
           disabled={false}
+          invalid={false}
+          invalidText="Filter returns no items"
           isOpen={false}
           light={false}
           role="combobox"
