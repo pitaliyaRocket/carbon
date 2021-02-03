@@ -125,6 +125,18 @@ export default class FilterableMultiSelect extends React.Component {
     translateWithId: PropTypes.func,
 
     /**
+     * Boolean the causes the filterable multiselect to present
+     * an invalid state if the userinput search returns no results.
+     * True by default
+     */
+    invalidSearchEmpty: PropTypes.bool,
+
+    /**
+     * Text used when user's search returns empty
+     */
+    invalidSearchEmptyText: PropTypes.string,
+
+    /**
      * Additional props passed to Downshift
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
@@ -155,6 +167,8 @@ export default class FilterableMultiSelect extends React.Component {
     light: false,
     open: false,
     selectionFeedback: 'top-after-reopen',
+    invalidSearchEmpty: true,
+    invalidSearchEmptyText: 'Filter returns no items',
   };
 
   constructor(props) {
@@ -278,6 +292,8 @@ export default class FilterableMultiSelect extends React.Component {
       invalidText,
       useTitleInItem,
       translateWithId,
+      invalidSearchEmpty,
+      invalidSearchEmptyText,
       downshiftProps,
     } = this.props;
     const inline = type === 'inline';
@@ -315,6 +331,12 @@ export default class FilterableMultiSelect extends React.Component {
     const inputClasses = cx(`${prefix}--text-input`, {
       [`${prefix}--text-input--empty`]: !this.state.inputValue,
     });
+    const invalidProp =
+      invalidSearchEmpty && !invalid
+        ? filterItems(items, { itemToString, inputValue }).length === 0
+        : invalid;
+    const invalidTextProp =
+      invalidSearchEmpty && !invalid ? invalidSearchEmptyText : invalidText;
     const input = (
       <Selection
         disabled={disabled}
@@ -372,8 +394,8 @@ export default class FilterableMultiSelect extends React.Component {
                   className={className}
                   disabled={disabled}
                   light={light}
-                  invalid={invalid}
-                  invalidText={invalidText}
+                  invalid={invalidProp}
+                  invalidText={invalidTextProp}
                   isOpen={isOpen}
                   size={size}
                   {...getRootProps()}>

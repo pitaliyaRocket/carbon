@@ -3500,6 +3500,8 @@ Map {
         "disabled": false,
         "filterItems": [Function],
         "initialSelectedItems": Array [],
+        "invalidSearchEmpty": true,
+        "invalidSearchEmptyText": "Filter returns no items",
         "itemToString": [Function],
         "light": false,
         "locale": "en",
@@ -3651,6 +3653,12 @@ Map {
         },
         "invalid": Object {
           "type": "bool",
+        },
+        "invalidSearchEmpty": Object {
+          "type": "bool",
+        },
+        "invalidSearchEmptyText": Object {
+          "type": "string",
         },
         "invalidText": Object {
           "type": "string",

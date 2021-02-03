@@ -173,6 +173,14 @@ storiesOf('MultiSelect', module)
           <MultiSelect.Filterable
             {...multiSelectProps}
             items={items}
+            invalidSearchEmpty={boolean(
+              'Invalid when search is empty (invalidSearchEmpty)',
+              true
+            )}
+            invalidSearchEmptyText={text(
+              'Text displayed when search gives empty result (invalidSearchEmptyText)',
+              'Filter returns no items'
+            )}
             itemToString={(item) => (item ? item.text : '')}
             placeholder={defaultPlaceholder}
             translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
