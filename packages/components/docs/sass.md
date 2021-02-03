@@ -441,7 +441,7 @@
   - [❌carbon-header [mixin]](#carbon-header-mixin)
   - [❌carbon-navigation [mixin]](#carbon-navigation-mixin)
   - [❌product-switcher [mixin]](#product-switcher-mixin)
-  - [❌shell-text-overflow [mixin]](#shell-text-overflow-mixin)
+  - [❌text-overflow [mixin]](#text-overflow-mixin)
   - [❌expanded [mixin]](#expanded-mixin)
   - [❌carbon-side-nav [mixin]](#carbon-side-nav-mixin)
   - [❌carbon-switcher [mixin]](#carbon-switcher-mixin)
@@ -1184,6 +1184,13 @@ yet.
     padding-right: ($condensed-gutter / 2);
     padding-left: ($condensed-gutter / 2);
   }
+
+  // For our narrow use-case, our container hangs 16px into the gutter
+  .#{$prefix}--row--narrow &,
+  .#{$prefix}--grid--narrow & {
+    padding-right: ($gutter / 2);
+    padding-left: 0;
+  }
 }
 ```
 
@@ -1387,7 +1394,7 @@ Define the properties for a selector assigned to a row in the grid system.
 
 ### ❌carbon--no-gutter [mixin]
 
-Add `no-gutter` and `no-gutter--{left,right}` classes to the output CSS. These
+Add `no-gutter` and `no-gutter--{start,end}` classes to the output CSS. These
 classes are useful for dropping the gutter in fluid situations.
 
 <details>
@@ -1397,10 +1404,21 @@ classes are useful for dropping the gutter in fluid situations.
 @mixin carbon--no-gutter() {
   .#{$prefix}--no-gutter,
   .#{$prefix}--row.#{$prefix}--no-gutter [class*='#{$prefix}--col'] {
+    padding-right: 0;
     padding-left: 0;
+  }
+
+  .#{$prefix}--no-gutter--start,
+  .#{$prefix}--row.#{$prefix}--no-gutter--start [class*='#{$prefix}--col'] {
+    padding-left: 0;
+  }
+
+  .#{$prefix}--no-gutter--end,
+  .#{$prefix}--row.#{$prefix}--no-gutter--end [class*='#{$prefix}--col'] {
     padding-right: 0;
   }
 
+  // Deprecated ☠️
   .#{$prefix}--no-gutter--left,
   .#{$prefix}--row.#{$prefix}--no-gutter--left [class*='#{$prefix}--col'] {
     padding-left: 0;
@@ -1423,14 +1441,23 @@ classes are useful for dropping the gutter in fluid situations.
 
 ### ❌carbon--hang [mixin]
 
-Add `hang--left` and `hang--right` classes for a given gutter. These classes are
-used alongside `no-gutter--left` and `no-gutter--right` to "hang" type.
+Add `hang--start` and `hang--end` classes for a given gutter. These classes are
+used alongside `no-gutter--start` and `no-gutter--end` to "hang" type.
 
 <details>
 <summary>Source code</summary>
 
 ```scss
 @mixin carbon--hang($gutter: $carbon--grid-gutter) {
+  .#{$prefix}--hang--start {
+    padding-left: ($gutter / 2);
+  }
+
+  .#{$prefix}--hang--end {
+    padding-right: ($gutter / 2);
+  }
+
+  // Deprecated ☠️
   .#{$prefix}--hang--left {
     padding-left: ($gutter / 2);
   }
@@ -1500,17 +1527,17 @@ https://keithjgrant.com/posts/2017/03/aspect-ratios/
   }
 
   .#{$prefix}--aspect-ratio::before {
-    content: '';
-    width: 1px;
-    margin-left: -1px;
     float: left;
+    width: 1px;
     height: 0;
+    margin-left: -1px;
+    content: '';
   }
 
   .#{$prefix}--aspect-ratio::after {
-    content: '';
     display: table;
     clear: both;
+    content: '';
   }
 
   @each $aspect-ratio in $aspect-ratios {
@@ -1571,14 +1598,14 @@ max-width properties are added with `make-container-max-widths`
       $prev-margin: map-get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
         @include carbon--breakpoint($name) {
-          padding-left: #{($carbon--grid-gutter / 2) + $margin};
           padding-right: #{($carbon--grid-gutter / 2) + $margin};
+          padding-left: #{($carbon--grid-gutter / 2) + $margin};
         }
       }
     } @else {
       @include carbon--breakpoint($name) {
-        padding-left: #{($carbon--grid-gutter / 2) + $margin};
         padding-right: #{($carbon--grid-gutter / 2) + $margin};
+        padding-left: #{($carbon--grid-gutter / 2) + $margin};
       }
     }
   }
@@ -2130,6 +2157,7 @@ Generate a media query for the maximum width of the given styles
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -3235,10 +3263,8 @@ $carbon--spacing-02: 0.25rem;
   - `spacing-02`
 - **Used by**:
   - [checkbox [mixin]](#checkbox-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [form [mixin]](#form-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [number-input [mixin]](#number-input-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -3623,9 +3649,9 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
@@ -3666,6 +3692,7 @@ $spacing-07: $carbon--spacing-07;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -3686,6 +3713,7 @@ $spacing-08: $carbon--spacing-08;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [search [mixin]](#search-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -3705,6 +3733,7 @@ $spacing-09: $carbon--spacing-09;
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
@@ -6896,7 +6925,6 @@ $text-05: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
@@ -6923,12 +6951,9 @@ $text-error: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
-  - [number-input [mixin]](#number-input-mixin)
-  - [select [mixin]](#select-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -7322,6 +7347,7 @@ $support-03: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [text-input [mixin]](#text-input-mixin)
 
 ### ✅support-04 [variable]
 
@@ -7792,6 +7818,7 @@ $hover-ui: if(
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -8105,7 +8132,6 @@ $disabled-02: if(
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -8152,6 +8178,7 @@ $disabled-03: if(
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
 ### ✅highlight [variable]
@@ -10323,422 +10350,422 @@ Mono `@font-face`'s
 @mixin carbon--font-face-mono() {
   // .woff support for IE11
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoW.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa1Xdm.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoW.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFhA.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q0Q.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFhA.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
 
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jcoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1hMoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1j8oQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1jsoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light Italic'), local('IBMPlexMono-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSflV1gMoQPttozw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa2HdgregdFOFh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa0XdgregdFOFh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa2ndgregdFOFh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa23dgregdFOFh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Italic'), local('IBMPlexMono-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6pfjptAgt5VM-kVkqdyU8n1ioa1XdgregdFA.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jcoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1hMoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1j8oQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1jsoQPttoz6Pz.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold Italic'), local(
         'IBMPlexMono-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6sfjptAgt5VM-kVkqdyU8n1ioSClN1gMoQPttozw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl1FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlRFgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl9FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwl5FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono Light'), local('IBMPlexMono-Light'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3oQIwlBFgsAXHNk.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iIq131nj-otFQ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1isq131nj-otFQ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iAq131nj-otFQ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1iEq131nj-otFQ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono'), local('IBMPlexMono'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl1FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlRFgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl9FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwl5FgsAXHNlYzg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Mono';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Mono SemiBold'), local('IBMPlexMono-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFgsAXHNk.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
@@ -10946,9 +10973,9 @@ Sans `@font-face`'s
 @mixin carbon--font-face-sans-condensed() {
   // .woff support for IE11
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 300;
     src: local('IBM Plex Sans Condensed Light Italic'), local(
         'IBMPlexSansCond-LightItalic'
       ),
@@ -10956,9 +10983,9 @@ Sans `@font-face`'s
         format('woff');
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 400;
     src: local('IBM Plex Sans Condensed Italic'), local(
         'IBMPlexSansCond-Italic'
       ),
@@ -10966,9 +10993,9 @@ Sans `@font-face`'s
         format('woff');
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 600;
     src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
         'IBMPlexSansCond-SemiBoldItalic'
       ),
@@ -10976,25 +11003,25 @@ Sans `@font-face`'s
         format('woff');
   }
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 300;
     src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6ovo.woff)
         format('woff');
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 400;
     src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHbat.woff)
         format('woff');
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 600;
     src: local('IBM Plex Sans Condensed SemiBold'), local(
         'IBMPlexSansCond-SemiBold'
       ),
@@ -11004,246 +11031,246 @@ Sans `@font-face`'s
 
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light Italic'), local(
         'IBMPlexSansCond-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYstEzi6D11GTg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light Italic'), local(
         'IBMPlexSansCond-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYotEzi6D11GTg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light Italic'), local(
         'IBMPlexSansCond-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8AfplYQtEzi6D10.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Italic'), local(
         'IBMPlexSansCond-Italic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KPLgKkPHhKABg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Italic'), local(
         'IBMPlexSansCond-Italic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KLLgKkPHhKABg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Italic'), local(
         'IBMPlexSansCond-Italic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8nN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas-KzLgKkPHhI.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
         'IBMPlexSansCond-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYstEzi6D11GTg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
         'IBMPlexSansCond-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYotEzi6D11GTg.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: italic;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold Italic'), local(
         'IBMPlexSansCond-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8iN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYas8HPvlYQtEzi6D10.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvjpYYnFBq4P1w.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvipYYnFBq4P1w.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 300;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed Light'), local('IBMPlexSansCond-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4C6rvspYYnFBq4.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYamyK7Bh4sNLhM.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYanyK7Bh4sNLhM.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 400;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed'), local('IBMPlexSansCond'),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8lN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHYapyK7Bh4sN.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold'), local(
         'IBMPlexSansCond-SemiBold'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvjpYYnFBq4P1w.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169,
       U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold'), local(
         'IBMPlexSansCond-SemiBold'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvipYYnFBq4P1w.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans Condensed';
     font-style: normal;
-    font-weight: 600;
-    font-display: swap;
     src: local('IBM Plex Sans Condensed SemiBold'), local(
         'IBMPlexSansCond-SemiBold'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v6/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY527LvspYYnFBq4.woff2)
         format('woff2');
+    font-display: swap;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
@@ -11266,490 +11293,490 @@ Sans `@font-face`'s
 @mixin carbon--font-face-sans() {
   // .woff support for IE11
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdvfo.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZP.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdvfo.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIFscg.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdHeEw.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFscg.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
 
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRce_fuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRccvfuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdffuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRceffuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcePfuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdvfuJGl18Q.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGqZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuE6ZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuFKZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGKZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGaZJW9XjDlN8.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJW9XjDg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJce_fuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJccvfuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdffuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJceffuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcePfuJGl18QRY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'), local(
         'IBMPlexSans-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdvfuJGl18Q.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIxsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIVsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIJsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AI5sdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AI9sdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIFsdP3pBms.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdzeFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdXeFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdLeFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhd7eFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhd_eFaxOedfTDw.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIxsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIVsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* greek */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIJsdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0370-03FF;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AI5sdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AI9sdP3pBmtF8A.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Sans';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFsdP3pBms.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
@@ -11903,434 +11930,434 @@ Serif `@font-face`'s
 @mixin carbon--font-face-serif() {
   // .woff support for IE11
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1npiw.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zUTiA.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1npiw.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI0q10.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUf2zE.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI0q10.woff)
         format('woff');
+    font-display: $carbon--font-display;
   }
 
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1TpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm13pjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1bpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1fpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light Italic'), local(
         'IBMPlexSerif-LightItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa454xm1npjfGj7oY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zgTjnTLgNuZ5w.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zETjnTLgNuZ5w.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zoTjnTLgNuZ5w.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zsTjnTLgNuZ5w.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Italic'), local('IBMPlexSerif-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizBREVNn1dOx-zrZ2X3pZvkTiUa6zUTjnTLgNs.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1TpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m13pjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1bpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1fpjfGj7oaMBg.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: italic;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold Italic'), local(
         'IBMPlexSerif-SemiBoldItalic'
       ),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizGREVNn1dOx-zrZ2X3pZvkTiUa4-o3m1npjfGj7oY.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI5q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SIwq1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI7q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI6q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 300;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif Light'), local('IBMPlexSerif-Light'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi20-SI0q1vjitOh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUS2zcZiVbJsNo.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUb2zcZiVbJsNo.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUQ2zcZiVbJsNo.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUR2zcZiVbJsNo.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 400;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif'), local('IBMPlexSerif'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizDREVNn1dOx-zrZ2X3pZvkTiUf2zcZiVbJ.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
   }
   /* cyrillic-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI5q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
       U+FE2E-FE2F;
   }
   /* cyrillic */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yIwq1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
   }
   /* vietnamese */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI7q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
   }
   /* latin-ext */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI6q1vjitOh3oc.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
       U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
   /* latin */
   @font-face {
+    font-weight: 600;
     font-family: 'IBM Plex Serif';
     font-style: normal;
-    font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Serif SemiBold'), local('IBMPlexSerif-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexserif/v7/jizAREVNn1dOx-zrZ2X3pZvkTi3A_yI0q1vjitOh.woff2)
         format('woff2');
+    font-display: $carbon--font-display;
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
       U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
       U+2212, U+2215, U+FEFF, U+FFFD;
@@ -13546,14 +13573,14 @@ Accordion styles
   .#{$prefix}--accordion {
     @include reset;
 
-    list-style: none;
     width: 100%;
+    list-style: none;
   }
 
   .#{$prefix}--accordion__item {
-    transition: all $duration--fast-02 motion(standard, productive);
-    border-top: 1px solid $ui-03;
     overflow: visible;
+    border-top: 1px solid $ui-03;
+    transition: all $duration--fast-02 motion(standard, productive);
 
     &:last-child {
       border-bottom: 1px solid $ui-03;
@@ -13563,27 +13590,27 @@ Accordion styles
   .#{$prefix}--accordion__heading {
     @include button-reset;
 
-    color: $text-01;
+    position: relative;
     display: flex;
+    flex-direction: $accordion-flex-direction;
     align-items: flex-start;
     justify-content: $accordion-justify-content;
-    cursor: pointer;
-    padding: rem(10px) 0;
-    flex-direction: $accordion-flex-direction;
-    position: relative;
-    min-height: rem(40px);
     width: 100%;
+    min-height: rem(40px);
     margin: 0;
+    padding: rem(10px) 0;
+    color: $text-01;
+    cursor: pointer;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
     &:hover::before,
     &:focus::before {
-      content: '';
       position: absolute;
       top: -1px;
       left: 0;
       width: 100%;
       height: calc(100% + 2px);
+      content: '';
     }
 
     &:hover::before {
@@ -13607,27 +13634,27 @@ Accordion styles
     width: 1rem;
     height: 1rem;
     margin: $accordion-arrow-margin;
-    fill: $ui-05;
     // TODO: RTL rotate(180deg);
     transform: rotate(90deg);
     transition: all $duration--fast-02 motion(standard, productive);
+    fill: $ui-05;
   }
 
   .#{$prefix}--accordion__title {
     @include type-style('body-long-01');
 
-    margin: $accordion-title-margin;
-    width: 100%;
-    text-align: left;
     z-index: 1;
+    width: 100%;
+    margin: $accordion-title-margin;
+    text-align: left;
   }
 
   .#{$prefix}--accordion__content {
     display: none;
+    padding-right: $carbon--spacing-05;
+    padding-left: $carbon--spacing-05;
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
-    padding-left: $carbon--spacing-05;
-    padding-right: $carbon--spacing-05;
 
     // Custom breakpoints based on issue #4993
     @include carbon--breakpoint-up(480px) {
@@ -13675,8 +13702,8 @@ Accordion styles
 
     .#{$prefix}--accordion__content {
       display: block;
-      padding-bottom: $carbon--spacing-06;
       padding-top: $spacing-03;
+      padding-bottom: $carbon--spacing-06;
       // Transition property for when the accordion opens
       transition: padding-top motion(entrance, productive) $duration--fast-02, padding-bottom
           motion(entrance, productive) $duration--fast-02;
@@ -13696,9 +13723,9 @@ Accordion styles
   }
 
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
+    cursor: default;
     pointer-events: none;
     fill: $ui-05;
-    cursor: default;
 
     &:hover,
     &:focus,
@@ -13785,9 +13812,9 @@ Breadcrumb styles
   }
 
   .#{$prefix}--breadcrumb-item::after {
-    content: '/';
-    color: $text-01;
     margin-left: $carbon--spacing-03;
+    color: $text-01;
+    content: '/';
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash
@@ -13852,9 +13879,9 @@ Button styles
   }
 
   .#{$prefix}--btn-set > .#{$prefix}--btn {
+    width: 100%;
     // 196px from design kit
     max-width: rem(196px);
-    width: 100%;
   }
 
   .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled
@@ -13934,8 +13961,8 @@ Button styles
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      background: transparent;
       color: $disabled;
+      background: transparent;
       outline: none;
     }
   }
@@ -14024,8 +14051,8 @@ Button styles
   }
 
   .#{$prefix}--btn--icon-only {
-    padding-left: rem(15px);
     padding-right: rem(15px);
+    padding-left: rem(15px);
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -14069,13 +14096,13 @@ Button styles
   }
 
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
-    padding-left: rem(11px);
     padding-right: rem(11px);
+    padding-left: rem(11px);
   }
 
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
-    padding-left: rem(7px);
     padding-right: rem(7px);
+    padding-left: rem(7px);
   }
 
   .#{$prefix}--btn--danger {
@@ -14156,23 +14183,23 @@ Button base styles
   @include reset;
   @include type-style('body-short-01');
 
-  cursor: pointer;
+  position: relative;
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
-  vertical-align: top;
-  flex-shrink: 0;
-  min-height: $button-height;
-  padding: $button-padding;
-  border-radius: $button-border-radius;
-  text-align: left;
-  text-decoration: none;
-  transition: all $duration--fast-01 motion(entrance, productive);
-  outline: none;
-  position: relative;
   max-width: rem(320px);
+  min-height: $button-height;
   // Fix to remove added margins on buttons in safari (see #5155)
   margin: 0;
+  padding: $button-padding;
+  text-align: left;
+  text-decoration: none;
+  vertical-align: top;
+  border-radius: $button-border-radius;
+  outline: none;
+  cursor: pointer;
+  transition: all $duration--fast-01 motion(entrance, productive);
 
   &:disabled,
   &:hover:disabled,
@@ -14180,11 +14207,11 @@ Button base styles
   &.#{$prefix}--btn--disabled,
   &.#{$prefix}--btn--disabled:hover,
   &.#{$prefix}--btn--disabled:focus {
-    cursor: not-allowed;
     color: $disabled-03;
     background: $disabled-02;
     border-color: $disabled-02;
     box-shadow: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--btn__icon {
@@ -14216,11 +14243,11 @@ Button variant styles
 
 ```scss
 @mixin button-theme() {
-  background-color: $bg-color;
-  border-width: $button-outline-width;
-  border-style: solid;
-  border-color: $border-color;
   color: $font-color;
+  background-color: $bg-color;
+  border-color: $border-color;
+  border-style: solid;
+  border-width: $button-outline-width;
 
   &:hover {
     background-color: $hover-bg-color;
@@ -14237,9 +14264,9 @@ Button variant styles
   &:hover.#{$prefix}--btn--disabled,
   &:focus.#{$prefix}--btn--disabled {
     color: $ui-04;
+    text-decoration: none;
     background-color: $disabled-02;
     border-color: $disabled-02;
-    text-decoration: none;
     box-shadow: none;
   }
 
@@ -14311,13 +14338,13 @@ Checkbox styles
     @include reset;
     @include type-style('body-short-01');
 
-    line-height: 1.5rem;
     position: relative;
     display: flex;
-    cursor: pointer;
     min-height: rem(24px);
-    user-select: none;
     padding-left: rem(20px);
+    line-height: 1.5rem;
+    cursor: pointer;
+    user-select: none;
   }
 
   .#{$prefix}--checkbox-label-text {
@@ -14333,7 +14360,13 @@ Checkbox styles
 
   // Spacing for presentational checkbox
   .#{$prefix}--checkbox-label::before {
-    content: '';
+    // We need to position the pseudo-element absolutely in the space that we've
+    // created with the padding from the label itself. We position only with
+    // `top` since we don't want the checkbox to be centered vertically with the
+    // text overflows.
+    position: absolute;
+    top: rem(2px);
+    left: 0;
 
     // According to the spec, we'll want the bounding box for our checkbox to
     // be 16px. The border size will be what will be updated during the
@@ -14342,35 +14375,27 @@ Checkbox styles
     height: rem(16px);
     margin: rem(2px);
 
-    // We need to position the pseudo-element absolutely in the space that we've
-    // created with the padding from the label itself. We position only with
-    // `top` since we don't want the checkbox to be centered vertically with the
-    // text overflows.
-    position: absolute;
-    left: 0;
-    top: rem(2px);
-
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
     border: 1px solid $ui-05;
     border-radius: 1px;
+    content: '';
   }
 
   // Create the appearance of the check in the `after` pseudo-element
   .#{$prefix}--checkbox-label::after {
-    content: '';
-
     position: absolute;
-    left: rem(6px);
     top: rem(8px);
+    left: rem(6px);
     width: rem(9px);
     height: rem(5px);
+    margin-top: rem(-3px);
     background: none;
-    border-left: 2px solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
+    border-left: 2px solid $inverse-01;
     transform: scale(0) rotate(-45deg);
     transform-origin: bottom right;
-    margin-top: rem(-3px);
+    content: '';
   }
 
   //----------------------------------------------
@@ -14396,11 +14421,11 @@ Checkbox styles
   // Indeterminate symbol
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
-    transform: scale(1) rotate(0deg);
-    border-left: 0 solid $inverse-01;
-    border-bottom: 2px solid $inverse-01;
-    width: rem(8px);
     top: rem(11px);
+    width: rem(8px);
+    border-bottom: 2px solid $inverse-01;
+    border-left: 0 solid $inverse-01;
+    transform: scale(1) rotate(0deg);
   }
 
   //----------------------------------------------
@@ -14426,8 +14451,8 @@ Checkbox styles
 
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
-    cursor: not-allowed;
     color: $disabled-02;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label::before,
@@ -14498,10 +14523,10 @@ Code snippet styles
     position: relative;
     display: inline;
     padding: 0;
+    color: $text-01;
+    background-color: $ui-01;
     border: 2px solid transparent;
     border-radius: 4px;
-    background-color: $ui-01;
-    color: $text-01;
     cursor: pointer;
 
     &:hover {
@@ -14513,8 +14538,8 @@ Code snippet styles
     }
 
     &:focus {
-      outline: none;
       border: 2px solid $focus;
+      outline: none;
     }
 
     &::before {
@@ -14526,11 +14551,11 @@ Code snippet styles
     .#{$prefix}--copy-btn__feedback {
       @include tooltip--content('icon');
 
+      display: none;
       box-sizing: content-box;
-      clip: auto;
       margin: auto;
       overflow: visible;
-      display: none;
+      clip: auto;
     }
 
     @include tooltip--placement('icon', 'bottom', 'center');
@@ -14558,15 +14583,31 @@ Code snippet styles
     padding: 0 $spacing-03;
   }
 
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy {
+    display: inline-block;
+
+    &:hover {
+      background-color: $ui-01;
+      cursor: auto;
+    }
+  }
+
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
 
-    border: none;
-    max-width: rem(760px);
     min-width: rem(320px);
+    max-width: rem(760px);
     height: $carbon--spacing-08;
-    padding: 0 $carbon--spacing-08 0 0;
+    padding-right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
+    padding: 0;
+
+    &::after {
+      right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
@@ -14575,8 +14616,8 @@ Code snippet styles
     align-items: center;
     height: 100%;
     padding-left: $carbon--spacing-05;
-    border-right: solid $carbon--spacing-05 transparent;
     overflow-x: auto;
+    border-right: solid $carbon--spacing-05 transparent;
 
     &:focus {
       @include focus-outline('outline');
@@ -14586,38 +14627,36 @@ Code snippet styles
   .#{$prefix}--snippet--single pre {
     @include type-style('code-01');
 
-    white-space: nowrap;
     padding-right: $spacing-03;
+    white-space: nowrap;
   }
 
   .#{$prefix}--snippet--single::after {
-    width: rem(16px);
-    height: 100%;
-    content: '';
     position: absolute;
     top: 0;
     right: rem(56px);
-
+    width: rem(16px);
+    height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
+    content: '';
   }
 
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
     @include bx--snippet;
 
-    border: none;
-    padding: $carbon--spacing-05;
     min-width: rem(320px);
     max-width: 100%;
+    padding: $carbon--spacing-05;
   }
 
   //closed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
-    overflow: hidden;
     position: relative;
-    max-height: rem(238px);
     min-height: rem(56px);
+    max-height: rem(238px);
+    overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -14625,15 +14664,21 @@ Code snippet styles
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
     max-height: 100%;
-    transition: max-height $duration--moderate-01 motion(standard, productive);
     padding-bottom: $spacing-05;
+    transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
   // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    overflow-x: scroll;
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
+    overflow-x: scroll;
+  }
+
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
+    .#{$prefix}--snippet-container
+    pre {
+    padding-right: 0;
   }
 
   // expanded pre
@@ -14644,15 +14689,14 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
-    width: rem(16px);
-    height: 100%;
-    content: '';
     position: absolute;
     top: 0;
     right: 0;
-
+    width: rem(16px);
+    height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
+    content: '';
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
@@ -14661,29 +14705,29 @@ Code snippet styles
 
   //Copy Button
   .#{$prefix}--snippet__icon {
-    fill: $icon-01;
-    height: rem(16px);
     width: rem(16px);
+    height: rem(16px);
     transition: all $duration--fast-01 motion(standard, productive);
+    fill: $icon-01;
   }
 
   .#{$prefix}--snippet-button {
     @include reset;
 
-    cursor: pointer;
     position: absolute;
     top: 0;
     right: 0;
-    border: none;
-    background-color: $ui-01;
-    outline: none;
-    padding: 0;
-    height: $carbon--spacing-08;
-    width: $carbon--spacing-08;
-    overflow: visible;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: $carbon--spacing-08;
+    height: $carbon--spacing-08;
+    padding: 0;
+    overflow: visible;
+    background-color: $ui-01;
+    border: none;
+    outline: none;
+    cursor: pointer;
 
     &:focus {
       @include focus-outline('outline');
@@ -14693,10 +14737,10 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
-    height: $carbon--spacing-07;
-    width: $carbon--spacing-07;
     top: $spacing-03;
     right: $spacing-03;
+    width: $carbon--spacing-07;
+    height: $carbon--spacing-07;
   }
 
   .#{$prefix}--snippet-button:hover {
@@ -14712,11 +14756,11 @@ Code snippet styles
     // Override one in code snippet
     @include carbon--font-family('sans');
 
-    z-index: z('overlay');
-    font-weight: 400;
-    left: inherit;
     top: 0.75rem;
     right: 1.25rem;
+    left: inherit;
+    z-index: z('overlay');
+    font-weight: 400;
   }
 
   .#{$prefix}--btn--copy__feedback::before,
@@ -14743,16 +14787,16 @@ Code snippet styles
     @include type-style('body-short-01');
     @include carbon--font-family('sans');
 
-    border: 0;
-    display: inline-flex;
-    align-items: center;
     position: absolute;
     right: $spacing-03;
     bottom: $spacing-03;
+    display: inline-flex;
+    align-items: center;
     padding: $spacing-03;
     padding-left: $carbon--spacing-05;
     color: $text-01;
     background-color: $field-01;
+    border: 0;
   }
 
   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand
@@ -14766,16 +14810,16 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
-    fill: $text-01;
-    margin-left: $spacing-03;
     margin-bottom: rem(1px);
+    margin-left: $spacing-03;
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
+    fill: $text-01;
   }
 
   button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
-    background: $hover-ui;
     color: $text-01;
+    background: $hover-ui;
   }
 
   .#{$prefix}--snippet-btn--expand:active {
@@ -14837,16 +14881,16 @@ Code snippet styles
   .#{$prefix}--snippet.#{$prefix}--skeleton code {
     @include skeleton;
 
+    display: block;
     width: 100%;
     height: 1rem;
-    display: block;
   }
 
   .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
     // (The height of button) + (The height of the tooltip's triangle) + 4px
     top: rem(50.8px);
-    left: 50%;
     right: auto;
+    left: 50%;
 
     &::before {
       top: 0;
@@ -14883,9 +14927,9 @@ Code snippet styles
   .#{$prefix}--snippet.#{$prefix}--skeleton span {
     @include skeleton;
 
+    display: block;
     width: 100%;
     height: 1rem;
-    display: block;
     margin-top: 0.5rem;
 
     &:first-child {
@@ -14915,8 +14959,8 @@ Code snippet styles
   - [bx--snippet [mixin]](#bx--snippet-mixin)
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [focus [variable]](#focus-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
@@ -14940,11 +14984,10 @@ Code snippet base styles
 @mixin bx--snippet() {
   @include type-style('code-01');
 
-  background: $snippet-background-color;
-  border: 1px solid $snippet-border-color;
   position: relative;
-  max-width: rem(600px);
   width: 100%;
+  max-width: rem(600px);
+  background: $snippet-background-color;
 }
 ```
 
@@ -14965,18 +15008,8 @@ Combo box styles
 
 ```scss
 @mixin combo-box() {
-  .#{$prefix}--combo-box .#{$prefix}--text-input {
-    &::placeholder {
-      color: $text-05;
-    }
-
-    &[disabled]::placeholder {
-      color: $disabled-02;
-    }
-
-    &::-ms-clear {
-      display: none;
-    }
+  .#{$prefix}--combo-box .#{$prefix}--text-input::-ms-clear {
+    display: none;
   }
 
   .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
@@ -14999,8 +15032,6 @@ Combo box styles
 - **Group**: [combo-box](#combo-box)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [text-05 [variable]](#text-05-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
 
 ## content-switcher
@@ -15030,24 +15061,24 @@ Content switcher styles
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    background-color: $ui-01;
+    position: relative;
     display: inline-flex;
     align-items: center;
     width: 100%;
-    padding: $carbon--spacing-03 $carbon--spacing-05;
     margin: 0;
-    white-space: nowrap;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: hidden;
+    color: $text-02;
+    white-space: nowrap;
     text-align: left;
     text-decoration: none;
+    background-color: $ui-01;
     border: none;
-    color: $text-02;
     transition: all $duration--fast-01 motion(standard, productive);
-    position: relative;
 
     &:focus {
-      box-shadow: inset 0 0 0 2px $focus;
       z-index: 3;
+      box-shadow: inset 0 0 0 2px $focus;
     }
 
     &:hover {
@@ -15056,9 +15087,9 @@ Content switcher styles
 
     &:hover,
     &:active {
-      background-color: $hover-ui;
-      color: $text-01;
       z-index: 3;
+      color: $text-01;
+      background-color: $hover-ui;
     }
 
     &:disabled {
@@ -15091,14 +15122,14 @@ Content switcher styles
   }
 
   .#{$prefix}--content-switcher-btn::before {
-    content: '';
-    display: block;
-    height: rem(16px);
-    width: rem(1px);
-    background-color: $content-switcher-divider;
     position: absolute;
-    z-index: 2;
     left: 0;
+    z-index: 2;
+    display: block;
+    width: rem(1px);
+    height: rem(16px);
+    background-color: $content-switcher-divider;
+    content: '';
   }
 
   .#{$prefix}--content-switcher-btn:first-of-type::before {
@@ -15138,8 +15169,8 @@ Content switcher styles
   }
 
   .#{$prefix}--content-switcher__icon {
-    fill: $text-02;
     transition: fill $duration--fast-01 motion(standard, productive);
+    fill: $text-02;
   }
 
   .#{$prefix}--content-switcher__icon + span {
@@ -15147,10 +15178,10 @@ Content switcher styles
   }
 
   .#{$prefix}--content-switcher__label {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
@@ -15161,13 +15192,13 @@ Content switcher styles
   .#{$prefix}--content-switcher--light
     .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
-    background-color: $ui-05;
-    color: $inverse-01;
     z-index: 3;
+    color: $inverse-01;
+    background-color: $ui-05;
 
     &:disabled {
-      background-color: $disabled-03;
       color: $disabled-02;
+      background-color: $disabled-03;
     }
   }
 
@@ -15183,20 +15214,20 @@ Content switcher styles
 - **Group**: [content-switcher](#content-switcher)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [focus [variable]](#focus-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
-  - [ui-05 [variable]](#ui-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [ui-05 [variable]](#ui-05-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
 
 ## data-table
@@ -15214,21 +15245,20 @@ Data table action styles
   //TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--table-toolbar {
-    background: $ui-01;
-    display: flex;
-    height: $layout-04;
-    overflow: hidden;
-
     // Need for batch actions
     position: relative;
+    display: flex;
     width: 100%;
+    height: $layout-04;
+    overflow: hidden;
+    background: $ui-01;
   }
 
   .#{$prefix}--toolbar-content {
     display: flex;
-    height: $layout-04;
-    width: 100%;
     justify-content: flex-end;
+    width: 100%;
+    height: $layout-04;
     transform: translate3d(0, 0, 0);
     transition: transform $duration--fast-02 motion(standard, productive), clip-path
         $duration--fast-02 motion(standard, productive);
@@ -15247,39 +15277,39 @@ Data table action styles
   //DEPRECATED v10/v9 search behaviour
   //-------------------------------------------------
   .#{$prefix}--batch-actions ~ .#{$prefix}--toolbar-search-container {
-    opacity: 1;
-    transition: opacity 110ms;
     display: flex;
     align-items: center;
+    opacity: 1;
+    transition: opacity 110ms;
   }
 
   //-------------------------------------------------
   //HIDDEN SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-expandable {
-    height: $layout-04;
-    width: $layout-04;
     position: relative;
-    transition: flex $transition--expansion $carbon--standard-easing;
+    width: $layout-04;
+    height: $layout-04;
     box-shadow: none;
+    transition: flex $transition--expansion $carbon--standard-easing;
   }
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
+    position: initial;
     width: $layout-04;
     height: 100%;
-    position: initial;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
     .#{$prefix}--search-magnifier {
-    height: $layout-04;
-    width: $layout-04;
-    padding: $spacing-05;
     left: 0;
+    width: $layout-04;
+    height: $layout-04;
+    padding: $spacing-05;
     cursor: pointer;
-    pointer-events: all;
     transition: background $duration--fast-02 motion(entrance, productive);
+    pointer-events: all;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -15303,18 +15333,18 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
     .#{$prefix}--search-input {
-    border: none;
     height: 100%;
-    visibility: hidden;
     padding: 0;
     background-color: transparent;
+    border: none;
+    visibility: hidden;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
     .#{$prefix}--search-close {
-    height: $layout-04;
     width: $layout-04;
+    height: $layout-04;
 
     &::before {
       top: 2px;
@@ -15364,8 +15394,8 @@ Data table action styles
     .#{$prefix}--search-input:focus
     + .#{$prefix}--search-close {
     border: none;
-    box-shadow: none;
     outline: none;
+    box-shadow: none;
   }
 
   .#{$prefix}--toolbar-search-container-active
@@ -15384,9 +15414,9 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:hover {
-    outline: none;
-    border: none;
     background: transparent;
+    border: none;
+    outline: none;
   }
 
   //-------------------------------------------------
@@ -15401,8 +15431,8 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
     .#{$prefix}--search-close:hover {
-    border: none;
     background-color: transparent;
+    border: none;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
@@ -15417,10 +15447,10 @@ Data table action styles
     @include button-reset;
 
     display: flex;
-    cursor: pointer;
-    height: $layout-04;
     width: $layout-04;
+    height: $layout-04;
     padding: $spacing-05;
+    cursor: pointer;
     transition: background $duration--fast-02 motion(entrance, productive);
   }
 
@@ -15429,9 +15459,9 @@ Data table action styles
     @include button-reset;
 
     display: flex;
-    cursor: pointer;
-    height: $layout-04;
     width: $layout-04;
+    height: $layout-04;
+    cursor: pointer;
     transition: background $duration--fast-02 motion(entrance, productive);
   }
 
@@ -15448,8 +15478,8 @@ Data table action styles
   }
 
   .#{$prefix}--toolbar-action[disabled] .#{$prefix}--toolbar-action__icon {
-    fill: $disabled;
     cursor: not-allowed;
+    fill: $disabled;
   }
 
   .#{$prefix}--toolbar-action:focus:not([disabled]),
@@ -15463,8 +15493,8 @@ Data table action styles
   }
 
   .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
-    margin: 0;
     max-width: none;
+    margin: 0;
     white-space: nowrap;
   }
 
@@ -15476,9 +15506,9 @@ Data table action styles
   //TOOLBAR BUTTON ICONS
   //-------------------------------------------------
   .#{$prefix}--toolbar-action__icon {
-    height: $layout-01;
     width: auto;
     max-width: $layout-01;
+    height: $layout-01;
     fill: $icon-01;
   }
 
@@ -15486,10 +15516,10 @@ Data table action styles
   //PERSISTENT SEARCH - OPTIONAL TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-persistent {
+    position: relative;
     width: 100%;
     height: $layout-04;
     opacity: 1;
-    position: relative;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
@@ -15540,39 +15570,40 @@ Data table action styles
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-close {
-    height: $layout-04;
     width: $layout-04;
+    height: $layout-04;
   }
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     transform: translate3d(0, 48px, 0);
     transition: transform $duration--fast-02 motion(standard, productive), clip-path
         $duration--fast-02 motion(standard, productive);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
   }
 
   //-------------------------------------------------
   //BATCH ACTIONS
   //-------------------------------------------------
   .#{$prefix}--batch-actions {
-    display: flex;
     position: absolute;
     top: 0;
     left: 0;
+    display: flex;
     align-items: center;
-    padding-left: $spacing-06;
-    padding-right: $spacing-06;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    will-change: transform;
+    padding-right: $spacing-06;
+    padding-left: $spacing-06;
+    overflow-x: auto;
     background-color: $interactive-01;
+    transform: translate3d(0, 48px, 0);
     transition: transform $duration--fast-02 motion(standard, productive), clip-path
         $duration--fast-02 motion(standard, productive),
       opacity $duration--fast-02 motion(standard, productive);
-    transform: translate3d(0, 48px, 0);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    pointer-events: none;
+    will-change: transform;
   }
 
   .#{$prefix}--batch-actions:focus {
@@ -15580,29 +15611,30 @@ Data table action styles
   }
 
   .#{$prefix}--batch-actions--active {
+    transform: translate3d(0, 0, 0);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     pointer-events: all;
-    transform: translate3d(0, 0, 0);
   }
 
   //btns container
   .#{$prefix}--action-list {
-    position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn {
     min-width: 0;
-    color: $text-04;
     padding: $button-padding-ghost;
+    color: $text-04;
+  }
+
+  .#{$prefix}--action-list .#{$prefix}--btn:disabled {
+    color: $disabled-03;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
-    fill: $icon-03;
     position: static;
     margin-left: $spacing-03;
+    fill: $icon-03;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon .st0 {
@@ -15638,18 +15670,18 @@ Data table action styles
   }
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
-    display: block;
     position: absolute;
-    opacity: 1;
     //visually 16px spacing is 1px too low
     top: rem(15px);
     left: 0;
-    height: $layout-01;
+    display: block;
     width: rem(1px);
-    content: '';
+    height: $layout-01;
     background-color: $text-04;
     border: none;
+    opacity: 1;
     transition: opacity $duration--fast-02 motion(standard, productive);
+    content: '';
   }
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
@@ -15659,17 +15691,15 @@ Data table action styles
 
   // cancel btn
   .#{$prefix}--batch-summary__cancel {
-    padding-right: $spacing-05;
     position: relative;
+    padding-right: $spacing-05;
   }
 
   // items selected text
   .#{$prefix}--batch-summary {
-    position: absolute;
-    left: 0;
-    margin-left: $spacing-05;
     display: flex;
     align-items: center;
+    margin-left: $spacing-05;
     color: $text-04;
   }
 
@@ -15703,8 +15733,8 @@ Data table action styles
     .#{$prefix}--toolbar-search-container-persistent
       .#{$prefix}--search
       .#{$prefix}--search-close {
-      height: rem(32px);
       width: rem(32px);
+      height: rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable
@@ -15713,8 +15743,8 @@ Data table action styles
     .#{$prefix}--toolbar-search-container-persistent
       .#{$prefix}--search
       .#{$prefix}--search-magnifier {
-      height: rem(32px);
       width: rem(32px);
+      height: rem(32px);
       padding: $spacing-03;
     }
 
@@ -15783,16 +15813,16 @@ Data table action styles
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action {
-    height: rem(32px);
     width: rem(32px);
+    height: rem(32px);
     padding: $spacing-03 0;
   }
 
   .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary {
-    padding-top: calc(0.375rem - 3px);
-    padding-bottom: calc(0.375rem - 3px);
     height: rem(32px);
     min-height: auto;
+    padding-top: calc(0.375rem - 3px);
+    padding-bottom: calc(0.375rem - 3px);
   }
 
   .#{$prefix}--table-toolbar--small
@@ -15814,8 +15844,8 @@ Data table action styles
 - **Group**: [data-table](#data-table)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [layout-04 [variable]](#layout-04-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -15826,8 +15856,9 @@ Data table action styles
   - [spacing-06 [variable]](#spacing-06-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [text-04 [variable]](#text-04-variable)
-  - [icon-03 [variable]](#icon-03-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [icon-03 [variable]](#icon-03-variable)
 
 ### ❌data-table-core [mixin]
 
@@ -15842,18 +15873,20 @@ Data table core styles
   // Container
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-container {
-    min-width: rem(500px);
-    overflow-x: auto;
     // Allow space for focus styles
     padding-top: $spacing-01;
+  }
+
+  .#{$prefix}--data-table-content {
+    overflow-x: auto;
   }
 
   //----------------------------------------------------------------------------
   // Table title text
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-header {
-    background: $ui-01;
     padding: $spacing-05 0 $spacing-06 $spacing-05;
+    background: $ui-01;
   }
 
   .#{$prefix}--data-table-header__title {
@@ -15872,9 +15905,9 @@ Data table core styles
   // Data table
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table {
+    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    width: 100%;
   }
 
   .#{$prefix}--data-table thead {
@@ -15886,14 +15919,14 @@ Data table core styles
   .#{$prefix}--data-table tbody {
     @include type-style('body-short-01');
 
-    background-color: $ui-01;
     width: 100%;
+    background-color: $ui-01;
   }
 
   .#{$prefix}--data-table tr {
-    border: none;
-    height: $layout-04;
     width: 100%;
+    height: $layout-04;
+    border: none;
   }
 
   .#{$prefix}--data-table tbody tr,
@@ -15910,19 +15943,19 @@ Data table core styles
   .#{$prefix}--data-table tbody tr:hover th {
     color: $text-01;
     background: $hover-field;
-    border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
   }
 
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
-    vertical-align: middle;
     text-align: left;
+    vertical-align: middle;
   }
 
   .#{$prefix}--data-table td {
-    padding-left: $spacing-05;
     padding-right: $spacing-05;
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table th {
@@ -15937,19 +15970,19 @@ Data table core styles
   }
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
-    padding-left: $spacing-05;
     padding-right: $spacing-05;
+    padding-left: $spacing-05;
     text-align: left;
   }
 
   .#{$prefix}--data-table td,
   .#{$prefix}--data-table tbody th {
-    background: $ui-01;
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
     color: $text-02;
+    background: $ui-01;
     border-top: 1px solid $ui-01;
     border-bottom: 1px solid $ui-03;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
 
     + td:first-of-type {
       padding-left: $spacing-04;
@@ -16018,10 +16051,10 @@ Data table core styles
     .#{$prefix}--overflow-menu-options__btn
     .#{$prefix}--overflow-menu-options__option-content
     svg {
-    margin-right: $spacing-03;
     position: relative;
     // Used to center svg without setting display flex //display block needed for overflow text truncation
     top: rem(3px);
+    margin-right: $spacing-03;
   }
 
   .#{$prefix}--data-table .#{$prefix}--overflow-menu,
@@ -16040,9 +16073,9 @@ Data table core styles
 
   .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
+    height: rem(24px);
     padding-top: 0;
     padding-bottom: 0;
-    height: rem(24px);
   }
 
   .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu {
@@ -16069,8 +16102,8 @@ Data table core styles
     tr:not(.#{$prefix}--parent-row):nth-child(odd)
     td {
     background-color: $data-table-zebra-color;
-    border-bottom: 1px solid $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
   }
 
   .#{$prefix}--data-table--zebra
@@ -16078,8 +16111,8 @@ Data table core styles
     tr:not(.#{$prefix}--parent-row):hover
     td {
     background-color: $hover-field;
-    border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
   }
 
   //----------------------------------------------------------------------------
@@ -16092,12 +16125,35 @@ Data table core styles
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
-    background: $ui-03;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
     // 16px padding left + 8px padding right + 20px checkbox width
     width: rem(44px);
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
+    background: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
+    min-width: 0;
+    // spacing between checkbox / chevron and next cell should be 16px / 1rem
+    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
+    padding-right: 0;
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
+    // 16px padding left + 20px checkbox width
+    width: rem(36px);
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
+    // 16px padding left + 16px checkbox width
+    width: rem(32px);
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
@@ -16117,6 +16173,10 @@ Data table core styles
   //----------------------------------------------------------------------------
   .#{$prefix}--table-column-radio {
     width: 48px;
+  }
+
+  .#{$prefix}--table-column-radio .#{$prefix}--radio-button__appearance {
+    margin-right: rem(-2px);
   }
 
   // default selected row + zebra select - even child
@@ -16225,9 +16285,9 @@ Data table core styles
   .#{$prefix}--data-table.#{$prefix}--data-table--compact
     .#{$prefix}--table-column-checkbox
     .#{$prefix}--checkbox-label {
+    height: rem(23px);
     // 24px row - 1px border
     min-height: rem(23px);
-    height: rem(23px);
   }
 
   //----------------------------------------------------------------------------
@@ -16318,13 +16378,13 @@ Data table core styles
 
     thead {
       position: sticky;
-      z-index: 1;
       top: 0;
+      z-index: 1;
       width: 100%;
       overflow: scroll;
+      will-change: transform;
       // Hides ie scrollbar
       -ms-overflow-style: none;
-      will-change: transform;
     }
 
     thead tr th {
@@ -16339,13 +16399,79 @@ Data table core styles
       will-change: transform;
     }
 
-    tr {
-      min-height: rem(48px);
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
       height: auto;
+      min-height: 3rem;
+    }
+
+    tr.#{$prefix}--expandable-row:not(.#{$prefix}--parent-row) {
+      height: auto;
+    }
+
+    .#{$prefix}--table-expand {
+      max-width: rem(48px);
+    }
+
+    thead .#{$prefix}--table-expand {
+      align-items: center;
+    }
+
+    .#{$prefix}--parent-row {
+      min-height: 3rem;
+    }
+
+    // .#{$prefix}--parent-row td {
+    //   padding: 1rem;
+    // }
+
+    &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--short)
+      td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {
+      padding-top: rem(14px);
+    }
+
+    // Taken from L125 _data-table-expandable
+    // Used to hide white line when parent row is hovered when child is expanded
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+      + tr[data-child-row]
+      td {
+      border-top: 1px solid $hover-ui;
+    }
+
+    tr.#{$prefix}--expandable-row:last-of-type {
+      overflow: hidden;
     }
 
     tr.#{$prefix}--data-table--selected:first-of-type td {
       border-top: none;
+    }
+
+    // Selectable fix
+    thead th.#{$prefix}--table-column-checkbox,
+    tbody tr td.#{$prefix}--table-column-checkbox {
+      align-items: center;
+      width: rem(36px);
+      min-width: rem(36px);
+    }
+
+    &.#{$prefix}--data-table--tall thead th.#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--tall td.#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
+    }
+
+    // Overflow fix
+    /* When using sticky header, with a selection element in the first column, we need to set the last item to a fixed width to match the table body. We only want this to happen when the last table header does not have any text */
+    th.#{$prefix}--table-column-checkbox ~ th:last-of-type:empty {
+      max-width: rem(64px);
+    }
+
+    th:empty:not(.#{$prefix}--table-expand) {
+      max-width: 2.25rem;
+    }
+
+    td.#{$prefix}--table-column-menu {
+      align-items: center;
+      height: auto;
+      padding-top: 0;
     }
 
     //hides webkit scrollbar
@@ -16372,9 +16498,73 @@ Data table core styles
       min-width: 0;
     }
 
+    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row) {
+      height: auto;
+    }
+
+    // Compact
+    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(24px);
+    }
+
+    // Short
+    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(32px);
+    }
+
+    // Tall
+    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(64px);
+    }
+
+    // Expansion overrides
+    &.#{$prefix}--data-table--compact tr td.#{$prefix}--table-expand {
+      padding-top: rem(4px);
+    }
+
+    &.#{$prefix}--data-table--short tr td.#{$prefix}--table-expand {
+      padding-top: rem(8px);
+    }
+
     .#{$prefix}--table-header-label {
-      max-width: calc(100% - 10px);
       @include text-overflow;
+
+      max-width: calc(100% - 10px);
+      // Needed to reduce 1px jump when toggling between variations
+      padding-top: rem(15px);
+      padding-bottom: 1rem;
+      overflow-y: hidden;
+    }
+
+    &.#{$prefix}--data-table--compact th .#{$prefix}--table-header-label {
+      padding-top: rem(3px);
+      padding-bottom: 0;
+    }
+
+    &.#{$prefix}--data-table--short th .#{$prefix}--table-header-label {
+      padding-top: rem(8px);
+      padding-bottom: 0;
+    }
+
+    &.#{$prefix}--data-table--tall th .#{$prefix}--table-header-label {
+      padding-top: 1rem;
+    }
+
+    &.#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    // With dynamic content overrides
+    &.#{$prefix}--data-table--compact
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--short
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
     }
   }
 
@@ -16400,11 +16590,12 @@ Data table core styles
 
 - **Group**: [data-table](#data-table)
 - **Requires**:
+  - [text-overflow [mixin]](#text-overflow-mixin)
   - [prefix [variable]](#prefix-variable)
   - [spacing-01 [variable]](#spacing-01-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-06 [variable]](#spacing-06-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [text-01 [variable]](#text-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -16415,6 +16606,7 @@ Data table core styles
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
 
 ### ❌data-table-expandable [mixin]
 
@@ -16438,9 +16630,9 @@ Data table expandable styles
   //----------------------------------------------------------------------------
   // default styles
   .#{$prefix}--expandable-row--hidden td {
-    border-top: 0;
     width: auto;
     padding: $spacing-05;
+    border-top: 0;
   }
 
   //child row hidden
@@ -16455,8 +16647,8 @@ Data table expandable styles
     td {
     padding-top: 0;
     padding-bottom: 0;
-    border: 0;
     background-color: $hover-ui;
+    border: 0;
     transition: padding $duration--moderate-01 motion(standard, productive), background-color
         $duration--moderate-01 motion(standard, productive);
   }
@@ -16465,8 +16657,8 @@ Data table expandable styles
     + tr[data-child-row]
     td
     .#{$prefix}--child-row-inner-container {
-    overflow: hidden;
     max-height: 0;
+    overflow: hidden;
   }
 
   //child row visible
@@ -16475,8 +16667,9 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    transition: all $duration--fast-02 motion(standard, productive);
     border-bottom: 1px solid $ui-03;
+    transition: padding-bottom $duration--fast-02 motion(standard, productive), transform
+        $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -16523,10 +16716,10 @@ Data table expandable styles
 
   // hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
+    color: $text-01;
     background-color: $hover-ui;
     border-top: 1px solid $ui-03;
     border-bottom: 1px solid $ui-03;
-    color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
@@ -16538,8 +16731,8 @@ Data table expandable styles
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     td {
-    background-color: $hover-ui;
     color: $text-01;
+    background-color: $hover-ui;
     border-bottom: 1px solid $ui-03;
   }
 
@@ -16554,10 +16747,10 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--expandable-row--hover td {
-    background-color: $hover-ui;
-    border-bottom: 1px solid $ui-03;
-    border-top: 1px solid $ui-03;
     color: $text-01;
+    background-color: $hover-ui;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $ui-03;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
@@ -16613,9 +16806,9 @@ Data table expandable styles
   }
 
   .#{$prefix}--table-expand__svg {
-    fill: $ui-05;
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
+    fill: $ui-05;
   }
 
   // fix expanded parent separating border length
@@ -16623,12 +16816,12 @@ Data table expandable styles
     td.#{$prefix}--table-expand
     + td::after {
     position: absolute;
-    content: '';
-    left: 0;
     bottom: rem(-1px);
-    height: rem(1px);
+    left: 0;
     width: rem(8px);
+    height: rem(1px);
     background: $ui-03;
+    content: '';
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
@@ -16657,8 +16850,8 @@ Data table expandable styles
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 1) td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 2) td {
     background-color: $data-table-zebra-color;
-    border-bottom: 1px solid $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
   }
 
   .#{$prefix}--data-table--zebra tr.#{$prefix}--parent-row td,
@@ -16666,7 +16859,7 @@ Data table expandable styles
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
     + tr[data-child-row]
     td {
-    transition: all $duration--moderate-01 motion(standard, productive), border-bottom
+    transition: transform $duration--moderate-01 motion(standard, productive), border-bottom
         $duration--moderate-01 motion(standard, productive),
       border-top $duration--moderate-01 motion(standard, productive);
   }
@@ -16679,16 +16872,16 @@ Data table expandable styles
     td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:hover td {
     background-color: $hover-field;
-    border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
   }
 
   .#{$prefix}--data-table--zebra
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td {
     background: $hover-ui;
-    border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
   }
 
   //----------------------------------------------------------------------------
@@ -16703,8 +16896,8 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
-    background: $selected-ui;
     color: $text-01;
+    background: $selected-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
@@ -16755,16 +16948,16 @@ Data table expandable styles
     td {
     color: $text-01;
     background-color: $hover-ui;
+    border-top: 1px solid $active-ui;
     border-bottom: 1px solid $ui-03;
     box-shadow: 0 1px $active-ui;
-    border-top: 1px solid $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     + tr[data-child-row]:last-of-type
     td {
-    box-shadow: inset 0 -1px $active-ui;
     padding-bottom: rem(24px);
+    box-shadow: inset 0 -1px $active-ui;
   }
 
   // Child row expanded hover
@@ -16806,13 +16999,13 @@ Data table expandable styles
   position: absolute;
   width: 1px;
   height: 1px;
-  padding: 0;
   margin: -1px;
+  padding: 0;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
   border: 0;
   visibility: inherit;
-  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
 }
 ```
 
@@ -16844,14 +17037,15 @@ Data table sort styles
   .#{$prefix}--table-sort {
     @include button-reset(false);
 
-    font: inherit;
-    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    color: $text-01;
     min-height: 100%;
+    color: $text-01;
+
+    font: inherit;
+    line-height: 1;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
       outline $duration--fast-01 motion(entrance, productive);
@@ -16877,7 +17071,40 @@ Data table sort styles
   .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     height: 100%;
+    min-height: 3rem;
+  }
+
+  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--short):not(.#{$prefix}--data-table--tall)
+    th
+    .#{$prefix}--table-sort__flex {
+    /* IE11 workaround for align-items: center and min-height
+        https://github.com/philipwalton/flexbugs/issues/231 */
+    @media screen and (-ms-high-contrast: active),
+      screen and (-ms-high-contrast: none) {
+      height: 2.99rem;
+    }
+  }
+
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-height: 1.5rem;
+  }
+
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-height: 2rem;
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    align-items: flex-start;
+    min-height: 4rem;
   }
 
   // -------------------------------------
@@ -16893,12 +17120,16 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
+    width: rem(20px);
+    min-width: $layout-01;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
-    margin-right: $spacing-05;
     opacity: 0;
     fill: $ui-05;
-    width: auto;
-    min-width: $layout-01;
+  }
+
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active {
+    background: $data-table-column-hover;
   }
 
   // active icons
@@ -16918,14 +17149,14 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon {
+    width: rem(20px);
+    min-width: $layout-01;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
-    margin-right: $spacing-05;
-    transition: transform $transition--base $carbon--standard-easing;
     transform: rotate(0);
     opacity: 1;
+    transition: transform $transition--base $carbon--standard-easing;
     fill: $ui-05;
-    width: auto;
-    min-width: $layout-01;
   }
 
   //----------------------------------------------------------------------------
@@ -16953,12 +17184,6 @@ Data table sort styles
     height: rem(64px);
   }
 
-  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort__flex {
-    align-items: flex-start;
-  }
-
   .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon-unsorted,
   .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon {
     margin-top: rem(13px);
@@ -16974,10 +17199,9 @@ Data table sort styles
   - [layout-04 [variable]](#layout-04-variable)
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
-  - [ui-05 [variable]](#ui-05-variable)
   - [layout-01 [variable]](#layout-01-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [ui-05 [variable]](#ui-05-variable)
 
 ## date-picker
 
@@ -17010,22 +17234,9 @@ Date picker styles
   }
 
   .#{$prefix}--date-picker-input__wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
-
-    ~ .#{$prefix}--form-requirement {
-      max-height: rem(200px);
-      display: block;
-      color: $text-error;
-      font-weight: 400;
-      margin-top: $carbon--spacing-02;
-      overflow: visible;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
@@ -17050,25 +17261,20 @@ Date picker styles
     @include type-style('code-02');
     @include focus-outline('reset');
 
-    display: block;
     position: relative;
-    height: rem(40px);
+    display: block;
     min-width: rem(144px);
+    height: rem(40px);
     padding: 0 $carbon--spacing-05;
+    color: $text-01;
     background-color: $field-01;
     border: none;
-    color: $text-01;
     border-bottom: 1px solid $ui-04;
     transition: $duration--fast-01 motion(standard, productive) all;
 
     &:focus,
     &.#{$prefix}--focused {
       @include focus-outline('outline');
-    }
-
-    &[data-invalid],
-    &[data-invalid]:focus {
-      @include focus-outline('invalid');
     }
 
     &:disabled {
@@ -17103,13 +17309,13 @@ Date picker styles
 
   .#{$prefix}--date-picker__icon {
     position: absolute;
-    right: 1rem;
-    fill: $icon-01;
-    cursor: pointer;
-    z-index: 1;
     // vertically center icon within parent container on IE11
     top: 50%;
+    right: 1rem;
+    z-index: 1;
     transform: translateY(-50%);
+    cursor: pointer;
+    fill: $icon-01;
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -17117,8 +17323,8 @@ Date picker styles
   }
 
   .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
-    fill: $disabled-02;
     cursor: not-allowed;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--date-picker--range
@@ -17158,11 +17364,9 @@ Date picker styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [text-error [variable]](#text-error-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [field-01 [variable]](#field-01-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [text-05 [variable]](#text-05-variable)
@@ -17182,9 +17386,9 @@ Dropdown styles
 @mixin dropdown() {
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
-    align-items: center;
-    grid-template: auto auto / auto min-content;
     grid-gap: rem(4px);
+    grid-template: auto auto / auto min-content;
+    align-items: center;
 
     .#{$prefix}--label {
       @include type-style('body-short-01');
@@ -17206,16 +17410,16 @@ Dropdown styles
     @include focus-outline('reset');
 
     position: relative;
-    list-style: none;
     display: block;
+    width: 100%;
+    height: rem(40px);
+    color: $text-01;
+    list-style: none;
     background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
-    width: 100%;
-    height: rem(40px);
-    cursor: pointer;
-    color: $text-01;
     outline: 2px solid transparent;
+    cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
     &:hover {
@@ -17227,8 +17431,8 @@ Dropdown styles
   .#{$prefix}--dropdown .#{$prefix}--list-box__field {
     @include button-reset;
 
-    text-align: left;
     padding: 0 rem(48px) 0 rem(16px);
+    text-align: left;
   }
 
   .#{$prefix}--dropdown--xl {
@@ -17271,8 +17475,8 @@ Dropdown styles
     position: absolute;
     top: 50%;
     right: $spacing-08;
-    fill: $support-01;
     transform: translateY(-50%);
+    fill: $support-01;
   }
 
   .#{$prefix}--dropdown--open:hover {
@@ -17300,22 +17504,22 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown__arrow {
-    fill: $ui-05;
     position: absolute;
-    right: 1rem;
     top: rem(13px);
-    pointer-events: none;
-    transition: transform $duration--fast-02 motion(standard, productive);
+    right: 1rem;
     transform-origin: 50% 45%;
+    transition: transform $duration--fast-02 motion(standard, productive);
+    pointer-events: none;
+    fill: $ui-05;
   }
 
   button.#{$prefix}--dropdown-text {
+    width: 100%;
     color: $text-01;
+    text-align: left;
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
     border: none;
-    width: 100%;
-    text-align: left;
 
     &:focus {
       @include focus-outline('outline');
@@ -17328,11 +17532,11 @@ Dropdown styles
     display: block;
     // Account for the border in `.bx--dropdown`
     height: calc(100% + 1px);
-    padding-left: $carbon--spacing-05;
     // 2rem + SVG width
     padding-right: rem(42px);
-    white-space: nowrap;
+    padding-left: $carbon--spacing-05;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
   }
 
@@ -17342,18 +17546,19 @@ Dropdown styles
     @include box-shadow;
     @include type-style('body-short-01');
 
-    background-color: $ui-01;
+    position: absolute;
+    z-index: z('dropdown');
     display: flex;
     flex-direction: column;
     width: 100%;
-    list-style: none;
-    position: absolute;
-    z-index: z('dropdown');
     max-height: 0;
-    transition: max-height $duration--fast-02 motion(standard, productive);
     // NOTE: IE, Edge, and Safari do not support two value `overflow` shorthand.
     overflow-x: hidden;
     overflow-y: auto;
+    list-style: none;
+
+    background-color: $ui-01;
+    transition: max-height $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list {
@@ -17366,12 +17571,12 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown-item {
+    position: relative;
+    visibility: inherit;
+    opacity: 0;
     transition: visibility $duration--fast-01 motion(standard, productive), opacity
         $duration--fast-01 motion(standard, productive),
       background-color $duration--fast-01 motion(standard, productive);
-    opacity: 0;
-    visibility: inherit;
-    position: relative;
 
     &:hover {
       background-color: $hover-ui;
@@ -17399,17 +17604,17 @@ Dropdown styles
 
     display: block;
     height: rem(40px);
+    margin: 0 $carbon--spacing-05;
+    padding: rem(11px) 0;
+    overflow: hidden;
     color: $text-02;
-    text-decoration: none;
     font-weight: normal;
     line-height: 1rem;
-    padding: rem(11px) 0;
-    margin: 0 $carbon--spacing-05;
+    white-space: nowrap;
+    text-decoration: none;
+    text-overflow: ellipsis;
     border: 1px solid transparent;
     border-top-color: $ui-03;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
 
     &:hover {
       color: $text-01;
@@ -17422,15 +17627,15 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {
+    height: rem(32px);
     padding-top: rem(7px);
     padding-bottom: rem(7px);
-    height: rem(32px);
   }
 
   .#{$prefix}--dropdown--xl .#{$prefix}--dropdown-link {
+    height: rem(48px);
     padding-top: rem(15px);
     padding-bottom: rem(15px);
-    height: rem(48px);
   }
 
   .#{$prefix}--dropdown--focused,
@@ -17444,10 +17649,10 @@ Dropdown styles
   // We don't want to apply focus styles via focus selector when using the aria-activedescendant structure
   .#{$prefix}--dropdown-list[aria-activedescendant]
     .#{$prefix}--dropdown-link:focus {
-    outline: none;
     // Copied from .bx--dropdown-link styles
     margin: 0 $carbon--spacing-05;
     padding: rem(11px) 0;
+    outline: none;
   }
 
   // Need added weight for item that is :focused and .bx--dropdown--focused
@@ -17534,11 +17739,11 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--inline {
-    justify-self: start;
     display: inline-block;
-    border-bottom-color: transparent;
+    justify-self: start;
     width: auto;
     background-color: transparent;
+    border-bottom-color: transparent;
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
@@ -17561,8 +17766,8 @@ Dropdown styles
 
   .#{$prefix}--dropdown--inline .#{$prefix}--dropdown-text {
     display: inline-block;
-    padding: rem(7px) $carbon--spacing-07 rem(7px) $carbon--spacing-04;
     height: rem(32px);
+    padding: rem(7px) $carbon--spacing-07 rem(7px) $carbon--spacing-04;
     overflow: visible;
     color: $text-01;
   }
@@ -17597,9 +17802,9 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
-    background-color: $hover-ui;
-    color: $text-01;
     display: block;
+    color: $text-01;
+    background-color: $hover-ui;
 
     &:hover {
       background-color: $selected-ui;
@@ -17631,9 +17836,9 @@ Dropdown styles
 - **Group**: [dropdown](#dropdown)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-01 [variable]](#text-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-error [variable]](#text-error-variable)
@@ -17675,8 +17880,8 @@ File uploader styles
     @include reset;
     @include type-style('productive-heading-01');
 
-    color: $text-01;
     margin-bottom: $carbon--spacing-03;
+    color: $text-01;
   }
 
   .#{$prefix}--file-input {
@@ -17693,15 +17898,15 @@ File uploader styles
   }
 
   .#{$prefix}--file-browse-btn {
-    margin-bottom: $carbon--spacing-03;
     display: inline-block;
     width: 100%;
     max-width: rem(320px);
+    margin-bottom: $carbon--spacing-03;
     color: $link-01;
-    transition: $duration--fast-02 motion(standard, productive);
-    cursor: pointer;
     outline: 2px solid transparent;
     outline-offset: -2px;
+    cursor: pointer;
+    transition: $duration--fast-02 motion(standard, productive);
 
     &:focus,
     &:hover {
@@ -17721,15 +17926,15 @@ File uploader styles
   }
 
   .#{$prefix}--file-browse-btn--disabled {
-    cursor: no-drop;
-    text-decoration: none;
     color: $disabled-02;
+    text-decoration: none;
+    cursor: no-drop;
 
     &:hover,
     &:focus {
-      outline: none;
-      text-decoration: none;
       color: $disabled-02;
+      text-decoration: none;
+      outline: none;
     }
   }
 
@@ -17741,8 +17946,8 @@ File uploader styles
     @include reset;
     @include type-style('body-short-01');
 
-    color: $text-02;
     margin-bottom: $carbon--spacing-05;
+    color: $text-02;
   }
 
   // For backwards compatibility
@@ -17761,15 +17966,15 @@ File uploader styles
 
   .#{$prefix}--file__selected-file {
     display: grid;
+    grid-auto-rows: auto;
     grid-gap: $carbon--spacing-05;
     grid-template-columns: 1fr auto;
-    grid-auto-rows: auto;
     align-items: center;
-    min-height: $carbon--spacing-09;
     max-width: rem(320px);
+    min-height: $carbon--spacing-09;
     margin-bottom: $carbon--spacing-03;
-    background-color: $field-01;
     word-break: break-word;
+    background-color: $field-01;
 
     &:last-child {
       margin-bottom: 0;
@@ -17796,9 +18001,9 @@ File uploader styles
       @include type-style('body-short-01');
 
       margin-left: $carbon--spacing-05;
+      overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      overflow: hidden;
     }
   }
 
@@ -17814,10 +18019,11 @@ File uploader styles
   .#{$prefix}--file__selected-file--invalid__wrapper {
     @include focus-outline('invalid');
 
-    outline-width: 1px;
-    background-color: $field-01;
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
+    background-color: $field-01;
+
+    outline-width: 1px;
   }
 
   .#{$prefix}--file__selected-file--invalid {
@@ -17827,8 +18033,8 @@ File uploader styles
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
-    border-top: 1px solid $ui-03;
     padding-top: $carbon--spacing-05;
+    border-top: 1px solid $ui-03;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -17851,10 +18057,10 @@ File uploader styles
 
     display: block;
     max-height: rem(200px);
-    color: $text-error;
-    font-weight: 400;
     padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: visible;
+    color: $text-error;
+    font-weight: 400;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -17876,8 +18082,8 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    fill: $interactive-04;
     cursor: pointer;
+    fill: $interactive-04;
 
     &:focus {
       @include focus-outline('border');
@@ -17891,20 +18097,20 @@ File uploader styles
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
-    height: $carbon--spacing-05;
     width: $carbon--spacing-05;
-    fill: $support-01;
+    height: $carbon--spacing-05;
     margin-right: $carbon--spacing-03;
+    fill: $support-01;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
     display: flex;
-    height: $carbon--spacing-05;
     width: $carbon--spacing-05;
+    height: $carbon--spacing-05;
+    padding: 0;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 0;
     fill: $icon-01;
 
     &:focus {
@@ -17950,8 +18156,8 @@ File uploader styles
   - [interactive-03 [variable]](#interactive-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
-  - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -17984,11 +18190,11 @@ Form styles
     @include type-style('body-short-01');
 
     display: flex;
-    flex-direction: column;
     // We specify `auto` as the default value so that the form item does
     // not collapse in IE11 due to a `flex-basis` of 0 only working with
     // `flex-direction: row`
     flex: 1 1 auto;
+    flex-direction: column;
     align-items: flex-start;
   }
 
@@ -17996,12 +18202,12 @@ Form styles
     @include reset;
     @include type-style('label-01');
 
+    display: inline-block;
+    margin-bottom: $carbon--spacing-03;
     color: $text-02;
     font-weight: $input-label-weight;
-    display: inline-block;
-    vertical-align: baseline;
-    margin-bottom: $carbon--spacing-03;
     line-height: 1rem;
+    vertical-align: baseline;
   }
 
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {
@@ -18022,32 +18228,54 @@ Form styles
     font-family: carbon--font-family('mono');
   }
 
-  input[data-invalid],
-  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  input[data-invalid]:not(:focus),
+  .#{$prefix}--number[data-invalid] input[type='number']:not(:focus),
+  .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:not(:focus),
   .#{$prefix}--text-area__wrapper[data-invalid]
-    > .#{$prefix}--text-area--invalid,
-  .#{$prefix}--select-input__wrapper[data-invalid],
-  .#{$prefix}--list-box[data-invalid],
-  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input {
+    > .#{$prefix}--text-area--invalid:not(:focus),
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input:not(:focus),
+  .#{$prefix}--list-box[data-invalid]:not(:focus),
+  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input:not(:focus) {
     @include focus-outline('invalid');
   }
 
   input[data-invalid],
+  .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--time-picker--invalid,
+  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input--warn,
+  .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--time-picker[data-invalid],
+  .#{$prefix}--list-box[data-invalid] {
+    ~ .#{$prefix}--form-requirement {
+      display: block;
+      max-height: rem(200px);
+      overflow: visible;
+      font-weight: 400;
+    }
+  }
+
+  input[data-invalid],
+  .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
   .#{$prefix}--list-box[data-invalid] {
     ~ .#{$prefix}--form-requirement {
-      max-height: rem(200px);
-      display: block;
       color: $text-error;
     }
   }
 
   //Fluid Form
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid] {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-warn] {
     display: block;
   }
 
@@ -18073,10 +18301,11 @@ Form styles
     @include reset;
     @include type-style('caption-01');
 
-    margin: $carbon--spacing-02 0 0;
-    max-height: 0;
-    overflow: hidden;
     display: none;
+    max-height: 0;
+
+    margin: $carbon--spacing-02 0 0;
+    overflow: hidden;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
@@ -18086,12 +18315,12 @@ Form styles
   .#{$prefix}--form__helper-text {
     @include type-style('helper-text-01');
 
-    color: $text-02;
     z-index: 0;
-    opacity: 1;
-    margin-top: $carbon--spacing-02;
     // Added to prevent error text from displaying under helper text in Safari (#6392)
     width: 100%;
+    margin-top: $carbon--spacing-02;
+    color: $text-02;
+    opacity: 1;
   }
 
   .#{$prefix}--label--disabled,
@@ -18108,8 +18337,8 @@ Form styles
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
-  - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [text-02 [variable]](#text-02-variable)
   - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
@@ -18128,9 +18357,9 @@ Inline loading styles
 @mixin inline-loading() {
   .#{$prefix}--inline-loading {
     display: flex;
+    align-items: center;
     width: 100%;
     min-height: 2rem;
-    align-items: center;
 
     .#{$prefix}--loading__svg circle {
       stroke-width: 12;
@@ -18149,11 +18378,11 @@ Inline loading styles
 
   .#{$prefix}--inline-loading__animation {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 2rem;
     height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
@@ -18161,9 +18390,9 @@ Inline loading styles
 
     // For deprecated older markup
     &.#{$prefix}--inline-loading__svg {
-      width: 0.75rem;
       position: absolute;
       top: 0.75rem;
+      width: 0.75rem;
     }
 
     &[hidden] {
@@ -18172,21 +18401,21 @@ Inline loading styles
   }
 
   .#{$prefix}--inline-loading__checkmark {
-    fill: none;
-    stroke: $interactive-04;
     transform-origin: 50% 50%;
-    stroke-width: 1.8;
-    stroke-dasharray: 12;
-    stroke-dashoffset: 12;
     animation-name: stroke;
     animation-duration: 250ms;
     animation-fill-mode: forwards;
+    fill: none;
+    stroke: $interactive-04;
+    stroke-width: 1.8;
+    stroke-dasharray: 12;
+    stroke-dashoffset: 12;
   }
 
   .#{$prefix}--inline-loading--error {
-    fill: $support-01;
     width: rem(16px);
     height: rem(16px);
+    fill: $support-01;
 
     &[hidden] {
       display: none;
@@ -18277,8 +18506,8 @@ Link styles
     display: inline;
     color: $disabled-02;
     font-weight: 400;
-    cursor: not-allowed;
     text-decoration: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited {
@@ -18358,10 +18587,10 @@ List styles
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
     > .#{$prefix}--list__item::before {
-    content: counter(item) '.';
-    counter-increment: item;
     position: absolute;
     left: rem(-24px);
+    content: counter(item) '.';
+    counter-increment: item;
   }
 
   .#{$prefix}--list--ordered.#{$prefix}--list--nested {
@@ -18472,9 +18701,9 @@ List box styles
   // `disabled` and `inline`.
   .#{$prefix}--list-box__wrapper--inline {
     display: inline-grid;
-    align-items: center;
-    grid-template: auto auto / auto auto;
     grid-gap: rem(4px);
+    grid-template: auto auto / auto auto;
+    align-items: center;
 
     .#{$prefix}--label {
       @include type-style('body-short-01');
@@ -18502,11 +18731,11 @@ List box styles
     width: $list-box-width;
     height: rem(40px);
     max-height: rem(40px);
+    color: $text-01;
     background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
     cursor: pointer;
-    color: $text-01;
     transition: all $duration--fast-01 motion(standard, productive);
 
     &:hover {
@@ -18545,13 +18774,13 @@ List box styles
     position: absolute;
     top: 50%;
     right: $carbon--spacing-08;
-    fill: $support-01;
     transform: translateY(-50%);
+    fill: $support-01;
   }
 
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
-    border-bottom: 0;
     padding-right: carbon--mini-units(8);
+    border-bottom: 0;
   }
 
   .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
@@ -18697,15 +18926,15 @@ List box styles
     position: relative;
     display: inline-flex;
     align-items: center;
-    vertical-align: top;
     // Account for the border in `.bx--list-box`
     height: calc(100% + 1px);
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
-    cursor: pointer;
-    outline: none;
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
+    vertical-align: top;
+    outline: none;
+    cursor: pointer;
   }
 
   .#{$prefix}--list-box__field:focus {
@@ -18713,8 +18942,8 @@ List box styles
   }
 
   .#{$prefix}--list-box__field[disabled] {
-    outline: none;
     color: $disabled-02;
+    outline: none;
   }
 
   // populated input field
@@ -18762,11 +18991,11 @@ List box styles
   .#{$prefix}--list-box__label {
     @include type-style('body-short-01');
 
-    color: $text-01;
-    user-select: none;
-    text-overflow: ellipsis;
     overflow: hidden;
+    color: $text-01;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    user-select: none;
   }
 
   // Menu status inside of a `list-box__field`
@@ -18774,16 +19003,16 @@ List box styles
     position: absolute;
     top: 0;
     right: $carbon--spacing-05;
-    height: 100%;
     display: flex;
     align-items: center;
-    transition: transform $duration--fast-01 motion(standard, productive);
+    height: 100%;
     cursor: pointer;
+    transition: transform $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--list-box__menu-icon > svg {
-    fill: $icon-01;
     height: 100%;
+    fill: $icon-01;
   }
 
   .#{$prefix}--list-box__menu-icon--open {
@@ -18793,18 +19022,18 @@ List box styles
   // Selection indicator for a `list-box__field`
   .#{$prefix}--list-box__selection {
     position: absolute;
+    top: 50%;
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
     right: rem(33px);
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: rem(30px);
+    justify-content: center;
     width: rem(30px);
+    height: rem(30px);
+    transform: translateY(-50%);
     cursor: pointer;
-    user-select: none;
     transition: background-color $duration--fast-01 motion(standard, productive);
+    user-select: none;
 
     &:focus {
       @include focus-outline('outline');
@@ -18824,33 +19053,33 @@ List box styles
     @include type-style('label-01');
 
     position: static;
+    top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: $inverse-02;
-    height: rem(24px);
     width: auto;
-    color: $inverse-01;
-    line-height: 0;
+    height: rem(24px);
+    margin-right: rem(10px);
     padding: rem(8px);
     // Align with hover circle of X button
     padding-right: rem(2px);
-    margin-right: rem(10px);
+    color: $inverse-01;
+    line-height: 0;
+    background-color: $inverse-02;
     border-radius: rem(12px);
-    top: auto;
     transform: none;
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
-    fill: $inverse-01;
-    margin-left: rem(4px);
     width: rem(20px);
     height: rem(20px);
+    margin-left: rem(4px);
     padding: rem(2px);
+    fill: $inverse-01;
 
     &:hover {
-      border-radius: 50%;
       background-color: $hover-secondary;
+      border-radius: 50%;
     }
   }
 
@@ -18874,13 +19103,13 @@ List box styles
     @include box-shadow();
 
     position: absolute;
-    left: 0;
     right: 0;
+    left: 0;
+    z-index: z('dropdown');
     width: $list-box-width;
+    overflow-y: auto;
     background-color: $ui-01;
     transition: max-height $duration--fast-02 motion(standard, productive);
-    overflow-y: auto;
-    z-index: z('dropdown');
 
     &:focus {
       // remove default browser focus in firefox
@@ -18915,12 +19144,12 @@ List box styles
   .#{$prefix}--list-box__menu-item {
     @include type-style('body-short-01');
 
+    position: relative;
     height: rem(40px);
     color: $text-02;
     cursor: pointer;
-    user-select: none;
-    position: relative;
     transition: background $duration--fast-01 motion(standard, productive);
+    user-select: none;
 
     &:hover {
       background-color: $hover-ui;
@@ -18980,19 +19209,19 @@ List box styles
 
     display: block;
     height: rem(40px);
+    margin: 0 $carbon--spacing-05;
+    padding: rem(11px) 0;
+    padding-right: $carbon--spacing-06;
+    overflow: hidden;
     color: $text-02;
-    text-decoration: none;
     font-weight: normal;
     line-height: 1rem;
-    padding: rem(11px) 0;
-    margin: 0 $carbon--spacing-05;
-    padding-right: $carbon--spacing-06;
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-top-color: $ui-03;
-    text-overflow: ellipsis;
-    overflow: hidden;
     white-space: nowrap;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    border-top: 1px solid transparent;
+    border-top-color: $ui-03;
+    border-bottom: 1px solid transparent;
     transition: border-color $duration--fast-01 motion(standard, productive), color
         $duration--fast-01 motion(standard, productive);
 
@@ -19011,15 +19240,15 @@ List box styles
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item__option {
+    height: rem(32px);
     padding-top: rem(7px);
     padding-bottom: rem(7px);
-    height: rem(32px);
   }
 
   .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option {
+    height: rem(48px);
     padding-top: rem(15px);
     padding-bottom: rem(15px);
-    height: rem(48px);
   }
 
   .#{$prefix}--list-box--disabled
@@ -19035,14 +19264,14 @@ List box styles
 
     &:focus {
       margin: 0;
-      padding-left: $carbon--spacing-03;
       padding-right: $carbon--spacing-03;
+      padding-left: $carbon--spacing-03;
     }
   }
 
   .#{$prefix}--list-box__menu-item--highlighted {
-    background-color: $hover-ui;
     color: $text-01;
+    background-color: $hover-ui;
     border-color: transparent;
   }
 
@@ -19088,10 +19317,10 @@ List box styles
   }
 
   .#{$prefix}--list-box__menu-item__selected-icon {
-    display: none;
     position: absolute;
     top: 50%;
     right: rem(16px);
+    display: none;
     transform: translateY(-50%);
     fill: $icon-01;
   }
@@ -19111,9 +19340,9 @@ List box styles
   }
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
   }
 
   // Dropdown top orientation modifiers
@@ -19142,8 +19371,8 @@ List box styles
   // TODO: remove [role='combobox'] in v11
   .#{$prefix}--list-box input[role='combobox'],
   .#{$prefix}--list-box input[type='text'] {
-    background-color: inherit;
     min-width: 0;
+    background-color: inherit;
   }
 }
 ```
@@ -19155,9 +19384,9 @@ List box styles
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [list-box-width [variable]](#list-box-width-variable)
+  - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-01 [variable]](#text-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [field-02 [variable]](#field-02-variable)
@@ -19171,8 +19400,8 @@ List box styles
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
-  - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
@@ -19244,14 +19473,14 @@ Loading styles
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: $overlay-01;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color $duration--slow-02 motion(standard, expressive);
     z-index: z('overlay');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: $overlay-01;
+    transition: background-color $duration--slow-02 motion(standard, expressive);
   }
 
   .#{$prefix}--loading-overlay--stop {
@@ -19285,8 +19514,8 @@ Loading styles
   animation-name: rotate;
   animation-duration: 690ms;
   animation-timing-function: linear;
-  animation-fill-mode: forwards;
   animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
 
   // Animate the stroke
   svg circle {
@@ -19401,18 +19630,18 @@ Modal styles
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    content: '';
     background-color: transparent;
-    opacity: 0;
     visibility: hidden;
+    opacity: 0;
     transition: background-color $duration--slow-02 motion(exit, expressive), opacity
         $duration--moderate-02 motion(exit, expressive),
       visibility 0ms linear $duration--moderate-02;
+    content: '';
 
     &.is-visible {
+      background-color: $overlay-01;
       visibility: inherit;
       opacity: 1;
-      background-color: $overlay-01;
       transition: background-color $duration--slow-02 motion(entrance, expressive),
         opacity $duration--moderate-02 motion(entrance, expressive),
         visibility 0ms linear;
@@ -19431,8 +19660,8 @@ Modal styles
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
-    transition: transform $duration--moderate-02 motion(entrance, expressive);
     transform: translate3d(0, 0, 0);
+    transition: transform $duration--moderate-02 motion(entrance, expressive);
   }
 
   .#{$prefix}--modal-container {
@@ -19441,23 +19670,23 @@ Modal styles
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: auto;
-    background-color: $ui-01;
     width: 100%;
     height: 100%;
     max-height: 100%;
+    overflow: hidden;
+    background-color: $ui-01;
     // make modal edge visible on high contrast themes (#3880)
     outline: 3px solid transparent;
     outline-offset: -3px;
-    overflow: hidden;
-    transform-origin: top center;
     transform: translate3d(0, -24px, 0);
+    transform-origin: top center;
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
       position: static;
       width: 84%;
-      max-height: 90%;
       height: auto;
+      max-height: 90%;
 
       .#{$prefix}--modal-header,
       .#{$prefix}--modal-content,
@@ -19593,19 +19822,18 @@ Modal styles
   }
 
   .#{$prefix}--modal-header {
-    padding-top: $spacing-05;
-    padding-right: $spacing-09;
-    margin-bottom: $spacing-03;
-
     grid-row: 1/1;
     grid-column: 1/-1;
+    margin-bottom: $spacing-03;
+    padding-top: $spacing-05;
+    padding-right: $spacing-09;
   }
 
   .#{$prefix}--modal-header__label {
     @include type-style('label-01');
 
-    color: $text-02;
     margin-bottom: $spacing-02;
+    color: $text-02;
   }
 
   .#{$prefix}--modal-header__heading {
@@ -19619,14 +19847,14 @@ Modal styles
 
     grid-row: 2/-2;
     grid-column: 1/-1;
-
-    overflow-y: auto;
     margin-bottom: $spacing-09;
-    color: $text-01;
-    font-weight: 400;
 
     // Required to accommodate focus outline's negative offset:
     padding-top: $spacing-03;
+
+    overflow-y: auto;
+    color: $text-01;
+    font-weight: 400;
 
     &:focus {
       @include focus-outline('outline');
@@ -19643,16 +19871,16 @@ Modal styles
   }
 
   .#{$prefix}--modal-content--overflow-indicator {
+    position: absolute;
+    bottom: $spacing-09;
+    left: 0;
     grid-row: 2/-2;
     grid-column: 1/-1;
     width: 100%;
     height: rem(32px);
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: $spacing-09;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
+    content: '';
     pointer-events: none;
   }
 
@@ -19664,16 +19892,16 @@ Modal styles
 
   .#{$prefix}--modal-footer {
     display: flex;
-    justify-content: flex-end;
-    margin-top: auto;
-    height: 4rem;
 
     grid-row: -1/-1;
     grid-column: 1/-1;
+    justify-content: flex-end;
+    height: 4rem;
+    margin-top: auto;
 
     button.#{$prefix}--btn {
-      max-width: none;
       flex: 0 1 50%;
+      max-width: none;
       height: 4rem;
       margin: 0;
       padding-top: $spacing-05;
@@ -19685,13 +19913,13 @@ Modal styles
     position: absolute;
     top: 0;
     right: 0;
-    height: 3rem;
     width: 3rem;
+    height: 3rem;
     padding: rem(12px);
-    border: 2px solid transparent;
     overflow: hidden;
-    cursor: pointer;
     background-color: transparent;
+    border: 2px solid transparent;
+    cursor: pointer;
     transition: background-color $duration--fast-02 motion(standard, productive);
 
     &:hover {
@@ -19699,8 +19927,8 @@ Modal styles
     }
 
     &:focus {
-      outline: none;
       border-color: $focus;
+      outline: none;
     }
   }
 
@@ -19709,9 +19937,9 @@ Modal styles
   }
 
   .#{$prefix}--modal-close__icon {
-    fill: $icon-01;
-    height: rem(20px);
     width: rem(20px);
+    height: rem(20px);
+    fill: $icon-01;
   }
 
   .#{$prefix}--body--with-modal-open {
@@ -19733,8 +19961,8 @@ Modal styles
   - [spacing-05 [variable]](#spacing-05-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
-  - [text-02 [variable]](#text-02-variable)
   - [spacing-02 [variable]](#spacing-02-variable)
+  - [text-02 [variable]](#text-02-variable)
   - [text-01 [variable]](#text-01-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -19759,28 +19987,28 @@ Multi select styles
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
     .#{$prefix}--checkbox-wrapper {
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
+    width: 100%;
+    height: 100%;
   }
 
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
     .#{$prefix}--checkbox-label {
-    padding-left: rem(28px);
     display: inline-block;
-    text-overflow: ellipsis;
+    width: 100%;
+    padding-left: rem(28px);
     overflow: hidden;
     white-space: nowrap;
-    width: 100%;
+    text-overflow: ellipsis;
   }
 
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
     > .#{$prefix}--form-item {
-    margin: 0;
     flex-direction: row;
+    margin: 0;
   }
 
   .#{$prefix}--multi-select
@@ -19793,8 +20021,8 @@ Multi select styles
   .#{$prefix}--multi-select--filterable {
     .#{$prefix}--list-box__selection--multi {
       position: absolute;
-      left: $carbon--spacing-03;
       right: auto;
+      left: $carbon--spacing-03;
     }
   }
 
@@ -19832,21 +20060,21 @@ Inline notification styles
   .#{$prefix}--inline-notification {
     @include reset;
 
+    position: relative;
     display: flex;
     flex-wrap: wrap;
-    position: relative;
-    height: auto;
-    min-height: rem(48px);
+    width: 100%;
     min-width: rem(288px);
     max-width: rem(288px);
-    width: 100%;
-    color: $inverse-01;
+    height: auto;
+    min-height: rem(48px);
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
+    color: $inverse-01;
 
     @include carbon--breakpoint(md) {
-      max-width: rem(608px);
       flex-wrap: nowrap;
+      max-width: rem(608px);
     }
 
     @include carbon--breakpoint(lg) {
@@ -19885,17 +20113,17 @@ Inline notification styles
     color: map-get($carbon--theme--white, 'text-01');
 
     &::before {
-      content: '';
-      pointer-events: none;
       position: absolute;
       top: 0;
       left: 0;
+      box-sizing: border-box;
       width: 100%;
       height: 100%;
-      box-sizing: border-box;
-      filter: opacity(0.4);
       border-style: solid;
       border-width: 1px 1px 1px 0;
+      filter: opacity(0.4);
+      content: '';
+      pointer-events: none;
     }
   }
 
@@ -19966,8 +20194,8 @@ Inline notification styles
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
     path[opacity='0'] {
-    fill: $carbon__black-100;
     opacity: 1;
+    fill: $carbon__black-100;
   }
 
   .#{$prefix}--inline-notification__details {
@@ -19982,8 +20210,8 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__icon {
     flex-shrink: 0;
-    margin-right: $carbon--spacing-05;
     margin-top: rem(14px);
+    margin-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--inline-notification__text-wrapper {
@@ -20005,10 +20233,10 @@ Inline notification styles
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    color: $inverse-link;
     height: rem(32px);
     margin-bottom: $carbon--spacing-03;
     margin-left: $carbon--spacing-08;
+    color: $inverse-link;
 
     @include carbon--breakpoint(md) {
       margin: $carbon--spacing-03 0;
@@ -20034,9 +20262,9 @@ Inline notification styles
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
     border-color: transparent;
-    box-shadow: none;
     outline: 2px solid $inverse-focus-ui;
     outline-offset: -2px;
+    box-shadow: none;
   }
 
   .#{$prefix}--inline-notification--low-contrast
@@ -20057,16 +20285,16 @@ Inline notification styles
     right: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    height: rem(48px);
+    justify-content: center;
     width: rem(48px);
     min-width: rem(48px);
     max-width: rem(48px);
+    height: rem(48px);
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive), background-color
         $duration--fast-02 motion(standard, productive);
 
@@ -20095,7 +20323,8 @@ Inline notification styles
     fill: map-get($carbon--theme--white, 'text-01');
   }
 
-  .#{$prefix}--inline-notification__action-button {
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button {
     color: $interactive-01;
 
     &:active {
@@ -20117,8 +20346,8 @@ Inline notification styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
@@ -20183,8 +20412,8 @@ Inline notification styles
 
 ```scss
 @mixin notification--experimental() {
-  border-left: 3px solid $color;
   background: $background-color;
+  border-left: 3px solid $color;
 
   .#{$prefix}--inline-notification__icon,
   .#{$prefix}--toast-notification__icon {
@@ -20217,11 +20446,11 @@ Toast notification styles
     display: flex;
     width: rem(288px);
     height: auto;
+    margin-top: $carbon--spacing-03;
+    margin-right: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-03;
     padding-left: rem(14px);
     color: $inverse-01;
-    margin-top: $carbon--spacing-03;
-    margin-bottom: $carbon--spacing-03;
-    margin-right: $carbon--spacing-05;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
 
     &:first-child {
@@ -20311,14 +20540,14 @@ Toast notification styles
   .#{$prefix}--toast-notification--warning
     .#{$prefix}--toast-notification__icon
     path[opacity='0'] {
-    fill: $carbon__black-100;
     opacity: 1;
+    fill: $carbon__black-100;
   }
 
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
-    margin-right: rem(14px);
     margin-top: rem(14px);
+    margin-right: rem(14px);
   }
 
   .#{$prefix}--toast-notification__details {
@@ -20330,17 +20559,17 @@ Toast notification styles
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: rem(48px);
+    min-width: rem(48px);
+    height: rem(48px);
+    min-height: rem(48px);
+    margin-left: auto;
+    padding: 0;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin-left: auto;
-    padding: 0;
-    height: rem(48px);
-    width: rem(48px);
-    min-height: rem(48px);
-    min-width: rem(48px);
     transition: outline $transition--base, background-color $transition--base;
 
     &:focus {
@@ -20367,17 +20596,17 @@ Toast notification styles
   .#{$prefix}--toast-notification__title {
     @include type-style('productive-heading-01');
 
-    font-weight: 600;
     margin-top: $carbon--spacing-05;
+    font-weight: 600;
     word-break: break-word;
   }
 
   .#{$prefix}--toast-notification__subtitle {
     @include type-style('body-short-01');
 
-    color: $inverse-01;
     margin-top: 0;
     margin-bottom: $carbon--spacing-06;
+    color: $inverse-01;
     word-break: break-word;
   }
 
@@ -20390,8 +20619,8 @@ Toast notification styles
   .#{$prefix}--toast-notification__caption {
     @include type-style('body-short-01');
 
-    color: $inverse-01;
     margin-bottom: $carbon--spacing-05;
+    color: $inverse-01;
   }
 
   .#{$prefix}--toast-notification--low-contrast
@@ -20409,9 +20638,9 @@ Toast notification styles
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [inverse-01 [variable]](#inverse-01-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-link [variable]](#inverse-link-variable)
   - [inverse-support-01 [variable]](#inverse-support-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
@@ -20439,31 +20668,35 @@ Number input styles
   .#{$prefix}--number {
     @include reset;
 
+    position: relative;
     display: flex;
     flex-direction: column;
-    position: relative;
   }
 
   .#{$prefix}--number input[type='number'] {
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    font-family: carbon--font-family('mono');
-    box-sizing: border-box;
     display: inline-flex;
+    box-sizing: border-box;
     width: 100%;
     min-width: 9.375rem;
-    padding-left: $carbon--spacing-05;
-    padding-right: $carbon--spacing-07;
-    font-weight: 300;
     height: rem(40px);
+    padding-right: $carbon--spacing-07;
+    padding-left: $carbon--spacing-05;
     color: $text-01;
+    font-weight: 300;
+
+    font-family: carbon--font-family('mono');
     background-color: $field-01;
     border: none;
-    border-radius: 0;
     border-bottom: 1px solid $ui-04;
+    border-radius: 0;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
+
+    // Firefox: Hide spinner (up and down buttons)
+    -moz-appearance: textfield;
 
     &:focus {
       @include focus-outline('outline');
@@ -20478,9 +20711,6 @@ Number input styles
       fill: $disabled;
     }
 
-    // Firefox: Hide spinner (up and down buttons)
-    -moz-appearance: textfield;
-
     // IE: Hide "clear-field" `x` button on input field
     &::-ms-clear {
       display: none;
@@ -20494,40 +20724,29 @@ Number input styles
 
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number--readonly input[type='number'] {
-    cursor: not-allowed;
-    background-color: $disabled-background-color;
     color: $disabled;
+    background-color: $disabled-background-color;
     border-bottom-color: transparent;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--number__input-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
-
-    ~ .#{$prefix}--form-requirement {
-      color: $text-error;
-      font-weight: 400;
-      margin-top: $carbon--spacing-02;
-      overflow: visible;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--number__controls {
     @include reset;
 
     position: absolute;
+    // vertically center controls within parent container on IE11
+    top: 50%;
     right: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    // vertically center controls within parent container on IE11
-    top: 50%;
+    justify-content: center;
     transform: translateY(-50%);
   }
 
@@ -20535,15 +20754,15 @@ Number input styles
     @include button-reset;
 
     display: inline-flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: rem(32px);
     height: rem(20px);
     color: $icon-01;
 
     svg {
-      fill: currentColor;
       position: relative;
+      fill: currentColor;
     }
 
     &.up-icon svg {
@@ -20563,29 +20782,18 @@ Number input styles
     }
 
     &:hover {
-      cursor: pointer;
       color: $icon-01;
+      cursor: pointer;
     }
 
     &:disabled {
-      cursor: not-allowed;
       color: $disabled;
+      cursor: not-allowed;
     }
   }
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
     display: none;
-  }
-
-  .#{$prefix}--number[data-invalid] {
-    .#{$prefix}--form-requirement {
-      display: inline-block;
-      max-height: rem(200px);
-    }
-
-    input[type='number'] {
-      @include focus-outline('invalid');
-    }
   }
 
   .#{$prefix}--number__invalid {
@@ -20599,8 +20807,8 @@ Number input styles
   }
 
   .#{$prefix}--number--mobile {
-    min-width: rem(144px);
     width: auto;
+    min-width: rem(144px);
 
     .#{$prefix}--number__control-btn,
     &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
@@ -20625,14 +20833,14 @@ Number input styles
     }
 
     input[type='number'] {
-      min-width: rem(64px);
       width: auto;
+      min-width: rem(64px);
       margin: 0;
-      border-right: 1px solid $ui-03;
-      border-left: 1px solid $ui-03;
       padding: 0;
       text-align: center;
       background-color: $field-01;
+      border-right: 1px solid $ui-03;
+      border-left: 1px solid $ui-03;
     }
 
     &.#{$prefix}--number--light {
@@ -20657,8 +20865,8 @@ Number input styles
 
   .#{$prefix}--number--xl.#{$prefix}--number--mobile
     .#{$prefix}--number__control-btn {
-    height: rem(48px);
     width: rem(48px);
+    height: rem(48px);
   }
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
@@ -20681,8 +20889,8 @@ Number input styles
 
   .#{$prefix}--number--sm.#{$prefix}--number--mobile
     .#{$prefix}--number__control-btn {
-    height: rem(32px);
     width: rem(32px);
+    height: rem(32px);
   }
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
@@ -20720,13 +20928,11 @@ Number input styles
 - **Requires**:
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-error [variable]](#text-error-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
@@ -20753,11 +20959,11 @@ Overflow menu styles
     @include focus-outline('reset');
 
     position: relative;
-    width: rem(32px);
-    height: rem(32px);
     display: flex;
     align-items: center;
     justify-content: center;
+    width: rem(32px);
+    height: rem(32px);
     cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive), background-color
         $duration--fast-02 motion(entrance, productive);
@@ -20796,8 +21002,8 @@ Overflow menu styles
   }
 
   .#{$prefix}--overflow-menu__icon {
-    height: rem(16px);
     width: rem(16px);
+    height: rem(16px);
     fill: $icon-01;
   }
 
@@ -20805,23 +21011,23 @@ Overflow menu styles
     @include reset;
     @include box-shadow;
 
+    position: absolute;
+    top: 32px;
+    left: 0;
+    z-index: z('floating');
     display: none;
     flex-direction: column;
     align-items: flex-start;
-    position: absolute;
-    z-index: z('floating');
-    background-color: $field-01;
     width: rem(160px);
     list-style: none;
-    top: 32px;
-    left: 0;
+    background-color: $field-01;
 
     &::after {
-      content: '';
       position: absolute;
       display: block;
       background-color: $field-01;
       transition: background-color $duration--fast-02 motion(entrance, productive);
+      content: '';
     }
   }
 
@@ -20855,23 +21061,23 @@ Overflow menu styles
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {
-    right: rem(-6px);
     top: 0;
-    height: rem(32px);
+    right: rem(-6px);
     width: rem(6px);
+    height: rem(32px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
     top: 0;
     left: rem(-6px);
-    height: rem(32px);
     width: rem(6px);
+    height: rem(32px);
   }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
-    left: auto;
     right: 0;
+    left: auto;
   }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after,
@@ -20892,11 +21098,11 @@ Overflow menu styles
     @include reset;
 
     display: flex;
-    background-color: transparent;
     align-items: center;
     width: 100%;
     height: rem(40px);
     padding: 0;
+    background-color: transparent;
     transition: background-color $duration--fast-02 motion(entrance, productive);
   }
 
@@ -20909,28 +21115,29 @@ Overflow menu styles
   }
 
   a.#{$prefix}--overflow-menu-options__btn::before {
-    content: '';
+    display: inline-block;
     height: 100%;
     vertical-align: middle;
-    display: inline-block;
+    content: '';
   }
 
   .#{$prefix}--overflow-menu-options__btn {
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    font-weight: 400;
-    width: 100%;
-    height: 100%;
-    border: none;
     display: inline-flex;
     align-items: center;
-    background-color: transparent;
-    text-align: left;
-    padding: 0 $carbon--spacing-05;
-    cursor: pointer;
-    color: $text-02;
+    width: 100%;
     max-width: 11.25rem;
+    height: 100%;
+    padding: 0 $carbon--spacing-05;
+    color: $text-02;
+
+    font-weight: 400;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive), background-color
         $duration--fast-02 motion(entrance, productive),
       color $duration--fast-02 motion(entrance, productive);
@@ -20957,8 +21164,8 @@ Overflow menu styles
   }
 
   .#{$prefix}--overflow-menu-options__option-content {
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
   }
 
@@ -21061,23 +21268,37 @@ Pagination styles
     @include reset;
     @include type-style('body-short-01');
 
-    width: 100%;
-    overflow-x: auto;
-    background-color: $ui-01;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid $ui-03;
+
+    width: 100%;
     min-height: rem(48px);
+    overflow-x: auto;
+    background-color: $ui-01;
+    border-top: 1px solid $ui-03;
 
     @include carbon--breakpoint('md') {
       overflow: initial;
     }
+
+    // mobile friendly pagination
+    @include carbon--breakpoint-down('md') {
+      .#{$prefix}--pagination__left > *,
+      .#{$prefix}--pagination__right > * {
+        display: none;
+      }
+
+      .#{$prefix}--pagination__items-count,
+      .#{$prefix}--pagination__control-buttons {
+        display: initial;
+      }
+    }
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
-    height: 100%;
     align-items: center;
+    height: 100%;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
@@ -21118,8 +21339,8 @@ Pagination styles
   .#{$prefix}--pagination__left,
   .#{$prefix}--pagination__right {
     display: flex;
-    height: rem(48px);
     align-items: center;
+    height: rem(48px);
   }
 
   .#{$prefix}--pagination__left > .#{$prefix}--form-item,
@@ -21160,19 +21381,20 @@ Pagination styles
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include reset;
 
-    border: none;
-    background: none;
-    cursor: pointer;
-    height: 100%;
-    width: $carbon--spacing-09;
-    margin: 0;
-    border-left: 1px solid $ui-03;
     display: flex;
-    justify-content: center;
     align-items: center;
-    fill: $ui-05;
+    justify-content: center;
+    width: $carbon--spacing-09;
+    height: 100%;
+    margin: 0;
+    background: none;
+
+    border: none;
+    border-left: 1px solid $ui-03;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive), background-color
         $duration--fast-02 motion(standard, productive);
+    fill: $ui-05;
   }
 
   .#{$prefix}--pagination__button:focus,
@@ -21189,18 +21411,18 @@ Pagination styles
 
   .#{$prefix}--pagination__button--no-index,
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--no-index {
-    fill: $disabled-02;
     cursor: not-allowed;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--pagination__button:disabled:hover,
   .#{$prefix}--pagination__button--no-index:hover,
   .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
   .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
-    cursor: not-allowed;
-    fill: $disabled-02;
     background: $ui-01;
     border-color: $ui-03;
+    cursor: not-allowed;
+    fill: $disabled-02;
   }
 
   // Skeleton state
@@ -21216,6 +21438,7 @@ Pagination styles
 - **Group**: [pagination](#pagination)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -21240,14 +21463,15 @@ Unstable pagination styles
     @include reset;
     @include carbon--type-style('body-short-01');
 
-    width: 100%;
-    background-color: $ui-01;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    width: 100%;
+    height: rem(48px);
+    background-color: $ui-01;
     border-top: 1px solid $ui-03;
     border-bottom: 1px solid transparent;
-    height: rem(48px);
   }
 
   .#{$prefix}--unstable-pagination__text {
@@ -21262,8 +21486,8 @@ Unstable pagination styles
   .#{$prefix}--unstable-pagination__left,
   .#{$prefix}--unstable-pagination__right {
     display: flex;
-    height: 100%;
     align-items: center;
+    height: 100%;
   }
 
   .#{$prefix}--unstable-pagination__left {
@@ -21289,26 +21513,27 @@ Unstable pagination styles
   .#{$prefix}--unstable-pagination__button {
     @include reset;
 
-    border: none;
-    border-left: 1px solid $ui-03;
-    background: none;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
     margin: 0;
     padding: 0 rem(14px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: $ui-05;
-    fill: $ui-05;
+    background: none;
+
+    border: none;
+    border-left: 1px solid $ui-03;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive), background-color
         $duration--fast-02 motion(standard, productive);
+    fill: $ui-05;
   }
 
   // Unset height/width set by icon-only button:
   .#{$prefix}--unstable-pagination__button .#{$prefix}--btn__icon {
-    height: initial;
     width: initial;
+    height: initial;
   }
 
   .#{$prefix}--unstable-pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
@@ -21316,13 +21541,13 @@ Unstable pagination styles
   }
 
   .#{$prefix}--unstable-pagination__button:hover {
-    background: $hover-ui;
     color: $ui-05;
+    background: $hover-ui;
   }
 
   .#{$prefix}--unstable-pagination__button--no-index {
-    fill: $disabled-02;
     cursor: not-allowed;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--unstable-pagination__button.#{$prefix}--btn:disabled {
@@ -21332,15 +21557,15 @@ Unstable pagination styles
 
   .#{$prefix}--unstable-pagination__button:disabled:hover,
   .#{$prefix}--unstable-pagination__button--no-index:hover {
+    background: transparent;
     cursor: not-allowed;
     fill: $disabled-02;
-    background: transparent;
   }
 
   .#{$prefix}--unstable-pagination__page-selector,
   .#{$prefix}--unstable-pagination__page-sizer {
-    height: 100%;
     align-items: center;
+    height: 100%;
   }
 
   .#{$prefix}--unstable-pagination__page-selector
@@ -21358,12 +21583,12 @@ Unstable pagination styles
     width: auto;
     min-width: auto;
     height: 100%;
-    padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
     margin-right: -0.65rem;
+    padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
 
     @include carbon--breakpoint('md') {
-      padding-right: carbon--mini-units(4.5);
       margin-right: 0;
+      padding-right: carbon--mini-units(4.5);
     }
   }
 
@@ -21423,24 +21648,24 @@ Pseudo underline
 @mixin pseudo-underline() {
   &:not(.#{$prefix}--pagination-nav__page--direction) {
     &::after {
-      background-color: $interactive-01;
-      bottom: 0;
-      content: '';
-      display: block;
-      height: $carbon--spacing-02;
-      left: 50%;
       position: absolute;
+      bottom: 0;
+      left: 50%;
+      display: block;
+      width: 0;
+      height: $carbon--spacing-02;
+      background-color: $interactive-01;
       opacity: 0;
       transition: width $duration--fast-02 motion(standard, productive);
-      width: 0;
+      content: '';
     }
   }
 
   .#{$prefix}--pagination-nav__page--active + &::after,
   &.#{$prefix}--pagination-nav__page--active::after {
     left: calc(50% - #{$carbon--spacing-05 / 2});
-    opacity: 1;
     width: $carbon--spacing-05;
+    opacity: 1;
   }
 }
 ```
@@ -21450,8 +21675,8 @@ Pseudo underline
 - **Group**: [pagination-nav](#pagination-nav)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
 - **Used by**:
   - [pagination-nav [mixin]](#pagination-nav-mixin)
@@ -21485,8 +21710,8 @@ Pagination nav base styles
   }
 
   .#{$prefix}--pagination-nav__list {
-    align-items: center;
     display: flex;
+    align-items: center;
     list-style: none;
   }
 
@@ -21506,24 +21731,24 @@ Pagination nav base styles
     @include type-style('body-short-01');
     @include button-reset($width: false);
 
-    border-radius: 0;
-    color: $text-color;
+    position: relative;
     display: block;
+    min-width: $button-min-width;
+    padding: $button-padding;
+    color: $text-color;
     font-weight: $font-weight;
     line-height: 1;
-    min-width: $button-min-width;
-    outline: 0;
-    padding: $button-padding;
-    position: relative;
     text-align: center;
     text-decoration: none;
+    border-radius: 0;
+    outline: 0;
     transition: background-color $duration--fast-02 motion(standard, productive),
       color $duration--fast-02 motion(standard, productive);
     user-select: none;
 
     &:hover {
-      background-color: $background-color-hover;
       color: $text-color;
+      background-color: $background-color-hover;
     }
 
     &:focus {
@@ -21532,8 +21757,8 @@ Pagination nav base styles
 
     &:disabled,
     &.#{$prefix}--pagination-nav__page--disabled {
-      background: none;
       color: rgba($text-color, 0.5);
+      background: none;
       outline: none;
       pointer-events: none;
     }
@@ -21541,24 +21766,24 @@ Pagination nav base styles
     @include pseudo-underline();
 
     &.#{$prefix}--pagination-nav__page--active {
-      background-color: $background-color-active;
       color: $text-color-active;
       font-weight: 600;
+      background-color: $background-color-active;
     }
 
     .#{$prefix}--pagination-nav__icon {
-      fill: currentColor;
       pointer-events: none;
+      fill: currentColor;
     }
   }
 
   .#{$prefix}--pagination-nav__page--direction {
-    align-items: center;
     display: flex;
-    height: $button-direction-size;
+    align-items: center;
     justify-content: center;
-    line-height: 0;
     width: $button-direction-size;
+    height: $button-direction-size;
+    line-height: 0;
   }
 
   .#{$prefix}--pagination-nav__select {
@@ -21566,9 +21791,9 @@ Pagination nav base styles
   }
 
   .#{$prefix}--pagination-nav__page--select {
-    appearance: none;
     max-height: $button-min-width;
     text-indent: calc(50% - 4.5px);
+    appearance: none;
     // Override some Firefox user-agent styles
     @-moz-document url-prefix() {
       text-indent: 0;
@@ -21576,11 +21801,11 @@ Pagination nav base styles
   }
 
   .#{$prefix}--pagination-nav__select-icon-wrapper {
-    height: 100%;
-    pointer-events: none;
     position: absolute;
     top: 0;
     width: 100%;
+    height: 100%;
+    pointer-events: none;
 
     @include pseudo-underline();
 
@@ -21592,10 +21817,10 @@ Pagination nav base styles
   }
 
   .#{$prefix}--pagination-nav__select-icon {
-    left: calc(50% - #{$select-icon-top-position / 2});
-    pointer-events: none;
     position: absolute;
     top: calc(50% - #{$select-icon-top-position / 2});
+    left: calc(50% - #{$select-icon-top-position / 2});
+    pointer-events: none;
   }
 
   .#{$prefix}--pagination-nav__accessibility-label {
@@ -21638,6 +21863,7 @@ Progress indicator styles
 
 ```scss
 @mixin flat-progress-indicator() {
+  /* stylelint-disable declaration-property-value-blacklist, declaration-empty-line-before */
   .#{$prefix}--flat-progress {
     @include reset;
     display: flex;
@@ -21943,8 +22169,8 @@ Progress indicator styles
     position: relative;
     display: inline-flex;
     flex-direction: row;
-    min-width: 7rem;
     width: rem(128px);
+    min-width: 7rem;
     overflow: visible;
 
     .#{$prefix}--tooltip__label {
@@ -21953,21 +22179,21 @@ Progress indicator styles
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
-    min-width: 8rem;
     flex-grow: 1;
+    min-width: 8rem;
   }
 
   .#{$prefix}--progress-line {
     position: absolute;
     left: 0;
-    height: 1px;
     width: rem(128px);
+    height: 1px;
     border: $progress-indicator-bar-width;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
-    min-width: rem(128px);
     width: 100%;
+    min-width: rem(128px);
   }
 
   .#{$prefix}--progress-step svg {
@@ -21976,39 +22202,39 @@ Progress indicator styles
     flex-shrink: 0;
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
-    border-radius: 50%;
     margin: rem(10px) $carbon--spacing-03 0 0;
+    border-radius: 50%;
     fill: $interactive-04;
   }
 
   .#{$prefix}--progress-label {
     @include type-style('body-short-01');
 
-    color: $text-01;
-    line-height: 1.45;
     max-width: rem(88px);
     margin: $carbon--spacing-03 0 0 0;
-    white-space: nowrap;
     overflow: hidden;
+    color: $text-01;
+    line-height: 1.45;
+    white-space: nowrap;
     text-overflow: ellipsis;
     transition: box-shadow $duration--fast-02 motion(standard, productive), color
         $duration--fast-02 motion(standard, productive);
 
     &::before {
-      content: '';
       display: block;
+      content: '';
     }
   }
 
   .#{$prefix}--progress-label:hover {
     color: $link-01;
-    cursor: pointer;
     box-shadow: 0 rem(1px) $link-01;
+    cursor: pointer;
   }
 
   .#{$prefix}--progress-label:focus {
-    outline: none;
     color: $link-01;
+    outline: none;
     box-shadow: 0 rem(3px) 0 0 $link-01;
   }
 
@@ -22033,8 +22259,8 @@ Progress indicator styles
   }
 
   .#{$prefix}--tooltip__text {
-    padding: 0;
     margin: 0;
+    padding: 0;
     font-weight: normal;
   }
 
@@ -22042,15 +22268,16 @@ Progress indicator styles
   .#{$prefix}--progress-step .#{$prefix}--tooltip {
     @include type-style('body-long-01');
 
-    min-width: rem(115px);
-    width: rem(125px);
-    min-height: $carbon--spacing-06;
-    margin-left: rem(22px);
-    margin-top: rem(40px);
-    padding: $carbon--spacing-03 $carbon--spacing-05;
     display: block;
-    visibility: hidden;
+    width: rem(125px);
+
+    min-width: rem(115px);
+    min-height: $carbon--spacing-06;
+    margin-top: rem(40px);
+    margin-left: rem(22px);
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     color: $inverse-01;
+    visibility: hidden;
   }
 
   //multiline tooltip
@@ -22068,8 +22295,8 @@ Progress indicator styles
 
     position: absolute;
     left: 0;
-    margin-left: $carbon--spacing-06;
     margin-top: rem(28px);
+    margin-left: $carbon--spacing-06;
     color: $text-02;
     text-align: start;
   }
@@ -22109,22 +22336,22 @@ Progress indicator styles
 
   //unclickable button
   .#{$prefix}--progress-step-button--unclickable {
-    cursor: default;
     outline: none;
+    cursor: default;
   }
 
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--progress-label:hover {
     color: $text-01;
-    cursor: default;
     box-shadow: none;
+    cursor: default;
   }
 
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--tooltip__label:hover {
     color: $link-01;
-    cursor: pointer;
     box-shadow: 0 rem(1px) $link-01;
+    cursor: pointer;
   }
 
   //DISABLED STYLING
@@ -22133,15 +22360,15 @@ Progress indicator styles
     pointer-events: none;
 
     svg {
-      fill: $disabled;
       cursor: not-allowed;
+      fill: $disabled;
     }
 
     .#{$prefix}--progress-label,
     .#{$prefix}--progress-label:hover {
       color: $disabled;
-      cursor: not-allowed;
       box-shadow: none;
+      cursor: not-allowed;
     }
 
     .#{$prefix}--progress-label:focus,
@@ -22170,8 +22397,9 @@ Progress indicator styles
   .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
     @include skeleton;
 
-    height: rem(12px);
     width: rem(40px);
+
+    height: rem(12px);
   }
 
   // Vertical Variant
@@ -22185,9 +22413,9 @@ Progress indicator styles
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
     flex-wrap: wrap;
     align-content: flex-start;
-    min-height: 3.625rem;
     width: initial;
     min-width: initial;
+    min-height: 3.625rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
@@ -22201,9 +22429,9 @@ Progress indicator styles
     display: inline-block;
     width: initial;
     max-width: rem(160px);
-    vertical-align: top;
     margin: 0;
     white-space: initial;
+    vertical-align: top;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
@@ -22221,8 +22449,8 @@ Progress indicator styles
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
     width: 1px;
+    height: 100%;
   }
 }
 ```
@@ -22298,20 +22526,20 @@ Radio button styles
 
     display: flex;
     align-items: center;
-    cursor: pointer;
     margin-right: $carbon--spacing-05;
+    cursor: pointer;
   }
 
   .#{$prefix}--radio-button__appearance {
     @include reset;
 
-    background-color: transparent;
-    border-radius: 50%;
-    border: $radio-border-width solid $icon-01;
     flex-shrink: 0;
-    height: rem(18px);
     width: rem(18px);
+    height: rem(18px);
     margin-right: $carbon--spacing-03;
+    background-color: transparent;
+    border: $radio-border-width solid $icon-01;
+    border-radius: 50%;
   }
 
   .#{$prefix}--radio-button:checked
@@ -22323,14 +22551,14 @@ Radio button styles
     border-color: $icon-01;
 
     &::before {
-      content: '';
-      display: inline-block;
       position: relative;
+      display: inline-block;
       width: 100%;
       height: 100%;
-      border-radius: 50%;
       background-color: $icon-01;
+      border-radius: 50%;
       transform: scale(0.5);
+      content: '';
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -22363,8 +22591,8 @@ Radio button styles
   .#{$prefix}--radio-button:focus
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
-    box-shadow: 0 0 0 2px $focus;
     outline: 1px solid transparent;
+    box-shadow: 0 0 0 2px $focus;
   }
 
   // Skeleton State
@@ -22442,9 +22670,9 @@ Search styles
 ```scss
 @mixin search() {
   .#{$prefix}--search {
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
     width: 100%;
   }
 
@@ -22454,20 +22682,20 @@ Search styles
 
   .#{$prefix}--search-input {
     @include reset;
-    @include type-style('body-short-02');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    appearance: none;
-    border: none;
-    background-color: $field-01;
-    color: $text-01;
-    padding: 0 $carbon--spacing-08;
-    text-overflow: ellipsis;
-    width: 100%;
     order: 1;
+    width: 100%;
+    padding: 0 $carbon--spacing-08;
+    color: $text-01;
+    text-overflow: ellipsis;
+    background-color: $field-01;
+    border: none;
+    border-bottom: 1px solid $ui-04;
     transition: background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive);
-    border-bottom: 1px solid $ui-04;
+    appearance: none;
 
     &:focus {
       @include focus-outline('outline');
@@ -22503,42 +22731,44 @@ Search styles
     background: $field-02;
   }
 
+  // Small styles
   .#{$prefix}--search--sm .#{$prefix}--search-input {
-    @include type-style('body-short-01');
-
     height: rem(32px);
+    // 8px padding on either side of icon + 16px icon (32px)
+    padding: 0 $spacing-07;
   }
 
-  .#{$prefix}--search--lg .#{$prefix}--search-input {
-    @include type-style('body-short-02');
+  .#{$prefix}--search--sm .#{$prefix}--search-magnifier {
+    left: rem(8px);
+  }
 
+  // Large styles
+  .#{$prefix}--search--lg .#{$prefix}--search-input {
     height: rem(40px);
+    // 12px padding on either side of icon + 16px icon (40px)
+    padding: 0 $spacing-08;
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-magnifier {
+    left: rem(12px);
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
-    @include type-style('body-short-02');
-
     height: rem(48px);
-    padding: 0 rem(64px) 0 rem(48px);
+    // 16px padding on either side of icon + 16px icon (48px)
+    padding: 0 $spacing-09;
   }
 
   .#{$prefix}--search-magnifier {
-    left: 0.75rem;
-    z-index: 2;
     position: absolute;
-    height: rem(16px);
-    width: rem(16px);
     top: 50%;
+    left: $spacing-05;
+    z-index: 2;
+    width: rem(16px);
+    height: rem(16px);
     transform: translateY(-50%);
-    fill: $icon-02;
     pointer-events: none;
-  }
-
-  .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
-    height: rem(20px);
-    width: rem(20px);
-    left: rem(24px);
-    transform: translate(-50%, -50%);
+    fill: $icon-02;
   }
 
   .#{$prefix}--search-close {
@@ -22550,15 +22780,15 @@ Search styles
     right: 0;
 
     &::before {
-      content: '';
-      display: block;
       position: absolute;
-      left: 0;
       top: rem(1px);
-      height: calc(100% - 2px);
+      left: 0;
+      display: block;
       width: 2px;
+      height: calc(100% - 2px);
       background-color: $field-01;
       transition: background-color $duration--fast-02 motion(standard, productive);
+      content: '';
     }
 
     &:hover {
@@ -22581,24 +22811,28 @@ Search styles
     }
   }
 
+  .#{$prefix}--search-close svg {
+    fill: inherit;
+  }
+
   .#{$prefix}--search-close,
   .#{$prefix}--search-button {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: rem(40px);
+    height: rem(40px);
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px 0;
+    visibility: inherit;
+    cursor: pointer;
+    opacity: 1;
     transition: opacity $duration--fast-02 motion(standard, productive), background-color
         $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive), border
         $duration--fast-02 motion(standard, productive);
-    cursor: pointer;
-    visibility: inherit;
-    opacity: 1;
-    height: rem(40px);
-    width: rem(40px);
     fill: $icon-01;
-    border-style: solid;
-    border-color: transparent;
-    border-width: 1px 0;
 
     &:hover {
       background-color: $hover-field;
@@ -22629,24 +22863,24 @@ Search styles
   .#{$prefix}--search--sm {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button {
-      height: rem(32px);
       width: rem(32px);
+      height: rem(32px);
     }
   }
 
   .#{$prefix}--search--lg {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button {
-      height: rem(40px);
       width: rem(40px);
+      height: rem(40px);
     }
   }
 
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button {
-      height: rem(48px);
       width: rem(48px);
+      height: rem(48px);
     }
   }
 
@@ -22674,12 +22908,16 @@ Search styles
 - **Group**: [search](#search)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [field-01 [variable]](#field-01-variable)
-  - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
+  - [spacing-08 [variable]](#spacing-08-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
@@ -22717,12 +22955,12 @@ Select styles
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    height: rem(40px);
-    appearance: none;
     display: block;
     width: rem(224px);
     min-width: rem(128px);
     max-width: rem(448px);
+
+    height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
     background-color: $field-01;
@@ -22733,6 +22971,7 @@ Select styles
 
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
     transition: outline $duration--fast-01 motion(standard, productive);
+    appearance: none;
 
     &:hover {
       background-color: $hover-ui;
@@ -22762,10 +23001,10 @@ Select styles
 
     &:disabled,
     &:hover:disabled {
-      cursor: not-allowed;
-      background-color: $disabled-background-color;
       color: $disabled-02;
+      background-color: $disabled-background-color;
       border-bottom-color: $disabled-background-color;
+      cursor: not-allowed;
     }
   }
 
@@ -22788,19 +23027,6 @@ Select styles
     padding-right: carbon--mini-units(10);
   }
 
-  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
-  .#{$prefix}--select-input__wrapper[data-invalid]
-    .#{$prefix}--select-input:focus {
-    @include focus-outline('invalid');
-  }
-
-  .#{$prefix}--form-requirement {
-    display: block;
-    color: $text-error;
-    font-weight: 400;
-    overflow: visible;
-  }
-
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
     fill: $disabled-02;
   }
@@ -22814,9 +23040,9 @@ Select styles
 
     &:disabled,
     &:hover:disabled {
-      cursor: not-allowed;
-      background-color: $disabled-background-color;
       color: $disabled-02;
+      background-color: $disabled-background-color;
+      cursor: not-allowed;
     }
   }
 
@@ -22825,8 +23051,8 @@ Select styles
     top: 0;
     right: $spacing-05;
     height: 100%;
-    fill: $ui-05;
     pointer-events: none;
+    fill: $ui-05;
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
@@ -22844,15 +23070,15 @@ Select styles
   }
 
   .#{$prefix}--select-option[disabled] {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   // Override some Firefox user-agent styles
   @-moz-document url-prefix() {
     .#{$prefix}--select-option {
-      background-color: $ui-01;
       color: $text-01;
+      background-color: $ui-01;
     }
 
     .#{$prefix}--select-optgroup {
@@ -22869,9 +23095,9 @@ Select styles
   .#{$prefix}--select--inline.#{$prefix}--select--invalid .#{$prefix}--label,
   .#{$prefix}--select--inline.#{$prefix}--select--invalid
     .#{$prefix}--form__helper-text {
+    align-self: flex-start;
     // Offset label text margin
     margin-top: rem(13px);
-    align-self: flex-start;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
@@ -22880,16 +23106,16 @@ Select styles
   }
 
   .#{$prefix}--select--inline .#{$prefix}--label {
-    white-space: nowrap;
     margin: 0 $carbon--spacing-03 0 0;
+    white-space: nowrap;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
-    background-color: transparent;
-    color: $text-01;
-    border-bottom: none;
-    padding-left: $carbon--spacing-03;
     padding-right: $spacing-07;
+    padding-left: $carbon--spacing-03;
+    color: $text-01;
+    background-color: transparent;
+    border-bottom: none;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
@@ -22948,7 +23174,6 @@ Select styles
   - [ui-04 [variable]](#ui-04-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [text-error [variable]](#text-error-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -22977,9 +23202,9 @@ Slider styles
   .#{$prefix}--slider {
     position: relative;
     width: 100%;
-    margin: 0 $carbon--spacing-05;
-    max-width: rem(640px);
     min-width: rem(200px);
+    max-width: rem(640px);
+    margin: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--slider__range-label {
@@ -22997,20 +23222,20 @@ Slider styles
     width: 100%;
     height: rem(2px);
     background: $ui-03;
-    cursor: pointer;
     transform: translate(0%, -50%);
+    cursor: pointer;
   }
 
   .#{$prefix}--slider__track:before {
-    content: '';
     position: absolute;
-    display: inline-block;
-    height: rem(4px);
-    width: rem(2px);
-    left: 50%;
-    transform: translate(-50%, 0);
     top: rem(-5px);
+    left: 50%;
+    display: inline-block;
+    width: rem(2px);
+    height: rem(4px);
     background: $ui-03;
+    transform: translate(-50%, 0);
+    content: '';
   }
 
   .#{$prefix}--slider__filled-track {
@@ -23018,27 +23243,27 @@ Slider styles
     width: 100%;
     height: rem(2px);
     background: $ui-05;
-    transform-origin: left;
-    pointer-events: none;
     transform: translate(0%, -50%);
+    transform-origin: left;
     transition: background $duration--fast-02 motion(standard, productive);
+    pointer-events: none;
   }
 
   .#{$prefix}--slider__thumb {
     position: absolute;
-    height: rem(14px);
+    top: 0;
+    z-index: 3;
     width: rem(14px);
+    height: rem(14px);
     background: $ui-05;
     border-radius: 50%;
+    outline: none;
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
-    top: 0;
     transform: translate(-50%, -50%);
+    cursor: pointer;
     transition: transform $duration--fast-02 motion(standard, productive), background
         $duration--fast-02 motion(standard, productive),
       box-shadow $duration--fast-02 motion(standard, productive);
-    cursor: pointer;
-    outline: none;
-    z-index: 3;
 
     &:hover {
       // 20px / 14px = 1.4286
@@ -23046,15 +23271,15 @@ Slider styles
     }
 
     &:focus {
+      background-color: $interactive-04;
+      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
-      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
-      background-color: $interactive-04;
     }
 
     &:active {
-      transform: translate(-50%, -50%) scale(1.4286);
       box-shadow: inset 0 0 0 2px $interactive-04;
+      transform: translate(-50%, -50%) scale(1.4286);
     }
   }
 
@@ -23095,9 +23320,9 @@ Slider styles
     }
 
     &:focus {
-      box-shadow: none;
-      outline: none;
       background-color: $ui-03;
+      outline: none;
+      box-shadow: none;
       transform: translate(-50%, -50%);
     }
 
@@ -23120,17 +23345,17 @@ Slider styles
     ~ .#{$prefix}--form-item
     .#{$prefix}--slider-text-input,
   .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
-    background-color: $disabled-01;
     color: $disabled-02;
-    transition: none;
-    cursor: not-allowed;
+    background-color: $disabled-01;
     border: none;
+    cursor: not-allowed;
+    transition: none;
 
     &:active,
     &:focus,
     &:hover {
-      outline: none;
       color: $disabled-02;
+      outline: none;
     }
   }
 
@@ -23207,13 +23432,13 @@ Used only for [data-structured-list]
 
 ```scss
 @mixin padding--data-structured-list($padding: $structured-list-padding) {
-  padding-left: $padding / 2;
   padding-right: $padding / 2;
+  padding-left: $padding / 2;
 
   // Controls gutter sizes for check
   &:first-child {
-    padding-left: $padding / 2;
     padding-right: $padding / 2;
+    padding-left: $padding / 2;
   }
 }
 ```
@@ -23297,13 +23522,13 @@ Tabs styles
     @include reset;
     @include type-style('body-short-01');
 
-    color: $text-01;
-    height: auto;
-    width: 100%;
     position: relative;
+    width: 100%;
+    height: auto;
+    color: $text-01;
     @include carbon--breakpoint(md) {
-      background: none;
       min-height: rem(40px);
+      background: none;
     }
   }
 
@@ -23317,13 +23542,13 @@ Tabs styles
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-09 0 $spacing-05;
     height: rem(40px);
-    cursor: pointer;
+    padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
-    outline: 2px solid transparent;
-    border-bottom: 1px solid $ui-04;
     background-color: $field-01;
+    border-bottom: 1px solid $ui-04;
+    outline: 2px solid transparent;
+    cursor: pointer;
     @include carbon--breakpoint(md) {
       display: none;
     }
@@ -23337,8 +23562,8 @@ Tabs styles
   .#{$prefix}--tabs-trigger svg {
     position: absolute;
     right: $spacing-05;
-    fill: $ui-05;
     transition: transform $duration--fast-01 motion(standard, productive);
+    fill: $ui-05;
   }
 
   .#{$prefix}--tabs-trigger--open:focus,
@@ -23362,12 +23587,12 @@ Tabs styles
   }
 
   .#{$prefix}--tabs-trigger-text {
-    text-decoration: none;
     padding-top: 2px;
+    overflow: hidden;
     color: $text-01;
     font-weight: 400;
     white-space: nowrap;
-    overflow: hidden;
+    text-decoration: none;
     text-overflow: ellipsis;
   }
 
@@ -23382,39 +23607,40 @@ Tabs styles
   .#{$prefix}--tabs__nav {
     @include box-shadow;
 
-    margin: 0;
-    padding: 0;
     position: absolute;
-    list-style: none;
+    z-index: z('dropdown');
     display: flex;
     flex-direction: column;
-    z-index: z('dropdown');
+    width: 100%;
+    max-height: 600px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
     background: $ui-01;
     transition: max-height $duration--fast-01 motion(standard, productive);
-    max-height: 600px;
-    width: 100%;
 
     @include carbon--breakpoint(md) {
+      z-index: auto;
       flex-direction: row;
+      width: auto;
       background: none;
       box-shadow: none;
-      z-index: auto;
       transition: inherit;
-      width: auto;
     }
   }
 
   .#{$prefix}--tabs__nav--hidden {
-    transition: max-height $duration--fast-01 motion(standard, productive);
-    overflow: hidden;
     max-height: 0;
+    overflow: hidden;
+    transition: max-height $duration--fast-01 motion(standard, productive);
 
     @include carbon--breakpoint(md) {
       display: flex;
-      transition: inherit;
-      overflow-x: auto;
       max-width: 100%;
       max-height: none;
+      overflow-x: auto;
+      transition: inherit;
     }
   }
 
@@ -23424,17 +23650,17 @@ Tabs styles
   .#{$prefix}--tabs__nav-item {
     @include reset;
 
-    background-color: $ui-01;
     display: flex;
-    padding: 0;
-    cursor: pointer;
     width: 100%;
     height: rem(40px);
+    padding: 0;
+    background-color: $ui-01;
+    cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
     @include carbon--breakpoint(md) {
-      background: transparent;
       height: auto;
+      background: transparent;
 
       + .#{$prefix}--tabs__nav-item {
         margin-left: rem(1px);
@@ -23499,8 +23725,8 @@ Tabs styles
   //---------------------------------------------
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
-    cursor: not-allowed;
     outline: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--tabs--container
@@ -23525,8 +23751,8 @@ Tabs styles
   // Item Selected
   //-----------------------------
   .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
-    border: none;
     display: none;
+    border: none;
     transition: color $duration--fast-01 motion(standard, productive);
 
     @include carbon--breakpoint(md) {
@@ -23550,12 +23776,12 @@ Tabs styles
       background-color: $ui-01;
 
       .#{$prefix}--tabs__nav-link {
+        padding: $spacing-03 $spacing-05;
         // height - vertical padding
         // Draws the border without affecting the inner-content
         line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-        box-shadow: inset 0 2px 0 0 $interactive-04;
         border-bottom: none;
-        padding: $spacing-03 $spacing-05;
+        box-shadow: inset 0 2px 0 0 $interactive-04;
       }
 
       .#{$prefix}--tabs__nav-link:focus,
@@ -23572,18 +23798,18 @@ Tabs styles
     @include focus-outline('reset');
 
     display: inline-block;
-    color: $text-02;
-    text-decoration: none;
-    font-weight: 400;
-    padding: $spacing-04 0;
     width: calc(100% - 32px);
     height: rem(40px);
-    white-space: nowrap;
-    text-overflow: ellipsis;
     margin: 0 $spacing-05;
-    line-height: 1rem;
-    border-bottom: 1px solid $ui-03;
+    padding: $spacing-04 0;
     overflow: hidden;
+    color: $text-02;
+    font-weight: 400;
+    line-height: 1rem;
+    white-space: nowrap;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid $ui-03;
     transition: border $duration--fast-01 motion(standard, productive), outline
         $duration--fast-01 motion(standard, productive);
 
@@ -23597,11 +23823,11 @@ Tabs styles
     }
 
     @include carbon--breakpoint(md) {
-      border-bottom: $tab-underline-color;
-      padding: $spacing-04 $spacing-05 $spacing-03;
       width: rem(160px);
       margin: 0;
+      padding: $spacing-04 $spacing-05 $spacing-03;
       line-height: inherit;
+      border-bottom: $tab-underline-color;
 
       &:focus,
       &:active {
@@ -23614,10 +23840,10 @@ Tabs styles
   .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
       height: rem(48px);
+      padding: $spacing-03 $spacing-05;
       // Height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
       border-bottom: none;
-      padding: $spacing-03 $spacing-05;
     }
   }
 
@@ -23651,14 +23877,14 @@ Tabs styles
   }
 
   .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
-    cursor: no-drop;
     border-bottom: $tab-underline-disabled;
+    cursor: no-drop;
   }
 
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
   .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
-    outline: none;
     border-bottom: $tab-underline-disabled;
+    outline: none;
   }
 
   //-----------------------------
@@ -23682,8 +23908,8 @@ Tabs styles
   // Skeleton state
   //-----------------------------
   .#{$prefix}--tabs.#{$prefix}--skeleton {
-    pointer-events: none;
     cursor: default;
+    pointer-events: none;
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
@@ -23714,8 +23940,8 @@ Tabs styles
   - [text-01 [variable]](#text-01-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
-  - [ui-04 [variable]](#ui-04-variable)
   - [field-01 [variable]](#field-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [field-02 [variable]](#field-02-variable)
@@ -23726,8 +23952,8 @@ Tabs styles
   - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
-  - [text-02 [variable]](#text-02-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
+  - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
 
 ## tag
@@ -23739,8 +23965,8 @@ Tabs styles
 
 ```scss
 @mixin tag-theme() {
-  background-color: $bg-color;
   color: $text-color;
+  background-color: $bg-color;
 
   .#{$prefix}--tag__close-icon {
     &:hover {
@@ -23779,15 +24005,15 @@ Tag styles
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: $carbon--spacing-02 $carbon--spacing-03;
-    min-height: 1.5rem;
-    // restricts size of contained elements
-    max-width: 100%;
     // ensures tag stays pill shaped;
     min-width: rem(32px);
+    // restricts size of contained elements
+    max-width: 100%;
+    min-height: 1.5rem;
     margin: $carbon--spacing-02;
-    border-radius: rem(15px);
+    padding: $carbon--spacing-02 $carbon--spacing-03;
     word-break: break-word;
+    border-radius: rem(15px);
     cursor: default;
 
     &:not(:first-child) {
@@ -23897,8 +24123,8 @@ Tag styles
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    cursor: pointer;
     padding-right: rem(2px);
+    cursor: pointer;
 
     &:focus,
     &:hover {
@@ -23912,10 +24138,10 @@ Tag styles
     height: rem(20px);
     margin: 0 0 0 rem(4px);
     padding: rem(2px);
-    border: 0;
-    background-color: transparent;
-    border-radius: 50%;
     color: currentColor;
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
     cursor: pointer;
 
     svg {
@@ -23928,9 +24154,9 @@ Tag styles
   }
 
   .#{$prefix}--tag__close-icon:focus {
+    border-radius: 50%;
     outline: none;
     box-shadow: inset 0 0 0 2px $focus;
-    border-radius: 50%;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
@@ -23986,18 +24212,18 @@ Text area styles
     @include type-style('body-long-01');
     @include focus-outline('reset');
 
-    background-color: $field-01;
     width: 100%;
-    height: 100%;
     min-width: 10rem;
+    height: 100%;
     min-height: rem(40px);
     padding: rem(11px) $carbon--spacing-05;
     color: $text-01;
-    resize: vertical;
+    background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
+    resize: vertical;
   }
 
   .#{$prefix}--text-area:focus,
@@ -24008,8 +24234,6 @@ Text area styles
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
     @include type-style('body-long-01');
-
-    opacity: 1;
   }
 
   .#{$prefix}--text-area--light {
@@ -24028,8 +24252,8 @@ Text area styles
 
   .#{$prefix}--text-area__invalid-icon {
     position: absolute;
-    right: $carbon--spacing-05;
     top: $carbon--spacing-04;
+    right: $carbon--spacing-05;
     fill: $support-01;
   }
 
@@ -24037,11 +24261,11 @@ Text area styles
   // Disabled
   //-----------------------------
   .#{$prefix}--text-area:disabled {
-    cursor: not-allowed;
-    outline: none;
+    color: $disabled-02;
     background-color: $disabled-background-color;
     border-bottom: 1px solid transparent;
-    color: $disabled-02;
+    outline: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--text-area:disabled::placeholder {
@@ -24070,9 +24294,9 @@ Text area styles
 - **Group**: [text-area](#text-area)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [field-01 [variable]](#field-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
@@ -24096,11 +24320,11 @@ Text input styles
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    background-color: $field-01;
     width: 100%;
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
     color: $text-01;
+    background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
     transition: background-color $duration--fast-01 motion(standard, productive),
@@ -24147,11 +24371,20 @@ Text input styles
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
-      right: $carbon--spacing-05;
       // top/transform used to center invalid icon in IE11
       top: 50%;
+      right: $carbon--spacing-05;
       transform: translateY(-50%);
       fill: $support-01;
+    }
+
+    .#{$prefix}--text-input__invalid-icon--warning {
+      fill: $support-03;
+
+      path[data-icon-path='inner-path'] {
+        opacity: 1;
+        fill: $carbon__black-100;
+      }
     }
 
     // TODO: deprecate this style block
@@ -24164,12 +24397,12 @@ Text input styles
     // TODO: remove selector above
     .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
       position: absolute;
-      height: rem(16px);
-      width: rem(16px);
       right: $carbon--spacing-05;
+      width: rem(16px);
+      height: rem(16px);
       padding: 0;
-      border: 0;
       background: none;
+      border: 0;
       cursor: pointer;
 
       svg {
@@ -24205,8 +24438,8 @@ Text input styles
   .#{$prefix}--text-input:disabled
     + .#{$prefix}--text-input--password__visibility__toggle
     svg {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   //-----------------------------
@@ -24215,10 +24448,11 @@ Text input styles
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
 
-    cursor: not-allowed;
+    color: $disabled-02;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
-    color: $disabled-02;
+
+    cursor: not-allowed;
   }
 
   .#{$prefix}--text-input--light:disabled {
@@ -24226,8 +24460,8 @@ Text input styles
   }
 
   .#{$prefix}--text-input:disabled::placeholder {
-    opacity: 1;
     color: $disabled-02;
+    opacity: 1;
   }
 
   //-----------------------------
@@ -24277,18 +24511,22 @@ Text input styles
     display: none;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--warn {
     border-bottom: none;
   }
 
   .#{$prefix}--form--fluid
     .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input--warn
     + .#{$prefix}--text-input__divider {
     display: block;
     margin: 0 1rem;
+    border-color: $ui-03;
     border-style: solid;
     border-bottom: none;
-    border-color: $ui-03;
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
@@ -24297,6 +24535,23 @@ Text input styles
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
     background: $field-02;
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid {
+    @include focus-outline('reset');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:not(:focus) {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:focus {
+    @include focus-outline('outline');
   }
 
   //-----------------------------
@@ -24310,8 +24565,8 @@ Text input styles
   .#{$prefix}--label--inline {
     flex: 1;
     margin: rem(13px) 0 0 0;
-    overflow-wrap: break-word;
     word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .#{$prefix}--label--inline--sm {
@@ -24325,8 +24580,8 @@ Text input styles
   .#{$prefix}--text-input__label-helper-wrapper {
     flex: 2;
     flex-direction: column;
-    margin-right: rem(24px);
     max-width: rem(128px);
+    margin-right: rem(24px);
     overflow-wrap: break-word;
   }
 
@@ -24335,10 +24590,10 @@ Text input styles
   }
 
   .#{$prefix}--text-input__field-outer-wrapper {
-    align-items: flex-start;
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
+    align-items: flex-start;
     width: 100%;
   }
 
@@ -24354,16 +24609,17 @@ Text input styles
 - **Group**: [text-input](#text-input)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [field-01 [variable]](#field-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [field-02 [variable]](#field-02-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [support-03 [variable]](#support-03-variable)
   - [icon-02 [variable]](#icon-02-variable)
-  - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
 
 ## tile
@@ -24378,12 +24634,12 @@ Tile styles
 ```scss
 @mixin tile() {
   .#{$prefix}--tile {
+    position: relative;
     display: block;
     min-width: 8rem;
     min-height: 4rem;
-    background-color: $ui-01;
-    position: relative;
     padding: $carbon--spacing-05;
+    background-color: $ui-01;
     outline: 2px solid transparent;
     outline-offset: -2px;
 
@@ -24399,8 +24655,8 @@ Tile styles
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable,
   .#{$prefix}--tile--expandable {
-    transition: $duration--moderate-01 motion(standard, productive);
     cursor: pointer;
+    transition: $duration--moderate-01 motion(standard, productive);
 
     &:hover {
       background: $hover-ui;
@@ -24441,15 +24697,15 @@ Tile styles
   .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile__chevron {
     position: absolute;
-    transition: $duration--fast-02 motion(standard, productive);
-    border: none;
     background: transparent;
+    border: none;
+    transition: $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--tile__checkmark {
-    height: 1rem;
     top: 1rem;
     right: 1rem;
+    height: 1rem;
     opacity: 0;
 
     svg {
@@ -24464,8 +24720,8 @@ Tile styles
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    bottom: 0.5rem;
     right: 0.5rem;
+    bottom: 0.5rem;
     height: 1rem;
 
     svg {
@@ -24485,11 +24741,11 @@ Tile styles
 
   .#{$prefix}--tile--expandable {
     width: 100%;
+    overflow: hidden;
     color: inherit;
     font-size: inherit;
     text-align: left;
     border: 0;
-    overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -24545,6 +24801,10 @@ Tile styles
   .#{$prefix}--tile-input {
     @include hidden;
   }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
+  }
 }
 ```
 
@@ -24553,8 +24813,8 @@ Tile styles
 - **Group**: [tile](#tile)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [ui-01 [variable]](#ui-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [ui-01 [variable]](#ui-01-variable)
   - [ui-02 [variable]](#ui-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -24578,10 +24838,6 @@ Time picker styles
     align-items: flex-end;
   }
 
-  .#{$prefix}--time-picker[data-invalid] .#{$prefix}--time-picker__input-field {
-    @include focus-outline('invalid');
-  }
-
   .#{$prefix}--time-picker__select {
     justify-content: center;
 
@@ -24596,9 +24852,9 @@ Time picker styles
   }
 
   .#{$prefix}--time-picker .#{$prefix}--select-input {
-    margin: 0;
-    min-width: auto;
     width: auto;
+    min-width: auto;
+    margin: 0;
     padding-right: rem(48px);
     line-height: 1;
   }
@@ -24628,10 +24884,10 @@ Time picker styles
 
     &:disabled,
     &:hover:disabled {
-      cursor: not-allowed;
+      color: $disabled-02;
       background-color: transparent;
       border-bottom: 1px solid transparent;
-      color: $disabled-02;
+      cursor: not-allowed;
     }
   }
 }
@@ -24673,8 +24929,8 @@ Toggle styles
     position: relative;
     display: flex;
     align-items: center;
-    cursor: pointer;
     margin: $carbon--spacing-03 0;
+    cursor: pointer;
   }
 
   .#{$prefix}--toggle__appearance {
@@ -24685,49 +24941,49 @@ Toggle styles
     // Toggle background oval
     &::before {
       position: absolute;
-      display: block;
-      content: '';
-      background-color: $ui-04;
-      cursor: pointer;
-      box-sizing: border-box;
-      height: carbon--rem(24px);
-      width: carbon--rem(48px);
-      border-radius: carbon--rem(15px);
       top: 0;
-      will-change: box-shadow;
+      display: block;
+      box-sizing: border-box;
+      width: carbon--rem(48px);
+      height: carbon--rem(24px);
+      background-color: $ui-04;
+      border-radius: carbon--rem(15px);
       // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
       box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
+      cursor: pointer;
       transition: box-shadow $duration--fast-01 motion(exit, productive), background-color
           $duration--fast-01 motion(exit, productive);
+      content: '';
+      will-change: box-shadow;
     }
 
     // Toggle circle
     &::after {
-      box-sizing: border-box;
       position: absolute;
-      display: block;
-      cursor: pointer;
-      left: carbon--rem(3px);
       top: carbon--rem(3px);
+      left: carbon--rem(3px);
+      display: block;
+      box-sizing: border-box;
       width: carbon--rem(18px);
       height: carbon--rem(18px);
       background-color: $icon-03;
       border-radius: 50%;
-      content: '';
+      cursor: pointer;
       transition: transform $duration--fast-01 motion(exit, productive);
+      content: '';
     }
   }
 
   .#{$prefix}--toggle__check {
-    fill: $icon-03;
     position: absolute;
-    left: carbon--rem(6px);
     top: carbon--rem(6px);
+    left: carbon--rem(6px);
+    z-index: 1;
     width: carbon--rem(6px);
     height: carbon--rem(5px);
-    z-index: 1;
-    transition: $duration--fast-01 motion(exit, productive);
     transform: scale(0.2);
+    transition: $duration--fast-01 motion(exit, productive);
+    fill: $icon-03;
   }
 
   .#{$prefix}--toggle__text--left,
@@ -24848,26 +25104,26 @@ Toggle styles
     height: carbon--rem(16px);
 
     &::before {
-      box-sizing: border-box;
-      height: carbon--rem(16px);
-      width: carbon--rem(32px);
-      border-radius: 0.9375rem;
       top: 0;
+      box-sizing: border-box;
+      width: carbon--rem(32px);
+      height: carbon--rem(16px);
+      border-radius: 0.9375rem;
     }
 
     &::after {
-      width: carbon--rem(10px);
-      height: carbon--rem(10px);
       top: carbon--rem(3px);
       left: carbon--rem(3px);
+      width: carbon--rem(10px);
+      height: carbon--rem(10px);
     }
   }
 
   .#{$prefix}--toggle--small:checked
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__check {
-    fill: $support-02;
     transform: scale(1) translateX(carbon--rem(16px));
+    fill: $support-02;
   }
 
   .#{$prefix}--toggle--small
@@ -24901,10 +25157,10 @@ Toggle styles
   .#{$prefix}--toggle-input__label {
     @include type-style('label-01');
 
-    color: $text-02;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    color: $text-02;
     cursor: pointer;
   }
 
@@ -24918,35 +25174,35 @@ Toggle styles
 
     // Toggle background oval
     &::before {
-      box-sizing: border-box;
       position: absolute;
       top: 0;
       display: block;
+      box-sizing: border-box;
       width: carbon--rem(48px);
       height: carbon--rem(24px);
-      border-radius: carbon--rem(15px);
-      content: '';
       background-color: $ui-04;
-      will-change: box-shadow;
+      border-radius: carbon--rem(15px);
       // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
       box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
       transition: box-shadow $duration--fast-01 motion(exit, productive), background-color
           $duration--fast-01 motion(exit, productive);
+      content: '';
+      will-change: box-shadow;
     }
 
     // Toggle circle
     &::after {
-      box-sizing: border-box;
       position: absolute;
       top: carbon--rem(3px);
       left: carbon--rem(3px);
       display: block;
+      box-sizing: border-box;
       width: carbon--rem(18px);
       height: carbon--rem(18px);
-      border-radius: 50%;
       background-color: $icon-03;
-      content: '';
+      border-radius: 50%;
       transition: transform $duration--fast-01 motion(exit, productive);
+      content: '';
     }
 
     .#{$prefix}--toggle-input__label & {
@@ -24959,12 +25215,12 @@ Toggle styles
     @include type-style('body-short-01');
 
     position: absolute;
-    margin-left: rem(56px);
-    user-select: none;
-    white-space: nowrap;
     // top offset needed to vertically center absolutely positioned flex child in IE11
     top: 50%;
+    margin-left: rem(56px);
+    white-space: nowrap;
     transform: translateY(-50%);
+    user-select: none;
   }
 
   //----------------------------------------------
@@ -25072,8 +25328,8 @@ Toggle styles
     }
 
     .#{$prefix}--toggle__check {
-      fill: $support-02;
       transform: scale(1) translateX(carbon--rem(16px));
+      fill: $support-02;
     }
   }
 
@@ -25147,30 +25403,30 @@ Toolbar styles
     }
 
     .#{$prefix}--overflow-menu__icon {
-      fill: $text-02;
       transition: fill 50ms $carbon--standard-easing;
+      fill: $text-02;
     }
 
     .#{$prefix}--search-magnifier {
-      fill: $text-02;
-      transform: scale(1.15);
-      transition: all 175ms $carbon--standard-easing;
       top: rem(8px);
       left: rem(6px);
+      transform: scale(1.15);
       cursor: pointer;
+      transition: all 175ms $carbon--standard-easing;
+      fill: $text-02;
     }
 
     fieldset {
-      border: 0;
       padding: 0;
+      border: 0;
     }
 
     .#{$prefix}--toolbar-search--active {
       width: rem(250px);
 
       .#{$prefix}--search-magnifier {
-        transform: scale(1);
         top: rem(9px);
+        transform: scale(1);
       }
 
       .#{$prefix}--search-input {
@@ -25198,12 +25454,12 @@ Toolbar styles
 
   .#{$prefix}--toolbar-search__btn {
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
+    width: rem(32px);
+    height: rem(32px);
     background: transparent;
     border: 0;
-    height: rem(32px);
-    width: rem(32px);
 
     &:focus {
       @include focus-outline;
@@ -25211,15 +25467,15 @@ Toolbar styles
   }
 
   .#{$prefix}--toolbar-filter-icon {
-    padding-left: 0;
     padding-right: 0;
+    padding-left: 0;
   }
 
   .#{$prefix}--toolbar-menu__title {
     @include type-style('caption-01');
 
-    font-weight: 600;
     padding: 0.5rem 1.25rem;
+    font-weight: 600;
   }
 
   .#{$prefix}--toolbar-menu__option {
@@ -25267,8 +25523,8 @@ Toolbar styles
   position: relative;
   display: inline-flex;
   align-items: center;
-  cursor: pointer;
   overflow: visible;
+  cursor: pointer;
 
   // Tooltip - renders as a combo of ::before and ::after elements
   &::before,
@@ -25279,8 +25535,8 @@ Toolbar styles
     display: flex;
     align-items: center;
     opacity: 0;
-    pointer-events: none;
     transition: opacity $duration--fast-01 motion(standard, productive);
+    pointer-events: none;
   }
 
   &::before {
@@ -25288,13 +25544,13 @@ Toolbar styles
     left: 0;
     width: 0;
     height: 0;
-    border-width: 0 rem(4px) rem(5px) rem(4px);
-    border-style: solid;
-    border-color: transparent transparent $inverse-02 transparent;
     margin: 0 auto;
-    content: '';
     margin-top: 1px;
     margin-left: 50%;
+    border-color: transparent transparent $inverse-02 transparent;
+    border-style: solid;
+    border-width: 0 rem(4px) rem(5px) rem(4px);
+    content: '';
   }
 
   &::after {
@@ -25305,14 +25561,14 @@ Toolbar styles
     height: rem(24px);
     margin-left: 50%;
     padding: 0 1rem;
-    border-radius: rem(2px);
     color: $inverse-01;
     font-weight: 400;
-    content: attr(aria-label);
-    transform: translateX(-50%);
     white-space: nowrap;
-    pointer-events: none;
     background-color: $inverse-02;
+    border-radius: rem(2px);
+    transform: translateX(-50%);
+    content: attr(aria-label);
+    pointer-events: none;
   }
 
   &:hover,
@@ -25362,9 +25618,9 @@ Toolbar styles
     @if ($align == 'start') {
       margin-left: 4px;
     } @else if ($align == 'end') {
-      margin-right: 4px;
-      left: auto;
       right: 0;
+      left: auto;
+      margin-right: 4px;
     }
   }
 
@@ -25415,10 +25671,10 @@ Toolbar styles
     .#{$prefix}--tooltip__trigger {
       @include type-style('label-01');
 
-      display: inline-flex;
       position: relative;
-      border-bottom: 1px dotted $interactive-01;
+      display: inline-flex;
       color: $text-01;
+      border-bottom: 1px dotted $interactive-01;
 
       &:hover {
         cursor: pointer;
@@ -25447,13 +25703,13 @@ Toolbar styles
     position: absolute;
     z-index: 1;
     display: none;
-    background: $inverse-02;
     width: rem(208px);
     margin-top: $carbon--spacing-04;
     padding: $carbon--spacing-03 $carbon--spacing-05;
+    background: $inverse-02;
     border-radius: rem(2px);
-    pointer-events: none;
     cursor: pointer;
+    pointer-events: none;
 
     p {
       @include type-style('body-short-01');
@@ -25467,8 +25723,8 @@ Toolbar styles
       left: 0;
       width: 0.6rem;
       height: 0.6rem;
-      background: $inverse-02;
       margin-left: $carbon--spacing-05;
+      background: $inverse-02;
     }
   }
 
@@ -25480,8 +25736,8 @@ Toolbar styles
 
   // Tooltip Definition caret - top position
   .#{$prefix}--tooltip--definition__top {
-    transform: translateY(-100%);
     margin-top: rem(-32px);
+    transform: translateY(-100%);
 
     .#{$prefix}--tooltip__caret {
       bottom: -0.2rem;
@@ -25505,15 +25761,15 @@ Toolbar styles
 
   .#{$prefix}--tooltip--definition__align-center .#{$prefix}--tooltip__caret {
     left: auto;
-    margin-left: auto;
     // Adjust by the half of the diagonal of the caret, which sizes 0.6rem
     margin-right: calc(50% - 6px);
+    margin-left: auto;
   }
 
   .#{$prefix}--tooltip--definition__align-end .#{$prefix}--tooltip__caret {
     left: auto;
-    margin-left: auto;
     margin-right: rem(16px);
+    margin-left: auto;
   }
 }
 ```
@@ -25523,12 +25779,12 @@ Toolbar styles
 - **Group**: [tooltip](#tooltip)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [interactive-01 [variable]](#interactive-01-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [inverse-02 [variable]](#inverse-02-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
 - **Used by**:
   - [tooltip [mixin]](#tooltip-mixin)
@@ -25649,8 +25905,8 @@ Tooltip styles
 
     display: inline-flex;
     align-items: center;
-    cursor: pointer;
     font-size: 1rem;
+    cursor: pointer;
 
     &:focus {
       @include focus-outline('border');
@@ -25673,21 +25929,21 @@ Tooltip styles
     @include reset;
 
     position: absolute;
+    z-index: z('floating');
     display: none;
     min-width: rem(208px);
     max-width: rem(288px);
-    background: $inverse-02;
     margin-top: $carbon--spacing-02;
     padding: $carbon--spacing-05;
-    border-radius: rem(2px);
-    z-index: z('floating');
-    word-wrap: break-word;
     color: $inverse-01;
+    word-wrap: break-word;
+    background: $inverse-02;
+    border-radius: rem(2px);
 
     // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
-      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
       outline: 0;
+      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
     }
 
     p {
@@ -25729,16 +25985,16 @@ Tooltip styles
     }
 
     .#{$prefix}--tooltip__caret {
-      border-left: $caret-size solid transparent;
-      border-right: $caret-size solid transparent;
-      border-bottom: $caret-size solid $inverse-02;
       position: absolute;
-      left: 0;
       top: calc(#{$caret-size * (-1)} + 1px);
       right: 0;
+      left: 0;
       width: 0;
       height: 0;
       margin: 0 auto;
+      border-right: $caret-size solid transparent;
+      border-bottom: $caret-size solid $inverse-02;
+      border-left: $caret-size solid transparent;
       content: '';
     }
 
@@ -25751,10 +26007,10 @@ Tooltip styles
 
     &[data-floating-menu-direction='left'] {
       .#{$prefix}--tooltip__caret {
-        left: auto;
         top: 50%;
         // left position has an additional space between caret and tooltip
         right: calc(#{$caret-size * (-1)} + 1px);
+        left: auto;
         transform: rotate(90deg) translate(50%, -50%);
       }
     }
@@ -25769,9 +26025,9 @@ Tooltip styles
 
     &[data-floating-menu-direction='right'] {
       .#{$prefix}--tooltip__caret {
-        left: calc(#{$caret-size * (-1)} + 1px);
         top: 50%;
         right: auto;
+        left: calc(#{$caret-size * (-1)} + 1px);
         transform: rotate(270deg) translate(50%, -50%);
       }
     }
@@ -25965,10 +26221,10 @@ Tooltip styles
   - [icon-02 [variable]](#icon-02-variable)
   - [hover-primary [variable]](#hover-primary-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [inverse-02 [variable]](#inverse-02-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [inverse-02 [variable]](#inverse-02-variable)
   - [ui-background [variable]](#ui-background-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
@@ -25988,8 +26244,8 @@ UI shell content
 ```scss
 @mixin carbon-content() {
   .#{$prefix}--content {
-    background: $ui-02;
     padding: 2rem;
+    background: $ui-02;
     transform: translate3d(0, 0, 0);
     will-change: margin-left;
   }
@@ -26065,22 +26321,22 @@ UI shell side nav
 
     position: fixed;
     top: carbon--mini-units(6);
-    bottom: 0;
     right: 0;
+    bottom: 0;
+    z-index: z('header');
     width: 0;
+    overflow: hidden;
+    color: $shell-panel-text-01;
     background-color: $shell-panel-bg-01;
     border: none;
-    will-change: width;
     transition: width 0.11s;
-    overflow: hidden;
-    z-index: z('header');
-    color: $shell-panel-text-01;
+    will-change: width;
   }
 
   .#{$prefix}--header-panel--expanded {
     width: carbon--mini-units(32);
-    border-left: 1px solid $shell-panel-border;
     border-right: 1px solid $shell-panel-border;
+    border-left: 1px solid $shell-panel-border;
   }
 }
 ```
@@ -26092,8 +26348,8 @@ UI shell side nav
   - [carbon--motion [mixin]](#carbon--motion-mixin)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
-  - [shell-panel-bg-01 [variable]](#shell-panel-bg-01-variable)
   - [shell-panel-text-01 [variable]](#shell-panel-text-01-variable)
+  - [shell-panel-bg-01 [variable]](#shell-panel-bg-01-variable)
   - [shell-panel-border [variable]](#shell-panel-border-variable)
 
 ### ❌carbon-header [mixin]
@@ -26106,16 +26362,16 @@ UI shell header
 ```scss
 @mixin carbon-header() {
   .#{$prefix}--header {
-    display: flex;
-    align-items: center;
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
+    left: 0;
+    z-index: z('header');
+    display: flex;
+    align-items: center;
     height: mini-units(6);
     background-color: $shell-header-bg-01;
     border-bottom: 1px solid $shell-header-border-01;
-    z-index: z('header');
   }
 
   .#{$prefix}--header__action {
@@ -26145,9 +26401,9 @@ UI shell header
   }
 
   .#{$prefix}--header__action--active {
-    border-left: 1px solid $shell-header-border-01;
     border-right: 1px solid $shell-header-border-01;
     border-bottom: 1px solid $shell-header-bg-01;
+    border-left: 1px solid $shell-header-border-01;
   }
 
   .#{$prefix}--header__action:focus {
@@ -26191,14 +26447,14 @@ UI shell header
     align-items: center;
     height: 100%;
     padding: 0 mini-units(4) 0 mini-units(2);
-    text-decoration: none;
     font-weight: 600;
-    letter-spacing: 0.1px;
     line-height: 1.25rem;
-    user-select: none;
+    letter-spacing: 0.1px;
+    text-decoration: none;
     border: rem(2px) solid transparent;
-    transition: border-color $duration--fast-02;
     outline: none;
+    transition: border-color $duration--fast-02;
+    user-select: none;
   }
 
   a.#{$prefix}--header__name:focus {
@@ -26218,72 +26474,72 @@ UI shell header
   // Header - Navigation
   //--------------------------------------------------------------------------
   .#{$prefix}--header__nav {
-    height: 100%;
-    padding-left: mini-units(2);
     position: relative;
     display: none;
+    height: 100%;
+    padding-left: mini-units(2);
 
     @include carbon--breakpoint('lg') {
       display: block;
     }
 
     &::before {
-      content: '';
-      display: block;
       position: absolute;
-      left: 0;
       top: 50%;
-      transform: translateY(-50%);
-      height: rem(24px);
+      left: 0;
+      display: block;
       width: rem(1px);
+      height: rem(24px);
       background-color: $shell-header-border-01;
+      transform: translateY(-50%);
+      content: '';
     }
   }
 
   .#{$prefix}--header__menu-bar {
     display: flex;
     height: 100%;
-    list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   a.#{$prefix}--header__menu-item {
     position: relative;
     display: flex;
     align-items: center;
-    color: $shell-header-text-02;
-    padding: 0 mini-units(2);
     // Used for links that are directly in the menubar to span the full height
     height: 100%;
+    padding: 0 mini-units(2);
+    color: $shell-header-text-02;
+    font-weight: 400;
     // Text styles
     font-size: rem(14px);
-    font-weight: 400;
-    letter-spacing: 0;
     line-height: 1.125rem;
+    letter-spacing: 0;
     // Reset link styles and make sure the text isn't selectable
     text-decoration: none;
-    user-select: none;
     // Used for focus styles
     border: 2px solid transparent;
     transition: background-color $duration--fast-02, border-color
         $duration--fast-02, color $duration--fast-02;
+    user-select: none;
   }
 
   a.#{$prefix}--header__menu-item:hover {
-    background-color: $shell-header-bg-02;
     color: $shell-header-text-01;
+    background-color: $shell-header-bg-02;
   }
 
   .#{$prefix}--header__action:active,
   a.#{$prefix}--header__menu-item:active {
-    background-color: $shell-header-bg-03;
     color: $shell-header-text-01;
+    background-color: $shell-header-bg-03;
   }
 
   a.#{$prefix}--header__menu-item:focus {
-    border-color: $shell-header-focus;
     color: $shell-header-text-01;
+    border-color: $shell-header-focus;
     outline: none;
   }
 
@@ -26297,14 +26553,14 @@ UI shell header
 
   a.#{$prefix}--header__menu-item[aria-current='page']::after,
   .#{$prefix}--header__menu-item--current::after {
-    content: '';
-    width: 100%;
     position: absolute;
     top: 0;
+    right: 0;
     bottom: -2px;
     left: 0;
-    right: 0;
+    width: 100%;
     border-bottom: 3px solid $inverse-support-04;
+    content: '';
   }
 
   a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
@@ -26326,11 +26582,11 @@ UI shell header
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true'] {
-    background-color: $shell-header-bg-06;
-    color: $shell-header-focus;
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
     // the next level.
     z-index: #{z('header') + 1};
+    color: $shell-header-focus;
+    background-color: $shell-header-bg-06;
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']
@@ -26340,9 +26596,9 @@ UI shell header
 
   .#{$prefix}--header__menu {
     display: none;
-    list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']
@@ -26350,13 +26606,13 @@ UI shell header
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: z('header');
     display: flex;
-    width: mini-units(25);
     flex-direction: column;
-    transform: translateY(100%);
+    width: mini-units(25);
     background-color: $shell-header-bg-06;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    z-index: z('header');
+    transform: translateY(100%);
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']
@@ -26376,14 +26632,14 @@ UI shell header
   }
 
   .#{$prefix}--header__menu .#{$prefix}--header__menu-item:hover {
-    background-color: $shell-header-bg-06;
     color: $shell-header-text-01;
+    background-color: $shell-header-bg-06;
   }
 
   .#{$prefix}--header__menu-arrow {
-    fill: $shell-header-icon-03;
     margin-left: mini-units(1);
     transition: transform $duration--fast-02, fill $duration--fast-02;
+    fill: $shell-header-icon-03;
   }
 
   //--------------------------------------------------------------------------
@@ -26391,8 +26647,8 @@ UI shell header
   //--------------------------------------------------------------------------
   .#{$prefix}--header__global {
     display: flex;
-    justify-content: flex-end;
     flex: 1 1 0%;
+    justify-content: flex-end;
     height: 100%;
   }
 
@@ -26403,29 +26659,29 @@ UI shell header
     position: absolute;
     width: 1px;
     height: 1px;
-    padding: 0;
     margin: -1px;
+    padding: 0;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
     border: 0;
     visibility: inherit;
-    white-space: nowrap;
+    clip: rect(0, 0, 0, 0);
   }
 
   .#{$prefix}--skip-to-content:focus {
-    display: flex;
-    align-items: center;
     top: 0;
     left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
     width: auto;
     height: 3rem;
-    clip: auto;
-    border: 4px solid $ibm-color__blue-60;
-    z-index: 9999;
-    background-color: $shell-header-bg-01;
-    color: $shell-header-text-01;
-    outline: none;
     padding: 0 1rem;
+    color: $shell-header-text-01;
+    background-color: $shell-header-bg-01;
+    border: 4px solid $ibm-color__blue-60;
+    outline: none;
+    clip: auto;
   }
 }
 ```
@@ -26468,16 +26724,16 @@ UI shell navigation
     top: mini-units(6);
     bottom: 0;
     left: 0;
-    background-color: $ibm-color__gray-90;
-    width: mini-units(32);
     z-index: z('dropdown');
-    box-shadow: 0 mini-units(1) mini-units(2) 0 rgba(0, 0, 0, 0.25);
+    width: mini-units(32);
     color: $ibm-color__gray-10;
+    background-color: $ibm-color__gray-90;
+    box-shadow: 0 mini-units(1) mini-units(2) 0 rgba(0, 0, 0, 0.25);
   }
 
   .#{$prefix}--navigation--right {
-    left: auto;
     right: 0;
+    left: auto;
   }
 
   .#{$prefix}--navigation svg {
@@ -26489,10 +26745,10 @@ UI shell navigation
   //----------------------------------------------------------------------------
   .#{$prefix}--navigation-section:not(:last-child)::after {
     display: block;
-    content: '';
     height: 1px;
-    background-color: $ibm-color__gray-80;
     margin: 0 mini-units(2);
+    background-color: $ibm-color__gray-80;
+    content: '';
   }
 
   //----------------------------------------------------------------------------
@@ -26510,14 +26766,14 @@ UI shell navigation
   }
 
   .#{$prefix}--navigation-item--active::after {
-    content: '';
-    display: block;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
+    display: block;
     width: 4px;
     background-color: $ibm-color__blue-60;
+    content: '';
   }
 
   //----------------------------------------------------------------------------
@@ -26526,18 +26782,18 @@ UI shell navigation
   a.#{$prefix}--navigation-link {
     display: flex;
     align-items: center;
-    color: $ibm-color__gray-10;
-    text-decoration: none;
-    font-size: rem(14px);
-    font-weight: 400;
     width: 100%;
     min-height: mini-units(5);
     padding-left: mini-units(2);
+    color: $ibm-color__gray-10;
+    font-weight: 400;
+    font-size: rem(14px);
+    text-decoration: none;
   }
 
   a.#{$prefix}--navigation-link:hover {
-    background-color: #333333;
     color: $ibm-color__white-0;
+    background-color: #333333;
   }
 
   a.#{$prefix}--navigation-link:focus {
@@ -26576,13 +26832,13 @@ UI shell navigation
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: mini-units(2);
     width: 100%;
-    color: $ibm-color__gray-10;
-    font-size: rem(14px);
-    font-weight: 400;
     min-height: mini-units(5);
+    padding-right: mini-units(2);
     padding-left: mini-units(2);
+    color: $ibm-color__gray-10;
+    font-weight: 400;
+    font-size: rem(14px);
   }
 
   .#{$prefix}--navigation-item--icon .#{$prefix}--navigation__category-title {
@@ -26612,20 +26868,20 @@ UI shell navigation
   }
 
   .#{$prefix}--navigation__category-item--active::after {
-    content: '';
     position: absolute;
-    display: block;
     top: 0;
     bottom: 0;
     left: 0;
+    display: block;
     width: 4px;
     background-color: $ibm-color__blue-60;
+    content: '';
   }
 
   .#{$prefix}--navigation__category-item--active
     > a.#{$prefix}--navigation-link {
-    font-weight: 600;
     color: $ibm-color__white-0;
+    font-weight: 600;
   }
 
   .#{$prefix}--navigation__category--expanded
@@ -26684,16 +26940,16 @@ UI shell product switcher
     top: mini-units(6);
     right: 0;
     bottom: 0;
-    width: mini-units(32);
-    will-change: transform;
-    transform: translate3d(100%, 0, 0);
-    padding: 1rem 0;
-    overflow-y: auto;
     z-index: 1000;
-    background-color: $shell-panel-bg-01;
+    width: mini-units(32);
     height: 100%;
+    padding: 1rem 0;
     overflow-x: hidden;
+    overflow-y: auto;
+    background-color: $shell-panel-bg-01;
+    transform: translate3d(100%, 0, 0);
     transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+    will-change: transform;
   }
 
   .#{$prefix}--panel--expanded {
@@ -26705,8 +26961,8 @@ UI shell product switcher
   // Switcher - Search
   //--------------------------------------------------------------------------
   .#{$prefix}--product-switcher__search {
-    padding: 0 mini-units(2);
     margin-bottom: mini-units(3);
+    padding: 0 mini-units(2);
   }
 
   .#{$prefix}--search--shell input {
@@ -26735,12 +26991,12 @@ UI shell product switcher
   .#{$prefix}--product-switcher__all-btn,
   .#{$prefix}--product-switcher__back-btn {
     display: inline-block;
-    background: transparent;
     width: 100%;
-    border: none;
     color: $shell-header-link;
-    cursor: pointer;
     text-align: left;
+    background: transparent;
+    border: none;
+    cursor: pointer;
   }
 
   .#{$prefix}--product-switcher__all-btn:hover,
@@ -26763,18 +27019,18 @@ UI shell product switcher
   }
 
   .#{$prefix}--product-switcher__back-arrow {
-    fill: $shell-header-link;
     margin-right: mini-units(2);
+    fill: $shell-header-link;
   }
 
   //--------------------------------------------------------------------------
   // Switcher - Product List
   //--------------------------------------------------------------------------
   .#{$prefix}--product-list__item {
-    cursor: pointer;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
   }
 
   .#{$prefix}--product-list__item:hover {
@@ -26803,14 +27059,14 @@ UI shell product switcher
     @include type-style('body-short-01');
 
     margin-left: 0.25rem;
-    font-weight: 400;
     color: $shell-header-text-02;
+    font-weight: 400;
   }
 
   .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu {
     display: none;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: mini-units(5);
 
     &.#{$prefix}--overflow-menu--open {
@@ -26860,7 +27116,7 @@ UI shell product switcher
   - [shell-header-link [variable]](#shell-header-link-variable)
   - [shell-header-text-02 [variable]](#shell-header-text-02-variable)
 
-### ❌shell-text-overflow [mixin]
+### ❌text-overflow [mixin]
 
 Helper to add in text overflow styles to a particular node. Useful if we don't
 want to have display-inline: block from the text helper classes
@@ -26869,9 +27125,9 @@ want to have display-inline: block from the text helper classes
 <summary>Source code</summary>
 
 ```scss
-@mixin shell-text-overflow() {
-  white-space: nowrap;
+@mixin text-overflow() {
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 ```
@@ -26893,6 +27149,7 @@ want to have display-inline: block from the text helper classes
 
 - **Group**: [ui-shell](#ui-shell)
 - **Used by**:
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ❌expanded [mixin]
@@ -26963,16 +27220,17 @@ UI shell side nav
     top: 0;
     bottom: 0;
     left: 0;
+    z-index: z('header');
     width: mini-units(6);
     max-width: mini-units(32);
-    color: $text-04;
-    background-color: $gray-100;
-    will-change: width;
-    // TODO: sync with motion work
-    transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
     // Useful to toggle this property to see what's going on when not expanded
     overflow: hidden;
-    z-index: z('header');
+    color: $text-04;
+    background-color: $gray-100;
+    // will-change: width;
+    // TODO: sync with motion work
+    transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+    will-change: width;
   }
 
   .#{$prefix}--side-nav--ux {
@@ -27012,8 +27270,8 @@ UI shell side nav
   .#{$prefix}--side-nav__overlay {
     position: absolute;
     top: rem(48px);
-    height: 0;
     width: 0;
+    height: 0;
     background-color: transparent;
     opacity: 0;
     transition: opacity $transition--expansion $carbon--standard-easing, background-color
@@ -27022,8 +27280,8 @@ UI shell side nav
 
   .#{$prefix}--side-nav__overlay-active {
     @include carbon--breakpoint-down('lg') {
-      height: 100vh;
       width: 100%;
+      height: 100vh;
       background-color: $overlay-01;
       opacity: 1;
       transition: opacity $transition--expansion $carbon--standard-easing, background-color
@@ -27061,10 +27319,10 @@ UI shell side nav
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__header {
     display: flex;
-    border-bottom: 1px solid $shell-side-nav-bg-02;
     width: 100%;
-    height: mini-units(6);
     max-width: 100%;
+    height: mini-units(6);
+    border-bottom: 1px solid $shell-side-nav-bg-02;
 
     @include expanded() {
       height: auto;
@@ -27080,29 +27338,30 @@ UI shell side nav
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__details {
     display: flex;
-    flex-direction: column;
-    padding-right: mini-units(2);
     // Necessary for text truncation in title
     // https://css-tricks.com/flexbox-truncated-text/#article-header-id-3
     flex: 1;
+    flex-direction: column;
     min-width: 0;
+    padding-right: mini-units(2);
 
     @include expanded($opacity: true, $visibility: true);
   }
 
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__details {
-    opacity: 1;
     visibility: inherit;
+    opacity: 1;
   }
 
   .#{$prefix}--side-nav__title {
-    @include shell-text-overflow();
+    @include text-overflow();
+
+    margin-top: mini-units(2);
+    font-weight: 600;
 
     // TODO: sync with type styles
     font-size: rem(14px);
-    font-weight: 600;
     letter-spacing: 0.1px;
-    margin-top: mini-units(2);
     user-select: none;
   }
 
@@ -27124,33 +27383,33 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__switcher-chevron {
-    display: flex;
-    align-items: center;
     position: absolute;
     top: 0;
     right: mini-units(1);
     bottom: 0;
+    display: flex;
+    align-items: center;
     fill: $shell-side-nav-icon-01;
   }
 
   .#{$prefix}--side-nav__select {
     @include focus-outline('reset');
 
-    appearance: none;
     flex: 1 1 0%;
-    background-color: $shell-header-bg-01;
-    color: $shell-header-text-01;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
-    font-size: rem(12px);
-    height: mini-units(4);
     // Flex bug, used to have the select node respect the width if a child has a
     // value that is longer than the width of the select
     min-width: 0;
+    height: mini-units(4);
     // Buffer the right hand side of select so text doesn't overlay the chevron
     padding-right: mini-units(4);
+    color: $shell-header-text-01;
+    font-size: rem(12px);
+    background-color: $shell-header-bg-01;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
     transition: outline $duration--fast-02;
+    appearance: none;
   }
 
   .#{$prefix}--side-nav__select:focus {
@@ -27171,9 +27430,9 @@ UI shell side nav
     @include button-reset($width: true);
 
     height: 100%;
+    padding-left: mini-units(2);
     text-align: left;
     transition: outline $duration--fast-02;
-    padding-left: mini-units(2);
   }
 
   .#{$prefix}--side-nav__toggle:focus {
@@ -27186,8 +27445,8 @@ UI shell side nav
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__items {
     flex: 1 1 0%;
-    overflow: hidden;
     padding: 1rem 0 0;
+    overflow: hidden;
 
     @include expanded() {
       overflow-y: auto;
@@ -27226,12 +27485,8 @@ UI shell side nav
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
+    color: $ibm-color__gray-100;
     // TODO: sync color
-    background-color: $gray-90;
-  }
-
-  .#{$prefix}--side-nav__item--active
-    > .#{$prefix}--side-nav__link--current:hover {
     background-color: $gray-90;
   }
 
@@ -27257,19 +27512,21 @@ UI shell side nav
     @include type-style('productive-heading-01');
     @include focus-outline('reset');
 
-    padding: 0 mini-units(2);
     display: flex;
     align-items: center;
     color: $text-04;
     height: mini-units(4);
-    user-select: none;
+
+    padding: 0 mini-units(2);
+    color: $shell-side-nav-text-01;
     transition: color $duration--fast-02, background-color $duration--fast-02,
       outline $duration--fast-02;
+    user-select: none;
   }
 
   .#{$prefix}--side-nav__submenu:hover {
-    background-color: $gray-90;
     color: $text-04;
+    background-color: $gray-90;
   }
 
   .#{$prefix}--side-nav__submenu:focus {
@@ -27284,15 +27541,15 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__submenu-chevron {
-    flex: 1;
     display: flex;
+    flex: 1;
     justify-content: flex-end;
   }
 
   .#{$prefix}--side-nav__submenu-chevron > svg {
-    transition: transform $duration--fast-02;
-    height: rem(16px);
     width: rem(16px);
+    height: rem(16px);
+    transition: transform $duration--fast-02;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
@@ -27305,19 +27562,24 @@ UI shell side nav
     height: mini-units(6);
   }
 
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
+    color: $text-04;
+    background-color: $gray-70;
+  }
+
   .#{$prefix}--side-nav__item--active
     .#{$prefix}--side-nav__submenu[aria-expanded='false'] {
-    background-color: $gray-70;
-    color: $text-04;
     position: relative;
+    color: $ibm-color__gray-100;
+    background-color: $shell-side-nav-bg-04;
     &::before {
-      content: '';
       position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
       width: 4px;
       background-color: $shell-side-nav-accent-01;
+      content: '';
     }
   }
 
@@ -27332,14 +27594,14 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title {
-    font-weight: 600;
     color: $text-04;
+    font-weight: 600;
   }
 
   .#{$prefix}--side-nav__menu {
     display: block;
-    visibility: hidden;
     max-height: 0;
+    visibility: hidden;
   }
 
   .#{$prefix}--side-nav__submenu[aria-expanded='true']
@@ -27384,9 +27646,9 @@ UI shell side nav
     position: relative;
     display: flex;
     align-items: center;
-    text-decoration: none;
     min-height: mini-units(4);
     padding: 0 mini-units(2);
+    text-decoration: none;
     transition: color $duration--fast-02, background-color $duration--fast-02,
       outline $duration--fast-02;
   }
@@ -27403,8 +27665,8 @@ UI shell side nav
 
     color: $shell-side-nav-text-01;
     font-size: rem(14px);
-    letter-spacing: 0.1px;
     line-height: 1.25rem;
+    letter-spacing: 0.1px;
     user-select: none;
   }
 
@@ -27415,8 +27677,8 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
-    background-color: $shell-side-nav-bg-04;
     font-weight: 600;
+    background-color: $shell-side-nav-bg-04;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page']
@@ -27427,13 +27689,13 @@ UI shell side nav
 
   a.#{$prefix}--side-nav__link[aria-current='page']::before,
   a.#{$prefix}--side-nav__link--current::before {
-    content: '';
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     width: 4px;
     background-color: $shell-side-nav-accent-01;
+    content: '';
   }
 
   .#{$prefix}--side-nav__menu[role='menu']
@@ -27446,11 +27708,11 @@ UI shell side nav
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__icon {
     display: flex;
-    justify-content: center;
-    align-items: center;
     // Helpful in flex containers so the icon does not have less than the
     // expected width
     flex: 0 0 mini-units(2);
+    align-items: center;
+    justify-content: center;
   }
 
   .#{$prefix}--side-nav__icon:not(.#{$prefix}--side-nav__submenu-chevron) {
@@ -27458,9 +27720,9 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__icon > svg {
-    fill: $icon-03;
     width: mini-units(2);
     height: mini-units(2);
+    fill: $icon-03;
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
@@ -27507,27 +27769,27 @@ UI shell side nav
     display: none;
 
     @include carbon--breakpoint-down('lg') {
-      display: block;
       position: relative;
+      display: block;
       margin-bottom: rem(32px);
     }
   }
 
   .#{$prefix}--side-nav__header-divider::after {
-    content: '';
     position: absolute;
-    height: rem(1px);
     bottom: rem(-16px);
     left: rem(16px);
     width: calc(100% - 32px);
+    height: rem(1px);
     background: $ibm-color__gray-20;
+    content: '';
   }
 
   //header menu items overrides
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item {
+    justify-content: space-between;
     color: $shell-side-nav-text-01;
     white-space: nowrap;
-    justify-content: space-between;
 
     &[aria-expanded='true'] {
       background-color: transparent;
@@ -27539,10 +27801,10 @@ UI shell side nav
     + .#{$prefix}--header__menu {
     bottom: inherit;
     width: 100%;
+    padding: 0;
+    background-color: transparent;
     box-shadow: none;
     transform: none;
-    background-color: transparent;
-    padding: 0;
 
     li {
       width: 100%;
@@ -27554,8 +27816,8 @@ UI shell side nav
     }
 
     a.#{$prefix}--header__menu-item:hover {
-      background-color: $shell-side-nav-bg-04;
       color: $ibm-color__gray-100;
+      background-color: $shell-side-nav-bg-04;
     }
   }
 
@@ -27594,7 +27856,7 @@ UI shell side nav
 - **Requires**:
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [expanded [mixin]](#expanded-mixin)
-  - [shell-text-overflow [mixin]](#shell-text-overflow-mixin)
+  - [text-overflow [mixin]](#text-overflow-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [text-04 [variable]](#text-04-variable)
@@ -27602,12 +27864,12 @@ UI shell side nav
   - [overlay-01 [variable]](#overlay-01-variable)
   - [shell-side-nav-bg-02 [variable]](#shell-side-nav-bg-02-variable)
   - [shell-side-nav-icon-01 [variable]](#shell-side-nav-icon-01-variable)
-  - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
   - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
+  - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
-  - [shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
   - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
   - [shell-side-nav-bg-04 [variable]](#shell-side-nav-bg-04-variable)
+  - [shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
   - [icon-03 [variable]](#icon-03-variable)
 
 ### ❌carbon-switcher [mixin]
@@ -27625,8 +27887,8 @@ UI shell side nav
   .#{$prefix}--switcher {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     color: $shell-panel-text-01;
   }
 
@@ -27653,13 +27915,13 @@ UI shell side nav
 
     display: block;
     height: $spacing-07;
-    text-decoration: none;
     padding: rem(6px) $spacing-05;
     color: $shell-panel-text-01;
+    text-decoration: none;
 
     &:hover:not(.#{$prefix}--switcher__item-link--selected) {
-      background: $shell-panel-bg-02;
       color: $shell-panel-text-02;
+      background: $shell-panel-bg-02;
       cursor: pointer;
     }
 
@@ -27669,14 +27931,14 @@ UI shell side nav
     }
 
     &:active {
-      background: $shell-panel-bg-03;
       color: $shell-panel-text-02;
+      background: $shell-panel-bg-03;
     }
   }
 
   .#{$prefix}--switcher__item-link--selected {
-    background: $shell-panel-bg-04;
     color: $shell-panel-text-02;
+    background: $shell-panel-bg-04;
   }
 }
 ```
@@ -27692,8 +27954,8 @@ UI shell side nav
   - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [shell-panel-border [variable]](#shell-panel-border-variable)
-  - [shell-panel-bg-02 [variable]](#shell-panel-bg-02-variable)
   - [shell-panel-text-02 [variable]](#shell-panel-text-02-variable)
+  - [shell-panel-bg-02 [variable]](#shell-panel-bg-02-variable)
   - [shell-panel-focus [variable]](#shell-panel-focus-variable)
   - [shell-panel-bg-03 [variable]](#shell-panel-bg-03-variable)
   - [shell-panel-bg-04 [variable]](#shell-panel-bg-04-variable)

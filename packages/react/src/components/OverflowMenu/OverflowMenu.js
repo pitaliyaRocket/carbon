@@ -538,6 +538,7 @@ class OverflowMenu extends Component {
       <ClickListener onClickOutside={this.handleClickOutside}>
         <button
           {...other}
+          type="button"
           aria-haspopup
           aria-expanded={this.state.open}
           className={overflowMenuClasses}

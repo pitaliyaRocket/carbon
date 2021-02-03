@@ -147,7 +147,10 @@ describe('ToastNotification', () => {
     });
 
     it('can render any node for the subtitle and caption', () => {
-      toast.setProps({ subtitle: <button />, caption: <button /> });
+      toast.setProps({
+        subtitle: <button type="button" />,
+        caption: <button type="button" />,
+      });
       expect(toast.length).toEqual(1);
     });
   });
@@ -258,7 +261,7 @@ describe('InlineNotification', () => {
     });
 
     it('can render any node for the subtitle', () => {
-      inline.setProps({ subtitle: <button /> });
+      inline.setProps({ subtitle: <button type="button" /> });
       expect(inline.length).toEqual(1);
     });
   });

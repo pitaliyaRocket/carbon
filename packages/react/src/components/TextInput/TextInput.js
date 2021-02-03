@@ -9,7 +9,10 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
-import { WarningFilled16 } from '@rocketsoftware/icons-react';
+import {
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@rocketsoftware/icons-react';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
@@ -28,6 +31,8 @@ const TextInput = React.forwardRef(function TextInput(
     hideLabel,
     invalid,
     invalidText,
+    warn,
+    warnText,
     helperText,
     light,
     size,
@@ -37,9 +42,11 @@ const TextInput = React.forwardRef(function TextInput(
   ref
 ) {
   const errorId = id + '-error-msg';
+  const warnId = id + '-warn-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
+    [`${prefix}--text-input--warn`]: warn,
     [`${prefix}--text-input--${size}`]: size,
   });
   const sharedTextInputProps = {
@@ -90,13 +97,30 @@ const TextInput = React.forwardRef(function TextInput(
       {labelText}
     </label>
   ) : null;
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
-      {invalidText}
-    </div>
-  ) : null;
+  let error = null;
+  if (invalid) {
+    error = (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {invalidText}
+      </div>
+    );
+  } else if (warn) {
+    error = (
+      <div className={`${prefix}--form-requirement`} id={warnId}>
+        {warnText}
+      </div>
+    );
+  }
   const input = (
-    <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
+    <input
+      {...textInputProps({
+        invalid,
+        sharedTextInputProps,
+        errorId,
+        warn,
+        warnId,
+      })}
+    />
   );
   const helper = helperText ? (
     <div className={helperTextClasses}>{helperText}</div>
@@ -117,10 +141,16 @@ const TextInput = React.forwardRef(function TextInput(
       <div className={fieldOuterWrapperClasses}>
         <div
           className={`${prefix}--text-input__field-wrapper`}
-          data-invalid={invalid || null}>
+          data-invalid={invalid || null}
+          data-warn={warn || null}>
           {invalid && (
             <WarningFilled16
               className={`${prefix}--text-input__invalid-icon`}
+            />
+          )}
+          {!invalid && warn && (
+            <WarningAltFilled16
+              className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
             />
           )}
           {input}
@@ -129,7 +159,7 @@ const TextInput = React.forwardRef(function TextInput(
           {isFluid && !inline && error}
         </div>
         {!isFluid && error}
-        {!invalid && !isFluid && !inline && helper}
+        {!invalid && !warn && !isFluid && !inline && helper}
       </div>
     </div>
   );
@@ -212,6 +242,16 @@ TextInput.propTypes = {
   invalidText: PropTypes.string,
 
   /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.string,
+
+  /**
    * Provide text that is used alongside the control label for additional help
    */
   helperText: PropTypes.node,
@@ -233,6 +273,8 @@ TextInput.defaultProps = {
   onClick: () => {},
   invalid: false,
   invalidText: '',
+  warn: false,
+  warnText: '',
   helperText: '',
   light: false,
   inline: false,

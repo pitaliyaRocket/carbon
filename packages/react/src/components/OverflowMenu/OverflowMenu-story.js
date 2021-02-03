@@ -73,6 +73,12 @@ const OverflowMenuExample = ({ overflowMenuProps, overflowMenuItemProps }) => (
 OverflowMenu.displayName = 'OverflowMenu';
 
 storiesOf('OverflowMenu', module)
+  .addParameters({
+    component: OverflowMenu,
+    subcomponents: {
+      OverflowMenuItem,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'basic',
