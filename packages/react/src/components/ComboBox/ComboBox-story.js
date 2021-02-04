@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
@@ -65,45 +64,27 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-storiesOf('ComboBox', module)
-  .addParameters({
+export default {
+  title: 'ComboBox',
+  decorators: [withKnobs],
+
+  parameters: {
     component: ComboBox,
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'with shouldFilterItem',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          {...props()}
-          shouldFilterItem={({ inputValue, item, itemToString }) =>
-            itemToString(item).includes(inputValue)
-          }
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: `Utilizes the shouldFilterItem prop to filter out options based on input rather than just highlighting the closest match.`,
-      },
-    }
-  );
+  },
+};
+
+export const Default = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...props()}
+    />
+  </div>
+);
+
+Default.parameters = {
+  info: {
+    text: 'ComboBox',
+  },
+};

@@ -11,6 +11,7 @@
   "useWorkspaces": true,
   "ignoreChanges": [
     "actions/**",
+    "codemods/**",
     "**/__fixtures__/**",
     "**/__tests__/**",
     "**/docs/**",

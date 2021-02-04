@@ -22,7 +22,7 @@ describe('Carbon Components React', () => {
         "BreadcrumbItem",
         "BreadcrumbSkeleton",
         "Button",
-        "ButtonGroup",
+        "ButtonSet",
         "ButtonSkeleton",
         "Card",
         "CardActionItem",
@@ -101,7 +101,6 @@ describe('Carbon Components React', () => {
         "OrderedList",
         "OverflowMenu",
         "OverflowMenuItem",
-        "PageSelector",
         "Pagination",
         "PaginationNav",
         "PaginationSkeleton",
@@ -207,7 +206,8 @@ describe('Carbon Components React', () => {
         "Tour",
         "TourTooltip",
         "UnorderedList",
-        "Unstable_Pagination",
+        "unstable_PageSelector",
+        "unstable_Pagination",
       ]
     `);
   });

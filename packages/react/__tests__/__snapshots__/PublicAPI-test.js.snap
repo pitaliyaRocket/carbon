@@ -102,6 +102,8 @@ Map {
       "kind": "primary",
       "size": "default",
       "tabIndex": 0,
+      "tooltipAlignment": "center",
+      "tooltipPosition": "top",
       "type": "button",
     },
     "displayName": "Button",
@@ -216,10 +218,9 @@ Map {
     },
     "render": [Function],
   },
-  "Card" => Object {
-    "defaultProps": Object {
-      "tabIndex": 0,
-    },
+  "ButtonSet" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "ButtonSet",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -227,226 +228,11 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "onBlur": Object {
-        "type": "func",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "onFocus": Object {
-        "type": "func",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "onKeyUp": Object {
-        "type": "func",
-      },
-      "onMouseDown": Object {
-        "type": "func",
-      },
-      "onMouseEnter": Object {
-        "type": "func",
-      },
-      "onMouseLeave": Object {
-        "type": "func",
-      },
-      "onMouseUp": Object {
-        "type": "func",
-      },
-      "tabIndex": Object {
-        "type": "number",
+      "stacked": Object {
+        "type": "bool",
       },
     },
-  },
-  "CardActionItem" => Object {
-    "defaultProps": Object {
-      "ariaLabel": "",
-      "description": "card action",
-    },
-    "propTypes": Object {
-      "ariaLabel": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "description": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "iconName": Object {
-        "args": Array [
-          Object {
-            "height": Object {
-              "type": "string",
-            },
-            "svgData": Object {
-              "isRequired": true,
-              "type": "object",
-            },
-            "viewBox": Object {
-              "isRequired": true,
-              "type": "string",
-            },
-            "width": Object {
-              "type": "string",
-            },
-          },
-        ],
-        "isRequired": true,
-        "type": "shape",
-      },
-      "id": Object {
-        "type": "string",
-      },
-    },
-  },
-  "CardActions" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "CardContent" => Object {
-    "defaultProps": Object {
-      "cardIcon": null,
-      "cardTitle": "card title",
-      "iconDescription": "card icon",
-    },
-    "propTypes": Object {
-      "cardContentItems": Object {
-        "args": Array [
-          Array [
-            Object {
-              "args": Array [
-                Object {
-                  "type": "node",
-                },
-              ],
-              "type": "arrayOf",
-            },
-            Object {
-              "type": "node",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "cardIcon": Object {
-        "args": Array [
-          Object {
-            "height": Object {
-              "type": "string",
-            },
-            "svgData": Object {
-              "isRequired": true,
-              "type": "object",
-            },
-            "viewBox": Object {
-              "isRequired": true,
-              "type": "string",
-            },
-            "width": Object {
-              "type": "string",
-            },
-          },
-        ],
-        "type": "shape",
-      },
-      "cardInfo": Object {
-        "type": "array",
-      },
-      "cardLink": Object {
-        "type": "node",
-      },
-      "cardTitle": Object {
-        "type": "string",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "iconDescription": Object {
-        "type": "string",
-      },
-    },
-  },
-  "CardContentItem" => Object {
-    "propTypes": Object {
-      "cardContentRef": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "current": Object {
-                    "type": "any",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "info": Object {
-        "type": "string",
-      },
-      "maxWidth": Object {
-        "type": "string",
-      },
-    },
-  },
-  "CardFooter" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "CardStatus" => Object {
-    "appStatus": Object {
-      "NOT_RUNNING": 1,
-      "RUNNING": 0,
-      "STOPPED": 2,
-    },
-    "defaultProps": Object {
-      "notRunningText": "Not Running",
-      "runningText": "Running",
-      "status": 0,
-      "stoppedText": "Stopped",
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "notRunningText": Object {
-        "type": "string",
-      },
-      "runningText": Object {
-        "type": "string",
-      },
-      "status": Object {
-        "type": "number",
-      },
-      "stoppedText": Object {
-        "type": "string",
-      },
-    },
+    "render": [Function],
   },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -2894,7 +2680,7 @@ Map {
       },
       "legendText": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "message": Object {
         "type": "bool",
@@ -3945,6 +3731,9 @@ Map {
         "isRequired": true,
         "type": "func",
       },
+      "titleText": Object {
+        "type": "string",
+      },
       "translateWithId": Object {
         "type": "func",
       },
@@ -4378,6 +4167,7 @@ Map {
     },
   },
   "PaginationNav" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -4401,6 +4191,7 @@ Map {
         "type": "func",
       },
     },
+    "render": [Function],
   },
   "PrimaryButton" => Object {},
   "ProgressIndicator" => Object {
@@ -6748,499 +6539,6 @@ Map {
       },
     },
   },
-  "Tour" => Object {
-    "propTypes": Object {
-      "closeButtonAriaLabel": Object {
-        "type": "string",
-      },
-      "disableAutoScroll": Object {
-        "type": "bool",
-      },
-      "disableCloseOnClick": Object {
-        "type": "bool",
-      },
-      "disableMask": Object {
-        "type": "bool",
-      },
-      "disableSmoothScroll": Object {
-        "type": "bool",
-      },
-      "enableFlip": Object {
-        "type": "bool",
-      },
-      "flipBeforeClose": Object {
-        "type": "bool",
-      },
-      "flipButtonAriaLabel": Object {
-        "type": "string",
-      },
-      "flippedDescription": Object {
-        "type": "string",
-      },
-      "flippedTitle": Object {
-        "type": "string",
-      },
-      "hideNext": Object {
-        "type": "bool",
-      },
-      "hidePrev": Object {
-        "type": "bool",
-      },
-      "identifier": Object {
-        "type": "string",
-      },
-      "initialStepIndex": Object {
-        "type": "number",
-      },
-      "isOpen": Object {
-        "type": "bool",
-      },
-      "movingTarget": Object {
-        "type": "bool",
-      },
-      "onClose": Object {
-        "type": "func",
-      },
-      "removeUpdateListener": Object {
-        "type": "func",
-      },
-      "rootSelector": Object {
-        "type": "string",
-      },
-      "setUpdateListener": Object {
-        "type": "func",
-      },
-      "steps": Object {
-        "args": Array [
-          Object {
-            "args": Array [
-              Object {
-                "allowForeignTarget": Object {
-                  "type": "bool",
-                },
-                "customNextFunc": Object {
-                  "type": "func",
-                },
-                "customPrevFunc": Object {
-                  "type": "func",
-                },
-                "description": Object {
-                  "isRequired": true,
-                  "type": "string",
-                },
-                "disableAutoScroll": Object {
-                  "type": "bool",
-                },
-                "disableNext": Object {
-                  "type": "bool",
-                },
-                "disablePrev": Object {
-                  "type": "bool",
-                },
-                "disableSmoothScroll": Object {
-                  "type": "bool",
-                },
-                "hideClose": Object {
-                  "type": "bool",
-                },
-                "hideNext": Object {
-                  "type": "bool",
-                },
-                "hidePrev": Object {
-                  "type": "bool",
-                },
-                "maskPadding": Object {
-                  "type": "number",
-                },
-                "movingTarget": Object {
-                  "type": "bool",
-                },
-                "nextLabel": Object {
-                  "type": "string",
-                },
-                "nextOnTargetClick": Object {
-                  "type": "bool",
-                },
-                "orientationPreferences": Object {
-                  "args": Array [
-                    Array [
-                      "east",
-                      "east-north",
-                      "east-south",
-                      "south",
-                      "south-east",
-                      "south-west",
-                      "west",
-                      "west-north",
-                      "west-south",
-                      "north",
-                      "north-east",
-                      "north-west",
-                    ],
-                  ],
-                  "type": "oneOf",
-                },
-                "prevLabel": Object {
-                  "type": "string",
-                },
-                "selector": Object {
-                  "type": "string",
-                },
-                "title": Object {
-                  "type": "string",
-                },
-                "tooltipSeparation": Object {
-                  "type": "number",
-                },
-                "validateNextOnTargetClick": Object {
-                  "type": "func",
-                },
-              },
-            ],
-            "type": "shape",
-          },
-        ],
-        "isRequired": true,
-        "type": "arrayOf",
-      },
-    },
-  },
-  "TourTooltip" => Object {
-    "defaultProps": Object {
-      "closeButtonAriaLabel": "Close",
-      "flipBeforeClose": false,
-      "flipButtonAriaLabel": "Flip",
-      "hideClose": false,
-      "hideNext": false,
-      "hidePrev": false,
-      "nextLabel": "Next",
-      "prevLabel": "Previous",
-    },
-    "propTypes": Object {
-      "closeButtonAriaLabel": Object {
-        "type": "string",
-      },
-      "description": Object {
-        "type": "string",
-      },
-      "disableNext": Object {
-        "type": "bool",
-      },
-      "disablePrev": Object {
-        "type": "bool",
-      },
-      "enableFlip": Object {
-        "type": "bool",
-      },
-      "flipBeforeClose": Object {
-        "type": "bool",
-      },
-      "flipButtonAriaLabel": Object {
-        "type": "string",
-      },
-      "flipped": Object {
-        "type": "bool",
-      },
-      "flippedDescription": Object {
-        "type": "string",
-      },
-      "flippedTitle": Object {
-        "type": "string",
-      },
-      "hideNext": Object {
-        "type": "bool",
-      },
-      "hidePrev": Object {
-        "type": "bool",
-      },
-      "nextLabel": Object {
-        "type": "string",
-      },
-      "onClose": Object {
-        "type": "func",
-      },
-      "onFlip": Object {
-        "type": "func",
-      },
-      "onNext": Object {
-        "type": "func",
-      },
-      "onPrev": Object {
-        "type": "func",
-      },
-      "prevLabel": Object {
-        "type": "string",
-      },
-      "title": Object {
-        "type": "string",
-      },
-    },
-  },
-  "SplitButton" => Object {
-    "defaultProps": Object {
-      "disabled": false,
-      "tabIndex": 0,
-      "type": "button",
-    },
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "classNameButton": Object {
-        "type": "string",
-      },
-      "classNameContainer": Object {
-        "type": "string",
-      },
-      "classNameOverflow": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "getViewport": Object {
-        "type": "func",
-      },
-      "role": Object {
-        "type": "string",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "default",
-            "field",
-            "small",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "tabIndex": Object {
-        "type": "number",
-      },
-      "type": Object {
-        "args": Array [
-          Array [
-            "button",
-            "reset",
-            "submit",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-  },
-  "ButtonGroup" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
-  },
-  "FlatProgressIndicator" => Object {
-    "defaultProps": Object {
-      "currentIndex": 0,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "currentIndex": Object {
-        "type": "number",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-    },
-  },
-  "FlatProgressStep" => Object {
-    "defaultProps": Object {
-      "renderLabel": [Function],
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "complete": Object {
-        "type": "bool",
-      },
-      "current": Object {
-        "type": "bool",
-      },
-      "description": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "index": Object {
-        "type": "number",
-      },
-      "invalid": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "overflowTooltipProps": Object {
-        "type": "object",
-      },
-      "renderLabel": Object {
-        "type": "func",
-      },
-      "secondaryLabel": Object {
-        "type": "string",
-      },
-      "skip": Object {
-        "type": "bool",
-      },
-      "tooltipId": Object {
-        "type": "string",
-      },
-    },
-  },
-  "FlatProgressIndicatorSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "PageSelector" => Object {
-    "defaultProps": Object {
-      "className": null,
-      "id": 1,
-      "labelText": "Current page number",
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "currentPage": Object {
-        "isRequired": true,
-        "type": "number",
-      },
-      "id": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "labelText": Object {
-        "type": "string",
-      },
-      "totalPages": Object {
-        "isRequired": true,
-        "type": "number",
-      },
-    },
-  },
-  "Unstable_Pagination" => Object {
-    "defaultProps": Object {
-      "backwardText": "Previous page",
-      "children": undefined,
-      "className": null,
-      "disabled": false,
-      "forwardText": "Next page",
-      "id": 1,
-      "initialPage": 1,
-      "itemRangeText": [Function],
-      "itemText": [Function],
-      "itemsPerPageText": "Items per page:",
-      "pageRangeText": [Function],
-      "pageSize": 10,
-      "pageSizes": undefined,
-      "pageText": [Function],
-      "pagesUnknown": false,
-      "totalItems": undefined,
-    },
-    "propTypes": Object {
-      "backwardText": Object {
-        "type": "string",
-      },
-      "children": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "node",
-            },
-            Object {
-              "type": "func",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "forwardText": Object {
-        "type": "string",
-      },
-      "id": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "initialPage": Object {
-        "type": "number",
-      },
-      "itemRangeText": Object {
-        "type": "func",
-      },
-      "itemText": Object {
-        "type": "func",
-      },
-      "itemsPerPageText": Object {
-        "type": "string",
-      },
-      "pageRangeText": Object {
-        "type": "func",
-      },
-      "pageSize": Object {
-        "type": "number",
-      },
-      "pageSizes": Object {
-        "args": Array [
-          Object {
-            "type": "number",
-          },
-        ],
-        "type": "arrayOf",
-      },
-      "pageText": Object {
-        "type": "func",
-      },
-      "pagesUnknown": Object {
-        "type": "bool",
-      },
-      "totalItems": Object {
-        "type": "number",
-      },
-    },
-  },
   "Content" => Object {
     "defaultProps": Object {
       "tagName": "main",
@@ -7753,6 +7051,137 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "unstable_PageSelector" => Object {
+    "defaultProps": Object {
+      "className": null,
+      "id": 1,
+      "labelText": "Current page number",
+    },
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "currentPage": Object {
+        "isRequired": true,
+        "type": "number",
+      },
+      "id": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "labelText": Object {
+        "type": "string",
+      },
+      "totalPages": Object {
+        "isRequired": true,
+        "type": "number",
+      },
+    },
+  },
+  "unstable_Pagination" => Object {
+    "defaultProps": Object {
+      "backwardText": "Previous page",
+      "children": undefined,
+      "className": null,
+      "disabled": false,
+      "forwardText": "Next page",
+      "id": 1,
+      "initialPage": 1,
+      "itemRangeText": [Function],
+      "itemText": [Function],
+      "itemsPerPageText": "Items per page:",
+      "pageRangeText": [Function],
+      "pageSize": 10,
+      "pageSizes": undefined,
+      "pageText": [Function],
+      "pagesUnknown": false,
+      "totalItems": undefined,
+    },
+    "propTypes": Object {
+      "backwardText": Object {
+        "type": "string",
+      },
+      "children": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "node",
+            },
+            Object {
+              "type": "func",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "forwardText": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "initialPage": Object {
+        "type": "number",
+      },
+      "itemRangeText": Object {
+        "type": "func",
+      },
+      "itemText": Object {
+        "type": "func",
+      },
+      "itemsPerPageText": Object {
+        "type": "string",
+      },
+      "pageRangeText": Object {
+        "type": "func",
+      },
+      "pageSize": Object {
+        "type": "number",
+      },
+      "pageSizes": Object {
+        "args": Array [
+          Object {
+            "type": "number",
+          },
+        ],
+        "type": "arrayOf",
+      },
+      "pageText": Object {
+        "type": "func",
+      },
+      "pagesUnknown": Object {
+        "type": "bool",
+      },
+      "totalItems": Object {
+        "type": "number",
+      },
+    },
   },
 }
 `;

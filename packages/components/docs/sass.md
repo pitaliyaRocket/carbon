@@ -194,6 +194,7 @@
   - [✅highlight [variable]](#highlight-variable)
   - [✅decorative-01 [variable]](#decorative-01-variable)
   - [✅hover-light-ui [variable]](#hover-light-ui-variable)
+  - [✅button-separator [variable]](#button-separator-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
@@ -4080,6 +4081,7 @@ Define theme variables from a map of tokens
   $highlight: map-get($theme, 'highlight') !global;
   $decorative-01: map-get($theme, 'decorative-01') !global;
   $hover-light-ui: map-get($theme, 'hover-light-ui') !global;
+  $button-separator: map-get($theme, 'button-separator') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
@@ -4391,6 +4393,10 @@ Define theme variables from a map of tokens
     $hover-light-ui: var(
       --#{$custom-property-prefix}-hover-light-ui,
       map-get($theme, 'hover-light-ui')
+    ) !global;
+    $button-separator: var(
+      --#{$custom-property-prefix}-button-separator,
+      map-get($theme, 'button-separator')
     ) !global;
     $skeleton-01: var(
       --#{$custom-property-prefix}-skeleton-01,
@@ -5082,6 +5088,19 @@ Define theme variables from a map of tokens
       @include custom-property(
         'hover-light-ui',
         map-get($theme, 'hover-light-ui')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'button-separator',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'button-separator',
+        map-get($theme, 'button-separator')
       );
     }
 
@@ -5867,6 +5886,7 @@ Define theme variables from a map of tokens
   - [highlight [variable]](#highlight-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [hover-light-ui [variable]](#hover-light-ui-variable)
+  - [button-separator [variable]](#button-separator-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
@@ -6023,6 +6043,7 @@ $carbon--theme--g90: map-merge(
     highlight: #0043ce,
     decorative-01: #6f6f6f,
     hover-light-ui: #6f6f6f,
+    button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #525252,
     brand-02: #6f6f6f,
@@ -6098,6 +6119,7 @@ $carbon--theme--g100: map-merge(
     highlight: #002d9c,
     decorative-01: #525252,
     hover-light-ui: #525252,
+    button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #393939,
     brand-02: #6f6f6f,
@@ -6332,6 +6354,7 @@ $carbon--theme: (
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
   decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
   hover-light-ui: if(global-variable-exists('hover-light-ui'), $hover-light-ui, map-get($carbon--theme--white, 'hover-light-ui')),
+  button-separator: if(global-variable-exists('button-separator'), $button-separator, map-get($carbon--theme--white, 'button-separator')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
   brand-01: if(global-variable-exists('brand-01'), $brand-01, map-get($carbon--theme--white, 'brand-01')),
@@ -8256,6 +8279,30 @@ $hover-light-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+
+### ✅button-separator [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-separator: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'button-separator'
+    ),
+  map-get($carbon--theme, 'button-separator'),
+  #e0e0e0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
 
 ### ✅skeleton-01 [variable]
 
@@ -13878,17 +13925,50 @@ Button styles
     display: flex;
   }
 
-  .#{$prefix}--btn-set > .#{$prefix}--btn {
+  .#{$prefix}--btn-set--stacked {
+    flex-direction: column;
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn {
     width: 100%;
     // 196px from design kit
     max-width: rem(196px);
+
+    &:not(:focus) {
+      box-shadow: rem(-1px) 0 0 0 $button-separator;
+    }
+
+    &:first-of-type:not(:focus) {
+      box-shadow: inherit;
+    }
   }
 
-  .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled
-    + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
-    + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
+  .#{$prefix}--btn-set .#{$prefix}--btn:focus + .#{$prefix}--btn {
+    box-shadow: inherit;
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
+    box-shadow: 0 rem(-1px) 0 0 $button-separator;
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
+    box-shadow: inherit;
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
     box-shadow: rem(-1px) 0 0 0 $disabled-03;
+
+    &:first-of-type {
+      box-shadow: none;
+    }
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
+    box-shadow: 0 rem(-1px) 0 0 $disabled-03;
+
+    &:first-of-type {
+      box-shadow: none;
+    }
   }
 
   .#{$prefix}--btn {
@@ -14147,6 +14227,7 @@ Button styles
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [prefix [variable]](#prefix-variable)
+  - [button-separator [variable]](#button-separator-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [text-04 [variable]](#text-04-variable)
@@ -15618,6 +15699,8 @@ Data table action styles
 
   //btns container
   .#{$prefix}--action-list {
+    position: absolute;
+    right: 0;
     display: flex;
   }
 
@@ -15697,6 +15780,8 @@ Data table action styles
 
   // items selected text
   .#{$prefix}--batch-summary {
+    position: absolute;
+    left: 0;
     display: flex;
     align-items: center;
     margin-left: $spacing-05;
@@ -19712,8 +19797,8 @@ Modal styles
 
   .#{$prefix}--modal-header,
   .#{$prefix}--modal-content {
-    padding-left: 1rem;
     padding-right: $spacing-09;
+    padding-left: 1rem;
   }
 
   .#{$prefix}--modal-header,
@@ -19888,6 +19973,16 @@ Modal styles
     ~ .#{$prefix}--modal-content--overflow-indicator {
     width: calc(100% - 4px);
     margin: 0 2px 2px;
+  }
+
+  @media screen and (-ms-high-contrast: active) {
+    .#{$prefix}--modal-scroll-content > *:last-child {
+      padding-bottom: 0;
+    }
+
+    .#{$prefix}--modal-content--overflow-indicator {
+      display: none;
+    }
   }
 
   .#{$prefix}--modal-footer {
@@ -23211,6 +23306,7 @@ Slider styles
     @include type-style('code-02');
 
     color: $text-01;
+    white-space: nowrap;
 
     &:last-of-type {
       margin-right: $carbon--spacing-05;
@@ -24451,7 +24547,8 @@ Text input styles
     color: $disabled-02;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
-
+    // Needed to fix disabled text in Safari #6673
+    -webkit-text-fill-color: currentColor;
     cursor: not-allowed;
   }
 
@@ -27227,7 +27324,6 @@ UI shell side nav
     overflow: hidden;
     color: $text-04;
     background-color: $gray-100;
-    // will-change: width;
     // TODO: sync with motion work
     transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
     will-change: width;
@@ -27402,7 +27498,7 @@ UI shell side nav
     height: mini-units(4);
     // Buffer the right hand side of select so text doesn't overlay the chevron
     padding-right: mini-units(4);
-    color: $shell-header-text-01;
+    color: $text-04;
     font-size: rem(12px);
     background-color: $shell-header-bg-01;
     border: none;
@@ -27485,7 +27581,7 @@ UI shell side nav
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
-    color: $ibm-color__gray-100;
+    color: $text-04;
     // TODO: sync color
     background-color: $gray-90;
   }
@@ -27514,11 +27610,10 @@ UI shell side nav
 
     display: flex;
     align-items: center;
-    color: $text-04;
     height: mini-units(4);
 
     padding: 0 mini-units(2);
-    color: $shell-side-nav-text-01;
+    color: $text-04;
     transition: color $duration--fast-02, background-color $duration--fast-02,
       outline $duration--fast-02;
     user-select: none;
@@ -27570,8 +27665,8 @@ UI shell side nav
   .#{$prefix}--side-nav__item--active
     .#{$prefix}--side-nav__submenu[aria-expanded='false'] {
     position: relative;
-    color: $ibm-color__gray-100;
-    background-color: $shell-side-nav-bg-04;
+    color: $text-04;
+    background-color: $gray-70;
     &::before {
       position: absolute;
       top: 0;
@@ -27583,14 +27678,10 @@ UI shell side nav
     }
   }
 
-  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
-    background-color: $gray-90;
-  }
-
   .#{$prefix}--side-nav__menu[role='menu']
     a.#{$prefix}--side-nav__link[role='menuitem']:not(.#{$prefix}--side-nav__link--current):not([aria-current='page']):hover {
-    background-color: $gray-90;
     color: $text-04;
+    background-color: $gray-90;
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title {
@@ -27663,7 +27754,7 @@ UI shell side nav
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
 
-    color: $shell-side-nav-text-01;
+    color: $text-04;
     font-size: rem(14px);
     line-height: 1.25rem;
     letter-spacing: 0.1px;
@@ -27684,7 +27775,7 @@ UI shell side nav
   a.#{$prefix}--side-nav__link[aria-current='page']
     .#{$prefix}--side-nav__link-text,
   a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
-    color: $ibm-color__gray-100;
+    color: $text-04;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page']::before,
@@ -27788,7 +27879,7 @@ UI shell side nav
   //header menu items overrides
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item {
     justify-content: space-between;
-    color: $shell-side-nav-text-01;
+    color: $text-04;
     white-space: nowrap;
 
     &[aria-expanded='true'] {
@@ -27816,7 +27907,7 @@ UI shell side nav
     }
 
     a.#{$prefix}--header__menu-item:hover {
-      color: $ibm-color__gray-100;
+      color: $text-04;
       background-color: $shell-side-nav-bg-04;
     }
   }
@@ -27834,7 +27925,7 @@ UI shell side nav
     a.#{$prefix}--header__menu-item:focus
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
-    fill: $shell-side-nav-text-01;
+    fill: $icon-03;
   }
 
   //----------------------------------------------------------------------------
@@ -27864,12 +27955,10 @@ UI shell side nav
   - [overlay-01 [variable]](#overlay-01-variable)
   - [shell-side-nav-bg-02 [variable]](#shell-side-nav-bg-02-variable)
   - [shell-side-nav-icon-01 [variable]](#shell-side-nav-icon-01-variable)
-  - [shell-header-text-01 [variable]](#shell-header-text-01-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
-  - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
-  - [shell-side-nav-bg-04 [variable]](#shell-side-nav-bg-04-variable)
   - [shell-side-nav-accent-01 [variable]](#shell-side-nav-accent-01-variable)
+  - [shell-side-nav-bg-04 [variable]](#shell-side-nav-bg-04-variable)
   - [icon-03 [variable]](#icon-03-variable)
 
 ### ❌carbon-switcher [mixin]
@@ -28120,7 +28209,6 @@ $shell-header-text-01: $carbon--gray-10;
 - **Type**: `Color`
 - **Used by**:
   - [carbon-header [mixin]](#carbon-header-mixin)
-  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ❌shell-header-text-02 [variable]
 
@@ -28461,8 +28549,6 @@ $shell-side-nav-text-01: $ibm-color__gray-70;
 
 - **Group**: [ui-shell](#ui-shell)
 - **Type**: `Color`
-- **Used by**:
-  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ❌shell-side-nav-text-02 [variable]
 

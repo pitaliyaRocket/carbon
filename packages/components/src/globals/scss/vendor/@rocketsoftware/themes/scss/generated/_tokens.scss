@@ -657,6 +657,16 @@ $hover-light-ui: if(
   #e5e5e5
 ) !default;
 
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$button-separator: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'button-separator'),
+  map-get($carbon--theme, 'button-separator'),
+  #e0e0e0
+) !default;
+
 /// Skeleton state of graphics
 /// @type {undefined}
 /// @access public

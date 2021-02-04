@@ -179,9 +179,19 @@ class FloatingMenu extends React.Component {
     children: PropTypes.object,
 
     /**
-     * The query selector indicating where the floating menu body should be placed.
+     * `true` if the menu alignment should be flipped.
      */
-    target: PropTypes.func,
+    flipped: PropTypes.bool,
+
+    /**
+     * Enable or disable focus trap behavior
+     */
+    focusTrap: PropTypes.bool,
+
+    /**
+     * Optional callback used to obtain a custom 'viewport' that differs from the window.
+     */
+    getViewport: PropTypes.func,
 
     /**
      * Where to put the tooltip, relative to the trigger button.
@@ -205,6 +215,16 @@ class FloatingMenu extends React.Component {
     ]),
 
     /**
+     * The callback called when the menu body has been mounted to/will be unmounted from the DOM.
+     */
+    menuRef: PropTypes.func,
+
+    /**
+     * The callback called when the menu body has been mounted and positioned.
+     */
+    onPlace: PropTypes.func,
+
+    /**
      * Specify a CSS selector that matches the DOM element that should
      * be focused when the Modal opens
      */
@@ -216,24 +236,10 @@ class FloatingMenu extends React.Component {
     styles: PropTypes.object,
 
     /**
-     * The callback called when the menu body has been mounted to/will be unmounted from the DOM.
-     */
-    menuRef: PropTypes.func,
-
-    /**
-     * The callback called when the menu body has been mounted and positioned.
-     */
-    onPlace: PropTypes.func,
-
-    /**
-     * Optional callback used to obtain a custom 'viewport' that differs from the window.
-     */
-    getViewport: PropTypes.func,
-
-    /**
      * `true` if the menu alignment should be flipped.
+     * The query selector indicating where the floating menu body should be placed.
      */
-    flipped: PropTypes.bool,
+    target: PropTypes.func,
 
     /**
      * The element ref of the tooltip's trigger button.
@@ -244,11 +250,6 @@ class FloatingMenu extends React.Component {
         current: PropTypes.any,
       }),
     ]),
-
-    /**
-     * Enable or disable focus trap behavior
-     */
-    focusTrap: PropTypes.bool,
   };
 
   static defaultProps = {
