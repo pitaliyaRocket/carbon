@@ -9169,6 +9169,7 @@ $expressive-heading-03: if(
       ),
       max: (
         font-size: 1.5rem,
+        line-height: 1.334,
       ),
     ),
   )
@@ -9340,7 +9341,7 @@ $expressive-paragraph-01: if(
   (
     font-size: 1.5rem,
     font-weight: 300,
-    line-height: 1.25,
+    line-height: 1.334,
     letter-spacing: 0,
     lg: (
       font-size: 1.75rem,
@@ -9387,7 +9388,7 @@ $quotation-01: if(
       lg: (
         font-size: 1.5rem,
         font-weight: 400,
-        line-height: 1.25,
+        line-height: 1.334,
         letter-spacing: 0,
       ),
       xlg: (
@@ -12927,6 +12928,7 @@ $expressive-heading-03: (
     ),
     max: (
       font-size: carbon--type-scale(6),
+      line-height: 1.334,
     ),
   ),
 );
@@ -13047,7 +13049,7 @@ $expressive-heading-06: (
 $expressive-paragraph-01: (
   font-size: carbon--type-scale(6),
   font-weight: carbon--font-weight('light'),
-  line-height: 1.25,
+  line-height: 1.334,
   letter-spacing: 0,
   breakpoints: (
     lg: (
@@ -13084,7 +13086,7 @@ $quotation-01: (
     ),
     lg: (
       font-size: carbon--type-scale(6),
-      line-height: 1.25,
+      line-height: 1.334,
     ),
     xlg: (
       font-size: carbon--type-scale(7),
@@ -14850,7 +14852,7 @@ Code snippet styles
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
@@ -24292,10 +24294,10 @@ Tag styles
 
   .#{$prefix}--tag__close-icon {
     flex-shrink: 0;
-    width: rem(20px);
-    height: rem(20px);
+    width: rem(16px);
+    height: rem(16px);
     margin: 0 0 0 rem(4px);
-    padding: rem(2px);
+    padding: 0;
     color: currentColor;
     background-color: transparent;
     border: 0;

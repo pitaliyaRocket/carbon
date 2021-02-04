@@ -607,6 +607,9 @@ Map {
       "open": Object {
         "type": "bool",
       },
+      "preventCloseOnClickOutside": Object {
+        "type": "bool",
+      },
       "selectorPrimaryFocus": Object {
         "type": "string",
       },
@@ -2006,7 +2009,6 @@ Map {
             "da",
             "de",
             "en",
-            "en",
             "eo",
             "es",
             "et",
@@ -3197,6 +3199,7 @@ Map {
     "defaultProps": Object {
       "disabled": false,
       "onKeyDown": [Function],
+      "preventCloseOnClickOutside": false,
       "primaryButtonText": "Save",
       "secondaryButtonText": "Cancel",
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
@@ -3241,6 +3244,9 @@ Map {
         "type": "func",
       },
       "passiveModal": Object {
+        "type": "bool",
+      },
+      "preventCloseOnClickOutside": Object {
         "type": "bool",
       },
       "primaryButtonText": Object {
@@ -5884,14 +5890,14 @@ Map {
       },
       "labelA": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelB": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
-        "type": "string",
+        "type": "node",
       },
       "onChange": Object {
         "type": "func",
@@ -5928,14 +5934,14 @@ Map {
       },
       "labelA": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelB": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
-        "type": "string",
+        "type": "node",
       },
       "onChange": Object {
         "type": "func",
