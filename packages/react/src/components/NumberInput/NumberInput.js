@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
 import {
   WarningFilled16,
+  WarningAltFilled16,
   CaretDownGlyph,
   CaretUpGlyph,
 } from '@rocketsoftware/icons-react';
@@ -147,6 +148,14 @@ class NumberInput extends Component {
      * Specify the value of the input
      */
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    /**
+     * Specify whether the control is currently in warning state
+     */
+    warn: PropTypes.bool,
+    /**
+     * Provide the text that is displayed when the control is in warning state
+     */
+    warnText: PropTypes.string,
   };
 
   static defaultProps = {
@@ -157,6 +166,8 @@ class NumberInput extends Component {
     step: 1,
     invalid: false,
     invalidText: 'Provide invalidText',
+    warn: false,
+    warnText: '',
     ariaLabel: 'Numeric input field with increment and decrement buttons',
     helperText: '',
     light: false,
@@ -291,6 +302,8 @@ class NumberInput extends Component {
       readOnly,
       invalid,
       invalidText,
+      warn,
+      warnText,
       helperText,
       ariaLabel,
       light,
@@ -367,6 +380,13 @@ class NumberInput extends Component {
           {invalidText}
         </div>
       );
+    } else if (warn) {
+      errorId = `${id}-error-id`;
+      error = (
+        <div className={`${prefix}--form-requirement`} id={errorId}>
+          {warnText}
+        </div>
+      );
     }
 
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
@@ -392,6 +412,10 @@ class NumberInput extends Component {
       t('increment.number'),
       t('decrement.number'),
     ];
+
+    const wrapperClasses = classNames(`${prefix}--number__input-wrapper`, {
+      [`${prefix}--number__input-wrapper--warning`]: !isInputInvalid && warn,
+    });
 
     return (
       <div className={`${prefix}--form-item`}>
@@ -439,7 +463,7 @@ class NumberInput extends Component {
             return (
               <>
                 {labelText}
-                <div className={`${prefix}--number__input-wrapper`}>
+                <div className={wrapperClasses}>
                   <input
                     data-invalid={isInputInvalid}
                     aria-invalid={isInputInvalid}
@@ -452,6 +476,11 @@ class NumberInput extends Component {
                   />
                   {isInputInvalid && (
                     <WarningFilled16 className={`${prefix}--number__invalid`} />
+                  )}
+                  {!isInputInvalid && warn && (
+                    <WarningAltFilled16
+                      className={`${prefix}--number__invalid ${prefix}--number__invalid--warning`}
+                    />
                   )}
                   <div className={`${prefix}--number__controls`}>
                     <button
@@ -478,7 +507,7 @@ class NumberInput extends Component {
                     </button>
                   </div>
                 </div>
-                {isInputInvalid ? null : helper}
+                {error ? null : helper}
               </>
             );
           })()}

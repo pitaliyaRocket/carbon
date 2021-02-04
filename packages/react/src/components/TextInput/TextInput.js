@@ -46,7 +46,6 @@ const TextInput = React.forwardRef(function TextInput(
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
-    [`${prefix}--text-input--warn`]: warn,
     [`${prefix}--text-input--${size}`]: size,
   });
   const sharedTextInputProps = {
@@ -90,6 +89,12 @@ const TextInput = React.forwardRef(function TextInput(
     `${prefix}--text-input__field-outer-wrapper`,
     {
       [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
+    }
+  );
+  const fieldWrapperClasses = classNames(
+    `${prefix}--text-input__field-wrapper`,
+    {
+      [`${prefix}--text-input__field-wrapper--warning`]: !invalid && warn,
     }
   );
   const label = labelText ? (
@@ -139,10 +144,7 @@ const TextInput = React.forwardRef(function TextInput(
         </div>
       )}
       <div className={fieldOuterWrapperClasses}>
-        <div
-          className={`${prefix}--text-input__field-wrapper`}
-          data-invalid={invalid || null}
-          data-warn={warn || null}>
+        <div className={fieldWrapperClasses} data-invalid={invalid || null}>
           {invalid && (
             <WarningFilled16
               className={`${prefix}--text-input__invalid-icon`}

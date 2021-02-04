@@ -133,6 +133,11 @@ export default class Modal extends Component {
     passiveModal: PropTypes.bool,
 
     /**
+     * Prevent closing on click outside of modal
+     */
+    preventCloseOnClickOutside: PropTypes.bool,
+
+    /**
      * Specify whether the Button should be disabled, or not
      */
     primaryButtonDisabled: PropTypes.bool,
@@ -184,6 +189,7 @@ export default class Modal extends Component {
     iconDescription: 'Close',
     modalHeading: '',
     modalLabel: '',
+    preventCloseOnClickOutside: false,
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     hasScrollingContent: false,
   };
@@ -216,7 +222,8 @@ export default class Modal extends Component {
       !elementOrParentIsFloatingMenu(
         evt.target,
         this.props.selectorsFloatingMenus
-      )
+      ) &&
+      !this.props.preventCloseOnClickOutside
     ) {
       this.props.onRequestClose(evt);
     }
@@ -326,6 +333,7 @@ export default class Modal extends Component {
       shouldSubmitOnEnter, // eslint-disable-line
       size,
       hasScrollingContent,
+      preventCloseOnClickOutside, // eslint-disable-line
       ...other
     } = this.props;
 

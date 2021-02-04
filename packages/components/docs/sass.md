@@ -556,7 +556,7 @@ Define color variables
   $ibm-color__magenta-30: #ffafd2 !default !global;
   $ibm-color__magenta-40: #ff7eb6 !default !global;
   $ibm-color__magenta-50: #ee5396 !default !global;
-  $ibm-color__magenta-60: #d12771 !default !global;
+  $ibm-color__magenta-60: #d02670 !default !global;
   $ibm-color__magenta-70: #9f1853 !default !global;
   $ibm-color__magenta-80: #740937 !default !global;
   $ibm-color__magenta-90: #510224 !default !global;
@@ -597,7 +597,7 @@ Define color variables
   $ibm-color__warm-gray-30: #cac5c4 !default !global;
   $ibm-color__warm-gray-40: #ada8a8 !default !global;
   $ibm-color__warm-gray-50: #8f8b8b !default !global;
-  $ibm-color__warm-gray-60: #736f6f !default !global;
+  $ibm-color__warm-gray-60: #726e6e !default !global;
   $ibm-color__warm-gray-70: #565151 !default !global;
   $ibm-color__warm-gray-80: #3c3838 !default !global;
   $ibm-color__warm-gray-90: #272525 !default !global;
@@ -687,7 +687,7 @@ Define color variables
       30: #ffafd2,
       40: #ff7eb6,
       50: #ee5396,
-      60: #d12771,
+      60: #d02670,
       70: #9f1853,
       80: #740937,
       90: #510224,
@@ -738,7 +738,7 @@ Define color variables
       30: #cac5c4,
       40: #ada8a8,
       50: #8f8b8b,
-      60: #736f6f,
+      60: #726e6e,
       70: #565151,
       80: #3c3838,
       90: #272525,
@@ -750,7 +750,7 @@ Define color variables
       30: #cac5c4,
       40: #ada8a8,
       50: #8f8b8b,
-      60: #736f6f,
+      60: #726e6e,
       70: #565151,
       80: #3c3838,
       90: #272525,
@@ -837,7 +837,7 @@ Define color variables
   $carbon--magenta-30: #ffafd2 !default !global;
   $carbon--magenta-40: #ff7eb6 !default !global;
   $carbon--magenta-50: #ee5396 !default !global;
-  $carbon--magenta-60: #d12771 !default !global;
+  $carbon--magenta-60: #d02670 !default !global;
   $carbon--magenta-70: #9f1853 !default !global;
   $carbon--magenta-80: #740937 !default !global;
   $carbon--magenta-90: #510224 !default !global;
@@ -878,7 +878,7 @@ Define color variables
   $carbon--warm-gray-30: #cac5c4 !default !global;
   $carbon--warm-gray-40: #ada8a8 !default !global;
   $carbon--warm-gray-50: #8f8b8b !default !global;
-  $carbon--warm-gray-60: #736f6f !default !global;
+  $carbon--warm-gray-60: #726e6e !default !global;
   $carbon--warm-gray-70: #565151 !default !global;
   $carbon--warm-gray-80: #3c3838 !default !global;
   $carbon--warm-gray-90: #272525 !default !global;
@@ -942,7 +942,7 @@ Define color variables
   $magenta-30: #ffafd2 !default !global;
   $magenta-40: #ff7eb6 !default !global;
   $magenta-50: #ee5396 !default !global;
-  $magenta-60: #d12771 !default !global;
+  $magenta-60: #d02670 !default !global;
   $magenta-70: #9f1853 !default !global;
   $magenta-80: #740937 !default !global;
   $magenta-90: #510224 !default !global;
@@ -983,7 +983,7 @@ Define color variables
   $warm-gray-30: #cac5c4 !default !global;
   $warm-gray-40: #ada8a8 !default !global;
   $warm-gray-50: #8f8b8b !default !global;
-  $warm-gray-60: #736f6f !default !global;
+  $warm-gray-60: #726e6e !default !global;
   $warm-gray-70: #565151 !default !global;
   $warm-gray-80: #3c3838 !default !global;
   $warm-gray-90: #272525 !default !global;
@@ -1073,7 +1073,7 @@ Define color variables
       30: #ffafd2,
       40: #ff7eb6,
       50: #ee5396,
-      60: #d12771,
+      60: #d02670,
       70: #9f1853,
       80: #740937,
       90: #510224,
@@ -1124,7 +1124,7 @@ Define color variables
       30: #cac5c4,
       40: #ada8a8,
       50: #8f8b8b,
-      60: #736f6f,
+      60: #726e6e,
       70: #565151,
       80: #3c3838,
       90: #272525,
@@ -1136,7 +1136,7 @@ Define color variables
       30: #cac5c4,
       40: #ada8a8,
       50: #8f8b8b,
-      60: #736f6f,
+      60: #726e6e,
       70: #565151,
       80: #3c3838,
       90: #272525,
@@ -2370,6 +2370,7 @@ Generate a media query for a given breakpoint
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [carbon-header [mixin]](#carbon-header-mixin)
 
 ### ✅carbon--container-01 [variable]
@@ -3829,6 +3830,7 @@ $spacing-09: $carbon--spacing-09;
   - [modal [mixin]](#modal-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅spacing-10 [variable]
@@ -6870,6 +6872,7 @@ $ui-05: if(
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅text-01 [variable]
@@ -7044,9 +7047,6 @@ $text-05: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
-  - [search [mixin]](#search-mixin)
-  - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅text-error [variable]
 
@@ -7264,6 +7264,7 @@ $field-01: if(
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
 
@@ -7299,6 +7300,7 @@ $field-02: if(
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
@@ -7466,6 +7468,7 @@ $support-03: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [number-input [mixin]](#number-input-mixin)
   - [text-input [mixin]](#text-input-mixin)
 
 ### ✅support-04 [variable]
@@ -7947,6 +7950,7 @@ $hover-ui: if(
   - [pagination [mixin]](#pagination-mixin)
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [select [mixin]](#select-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
   - [treeview [mixin]](#treeview-mixin)
@@ -13784,6 +13788,13 @@ Accordion styles
     transform: rotate(90deg);
     transition: all $duration--fast-02 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--accordion__title {
@@ -13859,6 +13870,13 @@ Accordion styles
       /* rtl:ignore */
       transform: rotate(-90deg);
       fill: $ui-05;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        fill: ButtonText;
+      }
     }
   }
 
@@ -14251,6 +14269,15 @@ Button styles
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
     .#{$prefix}--btn__icon {
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      path {
+        fill: ButtonText;
+      }
+    }
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
@@ -14268,6 +14295,15 @@ Button styles
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
     .#{$prefix}--btn__icon {
     fill: $disabled-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      path {
+        fill: GrayText;
+      }
+    }
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
@@ -14379,7 +14415,10 @@ Button base styles
   border-radius: $button-border-radius;
   outline: none;
   cursor: pointer;
-  transition: all $duration--fast-01 motion(entrance, productive);
+  transition: background $duration--fast-01 motion(entrance, productive), box-shadow
+      $duration--fast-01 motion(entrance, productive),
+    border-color $duration--fast-01 motion(entrance, productive), outline
+      $duration--fast-01 motion(entrance, productive);
 
   &:disabled,
   &:hover:disabled,
@@ -14623,6 +14662,14 @@ Checkbox styles
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
     // Must use box-shadow for appearance of multiple borders with rounded corners.
     box-shadow: 0 0 0 2px $inverse-01, 0 0 0 4px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `highlightText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid highlightText;
+      outline-offset: 2px;
+    }
   }
 
   //----------------------------------------------
@@ -16993,6 +17040,13 @@ Data table expandable styles
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   // fix expanded parent separating border length
@@ -17343,6 +17397,16 @@ Data table sort styles
     fill: $ui-05;
   }
 
+  // Windows, Firefox HCM Fix
+  .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__icon-unsorted {
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
+  }
+
   //----------------------------------------------------------------------------
   // Compact, Short, Tall Sortable
   //----------------------------------------------------------------------------
@@ -17477,8 +17541,7 @@ Date picker styles
     }
 
     &::placeholder {
-      color: $text-05;
-      opacity: 1;
+      @include placeholder-colors;
     }
   }
 
@@ -17553,7 +17616,6 @@ Date picker styles
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
 
@@ -17617,6 +17679,12 @@ Dropdown styles
 
     padding: 0 rem(48px) 0 rem(16px);
     text-align: left;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--dropdown--xl {
@@ -18165,6 +18233,7 @@ File uploader styles
     }
 
     .#{$prefix}--form-requirement {
+      display: block;
       grid-column: 1 / -1;
       max-height: none;
       margin: 0;
@@ -18228,6 +18297,11 @@ File uploader styles
     @include type-style('label-01');
 
     padding: 0 $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__title {
+    color: $text-error;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -18427,10 +18501,11 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--number__input-wrapper--warning,
   .#{$prefix}--date-picker-input__wrapper,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--text-input--warn,
+  .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
@@ -18459,7 +18534,7 @@ Form styles
 
   //Fluid Form
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-warn] {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
     display: block;
   }
 
@@ -19013,6 +19088,13 @@ List box styles
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
     fill: $disabled-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      fill: GrayText;
+    }
   }
 
   .#{$prefix}--list-box--disabled,
@@ -19197,6 +19279,13 @@ List box styles
   .#{$prefix}--list-box__menu-icon > svg {
     height: 100%;
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--list-box__menu-icon--open {
@@ -19226,6 +19315,13 @@ List box styles
 
   .#{$prefix}--list-box__selection > svg {
     fill: $icon-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:focus {
@@ -19265,6 +19361,13 @@ List box styles
       background-color: $hover-secondary;
       border-radius: 50%;
     }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--list-box--disabled
@@ -19274,6 +19377,13 @@ List box styles
 
     &:hover {
       background-color: initial;
+    }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      fill: GrayText;
     }
   }
 
@@ -20134,6 +20244,13 @@ Modal styles
     width: rem(20px);
     height: rem(20px);
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--body--with-modal-open {
@@ -21000,6 +21117,15 @@ Number input styles
     fill: $support-01;
   }
 
+  .#{$prefix}--number__invalid--warning {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
   .#{$prefix}--number--light input[type='number'] {
     background-color: $field-02;
   }
@@ -21140,6 +21266,7 @@ Number input styles
   - [ui-04 [variable]](#ui-04-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [support-03 [variable]](#support-03-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -21210,6 +21337,13 @@ Overflow menu styles
     width: rem(16px);
     height: rem(16px);
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--overflow-menu-options {
@@ -21600,6 +21734,13 @@ Pagination styles
     transition: outline $duration--fast-02 motion(standard, productive), background-color
         $duration--fast-02 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--pagination__button:focus,
@@ -22768,7 +22909,13 @@ Radio button styles
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
         // Utilize a system color variable to accomodate any user HCM theme
-        background-color: windowText;
+        background-color: WindowText;
+      }
+
+      // Firefox only HCM solution
+      @media screen and (prefers-contrast) {
+        // Utilize a system color variable to accomodate any user HCM theme
+        border: 2px solid WindowText;
       }
     }
   }
@@ -22907,8 +23054,7 @@ Search styles
     }
 
     &::placeholder {
-      color: $text-05;
-      font-weight: 400;
+      @include placeholder-colors;
     }
 
     &::-ms-clear {
@@ -22924,7 +23070,6 @@ Search styles
 
     &::placeholder {
       color: $disabled;
-      font-weight: 400;
     }
   }
 
@@ -22974,6 +23119,13 @@ Search styles
     transform: translateY(-50%);
     pointer-events: none;
     fill: $icon-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--search-close {
@@ -23018,6 +23170,12 @@ Search styles
 
   .#{$prefix}--search-close svg {
     fill: inherit;
+
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--search-close,
@@ -23117,7 +23275,6 @@ Search styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
   - [spacing-08 [variable]](#spacing-08-variable)
@@ -23258,6 +23415,15 @@ Select styles
     height: 100%;
     pointer-events: none;
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      path {
+        fill: ButtonText;
+      }
+    }
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
@@ -23430,6 +23596,13 @@ Slider styles
     background: $ui-03;
     transform: translate(0%, -50%);
     cursor: pointer;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--slider__track:before {
@@ -23453,6 +23626,13 @@ Slider styles
     transform-origin: left;
     transition: background $duration--fast-02 motion(standard, productive);
     pointer-events: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--slider__thumb {
@@ -23486,6 +23666,13 @@ Slider styles
     &:active {
       box-shadow: inset 0 0 0 2px $interactive-04;
       transform: translate(-50%, -50%) scale(1.4286);
+    }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
     }
   }
 
@@ -23728,131 +23915,126 @@ Tabs styles
     @include reset;
     @include type-style('body-short-01');
 
-    display: flex;
+    position: relative;
     width: 100%;
     height: auto;
-    min-height: rem(40px);
     color: $text-01;
+    @include carbon--breakpoint(md) {
+      min-height: rem(40px);
+      background: none;
+    }
   }
 
   .#{$prefix}--tabs--container {
-    min-height: rem(48px);
+    @include carbon--breakpoint(md) {
+      min-height: rem(48px);
+    }
   }
 
-  .#{$prefix}--tabs__nav {
+  .#{$prefix}--tabs-trigger {
     display: flex;
-    flex-direction: row;
-    width: auto;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: auto hidden;
-    list-style: none;
-    transition: max-height $duration--fast-01 motion(standard, productive);
-
-    // hide scrollbars
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
+    align-items: center;
+    justify-content: space-between;
+    height: rem(40px);
+    padding: 0 $spacing-09 0 $spacing-05;
+    color: $text-01;
+    background-color: $field-01;
+    border-bottom: 1px solid $ui-04;
+    outline: 2px solid transparent;
+    cursor: pointer;
+    @include carbon--breakpoint(md) {
       display: none;
     }
   }
 
-  //-----------------------------
-  // Overflow Nav Buttons
-  //-----------------------------
-  .#{$prefix}--tabs__overflow-indicator--left,
-  .#{$prefix}--tabs__overflow-indicator--right {
-    z-index: 1;
-    flex: 1 0 auto;
-    width: $carbon--spacing-03;
+  .#{$prefix}--tabs-trigger:focus,
+  .#{$prefix}--tabs-trigger:active {
+    @include focus-outline('outline');
   }
 
-  .#{$prefix}--tabs__overflow-indicator--left {
-    margin-right: -$carbon--spacing-03;
-    background-image: linear-gradient(to left, transparent, $ui-background);
+  .#{$prefix}--tabs-trigger svg {
+    position: absolute;
+    right: $spacing-05;
+    transition: transform $duration--fast-01 motion(standard, productive);
+    fill: $ui-05;
   }
 
-  .#{$prefix}--tabs__overflow-indicator--right {
-    margin-left: -$carbon--spacing-03;
-    background-image: linear-gradient(to right, transparent, $ui-background);
+  .#{$prefix}--tabs-trigger--open:focus,
+  .#{$prefix}--tabs-trigger--open:active {
+    @include focus-outline('reset');
+
+    transition: outline $duration--fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
-    background-image: linear-gradient(to left, transparent, $ui-01);
+  .#{$prefix}--tabs-trigger--open {
+    background: $ui-03;
   }
 
-  .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
-    background-image: linear-gradient(to right, transparent, $ui-01);
+  .#{$prefix}--tabs-trigger--open svg {
+    @include rotate(-180deg, $duration--fast-01, 50% 45%);
   }
 
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
-    background-image: linear-gradient(to left, transparent, $ui-03);
+  // There is only a difference in tab color when in mobile/dropdown view
+  .#{$prefix}--tabs--light.#{$prefix}--tabs-trigger {
+    background-color: $field-02;
   }
 
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--right {
-    background-image: linear-gradient(to right, transparent, $ui-03);
+  .#{$prefix}--tabs-trigger-text {
+    padding-top: 2px;
+    overflow: hidden;
+    color: $text-01;
+    font-weight: 400;
+    white-space: nowrap;
+    text-decoration: none;
+    text-overflow: ellipsis;
   }
 
-  // Safari-only media query
-  // won't appear correctly with CSS custom properties
-  // see: code snippet and modal overflow indicators
-  @media not all and (min-resolution: 0.001dpcm) {
-    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-      .#{$prefix}--tabs__overflow-indicator--left {
-        margin-right: -$carbon--spacing-05;
-        background-image: linear-gradient(
-          to left,
-          rgba($ui-background, 0),
-          $ui-background
-        );
-      }
-
-      .#{$prefix}--tabs__overflow-indicator--right {
-        margin-left: -$carbon--spacing-05;
-        background-image: linear-gradient(
-          to right,
-          rgba($ui-background, 0),
-          $ui-background
-        );
-      }
-
-      .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
-        background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
-      }
-      .#{$prefix}--tabs--container
-        .#{$prefix}--tabs__overflow-indicator--right {
-        background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
-      }
-    }
+  .#{$prefix}--tabs-trigger-text:hover {
+    color: $text-01;
   }
 
-  .#{$prefix}--tab--overflow-nav-button {
-    @include button-reset;
+  .#{$prefix}--tabs-trigger-text:focus {
+    outline: none;
+  }
 
+  .#{$prefix}--tabs__nav {
+    @include box-shadow;
+
+    position: absolute;
+    z-index: z('dropdown');
     display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: $carbon--spacing-08;
+    flex-direction: column;
+    width: 100%;
+    max-height: 600px;
 
-    &:focus {
-      @include focus-outline('outline');
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: $ui-01;
+    transition: max-height $duration--fast-01 motion(standard, productive);
+
+    @include carbon--breakpoint(md) {
+      z-index: auto;
+      flex-direction: row;
+      width: auto;
+      background: none;
+      box-shadow: none;
+      transition: inherit;
     }
   }
 
-  .#{$prefix}--tab--overflow-nav-button--hidden {
-    display: none;
-  }
+  .#{$prefix}--tabs__nav--hidden {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height $duration--fast-01 motion(standard, productive);
 
-  .#{$prefix}--tabs--container .#{$prefix}--tab--overflow-nav-button {
-    width: $carbon--spacing-09;
-    margin: 0;
-    background-color: $ui-03;
-  }
-
-  .#{$prefix}--tab--overflow-nav-button svg {
-    fill: $icon-01;
+    @include carbon--breakpoint(md) {
+      display: flex;
+      max-width: 100%;
+      max-height: none;
+      overflow-x: auto;
+      transition: inherit;
+    }
   }
 
   //-----------------------------
@@ -23862,34 +24044,38 @@ Tabs styles
     @include reset;
 
     display: flex;
+    width: 100%;
+    height: rem(40px);
     padding: 0;
+    background-color: $ui-01;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
-  }
 
-  .#{$prefix}--tabs__nav-item + .#{$prefix}--tabs__nav-item {
-    margin-left: rem(1px);
+    @include carbon--breakpoint(md) {
+      height: auto;
+      background: transparent;
+
+      + .#{$prefix}--tabs__nav-item {
+        margin-left: rem(1px);
+      }
+    }
   }
 
   .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
-    background-color: $ui-03;
-  }
+    @include carbon--breakpoint(md) {
+      background-color: $ui-03;
 
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item
-    + .#{$prefix}--tabs__nav-item {
-    margin-left: 0;
-    // Draws the border without affecting the inner-content
-    box-shadow: rem(-1px) 0 0 0 $ui-04;
-  }
+      + .#{$prefix}--tabs__nav-item {
+        margin-left: 0;
+        // Draws the border without affecting the inner-content
+        box-shadow: -1px 0 0 0 $ui-04;
+      }
 
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item
-    + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected
-    + .#{$prefix}--tabs__nav-item {
-    box-shadow: none;
+      + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+      &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
   }
 
   .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
@@ -23901,8 +24087,30 @@ Tabs styles
   //-----------------------------
   // Item Hover
   //-----------------------------
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item:hover {
-    background-color: $hover-selected-ui;
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
+    @include carbon--breakpoint(md) {
+      background: transparent;
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    background-color: $hover-ui;
+    box-shadow: 0 -1px 0 $hover-ui;
+
+    @include carbon--breakpoint(md) {
+      background-color: transparent;
+
+      + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $hover-selected-ui;
+    }
   }
 
   //---------------------------------------------
@@ -23910,7 +24118,6 @@ Tabs styles
   //---------------------------------------------
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
-    background-color: transparent;
     outline: none;
     cursor: not-allowed;
   }
@@ -23919,94 +24126,138 @@ Tabs styles
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
-    background-color: $disabled-02;
+    @include carbon--breakpoint(md) {
+      background-color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      color: $disabled-03;
+      border-bottom: none;
+    }
   }
 
   //-----------------------------
   // Item Selected
   //-----------------------------
-  .#{$prefix}--tabs__nav-item--selected {
+  .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
+    display: none;
+    border: none;
     transition: color $duration--fast-01 motion(standard, productive);
-  }
 
-  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link,
-  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:active {
-    @include type-style('productive-heading-01');
+    @include carbon--breakpoint(md) {
+      display: flex;
+      .#{$prefix}--tabs__nav-link,
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        @include type-style('productive-heading-01');
 
-    color: $text-01;
-    border-bottom: 2px solid $interactive-04;
-  }
-
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected,
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected:hover {
-    background-color: $ui-01;
-
-    .#{$prefix}--tabs__nav-link:focus,
-    .#{$prefix}--tabs__nav-link:active {
-      box-shadow: none;
+        color: $text-01;
+        border-bottom: 2px solid $interactive-04;
+      }
     }
   }
 
   .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--selected
-    .#{$prefix}--tabs__nav-link {
-    // height - vertical padding
-    line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-    // Draws the border without affecting the inner-content
-    box-shadow: inset 0 2px 0 0 $interactive-04;
-  }
+    .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $ui-01;
 
-  .#{$prefix}--tabs--light.#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--selected,
-  .#{$prefix}--tabs--light.#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--selected:hover {
-    background-color: $ui-background;
+      .#{$prefix}--tabs__nav-link {
+        padding: $spacing-03 $spacing-05;
+        // height - vertical padding
+        // Draws the border without affecting the inner-content
+        line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+        border-bottom: none;
+        box-shadow: inset 0 2px 0 0 $interactive-04;
+      }
+
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        box-shadow: none;
+      }
+    }
   }
 
   //-----------------------------
   // Link
   //-----------------------------
-  .#{$prefix}--tabs__nav-link {
+  a.#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
 
-    width: rem(160px);
-    padding: $spacing-04 $spacing-05 $spacing-03;
+    display: inline-block;
+    width: calc(100% - 32px);
+    height: rem(40px);
+    margin: 0 $spacing-05;
+    padding: $spacing-04 0;
     overflow: hidden;
     color: $text-02;
+    font-weight: 400;
+    line-height: 1rem;
     white-space: nowrap;
     text-decoration: none;
     text-overflow: ellipsis;
-    border-bottom: $tab-underline-color;
+    border-bottom: 1px solid $ui-03;
     transition: border $duration--fast-01 motion(standard, productive), outline
         $duration--fast-01 motion(standard, productive);
 
     &:focus,
     &:active {
       @include focus-outline('outline');
+
+      width: 100%;
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: rem(160px);
+      margin: 0;
+      padding: $spacing-04 $spacing-05 $spacing-03;
+      line-height: inherit;
+      border-bottom: $tab-underline-color;
+
+      &:focus,
+      &:active {
+        width: rem(160px);
+        border-bottom: 2px;
+      }
     }
   }
 
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-link {
-    height: rem(48px);
-    padding: $spacing-03 $spacing-05;
-    // height - vertical padding
-    line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-    border-bottom: 0;
+  .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      height: rem(48px);
+      padding: $spacing-03 $spacing-05;
+      // Height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      border-bottom: none;
+    }
   }
 
   //-----------------------------
   //  Link Hover
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-link {
     color: $text-01;
-    border-bottom: $tab-underline-color-hover;
+    @include carbon--breakpoint(md) {
+      color: $text-01;
+      border-bottom: $tab-underline-color-hover;
+    }
   }
 
   .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
-    border-bottom: none;
+    @include carbon--breakpoint(md) {
+      border-bottom: none;
+    }
   }
 
   //-----------------------------
@@ -24015,47 +24266,28 @@ Tabs styles
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
     color: $tab-text-disabled;
     border-bottom: $tab-underline-disabled;
-  }
-
-  .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
-    color: $tab-text-disabled;
-    border-bottom: $tab-underline-disabled;
-    cursor: not-allowed;
     pointer-events: none;
   }
 
+  .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
+    border-bottom: $tab-underline-disabled;
+    cursor: no-drop;
+  }
+
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:active {
+  .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
     border-bottom: $tab-underline-disabled;
     outline: none;
   }
 
-  .#{$prefix}--tabs--light
-    .#{$prefix}--tabs__nav-item--disabled
-    .#{$prefix}--tabs__nav-link {
-    border-bottom-color: $ui-03;
-  }
-
-  .#{$prefix}--tabs--light
-    .#{$prefix}--tabs__nav-item--disabled:hover
-    .#{$prefix}--tabs__nav-link {
-    border-bottom-color: $ui-03;
-  }
-
-  .#{$prefix}--tabs--light
-    .#{$prefix}--tabs__nav-item--disabled
+  //-----------------------------
+  //  Link Focus
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
     .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs--light
-    .#{$prefix}--tabs__nav-item--disabled
-    .#{$prefix}--tabs__nav-link:active {
-    border-bottom-color: $ui-03;
-  }
-
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--disabled
-    .#{$prefix}--tabs__nav-link {
-    color: $disabled-03;
-    border-bottom: none;
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
+    a.#{$prefix}--tabs__nav-link:active {
+    color: $text-02;
   }
 
   //-----------------------------
@@ -24077,17 +24309,408 @@ Tabs styles
     @include skeleton;
 
     width: rem(75px);
+    height: rem(12px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
     @include skeleton;
 
-    width: rem(75px);
-    margin-right: rem(1px);
+    width: rem(100px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
     @include hidden;
+  }
+
+  // TODO: remove namespace and suffix in next major release
+  .#{$prefix}--tabs--scrollable {
+    .#{$prefix}--tabs--scrollable {
+      @include reset;
+      @include type-style('body-short-01');
+
+      display: flex;
+      width: 100%;
+      height: auto;
+      min-height: rem(40px);
+      color: $text-01;
+    }
+
+    .#{$prefix}--tabs--scrollable--container {
+      min-height: rem(48px);
+    }
+
+    .#{$prefix}--tabs--scrollable__nav {
+      display: flex;
+      flex-direction: row;
+      width: auto;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: auto hidden;
+      list-style: none;
+      transition: max-height $duration--fast-01 motion(standard, productive);
+
+      // hide scrollbars
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    //-----------------------------
+    // Overflow Nav Buttons
+    //-----------------------------
+    .#{$prefix}--tabs__overflow-indicator--left,
+    .#{$prefix}--tabs__overflow-indicator--right {
+      z-index: 1;
+      flex: 1 0 auto;
+      width: $carbon--spacing-03;
+    }
+
+    .#{$prefix}--tabs__overflow-indicator--left {
+      margin-right: -$carbon--spacing-03;
+      background-image: linear-gradient(to left, transparent, $ui-background);
+    }
+
+    .#{$prefix}--tabs__overflow-indicator--right {
+      margin-left: -$carbon--spacing-03;
+      background-image: linear-gradient(to right, transparent, $ui-background);
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs__overflow-indicator--left {
+      background-image: linear-gradient(to left, transparent, $ui-01);
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs__overflow-indicator--right {
+      background-image: linear-gradient(to right, transparent, $ui-01);
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs__overflow-indicator--left {
+      background-image: linear-gradient(to left, transparent, $ui-03);
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs__overflow-indicator--right {
+      background-image: linear-gradient(to right, transparent, $ui-03);
+    }
+
+    // Safari-only media query
+    // won't appear correctly with CSS custom properties
+    // see: code snippet and modal overflow indicators
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+        .#{$prefix}--tabs__overflow-indicator--left {
+          margin-right: -$carbon--spacing-05;
+          background-image: linear-gradient(
+            to left,
+            rgba($ui-background, 0),
+            $ui-background
+          );
+        }
+
+        .#{$prefix}--tabs__overflow-indicator--right {
+          margin-left: -$carbon--spacing-05;
+          background-image: linear-gradient(
+            to right,
+            rgba($ui-background, 0),
+            $ui-background
+          );
+        }
+
+        .#{$prefix}--tabs--scrollable--container
+          .#{$prefix}--tabs__overflow-indicator--left {
+          background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
+        }
+        .#{$prefix}--tabs--scrollable--container
+          .#{$prefix}--tabs__overflow-indicator--right {
+          background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
+        }
+      }
+    }
+
+    .#{$prefix}--tab--overflow-nav-button {
+      @include button-reset;
+
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: $carbon--spacing-08;
+
+      &:focus {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--tab--overflow-nav-button--hidden {
+      display: none;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tab--overflow-nav-button {
+      width: $carbon--spacing-09;
+      margin: 0;
+      background-color: $ui-03;
+    }
+
+    .#{$prefix}--tab--overflow-nav-button svg {
+      fill: $icon-01;
+    }
+
+    //-----------------------------
+    // Item
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item {
+      @include reset;
+
+      display: flex;
+      padding: 0;
+      cursor: pointer;
+      transition: background-color $duration--fast-01 motion(standard, productive);
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item
+      + .#{$prefix}--tabs--scrollable__nav-item {
+      margin-left: rem(1px);
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item {
+      background-color: $ui-03;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item
+      + .#{$prefix}--tabs--scrollable__nav-item {
+      margin-left: 0;
+      // Draws the border without affecting the inner-content
+      box-shadow: rem(-1px) 0 0 0 $ui-04;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item
+      + .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected,
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected
+      + .#{$prefix}--tabs--scrollable__nav-item {
+      box-shadow: none;
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item
+      .#{$prefix}--tabs--scrollable__nav-link {
+      transition: color $duration--fast-01 motion(standard, productive), border-bottom-color
+          $duration--fast-01 motion(standard, productive),
+        outline $duration--fast-01 motion(standard, productive);
+    }
+
+    //-----------------------------
+    // Item Hover
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item:hover {
+      background-color: $hover-selected-ui;
+    }
+
+    //---------------------------------------------
+    // Item Disabled
+    //---------------------------------------------
+    .#{$prefix}--tabs--scrollable__nav-item--disabled,
+    .#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
+      background-color: transparent;
+      outline: none;
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
+      background-color: $disabled-02;
+    }
+
+    //-----------------------------
+    // Item Selected
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item--selected {
+      transition: color $duration--fast-01 motion(standard, productive);
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link,
+    .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+    .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+      @include type-style('productive-heading-01');
+
+      color: $text-01;
+      border-bottom: 2px solid $interactive-04;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected,
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
+      background-color: $ui-01;
+
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+        box-shadow: none;
+      }
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link {
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      // Draws the border without affecting the inner-content
+      box-shadow: inset 0 2px 0 0 $interactive-04;
+    }
+
+    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected,
+    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
+      background-color: $ui-background;
+    }
+
+    //-----------------------------
+    // Link
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-link {
+      @include focus-outline('reset');
+
+      width: rem(160px);
+      padding: $spacing-04 $spacing-05 $spacing-03;
+      overflow: hidden;
+      color: $text-02;
+      white-space: nowrap;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      border-bottom: $tab-underline-color;
+      transition: border $duration--fast-01 motion(standard, productive), outline
+          $duration--fast-01 motion(standard, productive);
+
+      &:focus,
+      &:active {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-link {
+      height: rem(48px);
+      padding: $spacing-03 $spacing-05;
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      border-bottom: 0;
+    }
+
+    //-----------------------------
+    //  Link Hover
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item:hover
+      .#{$prefix}--tabs--scrollable__nav-link {
+      color: $text-01;
+      border-bottom: $tab-underline-color-hover;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom: none;
+    }
+
+    //-----------------------------
+    //  Link Disabled
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link {
+      color: $tab-text-disabled;
+      border-bottom: $tab-underline-disabled;
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item--disabled:hover
+      .#{$prefix}--tabs--scrollable__nav-link {
+      color: $tab-text-disabled;
+      border-bottom: $tab-underline-disabled;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+      border-bottom: $tab-underline-disabled;
+      outline: none;
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom-color: $ui-03;
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled:hover
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom-color: $ui-03;
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+      border-bottom-color: $ui-03;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link {
+      color: $disabled-03;
+      border-bottom: none;
+    }
+
+    //-----------------------------
+    //  Tab Content Container
+    //-----------------------------
+    .#{$prefix}--tab-content {
+      padding: $carbon--spacing-05;
+    }
+
+    //-----------------------------
+    // Skeleton state
+    //-----------------------------
+    .#{$prefix}--tabs.#{$prefix}--skeleton {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton
+      .#{$prefix}--tabs--scrollable__nav-link {
+      @include skeleton;
+
+      width: rem(75px);
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+      @include skeleton;
+
+      width: rem(75px);
+      margin-right: rem(1px);
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+      @include hidden;
+    }
   }
 }
 ```
@@ -24096,25 +24719,31 @@ Tabs styles
 
 - **Group**: [tabs](#tabs)
 - **Requires**:
+  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [ui-background [variable]](#ui-background-variable)
-  - [ui-01 [variable]](#ui-01-variable)
-  - [ui-03 [variable]](#ui-03-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
-  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
-  - [icon-01 [variable]](#icon-01-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [ui-05 [variable]](#ui-05-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [field-02 [variable]](#field-02-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [disabled-03 [variable]](#disabled-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [ui-background [variable]](#ui-background-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [icon-01 [variable]](#icon-01-variable)
 
 ## tag
 
@@ -25032,7 +25661,7 @@ Time picker styles
         $duration--fast-01 motion(standard, productive);
 
     &::placeholder {
-      color: $text-05;
+      @include placeholder-colors;
     }
   }
 
@@ -25060,7 +25689,6 @@ Time picker styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)

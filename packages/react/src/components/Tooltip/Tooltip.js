@@ -108,6 +108,11 @@ class Tooltip extends Component {
     direction: PropTypes.oneOf(['bottom', 'top', 'left', 'right']),
 
     /**
+     * Enable or disable focus trap behavior
+     */
+    focusTrap: PropTypes.bool,
+
+    /**
      * The name of the default tooltip icon.
      */
     iconName: PropTypes.string,
@@ -208,6 +213,7 @@ class Tooltip extends Component {
 
   static defaultProps = {
     direction: DIRECTION_BOTTOM,
+    focusTrap: true,
     renderIcon: Information,
     showIcon: true,
     triggerText: null,
@@ -276,6 +282,9 @@ class Tooltip extends Component {
   }
 
   _handleUserInputOpenClose = (event, { open }) => {
+    if (this.isControlled) {
+      return;
+    }
     // capture tooltip body element before it is removed from the DOM
     const tooltipBody = this._tooltipEl;
     this.setState({ open }, () => {
@@ -401,6 +410,7 @@ class Tooltip extends Component {
       className,
       triggerClassName,
       direction,
+      focusTrap,
       triggerText,
       showIcon,
       iconName,
@@ -480,7 +490,7 @@ class Tooltip extends Component {
         </ClickListener>
         {open && (
           <FloatingMenu
-            focusTrap
+            focusTrap={focusTrap}
             selectorPrimaryFocus={this.props.selectorPrimaryFocus}
             target={this._getTarget}
             triggerRef={this._triggerRef}
