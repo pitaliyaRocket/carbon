@@ -215,6 +215,7 @@ categories:
           - arrows--vertical
           - automatic
           - bookmark
+          - bookmark--filled
           - branch
           - caret--sort
           - caret--sort--down
@@ -250,7 +251,9 @@ categories:
           - filter--remove
           - filter--reset
           - flag
+          - flag--filled
           - fork
+          - function-math
           - image--search
           - insert
           - insert--page
@@ -274,7 +277,10 @@ categories:
           - operations--field
           - operations--record
           - package
+          - pan--horizontal
+          - pan--vertical
           - pin
+          - pin--filled
           - recently-viewed
           - recommend
           - redo
@@ -418,10 +424,12 @@ categories:
           - finance
           - fish
           - fish--multiple
+          - fragile
           - fruit-bowl
           - gift
           - industry
           - inventory-management
+          - keep-dry
           - money
           - noodle-bowl
           - purchase
@@ -431,11 +439,14 @@ categories:
           - shopping--catalog
           - soccer
           - sprout
+          - stack-limitation
           - store
           - strawberry
           - tennis
           - tennis-ball
+          - this-side-up
           - tree
+          - two-person-lift
           - wallet
           - wheat
           - wireless-checkout
@@ -467,6 +478,8 @@ categories:
           - annotation-visibility
           - arrow--annotation
           - auto-scroll
+          - brush-freehand
+          - brush-polygon
           - cd--archive
           - cd--create-archive
           - cd--create-exchange
@@ -474,6 +487,7 @@ categories:
           - chemistry--reference
           - circle-measurement
           - cobb-angle
+          - contour-finding
           - coronavirus
           - cross-reference
           - cut-in-half
@@ -636,13 +650,26 @@ categories:
           - atomic
           - blockchain
           - box-plot
+          - calendar--heat-map
           - character-patterns
           - chart--3D
           - chart--area
+          - chart--area-smooth
+          - chart--area-stepper
           - chart--bar
+          - chart--bar-floating
+          - chart--bar-overlay
+          - chart--bar-stacked
+          - chart--bar-target
           - chart--bubble
+          - chart--bullet
           - chart--candlestick
           - chart--cluster-bar
+          - chart--column
+          - chart--column-floating
+          - chart--column-target
+          - chart--combo
+          - chart--combo-stacked
           - chart--custom
           - chart--error-bar
           - chart--error-bar--alt
@@ -651,13 +678,17 @@ categories:
           - chart--histogram
           - chart--line
           - chart--line--data
+          - chart--line-smooth
+          - chart--marimekko
           - chart--multi-line
           - chart--multitype
           - chart--network
           - chart--parallel
           - chart--pie
+          - chart--point
           - chart--population
           - chart--radar
+          - chart--radial
           - chart--relationship
           - chart--ring
           - chart--river
@@ -665,9 +696,11 @@ categories:
           - chart--scatter
           - chart--stacked
           - chart--stepper
+          - chart--sunburst
           - chart--treemap
           - chart--t-sne
           - chart--venn-diagram
+          - chart--waterfall
           - circle-packing
           - circle--filled
           - classifier--language
@@ -676,6 +709,7 @@ categories:
           - concept
           - container-software
           - covariate
+          - cross-tab
           - data--1
           - data--2
           - data--base
@@ -688,6 +722,7 @@ categories:
           - data--structured
           - data--unstructured
           - data-class
+          - data-player
           - data-refinery
           - data-refinery--reference
           - data-share
@@ -698,10 +733,12 @@ categories:
           - data-vis--3
           - data-vis--4
           - datastore
+          - decision-tree
           - diagram
           - diagram--reference
           - document-sentiment
           - double-integer
+          - driver-analysis
           - factor
           - flow
           - flow--connection
@@ -713,6 +750,7 @@ categories:
           - heat-map
           - heat-map--02
           - heat-map--03
+          - heat-map--stocks
           - hybrid-networking
           - improve-relevance
           - interactions
@@ -738,12 +776,14 @@ categories:
           - physical-hierarchy
           - presentation-file
           - qq-plot
+          - quadrant-plot
           - query-queue
           - relationship
           - report
           - report--data
           - row--collapse
           - row--expand
+          - sankey-diagram
           - scatter-matrix
           - schematics
           - share-knowledge
@@ -754,6 +794,7 @@ categories:
           - stem-leaf-plot
           - string-integer
           - string-text
+          - summary--KPI
           - sys-provision
           - table
           - table--split
@@ -801,10 +842,12 @@ categories:
           - closed-caption--filled
           - cloud-foundry--1
           - cloud-foundry--2
+          - content-view
           - copy
           - copy--file
           - course
           - CSV
+          - cube-view
           - DOC
           - document
           - document--add
@@ -847,6 +890,7 @@ categories:
           - legend
           - list--dropdown
           - model
+          - model--alt
           - model--reference
           - MOV
           - MP3
@@ -888,6 +932,7 @@ categories:
           - TXT
           - TXT--reference
           - upload
+          - websheet
           - WMV
           - workspace
           - XLS
@@ -1208,8 +1253,14 @@ categories:
           - code--reference
           - connection-signal
           - debug
+          - deployment-pattern
+          - deployment-policy
           - development
           - devices
+          - edge-cluster
+          - edge-device
+          - edge-node
+          - edge-service
           - email
           - email--new
           - fetch-upload
@@ -1227,11 +1278,13 @@ categories:
           - keyboard
           - laptop
           - logo--jupyter
+          - logo--keybase
           - logo--openshift
           - logo--python
           - logo--r-script
           - logo--vmware
           - machine-learning
+          - machine-learning-model
           - mail--all
           - mail--reply
           - mobile
@@ -1249,6 +1302,7 @@ categories:
           - rocket
           - rss
           - share
+          - signal-strength
           - tablet
           - tablet--landscape
           - terminal

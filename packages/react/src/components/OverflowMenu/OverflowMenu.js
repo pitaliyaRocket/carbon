@@ -262,7 +262,7 @@ class OverflowMenu extends Component {
 
   componentDidUpdate(_, prevState) {
     const { onClose } = this.props;
-    if (!this.state.open && prevState.isOpen) {
+    if (!this.state.open && prevState.open) {
       onClose();
     }
   }
@@ -412,14 +412,16 @@ class OverflowMenu extends Component {
         (event) => {
           const { target } = event;
           const { current: triggerEl } = this._triggerRef;
-          if (
-            !menuBody.contains(target) &&
-            triggerEl &&
-            !target.matches(
-              `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
-            )
-          ) {
-            this.closeMenu();
+          if (typeof target.matches === 'function') {
+            if (
+              !menuBody.contains(target) &&
+              triggerEl &&
+              !target.matches(
+                `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
+              )
+            ) {
+              this.closeMenu();
+            }
           }
         },
         !hasFocusin

@@ -10,8 +10,9 @@ import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Modal from '../Modal';
-import { settings } from '@rocketsoftware/carbon-components';
 import TextInput from '../TextInput';
+import { settings } from '@rocketsoftware/carbon-components';
+import mdx from './Modal.mdx';
 
 const { prefix } = settings;
 
@@ -105,6 +106,9 @@ export default {
 
   parameters: {
     component: Modal,
+    docs: {
+      page: mdx,
+    },
   },
 };
 

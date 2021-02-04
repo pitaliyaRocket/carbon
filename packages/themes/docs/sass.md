@@ -4316,7 +4316,7 @@ $caption-01: if(
   (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 );
@@ -4344,7 +4344,7 @@ $label-01: if(
   (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 );
@@ -4371,7 +4371,7 @@ $helper-text-01: if(
   map-get($carbon--theme, 'helper-text-01'),
   (
     font-size: 0.75rem,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 );
@@ -4399,7 +4399,7 @@ $body-short-01: if(
   (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.125rem,
+    line-height: 1.29,
     letter-spacing: 0.16px,
   )
 );
@@ -4427,7 +4427,7 @@ $body-long-01: if(
   (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.25rem,
+    line-height: 1.43,
     letter-spacing: 0.16px,
   )
 );
@@ -4455,7 +4455,7 @@ $body-short-02: if(
   (
     font-size: 1rem,
     font-weight: 400,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 );
@@ -4483,7 +4483,7 @@ $body-long-02: if(
   (
     font-size: 1rem,
     font-weight: 400,
-    line-height: 1.5rem,
+    line-height: 1.5,
     letter-spacing: 0,
   )
 );
@@ -4512,7 +4512,7 @@ $code-01: if(
     font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 );
@@ -4541,7 +4541,7 @@ $code-02: if(
     font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.25rem,
+    line-height: 1.43,
     letter-spacing: 0.32px,
   )
 );
@@ -4569,7 +4569,7 @@ $heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.125rem,
+    line-height: 1.29,
     letter-spacing: 0.16px,
   )
 );
@@ -4597,7 +4597,7 @@ $productive-heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.125rem,
+    line-height: 1.29,
     letter-spacing: 0.16px,
   )
 );
@@ -4625,7 +4625,7 @@ $heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 );
@@ -4653,7 +4653,7 @@ $productive-heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 );
@@ -4681,7 +4681,7 @@ $productive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 1.75rem,
+    line-height: 1.4,
     letter-spacing: 0,
   )
 );
@@ -4709,7 +4709,7 @@ $productive-heading-04: if(
   (
     font-size: 1.75rem,
     font-weight: 400,
-    line-height: 2.25rem,
+    line-height: 1.29,
     letter-spacing: 0,
   )
 );
@@ -4737,7 +4737,7 @@ $productive-heading-05: if(
   (
     font-size: 2rem,
     font-weight: 400,
-    line-height: 2.5rem,
+    line-height: 1.25,
     letter-spacing: 0,
   )
 );
@@ -4765,7 +4765,7 @@ $productive-heading-06: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 3.125rem,
+    line-height: 1.199,
     letter-spacing: 0,
   )
 );
@@ -4793,7 +4793,7 @@ $productive-heading-07: if(
   (
     font-size: 3.375rem,
     font-weight: 300,
-    line-height: 4rem,
+    line-height: 1.19,
     letter-spacing: 0,
   )
 );
@@ -4821,7 +4821,7 @@ $expressive-heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.25rem,
+    line-height: 1.25,
     letter-spacing: 0.16px,
   )
 );
@@ -4849,7 +4849,7 @@ $expressive-heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.5rem,
+    line-height: 1.5,
     letter-spacing: 0,
   )
 );
@@ -4877,12 +4877,12 @@ $expressive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 140%,
+    line-height: 1.4,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
         font-size: 1.25rem,
-        line-height: 125%,
+        line-height: 1.25,
       ),
       max: (
         font-size: 1.5rem,
@@ -4914,12 +4914,12 @@ $expressive-heading-04: if(
   (
     font-size: 1.75rem,
     font-weight: 400,
-    line-height: 129%,
+    line-height: 1.29,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
         font-size: 1.75rem,
-        line-height: 125%,
+        line-height: 1.25,
       ),
       max: (
         font-size: 2rem,
@@ -4951,31 +4951,30 @@ $expressive-heading-05: if(
   (
     font-size: 2rem,
     font-weight: 400,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
         font-weight: 300,
-        line-height: 122%,
+        line-height: 1.22,
         letter-spacing: 0,
       ),
       lg: (
         font-size: 2.625rem,
         font-weight: 300,
-        line-height: 119%,
+        line-height: 1.19,
         letter-spacing: 0,
       ),
       xlg: (
         font-size: 3rem,
         font-weight: 300,
-        line-height: 117%,
+        line-height: 1.17,
         letter-spacing: 0,
       ),
       max: (
         font-size: 3.75rem,
         font-weight: 300,
-        line-height: 4.375rem,
         letter-spacing: 0,
       ),
     ),
@@ -5005,31 +5004,30 @@ $expressive-heading-06: if(
   (
     font-size: 2rem,
     font-weight: 600,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
         font-weight: 600,
-        line-height: 122%,
+        line-height: 1.22,
         letter-spacing: 0,
       ),
       lg: (
         font-size: 2.625rem,
         font-weight: 600,
-        line-height: 119%,
+        line-height: 1.19,
         letter-spacing: 0,
       ),
       xlg: (
         font-size: 3rem,
         font-weight: 600,
-        line-height: 117%,
+        line-height: 1.17,
         letter-spacing: 0,
       ),
       max: (
         font-size: 3.75rem,
         font-weight: 600,
-        line-height: 4.375rem,
         letter-spacing: 0,
       ),
     ),
@@ -5059,15 +5057,15 @@ $expressive-paragraph-01: if(
   (
     font-size: 1.5rem,
     font-weight: 300,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     lg: (
       font-size: 1.75rem,
-      line-height: 129%,
+      line-height: 1.29,
     ),
     max: (
       font-size: 2rem,
-      line-height: 125%,
+      line-height: 1.25,
     ),
   )
 );
@@ -5095,7 +5093,7 @@ $quotation-01: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 130%,
+    line-height: 1.3,
     letter-spacing: 0,
     breakpoints: (
       md: (
@@ -5106,19 +5104,19 @@ $quotation-01: if(
       lg: (
         font-size: 1.5rem,
         font-weight: 400,
-        line-height: 125%,
+        line-height: 1.25,
         letter-spacing: 0,
       ),
       xlg: (
         font-size: 1.75rem,
         font-weight: 400,
-        line-height: 129%,
+        line-height: 1.29,
         letter-spacing: 0,
       ),
       max: (
         font-size: 2rem,
         font-weight: 400,
-        line-height: 125%,
+        line-height: 1.25,
         letter-spacing: 0,
       ),
     ),
@@ -5148,20 +5146,20 @@ $quotation-02: if(
   (
     font-size: 2rem,
     font-weight: 300,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
-        line-height: 122%,
+        line-height: 1.22,
       ),
       lg: (
         font-size: 2.625rem,
-        line-height: 119%,
+        line-height: 1.19,
       ),
       xlg: (
         font-size: 3rem,
-        line-height: 117%,
+        line-height: 1.17,
       ),
       max: (
         font-size: 3.75rem,
@@ -5193,7 +5191,7 @@ $display-01: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
@@ -5204,11 +5202,11 @@ $display-01: if(
       ),
       xlg: (
         font-size: 3.75rem,
-        line-height: 117%,
+        line-height: 1.17,
       ),
       max: (
         font-size: 4.75rem,
-        line-height: 113%,
+        line-height: 1.13,
       ),
     ),
   )
@@ -5237,7 +5235,7 @@ $display-02: if(
   (
     font-size: 2.625rem,
     font-weight: 600,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
@@ -5248,11 +5246,11 @@ $display-02: if(
       ),
       xlg: (
         font-size: 3.75rem,
-        line-height: 116%,
+        line-height: 1.16,
       ),
       max: (
         font-size: 4.75rem,
-        line-height: 113%,
+        line-height: 1.13,
       ),
     ),
   )
@@ -5281,25 +5279,25 @@ $display-03: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 4.25rem,
-        line-height: 115%,
+        line-height: 1.15,
       ),
       lg: (
         font-size: 5.75rem,
-        line-height: 111%,
+        line-height: 1.11,
         letter-spacing: -0.64px,
       ),
       xlg: (
         font-size: 7.625rem,
-        line-height: 107%,
+        line-height: 1.07,
       ),
       max: (
         font-size: 9.75rem,
-        line-height: 105%,
+        line-height: 1.05,
         letter-spacing: -0.96px,
       ),
     ),
@@ -5329,26 +5327,26 @@ $display-04: if(
   (
     font-size: 2.625rem,
     font-weight: 600,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 4.25rem,
-        line-height: 115%,
+        line-height: 1.15,
       ),
       lg: (
         font-size: 5.75rem,
-        line-height: 111%,
+        line-height: 1.11,
         letter-spacing: -0.64px,
       ),
       xlg: (
         font-size: 7.625rem,
-        line-height: 107%,
+        line-height: 1.07,
         letter-spacing: -0.64px,
       ),
       max: (
         font-size: 9.75rem,
-        line-height: 105%,
+        line-height: 1.05,
         letter-spacing: -0.96px,
       ),
     ),

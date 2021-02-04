@@ -208,6 +208,8 @@ describe('Carbon Components React', () => {
         "UnorderedList",
         "unstable_PageSelector",
         "unstable_Pagination",
+        "unstable_TreeNode",
+        "unstable_TreeView",
       ]
     `);
   });

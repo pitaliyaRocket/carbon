@@ -10,6 +10,7 @@ import React from 'react';
 import isEqual from 'lodash.isequal';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
+import { getCellId } from './tools/cells';
 import denormalize from './tools/denormalize';
 import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
@@ -442,6 +443,7 @@ export default class DataTable extends React.Component {
             headers: this.props.headers,
             cellsById: this.state.cellsById,
             inputValue: this.state.filterInputValue,
+            getCellId,
           })
         : this.state.rowIds;
     if (filteredRowIds.length == 0) {
@@ -662,6 +664,7 @@ export default class DataTable extends React.Component {
             headers,
             cellsById,
             inputValue: filterInputValue,
+            getCellId,
           })
         : rowIds;
     const renderProps = {

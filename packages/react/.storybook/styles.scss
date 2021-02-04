@@ -61,6 +61,7 @@ $prefix: 'bx';
 @import '~@rocketsoftware/carbon-components/src/components/tooltip/tooltip';
 @import '~@rocketsoftware/carbon-components/src/components/tabs/tabs';
 @import '~@rocketsoftware/carbon-components/src/components/tag/tag';
+@import '~@rocketsoftware/carbon-components/src/components/treeview/treeview';
 @import '~@rocketsoftware/carbon-components/src/components/pagination/pagination';
 @import '~@rocketsoftware/carbon-components/src/components/pagination/unstable_pagination';
 @import '~@rocketsoftware/carbon-components/src/components/accordion/accordion';
@@ -109,4 +110,8 @@ $prefix: 'bx';
   :root[storybook-carbon-theme='rocket'] {
     @include carbon--theme($carbon--theme--rocket, true);
   }
+}
+
+.sbdocs-li {
+  list-style: circle;
 }
