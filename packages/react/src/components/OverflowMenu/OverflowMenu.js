@@ -218,9 +218,10 @@ class OverflowMenu extends Component {
     selectorPrimaryFocus: PropTypes.string,
 
     /**
-     * The `tabindex` attribute.
+     * Specify the size of the OverflowMenu. Currently supports either `sm` or
+     * `xl` as an option.
      */
-    tabIndex: PropTypes.number,
+    size: PropTypes.oneOf(['sm', 'xl']),
   };
 
   static defaultProps = {
@@ -234,7 +235,6 @@ class OverflowMenu extends Component {
     onKeyDown: () => {},
     onClose: () => {},
     onOpen: () => {},
-    tabIndex: 0,
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
     light: false,
@@ -416,7 +416,7 @@ class OverflowMenu extends Component {
         menuBody.ownerDocument,
         focusinEventName,
         (event) => {
-          const { target } = event;
+          const target = ClickListener.getEventTarget(event);
           const { current: triggerEl } = this._triggerRef;
           if (typeof target.matches === 'function') {
             if (
@@ -450,7 +450,6 @@ class OverflowMenu extends Component {
   render() {
     const {
       id,
-      tabIndex,
       ariaLabel,
       children,
       iconDescription,
@@ -468,6 +467,7 @@ class OverflowMenu extends Component {
       menuOptionsClass,
       getViewport,
       light,
+      size,
       ...other
     } = this.props;
 
@@ -479,6 +479,7 @@ class OverflowMenu extends Component {
       {
         [`${prefix}--overflow-menu--open`]: open,
         [`${prefix}--overflow-menu--light`]: light,
+        [`${prefix}--overflow-menu--${size}`]: size,
       }
     );
 
@@ -489,6 +490,7 @@ class OverflowMenu extends Component {
         [`${prefix}--overflow-menu--flip`]: this.props.flipped,
         [`${prefix}--overflow-menu-options--open`]: open,
         [`${prefix}--overflow-menu-options--light`]: light,
+        [`${prefix}--overflow-menu-options--${size}`]: size,
       }
     );
 
@@ -542,7 +544,6 @@ class OverflowMenu extends Component {
       onKeyDown: this.handleKeyDown,
       className: overflowMenuIconClasses,
       'aria-label': iconDescription,
-      focusable: 'false', // Prevent `<svg>` in trigger icon from getting focus for IE11
     };
 
     return (
@@ -557,7 +558,6 @@ class OverflowMenu extends Component {
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}
-          tabIndex={tabIndex}
           ref={mergeRefs(this._triggerRef, ref)}>
           <IconElement {...iconProps}>
             {iconDescription && <title>{iconDescription}</title>}
