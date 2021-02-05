@@ -381,8 +381,14 @@
   }
 
   .#{$prefix}--side-nav__submenu:focus {
-    outline: 2px solid $inverse-focus-ui;
-    outline-offset: -2px;
+    @include focus-outline('outline');
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--side-nav__submenu-title {
@@ -520,6 +526,13 @@
   a.#{$prefix}--side-nav__link:focus,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
@@ -570,6 +583,12 @@
     width: mini-units(2);
     height: mini-units(2);
     fill: $icon-03;
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
@@ -682,6 +701,13 @@
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $icon-03;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   //----------------------------------------------------------------------------

@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { WarningFilled16 } from '@rocketsoftware/icons-react';
+import {
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@rocketsoftware/icons-react';
 import { settings } from '@rocketsoftware/carbon-components';
 import cx from 'classnames';
 import Downshift, { useSelect } from 'downshift';
@@ -52,6 +55,8 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     light,
     invalid,
     invalidText,
+    warn,
+    warnText,
     useTitleInItem,
     translateWithId,
     downshiftProps,
@@ -104,6 +109,8 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   }
 
   const inline = type === 'inline';
+  const showWarning = !invalid && warn;
+
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
     `${prefix}--list-box__wrapper`,
@@ -127,6 +134,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 
   const className = cx(`${prefix}--multi-select`, containerClassName, {
     [`${prefix}--multi-select--invalid`]: invalid,
+    [`${prefix}--multi-select--warning`]: showWarning,
     [`${prefix}--multi-select--inline`]: inline,
     [`${prefix}--multi-select--selected`]:
       selectedItems && selectedItems.length > 0,
@@ -189,10 +197,17 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         light={light}
         invalid={invalid}
         invalidText={invalidText}
+        warn={warn}
+        warnText={warnText}
         isOpen={isOpen}
         id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
+        )}
+        {showWarning && (
+          <WarningAltFilled16
+            className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+          />
         )}
         <button
           type="button"
@@ -245,7 +260,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             })}
         </ListBox.Menu>
       </ListBox>
-      {!inline && !invalid && helperText && (
+      {!inline && !invalid && !warn && helperText && (
         <div id={helperId} className={helperClasses}>
           {helperText}
         </div>
@@ -368,6 +383,16 @@ MultiSelect.propTypes = {
    * Specify title to show title on hover
    */
   useTitleInItem: PropTypes.bool,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.string,
 };
 
 MultiSelect.defaultProps = {

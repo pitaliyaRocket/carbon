@@ -11,7 +11,10 @@ import React from 'react';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import { settings } from '@rocketsoftware/carbon-components';
-import { WarningFilled16 } from '@rocketsoftware/icons-react';
+import {
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@rocketsoftware/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
@@ -142,6 +145,16 @@ export default class FilterableMultiSelect extends React.Component {
      * Specify title to show title on hover
      */
     useTitleInItem: PropTypes.bool,
+
+    /**
+     * Specify whether the control is currently in warning state
+     */
+    warn: PropTypes.bool,
+
+    /**
+     * Provide the text that is displayed when the control is in warning state
+     */
+    warnText: PropTypes.string,
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -292,6 +305,8 @@ export default class FilterableMultiSelect extends React.Component {
       light,
       invalid,
       invalidText,
+      warn,
+      warnText,
       useTitleInItem,
       translateWithId,
       invalidSearchEmpty,
@@ -299,6 +314,8 @@ export default class FilterableMultiSelect extends React.Component {
       downshiftProps,
     } = this.props;
     const inline = type === 'inline';
+    const showWarning = !invalid && warn;
+
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
       `${prefix}--list-box__wrapper`,
@@ -399,6 +416,8 @@ export default class FilterableMultiSelect extends React.Component {
                   light={light}
                   invalid={invalidProp}
                   invalidText={invalidTextProp}
+                  warn={warn}
+                  warnText={warnText}
                   isOpen={isOpen}
                   size={size}
                   {...getRootProps()}>
@@ -431,6 +450,11 @@ export default class FilterableMultiSelect extends React.Component {
                     {invalid && (
                       <WarningFilled16
                         className={`${prefix}--list-box__invalid-icon`}
+                      />
+                    )}
+                    {showWarning && (
+                      <WarningAltFilled16
+                        className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
                       />
                     )}
                     {inputValue && isOpen && (
@@ -501,7 +525,7 @@ export default class FilterableMultiSelect extends React.Component {
       <div className={wrapperClasses}>
         {title}
         {input}
-        {!inline && !invalid ? helper : null}
+        {!inline && !invalid && !warn ? helper : null}
       </div>
     );
   }

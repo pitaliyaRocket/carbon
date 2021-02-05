@@ -6068,6 +6068,7 @@ $carbon--theme--g10: map-merge(
     field-01: #ffffff,
     field-02: #f4f4f4,
     disabled-01: #ffffff,
+    highlight: #edf5ff,
   )
 );
 ```
@@ -7466,6 +7467,7 @@ $support-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -8221,6 +8223,7 @@ $disabled-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [slider [mixin]](#slider-mixin)
@@ -8254,6 +8257,7 @@ $disabled-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
@@ -13776,6 +13780,39 @@ Accordion styles
     }
   }
 
+  // Size styles
+  .#{$prefix}--accordion--xl .#{$prefix}--accordion__heading {
+    min-height: rem(48px);
+  }
+
+  .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
+    min-height: rem(32px);
+    padding: rem(5px) 0;
+  }
+
+  // Disabled styles
+  .#{$prefix}--accordion__heading[disabled] {
+    color: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--accordion__heading[disabled] .#{$prefix}--accordion__arrow {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--accordion__heading[disabled]:hover::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--accordion__item--disabled,
+  .#{$prefix}--accordion__item--disabled ~ * {
+    border-top: 1px solid $disabled-01;
+  }
+
+  li.#{$prefix}--accordion__item--disabled:last-of-type {
+    border-bottom: 1px solid $disabled-01;
+  }
+
   .#{$prefix}--accordion__arrow {
     @include focus-outline('reset');
     // Without flex basis and flex shrink being set here, our icon width can go
@@ -13933,6 +13970,8 @@ Accordion styles
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
@@ -14231,6 +14270,13 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -14895,6 +14941,11 @@ Code snippet styles
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--wraptext pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
   // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     padding-right: $carbon--spacing-08;
@@ -15247,7 +15298,11 @@ Combo box styles
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field {
     padding: 0;
   }
@@ -15279,6 +15334,14 @@ Content switcher styles
     height: rem(40px);
   }
 
+  .#{$prefix}--content-switcher--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--xl {
+    height: rem(48px);
+  }
+
   .#{$prefix}--content-switcher--disabled {
     cursor: not-allowed;
   }
@@ -15305,7 +15368,8 @@ Content switcher styles
 
     &:focus {
       z-index: 3;
-      box-shadow: inset 0 0 0 2px $focus;
+      border-color: $focus;
+      box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $ui-01;
     }
 
     &:hover {
@@ -17958,7 +18022,6 @@ Dropdown styles
 
   .#{$prefix}--dropdown--disabled {
     border-bottom-color: transparent;
-    cursor: not-allowed;
 
     &:hover {
       background-color: $field-01;
@@ -17983,6 +18046,11 @@ Dropdown styles
     &.#{$prefix}--dropdown--light:hover {
       background-color: $field-02;
     }
+  }
+
+  .#{$prefix}--dropdown--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--dropdown--disabled .#{$prefix}--list-box__menu-icon {
+    cursor: not-allowed;
   }
 
   .#{$prefix}--dropdown--auto-width {
@@ -18505,11 +18573,13 @@ Form styles
   .#{$prefix}--date-picker-input__wrapper,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input__field-wrapper--warning,
   .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
-  .#{$prefix}--list-box[data-invalid] {
+  .#{$prefix}--list-box[data-invalid],
+  .#{$prefix}--list-box--warning {
     ~ .#{$prefix}--form-requirement {
       display: block;
       max-height: rem(200px);
@@ -19037,7 +19107,19 @@ List box styles
     fill: $support-01;
   }
 
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
+  .#{$prefix}--list-box__invalid-icon--warning {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--list-box__invalid-icon--warning
+    path[data-icon-path='inner-path'] {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field {
     padding-right: carbon--mini-units(8);
     border-bottom: 0;
   }
@@ -19220,12 +19302,19 @@ List box styles
   // invalid && populated input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
+    .#{$prefix}--text-input,
+  .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
     // to account for clear input button outline
     padding-right: rem(98px);
   }
 
   .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
@@ -19241,11 +19330,18 @@ List box styles
   // invalid && empty input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
     .#{$prefix}--text-input--empty {
     padding-right: carbon--mini-units(9);
   }
 
   .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input--empty
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
@@ -19686,6 +19782,7 @@ List box styles
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [support-03 [variable]](#support-03-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
@@ -23073,10 +23170,6 @@ Search styles
     }
   }
 
-  .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
-    fill: $disabled;
-  }
-
   .#{$prefix}--search--light .#{$prefix}--search-input {
     background: $field-02;
   }
@@ -23210,6 +23303,24 @@ Search styles
 
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--search--disabled .#{$prefix}--search-close {
+    outline: none;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+      border-bottom-color: transparent;
+    }
+
+    &:hover::before {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--search--disabled svg {
+    fill: $disabled;
   }
 
   .#{$prefix}--search-close:focus,
@@ -23359,6 +23470,13 @@ Select styles
       @include focus-outline('outline');
 
       color: $text-01;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:disabled,
@@ -25435,6 +25553,13 @@ Tile styles
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
   }
 
@@ -25518,6 +25643,13 @@ Tile styles
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
       fill: $ui-05;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        fill: ButtonText;
+      }
     }
 
     &:hover {
@@ -25581,6 +25713,13 @@ Tile styles
     > .#{$prefix}--tile__checkmark
     svg {
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--tile-content {
@@ -26125,7 +26264,7 @@ Toggle styles
   .#{$prefix}--toggle-input--small:disabled:checked
     + .#{$prefix}--toggle-input__label
     .#{$prefix}--toggle__check {
-    fill: $disabled-02;
+    fill: $disabled-01;
   }
 
   //----------------------------------------------
@@ -27354,6 +27493,13 @@ UI shell header
   .#{$prefix}--header__action:focus {
     border-color: $shell-header-focus;
     outline: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--header__action:active {
@@ -27486,6 +27632,13 @@ UI shell header
     color: $shell-header-text-01;
     border-color: $shell-header-focus;
     outline: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   a.#{$prefix}--header__menu-item:hover > svg,
@@ -28473,8 +28626,14 @@ UI shell side nav
   }
 
   .#{$prefix}--side-nav__submenu:focus {
-    outline: 2px solid $inverse-focus-ui;
-    outline-offset: -2px;
+    @include focus-outline('outline');
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--side-nav__submenu-title {
@@ -28612,6 +28771,13 @@ UI shell side nav
   a.#{$prefix}--side-nav__link:focus,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
@@ -28661,7 +28827,13 @@ UI shell side nav
   .#{$prefix}--side-nav__icon > svg {
     width: mini-units(2);
     height: mini-units(2);
-    fill: $icon-03;
+    fill: $shell-side-nav-icon-01;
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
@@ -28773,18 +28945,14 @@ UI shell side nav
     a.#{$prefix}--header__menu-item:focus
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
-    fill: $icon-03;
-  }
+    fill: $shell-side-nav-text-01;
 
-  //----------------------------------------------------------------------------
-  // Side-nav ~ Content interaction
-  //----------------------------------------------------------------------------
-  .#{$prefix}--side-nav.#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
-    margin-left: 16rem;
-  }
-
-  .#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
-    width: calc(100% - 16rem);
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 }
 ```
