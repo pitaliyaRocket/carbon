@@ -89,7 +89,7 @@ class NumberInput extends Component {
     /**
      * Message which is displayed if the value is invalid.
      */
-    invalidText: PropTypes.string,
+    invalidText: PropTypes.node,
     /**
      * `true` to use the mobile variant.
      */
@@ -155,7 +155,7 @@ class NumberInput extends Component {
     /**
      * Provide the text that is displayed when the control is in warning state
      */
-    warnText: PropTypes.string,
+    warnText: PropTypes.node,
   };
 
   static defaultProps = {

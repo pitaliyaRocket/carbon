@@ -22,6 +22,7 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -191,6 +192,8 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     }
   }
 
+  const toggleButtonProps = getToggleButtonProps();
+
   return (
     <div className={wrapperClasses}>
       {titleText && (
@@ -220,11 +223,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         )}
         <button
           type="button"
-          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}>
+          {...toggleButtonProps}
+          ref={mergeRefs(toggleButtonProps.ref, ref)}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               clearSelection={!disabled ? clearSelection : noop}
@@ -316,7 +319,7 @@ MultiSelect.propTypes = {
   /**
    * If invalid, what is the error?
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -407,7 +410,7 @@ MultiSelect.propTypes = {
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText: PropTypes.string,
+  warnText: PropTypes.node,
 };
 
 MultiSelect.defaultProps = {

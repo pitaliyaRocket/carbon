@@ -2,11 +2,9 @@
   "name": "@carbon/bundler",
   "private": true,
   "description": "Bundler used for libraries in the Carbon Design System",
-  "version": "10.10.0",
+  "version": "10.11.0",
   "license": "Apache-2.0",
-  "bin": {
-    "bundler": "./bin/bundler.js"
-  },
+  "bin": "./bin/bundler.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",

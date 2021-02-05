@@ -213,7 +213,7 @@ TextInput.propTypes = {
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
@@ -265,7 +265,7 @@ TextInput.propTypes = {
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText: PropTypes.string,
+  warnText: PropTypes.node,
 };
 
 TextInput.defaultProps = {

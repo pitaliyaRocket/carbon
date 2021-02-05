@@ -39,7 +39,7 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.12.0"
+    "@carbon/icon-build-helpers": "^0.13.0"
   },
   "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }

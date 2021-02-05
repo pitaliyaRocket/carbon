@@ -43,6 +43,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
   light={false}
   locale="en"
   onChange={[MockFunction]}
+  onMenuChange={[MockFunction]}
   open={false}
   placeholder="Placeholder..."
   selectionFeedback="top-after-reopen"
