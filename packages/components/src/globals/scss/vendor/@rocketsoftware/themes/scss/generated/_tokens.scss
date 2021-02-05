@@ -506,6 +506,27 @@ $hover-ui: if(
   #e5e5e5
 ) !default;
 
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$hover-light-ui: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'hover-light-ui'),
+  map-get($carbon--theme, 'hover-light-ui'),
+  #e5e5e5
+) !default;
+
+/// Data table selected row hover
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$hover-selected-ui: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'hover-selected-ui'),
+  map-get($carbon--theme, 'hover-selected-ui'),
+  #cacaca
+) !default;
+
 /// `$ui-01` active; `$ui-02` active
 /// @type {undefined}
 /// @access public
@@ -514,6 +535,16 @@ $active-ui: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'active-ui'),
   map-get($carbon--theme, 'active-ui'),
+  #c6c6c6
+) !default;
+
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$active-light-ui: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'active-light-ui'),
+  map-get($carbon--theme, 'active-light-ui'),
   #c6c6c6
 ) !default;
 
@@ -536,17 +567,6 @@ $selected-light-ui: if(
     map-has-key($carbon--theme, 'selected-light-ui'),
   map-get($carbon--theme, 'selected-light-ui'),
   #e0e0e0
-) !default;
-
-/// Data table selected row hover
-/// @type {undefined}
-/// @access public
-/// @group @carbon/themes
-$hover-selected-ui: if(
-  global-variable-exists('carbon--theme') and
-    map-has-key($carbon--theme, 'hover-selected-ui'),
-  map-get($carbon--theme, 'hover-selected-ui'),
-  #cacaca
 ) !default;
 
 /// @type {undefined}
@@ -660,16 +680,6 @@ $decorative-01: if(
 /// @type {undefined}
 /// @access public
 /// @group @carbon/themes
-$hover-light-ui: if(
-  global-variable-exists('carbon--theme') and
-    map-has-key($carbon--theme, 'hover-light-ui'),
-  map-get($carbon--theme, 'hover-light-ui'),
-  #e5e5e5
-) !default;
-
-/// @type {undefined}
-/// @access public
-/// @group @carbon/themes
 $button-separator: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'button-separator'),
@@ -757,6 +767,16 @@ $hover-field: if(
     map-has-key($carbon--theme, 'hover-field'),
   map-get($carbon--theme, 'hover-field'),
   #e5e5e5
+) !default;
+
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$danger: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'danger'),
+  map-get($carbon--theme, 'danger'),
+  #da1e28
 ) !default;
 
 /// @type {Number}

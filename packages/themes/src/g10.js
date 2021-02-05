@@ -107,7 +107,9 @@ export const hoverTertiary = '#0353e9';
 export const activeTertiary = blue80;
 
 export const hoverUI = '#e5e5e5';
+export const hoverLightUI = '#e5e5e5';
 export const activeUI = gray30;
+export const activeLightUI = gray30;
 export const selectedUI = gray20;
 export const selectedLightUI = gray20;
 export const inverseHoverUI = '#4c4c4c';
@@ -128,8 +130,6 @@ export const disabled03 = gray50;
 export const highlight = blue10;
 
 export const decorative01 = gray20;
-
-export const hoverLightUI = '#e5e5e5';
 
 export const buttonSeparator = '#e0e0e0';
 
@@ -213,3 +213,4 @@ export const brand02 = interactive02;
 export const brand03 = interactive03;
 export const active01 = activeUI;
 export const hoverField = hoverUI;
+export const danger = danger01;
