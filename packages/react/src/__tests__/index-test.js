@@ -23,6 +23,7 @@ describe('Carbon Components React', () => {
         "BreadcrumbItem",
         "BreadcrumbSkeleton",
         "Button",
+        "ButtonGroup",
         "ButtonSet",
         "ButtonSkeleton",
         "Card",

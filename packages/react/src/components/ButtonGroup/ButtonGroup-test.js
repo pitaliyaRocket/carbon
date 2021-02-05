@@ -4,11 +4,11 @@ import OverflowMenuItem from '../OverflowMenuItem';
 import Button from '../Button';
 import { mount } from 'enzyme';
 
-describe('SplitButton', () => {
+describe('ButtonGroup', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
       <ButtonGroup buttonLabel={'Button Label'}>
-        <OverflowMenuItem itemText={'Item 1'} primaryFocus />
+        <OverflowMenuItem itemText={'Item 1'} />
         <OverflowMenuItem itemText={'Item 2'} />
         <OverflowMenuItem itemText={'Item 2'} />
       </ButtonGroup>

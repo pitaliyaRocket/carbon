@@ -20,29 +20,32 @@ const CardActionItem = ({
     <button
       {...other}
       className={cardActionItemClasses}
+      type="button"
       id={id}
       aria-label={ariaLabel}>
-      <Icon
-        className="bx--app-actions__button--icon"
-        icon={iconName}
-        name={'icon'}
-        description={description}
-      />
+      {iconName ? (
+        <Icon
+          className="bx--app-actions__button--icon"
+          icon={iconName}
+          name={'icon'}
+          description={description}
+        />
+      ) : null}
     </button>
   );
 };
 
 CardActionItem.propTypes = {
-  className: PropTypes.string,
-  id: PropTypes.string,
   ariaLabel: PropTypes.string,
+  className: PropTypes.string,
+  description: PropTypes.string.isRequired,
   iconName: PropTypes.shape({
     width: PropTypes.string,
     height: PropTypes.string,
-    viewBox: PropTypes.string.isRequired,
-    svgData: PropTypes.object.isRequired,
-  }).isRequired,
-  description: PropTypes.string.isRequired,
+    viewBox: PropTypes.string,
+    svgData: PropTypes.object,
+  }),
+  id: PropTypes.string,
 };
 
 CardActionItem.defaultProps = {

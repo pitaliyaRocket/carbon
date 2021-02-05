@@ -55,11 +55,7 @@ const props = {
 
 const OverflowMenuExample = ({ overflowMenuProps, overflowMenuItemProps }) => (
   <OverflowMenu {...overflowMenuProps}>
-    <OverflowMenuItem
-      {...overflowMenuItemProps}
-      itemText="Option 1"
-      primaryFocus
-    />
+    <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 1" />
     <OverflowMenuItem
       {...overflowMenuItemProps}
       itemText="Option 2 is an example of a really long string and how we recommend handling this"
@@ -132,7 +128,6 @@ export const WithLinks = withReadme(OverflowREADME, () => (
         ...props.menuItem(),
         href: 'https://www.ibm.com',
       }}
-      primaryFocus
       itemText="Option 1"
     />
     <OverflowMenuItem

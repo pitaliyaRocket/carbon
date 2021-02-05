@@ -10,7 +10,7 @@ describe('CardActionItem', () => {
       className: 'extra-class',
       id: 'testId',
       ariaLabel: 'testLabel',
-      iconName: { iconAdd },
+      iconName: iconAdd,
       description: 'testDescription',
     };
     const wrapper = shallow(<CardActionItem {...props} />);

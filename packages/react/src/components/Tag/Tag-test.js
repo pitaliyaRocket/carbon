@@ -8,7 +8,7 @@
 import React from 'react';
 import Tag from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
-import { Add16 } from '@carbon/icons-react';
+import { Add16 } from '@rocketsoftware/icons-react';
 import { shallow } from 'enzyme';
 import { settings } from '@rocketsoftware/carbon-components';
 import { render, cleanup } from '@carbon/test-utils/react';

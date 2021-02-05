@@ -2,6 +2,7 @@ import {
   blue60,
   red60,
   gray20,
+  gray30,
   gray60,
   // Tools
   rgba,
@@ -53,7 +54,8 @@ export const inverseSupport04 = '#93c7c2';
 
 export const overlay01 = rgba('#171717', 0.5);
 
-export const danger = red60;
+export const danger01 = red60;
+export const danger02 = red60;
 
 // Interaction states
 export const focus = '#025c53';
@@ -72,6 +74,7 @@ export const activeTertiary = '#012e29';
 
 export const hoverUI = '#e5e5e5';
 export const activeUI = '#bebebe';
+export const activeLightUI = gray30;
 export const selectedUI = '#dcdcdc';
 export const selectedLightUI = gray20;
 export const inverseHoverUI = '#e5e5e5';
@@ -93,6 +96,8 @@ export const highlight = '#c9deff';
 
 export const decorative01 = gray20;
 
+export const buttonSeparator = '#e0e0e0';
+
 export const hoverLightUI = '#e5e5e5';
 
 export const skeleton01 = '#e5e5e5';
@@ -104,6 +109,7 @@ export const brand03 = '#025c53';
 export const active01 = '#bebebe';
 export const hoverField = '#e5e5e5';
 
+export const danger = danger01;
 // Type
 export {
   caption01,

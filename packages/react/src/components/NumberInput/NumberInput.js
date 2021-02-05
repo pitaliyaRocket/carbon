@@ -293,7 +293,7 @@ class NumberInput extends Component {
     const {
       className,
       disabled,
-      enforceValidation,
+      enforceValidation, // eslint-disable-line
       iconDescription, // eslint-disable-line
       id,
       hideLabel,
@@ -337,7 +337,6 @@ class NumberInput extends Component {
       id,
       max,
       min,
-      enforceValidation,
       step,
       onChange: this.handleChange,
       value:

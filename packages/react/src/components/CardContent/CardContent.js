@@ -23,9 +23,9 @@ const CardContent = ({
 
   const cardLinkContent = cardLink
     ? cardLink.map((link, key) => (
-        <a key={key} href={link} className="bx--about__title--link">
+        <div key={key} className="bx--about__title--link">
           {link}
-        </a>
+        </div>
       ))
     : '';
 
@@ -52,7 +52,7 @@ const CardContent = ({
     <div {...other} ref={cardContentRef} className={cardContentClasses}>
       {children}
       <div className="bx--card-overview__about">
-        {cardIcon !== null ? (
+        {cardIcon ? (
           <div className="bx--about__icon">
             <Icon
               icon={cardIcon}
@@ -76,27 +76,26 @@ const CardContent = ({
 };
 
 CardContent.propTypes = {
-  children: PropTypes.node,
-  cardIcon: PropTypes.shape({
-    width: PropTypes.string,
-    height: PropTypes.string,
-    viewBox: PropTypes.string.isRequired,
-    svgData: PropTypes.object.isRequired,
-  }),
-  cardTitle: PropTypes.string,
-  cardLink: PropTypes.node,
-  cardInfo: PropTypes.array,
-  className: PropTypes.string,
-  iconDescription: PropTypes.string,
   cardContentItems: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  cardIcon: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.string,
+    viewBox: PropTypes.string,
+    svgData: PropTypes.object,
+  }),
+  cardInfo: PropTypes.array,
+  cardLink: PropTypes.node,
+  cardTitle: PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  iconDescription: PropTypes.string,
 };
 
 CardContent.defaultProps = {
   iconDescription: 'card icon',
-  cardIcon: null,
   cardTitle: 'card title',
 };
 
