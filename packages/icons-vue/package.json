@@ -5,7 +5,11 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-vue",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/icons-vue"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "rocketsoftware",
@@ -28,7 +32,7 @@
     "@rocketsoftware/icon-helpers": "^0.6.0"
   },
   "devDependencies": {
-    "@carbon/cli-reporter": "^10.3.0",
+    "@carbon/cli-reporter": "^10.4.0",
     "@rocketsoftware/icons": "^0.6.0",
     "fs-extra": "^8.1.0",
     "prettier": "^2.1.0",
