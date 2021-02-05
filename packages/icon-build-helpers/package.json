@@ -2,7 +2,7 @@
   "name": "@carbon/icon-build-helpers",
   "private": true,
   "description": "Build helpers for the Carbon Design System icon library",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "repository": {
@@ -41,7 +41,7 @@
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "rimraf": "^3.0.0",
-    "rollup": "^2.36.1",
+    "rollup": "^2.38.0",
     "rollup-plugin-strip-banner": "^2.0.0",
     "svgo": "^1.1.1"
   }

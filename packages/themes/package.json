@@ -25,8 +25,9 @@
     "access": "public"
   },
   "scripts": {
+    "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\"",
     "clean": "rimraf es lib umd scss/generated",
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && node tasks/build.js && carbon-cli check \"scss/*.scss\" && carbon-cli sassdoc \"scss/**/*.scss\""
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && node tasks/build.js && carbon-cli check \"scss/*.scss\""
   },
   "dependencies": {
     "@rocketsoftware/colors": "^0.6.0",
@@ -35,9 +36,9 @@
     "color": "^3.1.2"
   },
   "devDependencies": {
-    "@carbon/cli": "^10.18.0",
+    "@carbon/cli": "^10.19.0",
     "@carbon/cli-reporter": "^10.4.0",
-    "@carbon/scss-generator": "^10.12.0",
+    "@carbon/scss-generator": "^10.13.0",
     "@carbon/test-utils": "^10.14.0",
     "change-case": "^4.1.1",
     "core-js": "^3.6.5",
