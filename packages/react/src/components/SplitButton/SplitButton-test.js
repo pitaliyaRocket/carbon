@@ -13,7 +13,7 @@ describe('SplitButton', () => {
         classNameButton={'extra-class'}
         classNameOverflow={'extra-class'}>
         <OverflowMenuItem itemText={'Item 1'} />
-        <OverflowMenuItem itemText={'Item 2'} primaryFocus />
+        <OverflowMenuItem itemText={'Item 2'} />
         <OverflowMenuItem itemText={'Item 2'} />
       </SplitButton>
     );

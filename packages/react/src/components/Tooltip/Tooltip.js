@@ -21,6 +21,10 @@ import FloatingMenu, {
 import ClickListener from '../../internal/ClickListener';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, matches as keyDownMatch } from '../../internal/keyboard';
+import {
+  selectorFocusable,
+  selectorTabbable,
+} from '../../internal/keyboard/navigation';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
@@ -88,29 +92,10 @@ class Tooltip extends Component {
 
   static propTypes = {
     /**
-     * The ID of the trigger button.
+     * Specify the alignment (to the trigger button) of the tooltip.
+     * Can be one of: start, center, or end.
      */
-    triggerId: PropTypes.string,
-
-    /**
-     * The ID of the tooltip content.
-     */
-    tooltipId: PropTypes.string,
-
-    /**
-     * The ID of the tooltip body content.
-     */
-    tooltipBodyId: PropTypes.string,
-
-    /**
-     * Optional starting value for uncontrolled state
-     */
-    defaultOpen: PropTypes.bool,
-
-    /**
-     * Open/closed state.
-     */
-    open: PropTypes.bool,
+    align: PropTypes.oneOf(['start', 'center', 'end']),
 
     /**
      * Contents to put into the tooltip.
@@ -123,9 +108,9 @@ class Tooltip extends Component {
     className: PropTypes.string,
 
     /**
-     * The CSS class names of the trigger UI.
+     * Optional starting value for uncontrolled state
      */
-    triggerClassName: PropTypes.string,
+    defaultOpen: PropTypes.bool,
 
     /**
      * Where to put the tooltip, relative to the trigger UI.
@@ -133,10 +118,14 @@ class Tooltip extends Component {
     direction: PropTypes.oneOf(['bottom', 'top', 'left', 'right']),
 
     /**
-     * Specify a CSS selector that matches the DOM element that should
-     * be focused when the Tooltip opens
+     * Enable or disable focus trap behavior
      */
-    selectorPrimaryFocus: PropTypes.string,
+    focusTrap: PropTypes.bool,
+
+    /**
+     * The name of the default tooltip icon.
+     */
+    iconName: PropTypes.string,
 
     /**
      * The adjustment of the tooltip position.
@@ -148,6 +137,21 @@ class Tooltip extends Component {
       }),
       PropTypes.func,
     ]),
+
+    /**
+     * * the signature of the event handler will be:
+     * * `onChange(event, { open })` where:
+     *   * `event` is the (React) raw event
+     *   * `open` is the new value
+     */
+    onChange: !useControlledStateWithValue
+      ? PropTypes.func
+      : requiredIfValueExists(PropTypes.func),
+
+    /**
+     * Open/closed state.
+     */
+    open: PropTypes.bool,
 
     /**
      * The callback function to optionally render the icon element.
@@ -165,14 +169,40 @@ class Tooltip extends Component {
     },
 
     /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the Tooltip opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
+
+    /**
      * `true` to show the default tooltip icon.
      */
     showIcon: PropTypes.bool,
 
     /**
-     * The name of the default tooltip icon.
+     * Optional prop to specify the tabIndex of the Tooltip
      */
-    iconName: PropTypes.string,
+    tabIndex: PropTypes.number,
+
+    /**
+     * The ID of the tooltip body content.
+     */
+    tooltipBodyId: PropTypes.string,
+
+    /**
+     * The ID of the tooltip content.
+     */
+    tooltipId: PropTypes.string,
+
+    /**
+     * The CSS class names of the trigger UI.
+     */
+    triggerClassName: PropTypes.string,
+
+    /**
+     * The ID of the trigger button.
+     */
+    triggerId: PropTypes.string,
 
     ...isRequiredOneOf({
       /**
@@ -186,28 +216,15 @@ class Tooltip extends Component {
     }),
 
     /**
-     * Optional prop to specify the tabIndex of the Tooltip
-     */
-    tabIndex: PropTypes.number,
-
-    /**
-     * * the signature of the event handler will be:
-     * * `onChange(event, { open })` where:
-     *   * `event` is the (React) raw event
-     *   * `open` is the new value
-     */
-    onChange: !useControlledStateWithValue
-      ? PropTypes.func
-      : requiredIfValueExists(PropTypes.func),
-
-    /**
      * Optional callback used to obtain a custom 'viewport' that differs from the window.
      */
     getViewport: PropTypes.func,
   };
 
   static defaultProps = {
+    align: 'center',
     direction: DIRECTION_BOTTOM,
+    focusTrap: true,
     renderIcon: Information,
     showIcon: true,
     triggerText: null,
@@ -228,6 +245,23 @@ class Tooltip extends Component {
    * @private
    */
   _triggerRef = React.createRef();
+
+  /**
+   * Unique tooltip ID that is user-provided or auto-generated
+   * Referenced in aria-labelledby attribute
+   * @type {string}
+   * @private
+   */
+  _tooltipId =
+    this.props.id ||
+    this.props.tooltipId ||
+    `__carbon-tooltip_${Math.random().toString(36).substr(2)}`;
+
+  /**
+   * Internal flag for tracking whether or not focusing on the tooltip trigger
+   * should automatically display the tooltip body
+   */
+  _tooltipDismissed = false;
 
   componentDidMount() {
     if (!this._debouncedHandleFocus) {
@@ -260,9 +294,32 @@ class Tooltip extends Component {
   }
 
   _handleUserInputOpenClose = (event, { open }) => {
+    if (this.isControlled) {
+      // Callback to the parent to let them decide what to do
+      this.props.onChange(event, { open });
+      return;
+    }
+    // capture tooltip body element before it is removed from the DOM
+    const tooltipBody = this._tooltipEl;
     this.setState({ open }, () => {
       if (this.props.onChange) {
         this.props.onChange(event, { open });
+      }
+      if (!open && tooltipBody && tooltipBody.id === this._tooltipId) {
+        this._tooltipDismissed = true;
+        const primaryFocusNode = tooltipBody.querySelector(
+          this.props.selectorPrimaryFocus || null
+        );
+        const tabbableNode = tooltipBody.querySelector(selectorTabbable);
+        const focusableNode = tooltipBody.querySelector(selectorFocusable);
+        const focusTarget =
+          primaryFocusNode || // User defined focusable node
+          tabbableNode || // First sequentially focusable node
+          focusableNode || // First programmatic focusable node
+          tooltipBody;
+        if (focusTarget !== tooltipBody) {
+          this._triggerRef?.current.focus();
+        }
       }
     });
   };
@@ -273,17 +330,21 @@ class Tooltip extends Component {
    * @param {Element} [evt] For handing `mouseout` event, indicates where the mouse pointer is gone.
    */
   _handleFocus = (state, evt) => {
-    const { relatedTarget } = evt;
+    const { currentTarget, relatedTarget } = evt;
+    if (currentTarget !== relatedTarget) {
+      this._tooltipDismissed = false;
+    }
     if (state === 'over') {
-      this._handleUserInputOpenClose(evt, { open: true });
-    } else {
+      if (!this._tooltipDismissed) {
+        this._handleUserInputOpenClose(evt, { open: true });
+      }
+      this._tooltipDismissed = false;
+    } else if (state !== 'out') {
       // Note: SVGElement in IE11 does not have `.contains()`
       const { current: triggerEl } = this._triggerRef;
       const shouldPreventClose =
         relatedTarget &&
-        ((triggerEl &&
-          triggerEl.contains &&
-          triggerEl.contains(relatedTarget)) ||
+        ((triggerEl && triggerEl?.contains(relatedTarget)) ||
           (this._tooltipEl && this._tooltipEl.contains(relatedTarget)));
       if (!shouldPreventClose) {
         this._handleUserInputOpenClose(evt, { open: false });
@@ -317,7 +378,15 @@ class Tooltip extends Component {
       click: 'click',
     }[evt.type];
     const hadContextMenu = this._hasContextMenu;
-    this._hasContextMenu = evt.type === 'contextmenu';
+    if (evt.type === 'click' || evt.type === 'contextmenu') {
+      this._hasContextMenu = evt.type === 'contextmenu';
+    }
+
+    if (this._hasContextMenu) {
+      this._handleUserInputOpenClose(evt, { open: false });
+      return;
+    }
+
     if (state === 'click') {
       evt.stopPropagation();
       evt.preventDefault();
@@ -325,12 +394,8 @@ class Tooltip extends Component {
         ? !this.props.open
         : !this.state.open;
       this._handleUserInputOpenClose(evt, { open: shouldOpen });
-    } else if (
-      state &&
-      (state !== 'out' || !hadContextMenu) &&
-      this._debouncedHandleFocus
-    ) {
-      this._debouncedHandleFocus(state, evt);
+    } else if (state && (state !== 'out' || !hadContextMenu)) {
+      this?._debouncedHandleFocus(state, evt);
     }
   };
 
@@ -373,14 +438,13 @@ class Tooltip extends Component {
       triggerId = (this.triggerId =
         this.triggerId ||
         `__carbon-tooltip-trigger_${Math.random().toString(36).substr(2)}`),
-      tooltipId = (this.tooltipId =
-        this.tooltipId ||
-        `__carbon-tooltip_${Math.random().toString(36).substr(2)}`),
       tooltipBodyId,
       children,
       className,
       triggerClassName,
       direction,
+      align,
+      focusTrap,
       triggerText,
       showIcon,
       iconName,
@@ -398,7 +462,11 @@ class Tooltip extends Component {
 
     const tooltipClasses = classNames(
       `${prefix}--tooltip`,
-      { [`${prefix}--tooltip--shown`]: open },
+      {
+        [`${prefix}--tooltip--shown`]: open,
+        [`${prefix}--tooltip--${direction}`]: direction,
+        [`${prefix}--tooltip--align-${align}`]: align,
+      },
       className
     );
 
@@ -414,14 +482,15 @@ class Tooltip extends Component {
       role: 'button',
       tabIndex: tabIndex,
       onClick: this.handleMouse,
+      onContextMenu: this.handleMouse,
       onKeyDown: this.handleKeyPress,
       onMouseOver: this.handleMouse,
       onMouseOut: this.handleMouse,
       onFocus: this.handleMouse,
       onBlur: this.handleMouse,
-      'aria-controls': !open ? undefined : tooltipId,
+      'aria-controls': !open ? undefined : this._tooltipId,
       'aria-expanded': open,
-      'aria-describedby': open ? tooltipId : null,
+      'aria-describedby': open ? this._tooltipId : null,
       // if the user provides property `triggerText`,
       // then the button should use aria-labelledby to point to its id,
       // if the user doesn't provide property `triggerText`,
@@ -441,8 +510,11 @@ class Tooltip extends Component {
           {showIcon ? (
             <div id={triggerId} className={triggerClasses}>
               {triggerText}
-              <div className={`${prefix}--tooltip__trigger`} {...properties}>
-                <IconCustomElement ref={refProp} {...iconProperties} />
+              <div
+                className={`${prefix}--tooltip__trigger`}
+                {...properties}
+                ref={refProp}>
+                <IconCustomElement {...iconProperties} />
               </div>
             </div>
           ) : (
@@ -457,6 +529,7 @@ class Tooltip extends Component {
         </ClickListener>
         {open && (
           <FloatingMenu
+            focusTrap={focusTrap}
             selectorPrimaryFocus={this.props.selectorPrimaryFocus}
             target={this._getTarget}
             triggerRef={this._triggerRef}
@@ -467,9 +540,9 @@ class Tooltip extends Component {
               this._tooltipEl = node;
             }}>
             <div
-              id={tooltipId}
               className={tooltipClasses}
               {...other}
+              id={this._tooltipId}
               data-floating-menu-direction={direction}
               onMouseOver={this.handleMouse}
               onMouseOut={this.handleMouse}
@@ -480,7 +553,6 @@ class Tooltip extends Component {
               <span className={`${prefix}--tooltip__caret`} />
               <div
                 className={`${prefix}--tooltip__content`}
-                tabIndex="-1"
                 role="dialog"
                 aria-describedby={tooltipBodyId}
                 aria-labelledby={triggerId}>
@@ -494,6 +566,7 @@ class Tooltip extends Component {
   }
 }
 
+export { Tooltip };
 export default (() => {
   const forwardRef = (props, ref) => <Tooltip {...props} innerRef={ref} />;
   forwardRef.displayName = 'Tooltip';

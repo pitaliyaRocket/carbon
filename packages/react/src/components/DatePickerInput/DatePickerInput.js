@@ -9,6 +9,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
+import {
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@rocketsoftware/icons-react';
 import { Calendar16 } from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
@@ -16,14 +20,43 @@ const { prefix } = settings;
 export default class DatePickerInput extends Component {
   static propTypes = {
     /**
-     * Specify an id that unique identifies the <input>
+     * The type of the date picker:
+     *
+     * * `simple` - Without calendar dropdown.
+     * * `single` - With calendar dropdown and single date.
+     * * `range` - With calendar dropdown and a date range.
      */
-    id: PropTypes.string.isRequired,
+    datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
+
+    /**
+     * Specify whether or not the input should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Specify if the label should be hidden
+     */
+    hideLabel: PropTypes.bool,
 
     /**
      * The description of the calendar icon.
      */
     iconDescription: PropTypes.string,
+
+    /**
+     * Specify an id that uniquely identifies the `<input>`
+     */
+    id: PropTypes.string.isRequired,
+
+    /**
+     * Specify whether or not the input should be invalid
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Specify the text to be rendered when the input is invalid
+     */
+    invalidText: PropTypes.node,
 
     /**
      * Provide the text that will be read by a screen reader when visiting this
@@ -32,9 +65,20 @@ export default class DatePickerInput extends Component {
     labelText: PropTypes.node.isRequired,
 
     /**
-     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option.
+     * Specify an `onChange` handler that is called whenever a change in the
+     * input field has occurred
      */
-    size: PropTypes.oneOf(['sm', 'xl']),
+    onChange: PropTypes.func,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    openCalendar: PropTypes.func,
 
     /**
      * Provide a regular expression that the input value must match
@@ -53,59 +97,27 @@ export default class DatePickerInput extends Component {
     },
 
     /**
-     * Specify the type of the <input>
-     */
-    type: PropTypes.string,
-
-    /**
-     * Specify whether or not the input should be disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * Specify whether or not the input should be invalid
-     */
-    invalid: PropTypes.bool,
-
-    /**
-     * Specify the text to be rendered when the input is invalid
-     */
-    invalidText: PropTypes.string,
-
-    /**
-     * Specify if the label should be hidden
-     */
-    hideLabel: PropTypes.bool,
-
-    /**
      * Specify the placeholder text
      */
     placeholder: PropTypes.string,
 
     /**
-     * The type of the date picker:
-     *
-     * * `simple` - Without calendar dropdown.
-     * * `single` - With calendar dropdown and single date.
-     * * `range` - With calendar dropdown and a date range.
+     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option.
      */
-    datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
+    size: PropTypes.oneOf(['sm', 'xl']),
 
     /**
-     * Provide a function to be called when the input field is clicked
+     * Specify the type of the `<input>`
      */
-    onClick: PropTypes.func,
-
+    type: PropTypes.string,
     /**
-     * Provide a function to be called when the input field is clicked
+     * Specify whether the control is currently in warning state
      */
-    openCalendar: PropTypes.func,
-
+    warn: PropTypes.bool,
     /**
-     * Specify an `onChange` handler that is called whenever a change in the
-     * input field has occurred
+     * Provide the text that is displayed when the control is in warning state
      */
-    onChange: PropTypes.func,
+    warnText: PropTypes.node,
   };
 
   static defaultProps = {
@@ -134,6 +146,8 @@ export default class DatePickerInput extends Component {
       iconDescription,
       openCalendar,
       size,
+      warn,
+      warnText,
       ...other
     } = this.props;
 
@@ -154,6 +168,11 @@ export default class DatePickerInput extends Component {
       pattern,
     };
 
+    const wrapperClasses = classNames(`${prefix}--date-picker-input__wrapper`, {
+      [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
+      [`${prefix}--date-picker-input__wrapper--warn`]: warn,
+    });
+
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: disabled,
@@ -161,12 +180,30 @@ export default class DatePickerInput extends Component {
 
     const inputClasses = classNames(`${prefix}--date-picker__input`, {
       [`${prefix}--date-picker__input--${size}`]: size,
+      [`${prefix}--date-picker__input--invalid`]: invalid,
     });
 
     const datePickerIcon = (() => {
-      if (datePickerType === 'simple') {
+      if (datePickerType === 'simple' && !invalid && !warn) {
         return;
       }
+
+      if (invalid) {
+        return (
+          <WarningFilled16
+            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
+          />
+        );
+      }
+
+      if (!invalid && warn) {
+        return (
+          <WarningAltFilled16
+            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
+          />
+        );
+      }
+
       return (
         <Calendar16
           className={`${prefix}--date-picker__icon`}
@@ -184,9 +221,14 @@ export default class DatePickerInput extends Component {
       </label>
     ) : null;
 
-    const error = invalid ? (
-      <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-    ) : null;
+    let error = null;
+    if (invalid) {
+      error = (
+        <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+      );
+    } else if (warn) {
+      error = <div className={`${prefix}--form-requirement`}>{warnText}</div>;
+    }
 
     const containerClasses = classNames(`${prefix}--date-picker-container`, {
       [`${prefix}--date-picker--nolabel`]: !label,
@@ -218,7 +260,7 @@ export default class DatePickerInput extends Component {
     return (
       <div className={containerClasses}>
         {label}
-        <div className={`${prefix}--date-picker-input__wrapper`}>
+        <div className={wrapperClasses}>
           {input}
           {datePickerIcon}
         </div>

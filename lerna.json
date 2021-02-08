@@ -7,11 +7,11 @@
     }
   },
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--frozen-lockfile"
-  ],
+  "npmClientArgs": ["--frozen-lockfile"],
   "useWorkspaces": true,
   "ignoreChanges": [
+    "actions/**",
+    "codemods/**",
     "**/__fixtures__/**",
     "**/__tests__/**",
     "**/docs/**",

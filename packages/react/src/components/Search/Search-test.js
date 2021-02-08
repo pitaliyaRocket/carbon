@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Search16, Close16, Close20 } from '@rocketsoftware/icons-react';
+import { Search16, Close16 } from '@rocketsoftware/icons-react';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import { mount, shallow } from 'enzyme';
@@ -104,7 +104,7 @@ describe('Search', () => {
 
         it('renders two Icons', () => {
           wrapper.setProps({ size: undefined });
-          const iconTypes = [Search16, Close20];
+          const iconTypes = [Search16, Close16];
           const icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
           expect(icons.length).toEqual(2);
         });
@@ -149,7 +149,7 @@ describe('Search', () => {
       const small = mount(
         <Search
           id="test"
-          small
+          size="sm"
           className="extra-class"
           label="Search Field"
           labelText="testlabel"
@@ -173,7 +173,7 @@ describe('Search', () => {
       });
 
       it('renders two Icons', () => {
-        const iconTypes = [Search16, Close20];
+        const iconTypes = [Search16, Close16];
         const icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
         expect(icons.length).toEqual(2);
       });

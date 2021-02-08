@@ -21,6 +21,7 @@ const PACKAGES_TO_BUILD = new Set([
   'icons',
   'layout',
   'motion',
+  'pictograms',
   'themes',
   'type',
 ]);
@@ -28,6 +29,7 @@ const IGNORE_EXAMPLE_DIRS = new Set([
   'styled-components',
   'vue-cli',
   'storybook',
+  'sass-modules',
 ]);
 
 /**
@@ -109,14 +111,25 @@ async function main() {
           await fs.ensureDir(exampleDir);
 
           if (packageJson.scripts.build) {
-            spawn.sync('yarn', ['install'], {
+            const installResult = spawn.sync('yarn', ['install'], {
               stdio: 'ignore',
               cwd: example.filepath,
             });
-            spawn.sync('yarn', ['build'], {
+            if (installResult.status !== 0) {
+              throw new Error(
+                `Error installing dependencies for ${pkg.name}:${example.name}`
+              );
+            }
+
+            const buildResult = spawn.sync('yarn', ['build'], {
               stdio: 'ignore',
               cwd: example.filepath,
             });
+            if (buildResult.status !== 0) {
+              throw new Error(
+                `Error building example ${example.name} for ${pkg.name}`
+              );
+            }
           }
 
           if (await fs.pathExists(exampleBuildDir)) {

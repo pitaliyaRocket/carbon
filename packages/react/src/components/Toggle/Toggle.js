@@ -17,6 +17,8 @@ const getInstanceId = setupGetInstanceId();
 
 class Toggle extends React.Component {
   static propTypes = {
+    ['aria-label']: PropTypes.string.isRequired,
+
     /**
      * Specify a custom className to apply to the form-item node
      */
@@ -28,43 +30,44 @@ class Toggle extends React.Component {
     defaultToggled: PropTypes.bool,
 
     /**
-     * Provide an optional hook that is called when the control is toggled
+     * Provide an id that unique represents the underlying `<input>`
      */
-    onToggle: PropTypes.func,
+    id: PropTypes.string.isRequired,
 
+    /**
+     * Specify the label for the "off" position
+     */
+    labelA: PropTypes.node.isRequired,
+
+    /**
+     * Specify the label for the "on" position
+     */
+    labelB: PropTypes.node.isRequired,
+
+    /**
+     * Provide the text that will be read by a screen reader when visiting this
+     * control
+     */
+    labelText: PropTypes.node,
     /**
      * Provide an optional hook that is called when the control is changed
      */
     onChange: PropTypes.func,
 
     /**
-     * Provide an id that unique represents the underlying <input>
+     * Provide an optional hook that is called when the control is toggled
      */
-    id: PropTypes.string.isRequired,
+    onToggle: PropTypes.func,
+
+    /**
+     * Specify the size of the Toggle. Currently only supports 'sm'
+     */
+    size: PropTypes.oneOf(['sm']),
 
     /**
      * Specify whether the control is toggled
      */
     toggled: PropTypes.bool,
-
-    /**
-     * Provide the text that will be read by a screen reader when visiting this
-     * control
-     * `aria-label` is always required but will be null if `labelText` is also
-     * provided
-     */
-    labelText: PropTypes.string,
-    ['aria-label']: PropTypes.string.isRequired,
-
-    /**
-     * Specify the label for the "off" position
-     */
-    labelA: PropTypes.string.isRequired,
-
-    /**
-     * Specify the label for the "on" position
-     */
-    labelB: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -87,12 +90,17 @@ class Toggle extends React.Component {
       labelText,
       labelA,
       labelB,
+      size,
       ...other
     } = this.props;
 
     let input;
     const wrapperClasses = classNames(`${prefix}--form-item`, {
       [className]: className,
+    });
+
+    const toggleClasses = classNames(`${prefix}--toggle-input`, {
+      [`${prefix}--toggle-input--small`]: size,
     });
 
     const checkedProps = {};
@@ -111,7 +119,7 @@ class Toggle extends React.Component {
           aria-label={null}
           type="checkbox"
           id={id}
-          className={`${prefix}--toggle-input`}
+          className={toggleClasses}
           onChange={(evt) => {
             onChange && onChange(evt);
             onToggle(input.checked, id, evt);
@@ -130,15 +138,34 @@ class Toggle extends React.Component {
         <label
           className={`${prefix}--toggle-input__label`}
           htmlFor={id}
-          aria-label={labelText ? null : this.props['aria-label']}>
+          aria-label={
+            typeof labelText === 'string' ? null : this.props['aria-label']
+          }>
           {labelText}
           <span className={`${prefix}--toggle__switch`}>
-            <span className={`${prefix}--toggle__text--off`} aria-hidden="true">
-              {labelA}
-            </span>
-            <span className={`${prefix}--toggle__text--on`} aria-hidden="true">
-              {labelB}
-            </span>
+            {size && (
+              <svg
+                className={`${prefix}--toggle__check`}
+                width="6px"
+                height="5px"
+                viewBox="0 0 6 5">
+                <path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z" />
+              </svg>
+            )}
+            {!size && (
+              <>
+                <span
+                  className={`${prefix}--toggle__text--off`}
+                  aria-hidden="true">
+                  {labelA}
+                </span>
+                <span
+                  className={`${prefix}--toggle__text--on`}
+                  aria-hidden="true">
+                  {labelB}
+                </span>
+              </>
+            )}
           </span>
         </label>
       </div>

@@ -380,10 +380,20 @@ $overlay-01: if(
 /// @type {undefined}
 /// @access public
 /// @group @carbon/themes
-$danger: if(
+$danger-01: if(
   global-variable-exists('carbon--theme') and
-    map-has-key($carbon--theme, 'danger'),
-  map-get($carbon--theme, 'danger'),
+    map-has-key($carbon--theme, 'danger-01'),
+  map-get($carbon--theme, 'danger-01'),
+  #da1e28
+) !default;
+
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$danger-02: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'danger-02'),
+  map-get($carbon--theme, 'danger-02'),
   #da1e28
 ) !default;
 
@@ -496,6 +506,27 @@ $hover-ui: if(
   #e5e5e5
 ) !default;
 
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$hover-light-ui: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'hover-light-ui'),
+  map-get($carbon--theme, 'hover-light-ui'),
+  #e5e5e5
+) !default;
+
+/// Data table selected row hover
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$hover-selected-ui: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'hover-selected-ui'),
+  map-get($carbon--theme, 'hover-selected-ui'),
+  #cacaca
+) !default;
+
 /// `$ui-01` active; `$ui-02` active
 /// @type {undefined}
 /// @access public
@@ -504,6 +535,16 @@ $active-ui: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'active-ui'),
   map-get($carbon--theme, 'active-ui'),
+  #c6c6c6
+) !default;
+
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$active-light-ui: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'active-light-ui'),
+  map-get($carbon--theme, 'active-light-ui'),
   #c6c6c6
 ) !default;
 
@@ -526,17 +567,6 @@ $selected-light-ui: if(
     map-has-key($carbon--theme, 'selected-light-ui'),
   map-get($carbon--theme, 'selected-light-ui'),
   #e0e0e0
-) !default;
-
-/// Data table selected row hover
-/// @type {undefined}
-/// @access public
-/// @group @carbon/themes
-$hover-selected-ui: if(
-  global-variable-exists('carbon--theme') and
-    map-has-key($carbon--theme, 'hover-selected-ui'),
-  map-get($carbon--theme, 'hover-selected-ui'),
-  #cacaca
 ) !default;
 
 /// @type {undefined}
@@ -650,11 +680,11 @@ $decorative-01: if(
 /// @type {undefined}
 /// @access public
 /// @group @carbon/themes
-$hover-light-ui: if(
+$button-separator: if(
   global-variable-exists('carbon--theme') and
-    map-has-key($carbon--theme, 'hover-light-ui'),
-  map-get($carbon--theme, 'hover-light-ui'),
-  #e5e5e5
+    map-has-key($carbon--theme, 'button-separator'),
+  map-get($carbon--theme, 'button-separator'),
+  #e0e0e0
 ) !default;
 
 /// Skeleton state of graphics
@@ -739,6 +769,16 @@ $hover-field: if(
   #e5e5e5
 ) !default;
 
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$danger: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'danger'),
+  map-get($carbon--theme, 'danger'),
+  #da1e28
+) !default;
+
 /// @type {Number}
 /// @access public
 /// @group @carbon/themes
@@ -749,7 +789,7 @@ $caption-01: if(
   (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 ) !default;
@@ -764,7 +804,7 @@ $label-01: if(
   (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 ) !default;
@@ -778,7 +818,7 @@ $helper-text-01: if(
   map-get($carbon--theme, 'helper-text-01'),
   (
     font-size: 0.75rem,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 ) !default;
@@ -793,7 +833,7 @@ $body-short-01: if(
   (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.125rem,
+    line-height: 1.29,
     letter-spacing: 0.16px,
   )
 ) !default;
@@ -808,7 +848,7 @@ $body-long-01: if(
   (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.25rem,
+    line-height: 1.43,
     letter-spacing: 0.16px,
   )
 ) !default;
@@ -823,7 +863,7 @@ $body-short-02: if(
   (
     font-size: 1rem,
     font-weight: 400,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 ) !default;
@@ -838,7 +878,7 @@ $body-long-02: if(
   (
     font-size: 1rem,
     font-weight: 400,
-    line-height: 1.5rem,
+    line-height: 1.5,
     letter-spacing: 0,
   )
 ) !default;
@@ -857,7 +897,7 @@ $code-01: if(
       ),
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 ) !default;
@@ -876,7 +916,7 @@ $code-02: if(
       ),
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.25rem,
+    line-height: 1.43,
     letter-spacing: 0.32px,
   )
 ) !default;
@@ -891,7 +931,7 @@ $heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.125rem,
+    line-height: 1.29,
     letter-spacing: 0.16px,
   )
 ) !default;
@@ -906,7 +946,7 @@ $productive-heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.125rem,
+    line-height: 1.29,
     letter-spacing: 0.16px,
   )
 ) !default;
@@ -921,7 +961,7 @@ $heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 ) !default;
@@ -936,7 +976,7 @@ $productive-heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 ) !default;
@@ -951,7 +991,7 @@ $productive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 1.75rem,
+    line-height: 1.4,
     letter-spacing: 0,
   )
 ) !default;
@@ -966,7 +1006,7 @@ $productive-heading-04: if(
   (
     font-size: 1.75rem,
     font-weight: 400,
-    line-height: 2.25rem,
+    line-height: 1.29,
     letter-spacing: 0,
   )
 ) !default;
@@ -981,7 +1021,7 @@ $productive-heading-05: if(
   (
     font-size: 2rem,
     font-weight: 400,
-    line-height: 2.5rem,
+    line-height: 1.25,
     letter-spacing: 0,
   )
 ) !default;
@@ -996,7 +1036,7 @@ $productive-heading-06: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 3.125rem,
+    line-height: 1.199,
     letter-spacing: 0,
   )
 ) !default;
@@ -1011,7 +1051,7 @@ $productive-heading-07: if(
   (
     font-size: 3.375rem,
     font-weight: 300,
-    line-height: 4rem,
+    line-height: 1.19,
     letter-spacing: 0,
   )
 ) !default;
@@ -1026,7 +1066,7 @@ $expressive-heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.25rem,
+    line-height: 1.25,
     letter-spacing: 0.16px,
   )
 ) !default;
@@ -1041,7 +1081,7 @@ $expressive-heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.5rem,
+    line-height: 1.5,
     letter-spacing: 0,
   )
 ) !default;
@@ -1056,15 +1096,16 @@ $expressive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 140%,
+    line-height: 1.4,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
         font-size: 1.25rem,
-        line-height: 125%,
+        line-height: 1.25,
       ),
       max: (
         font-size: 1.5rem,
+        line-height: 1.334,
       ),
     ),
   )
@@ -1080,12 +1121,12 @@ $expressive-heading-04: if(
   (
     font-size: 1.75rem,
     font-weight: 400,
-    line-height: 129%,
+    line-height: 1.29,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
         font-size: 1.75rem,
-        line-height: 125%,
+        line-height: 1.25,
       ),
       max: (
         font-size: 2rem,
@@ -1104,31 +1145,30 @@ $expressive-heading-05: if(
   (
     font-size: 2rem,
     font-weight: 400,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
         font-weight: 300,
-        line-height: 122%,
+        line-height: 1.22,
         letter-spacing: 0,
       ),
       lg: (
         font-size: 2.625rem,
         font-weight: 300,
-        line-height: 119%,
+        line-height: 1.19,
         letter-spacing: 0,
       ),
       xlg: (
         font-size: 3rem,
         font-weight: 300,
-        line-height: 117%,
+        line-height: 1.17,
         letter-spacing: 0,
       ),
       max: (
         font-size: 3.75rem,
         font-weight: 300,
-        line-height: 4.375rem,
         letter-spacing: 0,
       ),
     ),
@@ -1145,31 +1185,30 @@ $expressive-heading-06: if(
   (
     font-size: 2rem,
     font-weight: 600,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
         font-weight: 600,
-        line-height: 122%,
+        line-height: 1.22,
         letter-spacing: 0,
       ),
       lg: (
         font-size: 2.625rem,
         font-weight: 600,
-        line-height: 119%,
+        line-height: 1.19,
         letter-spacing: 0,
       ),
       xlg: (
         font-size: 3rem,
         font-weight: 600,
-        line-height: 117%,
+        line-height: 1.17,
         letter-spacing: 0,
       ),
       max: (
         font-size: 3.75rem,
         font-weight: 600,
-        line-height: 4.375rem,
         letter-spacing: 0,
       ),
     ),
@@ -1186,15 +1225,15 @@ $expressive-paragraph-01: if(
   (
     font-size: 1.5rem,
     font-weight: 300,
-    line-height: 125%,
+    line-height: 1.334,
     letter-spacing: 0,
     lg: (
       font-size: 1.75rem,
-      line-height: 129%,
+      line-height: 1.29,
     ),
     max: (
       font-size: 2rem,
-      line-height: 125%,
+      line-height: 1.25,
     ),
   )
 ) !default;
@@ -1209,7 +1248,7 @@ $quotation-01: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 130%,
+    line-height: 1.3,
     letter-spacing: 0,
     breakpoints: (
       md: (
@@ -1220,19 +1259,19 @@ $quotation-01: if(
       lg: (
         font-size: 1.5rem,
         font-weight: 400,
-        line-height: 125%,
+        line-height: 1.334,
         letter-spacing: 0,
       ),
       xlg: (
         font-size: 1.75rem,
         font-weight: 400,
-        line-height: 129%,
+        line-height: 1.29,
         letter-spacing: 0,
       ),
       max: (
         font-size: 2rem,
         font-weight: 400,
-        line-height: 125%,
+        line-height: 1.25,
         letter-spacing: 0,
       ),
     ),
@@ -1249,20 +1288,20 @@ $quotation-02: if(
   (
     font-size: 2rem,
     font-weight: 300,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
-        line-height: 122%,
+        line-height: 1.22,
       ),
       lg: (
         font-size: 2.625rem,
-        line-height: 119%,
+        line-height: 1.19,
       ),
       xlg: (
         font-size: 3rem,
-        line-height: 117%,
+        line-height: 1.17,
       ),
       max: (
         font-size: 3.75rem,
@@ -1281,7 +1320,7 @@ $display-01: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
@@ -1292,11 +1331,11 @@ $display-01: if(
       ),
       xlg: (
         font-size: 3.75rem,
-        line-height: 117%,
+        line-height: 1.17,
       ),
       max: (
         font-size: 4.75rem,
-        line-height: 113%,
+        line-height: 1.13,
       ),
     ),
   )
@@ -1312,7 +1351,7 @@ $display-02: if(
   (
     font-size: 2.625rem,
     font-weight: 600,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
@@ -1323,11 +1362,11 @@ $display-02: if(
       ),
       xlg: (
         font-size: 3.75rem,
-        line-height: 116%,
+        line-height: 1.16,
       ),
       max: (
         font-size: 4.75rem,
-        line-height: 113%,
+        line-height: 1.13,
       ),
     ),
   )
@@ -1343,25 +1382,25 @@ $display-03: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 4.25rem,
-        line-height: 115%,
+        line-height: 1.15,
       ),
       lg: (
         font-size: 5.75rem,
-        line-height: 111%,
+        line-height: 1.11,
         letter-spacing: -0.64px,
       ),
       xlg: (
         font-size: 7.625rem,
-        line-height: 107%,
+        line-height: 1.07,
       ),
       max: (
         font-size: 9.75rem,
-        line-height: 105%,
+        line-height: 1.05,
         letter-spacing: -0.96px,
       ),
     ),
@@ -1378,26 +1417,26 @@ $display-04: if(
   (
     font-size: 2.625rem,
     font-weight: 600,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 4.25rem,
-        line-height: 115%,
+        line-height: 1.15,
       ),
       lg: (
         font-size: 5.75rem,
-        line-height: 111%,
+        line-height: 1.11,
         letter-spacing: -0.64px,
       ),
       xlg: (
         font-size: 7.625rem,
-        line-height: 107%,
+        line-height: 1.07,
         letter-spacing: -0.64px,
       ),
       max: (
         font-size: 9.75rem,
-        line-height: 105%,
+        line-height: 1.05,
         letter-spacing: -0.96px,
       ),
     ),

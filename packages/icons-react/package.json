@@ -5,7 +5,11 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/icons-react"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
@@ -29,11 +33,15 @@
     "build": "yarn clean && node tasks/build.js",
     "clean": "rimraf es lib umd"
   },
+  "peerDependencies": {
+    "react": ">=16"
+  },
   "dependencies": {
-    "@rocketsoftware/icon-helpers": "^0.6.0"
+    "@rocketsoftware/icon-helpers": "^0.6.0",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.8.0",
+    "@carbon/icon-build-helpers": "^0.15.0",
     "@rocketsoftware/icons": "^0.6.0"
   },
   "sideEffects": false

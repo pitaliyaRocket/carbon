@@ -40,7 +40,7 @@ storiesOf('Pattern|SplitButton', module)
       return (
         <SplitButton {...regularProps}>
           <OverflowMenuItem itemText={'Item 1'} {...itemProps} />
-          <OverflowMenuItem itemText={'Item 2'} {...itemProps} primaryFocus />
+          <OverflowMenuItem itemText={'Item 2'} {...itemProps} />
           <OverflowMenuItem itemText={'Item 3'} {...itemProps} />
           <OverflowMenuItem itemText={'Item 4'} {...itemProps} />
         </SplitButton>

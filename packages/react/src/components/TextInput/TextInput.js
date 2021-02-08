@@ -9,7 +9,10 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
-import { WarningFilled16 } from '@rocketsoftware/icons-react';
+import {
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@rocketsoftware/icons-react';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
@@ -28,6 +31,8 @@ const TextInput = React.forwardRef(function TextInput(
     hideLabel,
     invalid,
     invalidText,
+    warn,
+    warnText,
     helperText,
     light,
     size,
@@ -37,6 +42,7 @@ const TextInput = React.forwardRef(function TextInput(
   ref
 ) {
   const errorId = id + '-error-msg';
+  const warnId = id + '-warn-msg';
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
@@ -85,18 +91,41 @@ const TextInput = React.forwardRef(function TextInput(
       [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
     }
   );
+  const fieldWrapperClasses = classNames(
+    `${prefix}--text-input__field-wrapper`,
+    {
+      [`${prefix}--text-input__field-wrapper--warning`]: !invalid && warn,
+    }
+  );
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
       {labelText}
     </label>
   ) : null;
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
-      {invalidText}
-    </div>
-  ) : null;
+  let error = null;
+  if (invalid) {
+    error = (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {invalidText}
+      </div>
+    );
+  } else if (warn) {
+    error = (
+      <div className={`${prefix}--form-requirement`} id={warnId}>
+        {warnText}
+      </div>
+    );
+  }
   const input = (
-    <input {...textInputProps({ invalid, sharedTextInputProps, errorId })} />
+    <input
+      {...textInputProps({
+        invalid,
+        sharedTextInputProps,
+        errorId,
+        warn,
+        warnId,
+      })}
+    />
   );
   const helper = helperText ? (
     <div className={helperTextClasses}>{helperText}</div>
@@ -115,12 +144,15 @@ const TextInput = React.forwardRef(function TextInput(
         </div>
       )}
       <div className={fieldOuterWrapperClasses}>
-        <div
-          className={`${prefix}--text-input__field-wrapper`}
-          data-invalid={invalid || null}>
+        <div className={fieldWrapperClasses} data-invalid={invalid || null}>
           {invalid && (
             <WarningFilled16
               className={`${prefix}--text-input__invalid-icon`}
+            />
+          )}
+          {!invalid && warn && (
+            <WarningAltFilled16
+              className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
             />
           )}
           {input}
@@ -129,7 +161,7 @@ const TextInput = React.forwardRef(function TextInput(
           {isFluid && !inline && error}
         </div>
         {!isFluid && error}
-        {!invalid && !isFluid && !inline && helper}
+        {!invalid && !warn && !isFluid && !inline && helper}
       </div>
     </div>
   );
@@ -139,67 +171,39 @@ TextInput.PasswordInput = PasswordInput;
 TextInput.ControlledPasswordInput = ControlledPasswordInput;
 TextInput.propTypes = {
   /**
-   * Specify an optional className to be applied to the <input> node
+   * Specify an optional className to be applied to the `<input>` node
    */
   className: PropTypes.string,
 
   /**
-   * Optionally provide the default value of the <input>
+   * Optionally provide the default value of the `<input>`
    */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
-   * Specify whether the <input> should be disabled
+   * Specify whether the `<input>` should be disabled
    */
   disabled: PropTypes.bool,
 
   /**
-   * Specify a custom `id` for the <input>
+   * Provide text that is used alongside the control label for additional help
    */
-  id: PropTypes.string.isRequired,
-
-  /**
-   * Provide the text that will be read by a screen reader when visiting this
-   * control
-   */
-  labelText: PropTypes.node.isRequired,
-
-  /**
-   * Optionally provide an `onChange` handler that is called whenever <input>
-   * is updated
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * Optionally provide an `onClick` handler that is called whenever the
-   * <input> is clicked
-   */
-  onClick: PropTypes.func,
-
-  /**
-   * Specify the placeholder attribute for the <input>
-   */
-  placeholder: PropTypes.string,
-
-  /**
-   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
-   */
-  size: PropTypes.oneOf(['sm', 'xl']),
-
-  /**
-   * Specify the type of the <input>
-   */
-  type: PropTypes.string,
-
-  /**
-   * Specify the value of the <input>
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  helperText: PropTypes.node,
 
   /**
    * Specify whether you want the underlying label to be visually hidden
    */
   hideLabel: PropTypes.bool,
+
+  /**
+   * Specify a custom `id` for the `<input>`
+   */
+  id: PropTypes.string.isRequired,
+
+  /**
+   * `true` to use the inline version.
+   */
+  inline: PropTypes.bool,
 
   /**
    * Specify whether the control is currently invalid
@@ -209,21 +213,59 @@ TextInput.propTypes = {
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
-   * Provide text that is used alongside the control label for additional help
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
    */
-  helperText: PropTypes.node,
+  labelText: PropTypes.node.isRequired,
 
   /**
    * `true` to use the light version.
    */
   light: PropTypes.bool,
+
   /**
-   * `true` to use the inline version.
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
+   * is updated
    */
-  inline: PropTypes.bool,
+  onChange: PropTypes.func,
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<input>` is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify the placeholder attribute for the `<input>`
+   */
+  placeholder: PropTypes.string,
+
+  /**
+   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
+   */
+  size: PropTypes.oneOf(['sm', 'xl']),
+
+  /**
+   * Specify the type of the `<input>`
+   */
+  type: PropTypes.string,
+
+  /**
+   * Specify the value of the `<input>`
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 TextInput.defaultProps = {
@@ -233,6 +275,8 @@ TextInput.defaultProps = {
   onClick: () => {},
   invalid: false,
   invalidText: '',
+  warn: false,
+  warnText: '',
   helperText: '',
   light: false,
   inline: false,

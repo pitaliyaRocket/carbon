@@ -23,19 +23,16 @@ export default class OverflowMenuItem extends React.Component {
     className: PropTypes.string,
 
     /**
-     * The CSS class name to be placed on the wrapper list item element
+     * A callback to tell the parent menu component that the menu should be closed.
      */
-    wrapperClassName: PropTypes.string,
+    closeMenu: PropTypes.func,
 
     /**
-     * The text in the menu item.
+     * `true` to make this menu item disabled.
      */
-    itemText: PropTypes.node.isRequired,
+    disabled: PropTypes.bool,
 
-    /**
-     * If given, overflow item will render as a link with the given href
-     */
-    href: PropTypes.string,
+    handleOverflowMenuItemFocus: PropTypes.func,
 
     /**
      * `true` to make this menu item a divider.
@@ -43,14 +40,21 @@ export default class OverflowMenuItem extends React.Component {
     hasDivider: PropTypes.bool,
 
     /**
+     * If given, overflow item will render as a link with the given href
+     */
+    href: PropTypes.string,
+
+    index: PropTypes.number,
+
+    /**
      * `true` to make this menu item a "danger button".
      */
     isDelete: PropTypes.bool,
 
     /**
-     * `true` to make this menu item disabled.
+     * The text in the menu item.
      */
-    disabled: PropTypes.bool,
+    itemText: PropTypes.node.isRequired,
 
     /**
      * event handlers
@@ -64,11 +68,6 @@ export default class OverflowMenuItem extends React.Component {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     onMouseUp: PropTypes.func,
-
-    /**
-     * A callback to tell the parent menu component that the menu should be closed.
-     */
-    closeMenu: PropTypes.func,
 
     /**
      * `true` if this menu item should get focus when the menu gets open.
@@ -85,8 +84,16 @@ export default class OverflowMenuItem extends React.Component {
      * `true` if this menu item has long text and requires a browser tooltip
      */
     requireTitle: PropTypes.bool,
-    index: PropTypes.number,
-    handleOverflowMenuItemFocus: PropTypes.func,
+
+    /**
+     * Specify a title for the OverflowMenuItem
+     */
+    title: PropTypes.string,
+
+    /**
+     * The CSS class name to be placed on the wrapper list item element
+     */
+    wrapperClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -141,6 +148,7 @@ export default class OverflowMenuItem extends React.Component {
       wrapperClassName,
       requireTitle,
       index,
+      title,
       ...other
     } = this.props;
 
@@ -193,7 +201,7 @@ export default class OverflowMenuItem extends React.Component {
             onKeyDown(evt);
           }}
           ref={this.overflowMenuItem}
-          title={requireTitle ? itemText : null}
+          title={requireTitle ? title || itemText : null}
           tabIndex="-1"
           index={index}>
           {OverflowMenuItemContent}

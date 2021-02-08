@@ -55,14 +55,39 @@ const ListBoxSelection = ({
     }
   };
   const description = selectionCount ? t('clear.all') : t('clear.selection');
-  return (
+  const tagClasses = cx(
+    `${prefix}--tag`,
+    `${prefix}--tag--filter`,
+    `${prefix}--tag--high-contrast`,
+    {
+      [`${prefix}--tag--disabled`]: disabled,
+    }
+  );
+  return selectionCount ? (
+    <div className={tagClasses}>
+      <span className={`${prefix}--tag__label`} title={selectionCount}>
+        {selectionCount}
+      </span>
+      <div
+        role="button"
+        tabIndex={disabled ? -1 : 0}
+        className={`${prefix}--tag__close-icon`}
+        onClick={handleOnClick}
+        onKeyDown={handleOnKeyDown}
+        disabled={disabled}
+        aria-label={t('clear.all')}
+        title={description}>
+        <Close16 />
+      </div>
+    </div>
+  ) : (
     <div
       role="button"
       className={className}
       tabIndex={disabled ? -1 : 0}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      aria-label="Clear Selection"
+      aria-label={description}
       title={description}>
       {selectionCount}
       <Close16 />
@@ -82,28 +107,21 @@ const defaultTranslations = {
 
 ListBoxSelection.propTypes = {
   /**
-   * Specify whether or not the clear selection element should be disabled
-   */
-  disabled: PropTypes.bool,
-
-  /**
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
    */
   clearSelection: PropTypes.func.isRequired,
 
   /**
-   * Specify an optional `selectionCount` value that will be used to determine
-   * whether the selection should display a badge or a single clear icon.
+   * Specify whether or not the clear selection element should be disabled
    */
-  selectionCount: PropTypes.number,
+  disabled: PropTypes.bool,
 
   /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes in an id defined in `translationIds` and should
-   * return a string message for that given message id.
+   * Specify an optional `onClearSelection` handler that is called when the underlying
+   * element is cleared
    */
-  translateWithId: PropTypes.func.isRequired,
+  onClearSelection: PropTypes.func,
 
   /**
    * Specify an optional `onClick` handler that is called when the underlying
@@ -118,10 +136,17 @@ ListBoxSelection.propTypes = {
   onKeyDown: PropTypes.func,
 
   /**
-   * Specify an optional `onClearSelection` handler that is called when the underlying
-   * element is cleared
+   * Specify an optional `selectionCount` value that will be used to determine
+   * whether the selection should display a badge or a single clear icon.
    */
-  onClearSelection: PropTypes.func,
+  selectionCount: PropTypes.number,
+
+  /**
+   * i18n hook used to provide the appropriate description for the given menu
+   * icon. This function takes in an id defined in `translationIds` and should
+   * return a string message for that given message id.
+   */
+  translateWithId: PropTypes.func.isRequired,
 };
 
 ListBoxSelection.defaultProps = {

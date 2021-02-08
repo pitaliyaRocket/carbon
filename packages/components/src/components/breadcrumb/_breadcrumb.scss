@@ -37,12 +37,16 @@
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
     color: $link-01;
+
+    &:hover {
+      color: $hover-primary-text;
+    }
   }
 
   .#{$prefix}--breadcrumb-item::after {
-    content: '/';
-    color: $text-01;
     margin-left: $carbon--spacing-03;
+    color: $text-01;
+    content: '/';
   }
 
   .#{$prefix}--breadcrumb--no-trailing-slash

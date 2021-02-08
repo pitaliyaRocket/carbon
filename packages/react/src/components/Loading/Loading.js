@@ -34,7 +34,7 @@ function Loading({
     [`${prefix}--loading-overlay--stop`]: !active,
   });
   const loadingId = id || `loading-id-${instanceId}`;
-  const spinnerRadius = small ? '26.8125' : '37.5';
+  const spinnerRadius = small ? '42' : '44';
 
   const loading = (
     <div
@@ -46,20 +46,20 @@ function Loading({
       <label id={loadingId} className={`${prefix}--visually-hidden`}>
         {description}
       </label>
-      <svg className={`${prefix}--loading__svg`} viewBox="-75 -75 150 150">
+      <svg className={`${prefix}--loading__svg`} viewBox="0 0 100 100">
         <title>{description}</title>
         {small ? (
           <circle
             className={`${prefix}--loading__background`}
-            cx="0"
-            cy="0"
+            cx="50%"
+            cy="50%"
             r={spinnerRadius}
           />
         ) : null}
         <circle
           className={`${prefix}--loading__stroke`}
-          cx="0"
-          cy="0"
+          cx="50%"
+          cy="50%"
           r={spinnerRadius}
         />
       </svg>
@@ -75,11 +75,6 @@ function Loading({
 
 Loading.propTypes = {
   /**
-   * Provide an `id` to uniquely identify the label
-   */
-  id: PropTypes.string,
-
-  /**
    * Specify whether you want the loading indicator to be spinning or not
    */
   active: PropTypes.bool,
@@ -90,9 +85,14 @@ Loading.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether you want the loader to be applied with an overlay
+   * Specify an description that would be used to best describe the loading state
    */
-  withOverlay: PropTypes.bool,
+  description: PropTypes.string,
+
+  /**
+   * Provide an `id` to uniquely identify the label
+   */
+  id: PropTypes.string,
 
   /**
    * Specify whether you would like the small variant of <Loading>
@@ -100,9 +100,9 @@ Loading.propTypes = {
   small: PropTypes.bool,
 
   /**
-   * Specify an description that would be used to best describe the loading state
+   * Specify whether you want the loader to be applied with an overlay
    */
-  description: PropTypes.string,
+  withOverlay: PropTypes.bool,
 };
 
 Loading.defaultProps = {

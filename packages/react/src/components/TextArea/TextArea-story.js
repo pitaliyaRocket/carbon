@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import TextArea from '../TextArea';
 import TextAreaSkeleton from '../TextArea/TextArea.Skeleton';
+import mdx from './TextArea.mdx';
 
 const TextAreaProps = () => ({
   className: 'some-class',
@@ -33,33 +33,49 @@ const TextAreaProps = () => ({
   onClick: action('onClick'),
 });
 
-storiesOf('TextArea', module)
-  .addDecorator(withKnobs)
-  .add('Default', () => <TextArea {...TextAreaProps()} />, {
-    info: {
-      text: `
+export default {
+  title: 'TextArea',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: TextArea,
+    docs: {
+      page: mdx,
+    },
+    subcomponents: {
+      TextAreaSkeleton,
+    },
+  },
+};
+
+export const Default = () => <TextArea {...TextAreaProps()} />;
+
+Default.parameters = {
+  info: {
+    text: `
             Text areas enable the user to interact with and input data. A text area is used when you
             anticipate the user to input more than 1 sentence.
           `,
-    },
-  })
-  .add(
-    'skeleton',
-    () => (
-      <div
-        aria-label="loading text area"
-        aria-live="assertive"
-        role="status"
-        tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-      >
-        <TextAreaSkeleton />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
-  );
+  },
+};
+
+export const Skeleton = () => (
+  <div
+    aria-label="loading text area"
+    aria-live="assertive"
+    role="status"
+    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+  >
+    <TextAreaSkeleton />
+  </div>
+);
+
+Skeleton.storyName = 'skeleton';
+
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+  },
+};

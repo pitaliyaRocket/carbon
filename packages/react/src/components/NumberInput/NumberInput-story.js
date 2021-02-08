@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -18,7 +17,9 @@ import {
   select,
 } from '@storybook/addon-knobs';
 import NumberInput from '../NumberInput';
+import { NumberInput as OGNumberInput } from './NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
+import mdx from './NumberInput.mdx';
 
 const sizes = {
   'Extra large size (xl)': 'xl',
@@ -44,6 +45,11 @@ const props = () => ({
     'Form validation UI content (invalidText)',
     'Number is not valid'
   ),
+  warn: boolean('Show warning state (warn)', false),
+  warnText: text(
+    'Warning state text (warnText)',
+    'A high threshold may impact performance'
+  ),
   helperText: text('Helper text (helperText)', 'Optional helper text.'),
   light: boolean('Light variant (light)', false),
   onChange: action('onChange'),
@@ -58,47 +64,49 @@ const props = () => ({
   ),
 });
 
-NumberInput.displayName = 'NumberInput';
+export default {
+  title: 'NumberInput',
+  component: OGNumberInput,
+  decorators: [withKnobs],
 
-storiesOf('NumberInput', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const { numberInputArrowTranslationIds, ...rest } = props();
-      return (
-        <NumberInput
-          translateWithId={(id) => numberInputArrowTranslationIds[id]}
-          {...rest}
-        />
-      );
+  parameters: {
+    docs: {
+      page: mdx,
     },
-    {
-      info: {
-        text: `
-            Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
-            The Number Input component can be passed a starting value, a min, a max, and the step.
-          `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div
-        aria-label="loading number input"
-        aria-live="assertive"
-        role="status"
-        tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-      >
-        <NumberInputSkeleton />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
+
+    subcomponents: {
+      NumberInputSkeleton,
+    },
+  },
+};
+
+export const Default = () => {
+  const { numberInputArrowTranslationIds, ...rest } = props();
+  return (
+    <NumberInput
+      translateWithId={(id) => numberInputArrowTranslationIds[id]}
+      {...rest}
+    />
   );
+};
+
+export const Skeleton = () => (
+  <div
+    aria-label="loading number input"
+    aria-live="assertive"
+    role="status"
+    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+  >
+    <NumberInputSkeleton />
+  </div>
+);
+
+Skeleton.storyName = 'skeleton';
+
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+  },
+};

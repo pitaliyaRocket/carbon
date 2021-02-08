@@ -15,6 +15,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   {
     labelText,
     className,
+    disabled,
     id,
     placeholder,
     onChange,
@@ -50,12 +51,12 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   const sharedTextInputProps = {
     id,
     onChange: (evt) => {
-      if (!other.disabled) {
+      if (!disabled) {
         onChange(evt);
       }
     },
     onClick: (evt) => {
-      if (!other.disabled) {
+      if (!disabled) {
         onClick(evt);
       }
     },
@@ -67,10 +68,10 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   };
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: other.disabled,
+    [`${prefix}--label--disabled`]: disabled,
   });
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: other.disabled,
+    [`${prefix}--form__helper-text--disabled`]: disabled,
   });
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
@@ -90,10 +91,12 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   );
   const passwordVisibilityToggleClasses = classNames(
     `${prefix}--text-input--password__visibility__toggle`,
+    `${prefix}--btn`,
     `${prefix}--btn--icon-only`,
     `${prefix}--tooltip__trigger`,
     `${prefix}--tooltip--a11y`,
     {
+      [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--tooltip--${tooltipPosition}`]: tooltipPosition,
       [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
     }
@@ -102,15 +105,19 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     <>
       <input
         {...textInputProps({ invalid, sharedTextInputProps, errorId })}
+        disabled={disabled}
         data-toggle-password-visibility={inputType === 'password'}
       />
       <button
         type="button"
         className={passwordVisibilityToggleClasses}
+        disabled={disabled}
         onClick={togglePasswordVisibility}>
-        <span className={`${prefix}--assistive-text`}>
-          {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
-        </span>
+        {!disabled && (
+          <span className={`${prefix}--assistive-text`}>
+            {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
+          </span>
+        )}
         {passwordVisibilityIcon}
       </button>
     </>
@@ -139,12 +146,12 @@ const PasswordInput = React.forwardRef(function PasswordInput(
 PasswordInput.propTypes = {
   /**
    * Provide a custom className that is applied directly to the underlying
-   * <input> node
+   * `<input>` node
    */
   className: PropTypes.string,
 
   /**
-   * Optionally provide the default value of the <input>
+   * Optionally provide the default value of the `<input>`
    */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -154,42 +161,24 @@ PasswordInput.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Provide a unique identifier for the input field
+   * Provide text that is used alongside the control label for additional help
    */
-  id: PropTypes.string.isRequired,
-
-  /**
-   * Provide the text that will be read by a screen reader when visiting this
-   * control
-   */
-  labelText: PropTypes.node.isRequired,
-
-  /**
-   * Optionally provide an `onChange` handler that is called whenever <input>
-   * is updated
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * Optionally provide an `onClick` handler that is called whenever the
-   * <input> is clicked
-   */
-  onClick: PropTypes.func,
-
-  /**
-   * Specify the placeholder attribute for the <input>
-   */
-  placeholder: PropTypes.string,
-
-  /**
-   * Provide the current value of the <input>
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  helperText: PropTypes.node,
 
   /**
    * Specify whether or not the underlying label is visually hidden
    */
   hideLabel: PropTypes.bool,
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel: PropTypes.string,
+
+  /**
+   * Provide a unique identifier for the input field
+   */
+  id: PropTypes.string.isRequired,
 
   /**
    * Specify whether the control is currently invalid
@@ -199,12 +188,13 @@ PasswordInput.propTypes = {
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
-   * Provide text that is used alongside the control label for additional help
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
    */
-  helperText: PropTypes.node,
+  labelText: PropTypes.node.isRequired,
 
   /**
    * Specify light version or default version of this control
@@ -212,21 +202,21 @@ PasswordInput.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
+   * is updated
    */
-  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  onChange: PropTypes.func,
 
   /**
-   * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<input>` is clicked
    */
-  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+  onClick: PropTypes.func,
 
   /**
-   * "Hide password" tooltip text on password visibility toggle
+   * Specify the placeholder attribute for the `<input>`
    */
-  hidePasswordLabel: PropTypes.string,
+  placeholder: PropTypes.string,
 
   /**
    * "Show password" tooltip text on password visibility toggle
@@ -237,6 +227,23 @@ PasswordInput.propTypes = {
    * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size
    */
   size: PropTypes.string,
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+  /**
+   * Provide the current value of the `<input>`
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 PasswordInput.defaultProps = {

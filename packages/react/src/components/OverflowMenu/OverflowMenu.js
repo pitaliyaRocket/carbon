@@ -97,19 +97,9 @@ class OverflowMenu extends Component {
 
   static propTypes = {
     /**
-     * `true` if the menu should be open.
+     * The ARIA label.
      */
-    open: PropTypes.bool,
-
-    /**
-     * The menu direction.
-     */
-    direction: PropTypes.oneOf([DIRECTION_TOP, DIRECTION_BOTTOM]),
-
-    /**
-     * `true` if the menu alignment should be flipped.
-     */
-    flipped: PropTypes.bool,
+    ariaLabel: PropTypes.string,
 
     /**
      * The child nodes.
@@ -122,9 +112,29 @@ class OverflowMenu extends Component {
     className: PropTypes.string,
 
     /**
-     * The `tabindex` attribute.
+     * The menu direction.
      */
-    tabIndex: PropTypes.number,
+    direction: PropTypes.oneOf([DIRECTION_TOP, DIRECTION_BOTTOM]),
+
+    /**
+     * `true` if the menu alignment should be flipped.
+     */
+    flipped: PropTypes.bool,
+
+    /**
+     * Optional callback used to obtain a custom 'viewport' that differs from the window.
+     */
+    getViewport: PropTypes.func,
+
+    /**
+     * The CSS class for the icon.
+     */
+    iconClass: PropTypes.string,
+
+    /**
+     * The icon description.
+     */
+    iconDescription: PropTypes.string.isRequired,
 
     /**
      * The element ID.
@@ -132,29 +142,10 @@ class OverflowMenu extends Component {
     id: PropTypes.string,
 
     /**
-     * The ARIA label.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make OverflowMenu background color same as container background color.
      */
-    ariaLabel: PropTypes.string,
-
-    /**
-     * The event handler for the `click` event.
-     */
-    onClick: PropTypes.func,
-
-    /**
-     * The event handler for the `focus` event.
-     */
-    onFocus: PropTypes.func,
-
-    /**
-     * The event handler for the `keydown` event.
-     */
-    onKeyDown: PropTypes.func,
-
-    /**
-     * The icon description.
-     */
-    iconDescription: PropTypes.string.isRequired,
+    light: PropTypes.bool,
 
     /**
      * The adjustment in position applied to the floating menu.
@@ -179,14 +170,14 @@ class OverflowMenu extends Component {
     ]),
 
     /**
-     * The CSS class for the icon.
+     * The class to apply to the menu options
      */
-    iconClass: PropTypes.string,
+    menuOptionsClass: PropTypes.string,
 
     /**
-     * Function called to override icon rendering.
+     * The event handler for the `click` event.
      */
-    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    onClick: PropTypes.func,
 
     /**
      * Function called when menu is closed
@@ -194,31 +185,43 @@ class OverflowMenu extends Component {
     onClose: PropTypes.func,
 
     /**
-     * The class to apply to the menu options
+     * The event handler for the `focus` event.
      */
-    menuOptionsClass: PropTypes.string,
+    onFocus: PropTypes.func,
 
     /**
-     * Function called when menu is closed
+     * The event handler for the `keydown` event.
+     */
+    onKeyDown: PropTypes.func,
+
+    /**
+     * Function called when menu is opened
      */
     onOpen: PropTypes.func,
 
     /**
-     * Optional callback used to obtain a custom 'viewport' that differs from the window.
-     */
-    getViewport: PropTypes.func,
-
-    /**
      * `true` to use the light version. For use on $ui-01 backgrounds only.
      * Don't use this to make OverflowMenu background color same as container background color.
+     * `true` if the menu should be open.
      */
-    light: PropTypes.bool,
+    open: PropTypes.bool,
+
+    /**
+     * Function called to override icon rendering.
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
     /**
      * Specify a CSS selector that matches the DOM element that should
      * be focused when the OverflowMenu opens
      */
     selectorPrimaryFocus: PropTypes.string,
+
+    /**
+     * Specify the size of the OverflowMenu. Currently supports either `sm` or
+     * `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
   };
 
   static defaultProps = {
@@ -232,7 +235,6 @@ class OverflowMenu extends Component {
     onKeyDown: () => {},
     onClose: () => {},
     onOpen: () => {},
-    tabIndex: 0,
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
     light: false,
@@ -260,7 +262,7 @@ class OverflowMenu extends Component {
 
   componentDidUpdate(_, prevState) {
     const { onClose } = this.props;
-    if (!this.state.open && prevState.isOpen) {
+    if (!this.state.open && prevState.open) {
       onClose();
     }
   }
@@ -311,7 +313,13 @@ class OverflowMenu extends Component {
 
     // Close the overflow menu on escape
     if (keyCodeMatches(evt, [keys.Escape])) {
-      this.closeMenu();
+      let wasOpen = this.state.open;
+      this.closeMenu(() => {
+        if (wasOpen) {
+          this.focusMenuEl();
+        }
+      });
+
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
     }
@@ -326,11 +334,11 @@ class OverflowMenu extends Component {
     }
   };
 
-  closeMenu = () => {
-    let wasOpen = this.state.open;
+  closeMenu = (onCloseMenu) => {
     this.setState({ open: false }, () => {
-      if (wasOpen) {
-        this.focusMenuEl();
+      // Optional callback to be executed after the state as been set to close
+      if (onCloseMenu) {
+        onCloseMenu();
       }
       this.props.onClose();
     });
@@ -408,16 +416,18 @@ class OverflowMenu extends Component {
         menuBody.ownerDocument,
         focusinEventName,
         (event) => {
-          const { target } = event;
+          const target = ClickListener.getEventTarget(event);
           const { current: triggerEl } = this._triggerRef;
-          if (
-            !menuBody.contains(target) &&
-            triggerEl &&
-            !target.matches(
-              `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
-            )
-          ) {
-            this.closeMenu();
+          if (typeof target.matches === 'function') {
+            if (
+              !menuBody.contains(target) &&
+              triggerEl &&
+              !target.matches(
+                `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
+              )
+            ) {
+              this.closeMenu();
+            }
           }
         },
         !hasFocusin
@@ -440,7 +450,6 @@ class OverflowMenu extends Component {
   render() {
     const {
       id,
-      tabIndex,
       ariaLabel,
       children,
       iconDescription,
@@ -458,6 +467,7 @@ class OverflowMenu extends Component {
       menuOptionsClass,
       getViewport,
       light,
+      size,
       ...other
     } = this.props;
 
@@ -469,6 +479,7 @@ class OverflowMenu extends Component {
       {
         [`${prefix}--overflow-menu--open`]: open,
         [`${prefix}--overflow-menu--light`]: light,
+        [`${prefix}--overflow-menu--${size}`]: size,
       }
     );
 
@@ -479,6 +490,7 @@ class OverflowMenu extends Component {
         [`${prefix}--overflow-menu--flip`]: this.props.flipped,
         [`${prefix}--overflow-menu-options--open`]: open,
         [`${prefix}--overflow-menu-options--light`]: light,
+        [`${prefix}--overflow-menu-options--${size}`]: size,
       }
     );
 
@@ -490,7 +502,7 @@ class OverflowMenu extends Component {
     const childrenWithProps = React.Children.toArray(children).map(
       (child, index) =>
         React.cloneElement(child, {
-          closeMenu: this.closeMenu,
+          closeMenu: child.props.closeMenu || this.closeMenu,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
           ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
@@ -511,6 +523,7 @@ class OverflowMenu extends Component {
 
     const wrappedMenuBody = (
       <FloatingMenu
+        focusTrap
         triggerRef={this._triggerRef}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
@@ -531,13 +544,13 @@ class OverflowMenu extends Component {
       onKeyDown: this.handleKeyDown,
       className: overflowMenuIconClasses,
       'aria-label': iconDescription,
-      focusable: 'false', // Prevent `<svg>` in trigger icon from getting focus for IE11
     };
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <button
           {...other}
+          type="button"
           aria-haspopup
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
@@ -545,7 +558,6 @@ class OverflowMenu extends Component {
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}
-          tabIndex={tabIndex}
           ref={mergeRefs(this._triggerRef, ref)}>
           <IconElement {...iconProps}>
             {iconDescription && <title>{iconDescription}</title>}
@@ -557,6 +569,7 @@ class OverflowMenu extends Component {
   }
 }
 
+export { OverflowMenu };
 export default (() => {
   const forwardRef = (props, ref) => <OverflowMenu {...props} innerRef={ref} />;
   forwardRef.displayName = 'OverflowMenu';

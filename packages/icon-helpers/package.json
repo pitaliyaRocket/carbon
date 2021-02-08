@@ -5,7 +5,11 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icon-helpers",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/icon-helpers"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
@@ -26,11 +30,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonIconHelpers",
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonIconHelpers",
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.9.0",
+    "@carbon/cli": "^10.19.0",
     "rimraf": "^3.0.0"
   },
   "sideEffects": false

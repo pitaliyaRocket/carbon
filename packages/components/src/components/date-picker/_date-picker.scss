@@ -37,27 +37,24 @@
   }
 
   .#{$prefix}--date-picker-input__wrapper {
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
-
-    ~ .#{$prefix}--form-requirement {
-      max-height: rem(200px);
-      display: block;
-      color: $text-error;
-      font-weight: 400;
-      margin-top: $carbon--spacing-02;
-      overflow: visible;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
-  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
-    .#{$prefix}--date-picker__input {
-      width: rem(120px);
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple .#{$prefix}--label {
+    width: rem(120px);
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--invalid,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--warn {
+    .#{$prefix}--date-picker__input,
+    ~ .#{$prefix}--form-requirement {
+      width: rem(152px);
     }
   }
 
@@ -72,19 +69,23 @@
     width: rem(288px);
   }
 
+  .#{$prefix}--date-picker
+    .#{$prefix}--date-picker-input__wrapper--warn
+    ~ .#{$prefix}--form-requirement {
+    color: $text-01;
+  }
   .#{$prefix}--date-picker__input {
     @include reset;
     @include type-style('code-02');
     @include focus-outline('reset');
 
-    display: block;
     position: relative;
+    display: block;
     height: rem(40px);
-    min-width: rem(144px);
     padding: 0 $carbon--spacing-05;
+    color: $text-01;
     background-color: $field-01;
     border: none;
-    color: $text-01;
     border-bottom: 1px solid $ui-04;
     transition: $duration--fast-01 motion(standard, productive) all;
 
@@ -93,14 +94,9 @@
       @include focus-outline('outline');
     }
 
-    &[data-invalid],
-    &[data-invalid]:focus {
-      @include focus-outline('invalid');
-    }
-
     &:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
+      background-color: $disabled-01;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
     }
@@ -114,8 +110,7 @@
     }
 
     &::placeholder {
-      color: $text-05;
-      opacity: 1;
+      @include placeholder-colors;
     }
   }
 
@@ -130,13 +125,38 @@
 
   .#{$prefix}--date-picker__icon {
     position: absolute;
-    right: 1rem;
-    fill: $icon-01;
-    cursor: pointer;
-    z-index: 1;
     // vertically center icon within parent container on IE11
     top: 50%;
+    right: 1rem;
+    z-index: 1;
     transform: translateY(-50%);
+    cursor: pointer;
+    fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
+  }
+
+  .#{$prefix}--date-picker__icon--invalid,
+  .#{$prefix}--date-picker__icon--warn {
+    cursor: auto;
+  }
+
+  .#{$prefix}--date-picker__icon--warn {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--date-picker__icon--warn path:first-of-type {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
+  .#{$prefix}--date-picker__icon--invalid {
+    fill: $support-01;
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -144,8 +164,8 @@
   }
 
   .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
-    fill: $disabled-02;
     cursor: not-allowed;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--date-picker--range
