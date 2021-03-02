@@ -850,7 +850,7 @@ Map {
         "type": "oneOf",
       },
       "titleText": Object {
-        "type": "string",
+        "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
@@ -863,6 +863,12 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
   },
@@ -1031,6 +1037,7 @@ Map {
       "secondaryButtonText": Object {
         "type": "string",
       },
+      "secondaryButtons": [Function],
       "secondaryClassName": Object {
         "type": "string",
       },
@@ -1622,7 +1629,8 @@ Map {
         "persistent": Object {
           "type": "bool",
         },
-        "placeHolderText": Object {
+        "placeHolderText": [Function],
+        "placeholder": Object {
           "type": "string",
         },
         "searchContainerClass": Object {
@@ -2213,7 +2221,8 @@ Map {
       "persistent": Object {
         "type": "bool",
       },
-      "placeHolderText": Object {
+      "placeHolderText": [Function],
+      "placeholder": Object {
         "type": "string",
       },
       "searchContainerClass": Object {
@@ -2312,70 +2321,80 @@ Map {
       "locale": Object {
         "args": Array [
           Array [
-            "ar",
-            "at",
-            "az",
-            "be",
-            "bg",
-            "bn",
-            "bs",
-            "cat",
-            "cs",
-            "cy",
-            "da",
-            "de",
-            "en",
-            "eo",
-            "es",
-            "et",
-            "fa",
-            "fi",
-            "fo",
-            "fr",
-            "ga",
-            "gr",
-            "he",
-            "hi",
-            "hr",
-            "hu",
-            "id",
-            "is",
-            "it",
-            "ja",
-            "ka",
-            "km",
-            "ko",
-            "kz",
-            "lt",
-            "lv",
-            "mk",
-            "mn",
-            "ms",
-            "my",
-            "nl",
-            "no",
-            "pa",
-            "pl",
-            "pt",
-            "ro",
-            "ru",
-            "si",
-            "sk",
-            "sl",
-            "sq",
-            "sr-cyr",
-            "sr",
-            "sv",
-            "th",
-            "tr",
-            "uk",
-            "uz",
-            "vn",
-            "zh-tw",
-            "zh",
+            Object {
+              "type": "object",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  "ar",
+                  "at",
+                  "az",
+                  "be",
+                  "bg",
+                  "bn",
+                  "bs",
+                  "cat",
+                  "cs",
+                  "cy",
+                  "da",
+                  "de",
+                  "en",
+                  "eo",
+                  "es",
+                  "et",
+                  "fa",
+                  "fi",
+                  "fo",
+                  "fr",
+                  "ga",
+                  "gr",
+                  "he",
+                  "hi",
+                  "hr",
+                  "hu",
+                  "id",
+                  "is",
+                  "it",
+                  "ja",
+                  "ka",
+                  "km",
+                  "ko",
+                  "kz",
+                  "lt",
+                  "lv",
+                  "mk",
+                  "mn",
+                  "ms",
+                  "my",
+                  "nl",
+                  "no",
+                  "pa",
+                  "pl",
+                  "pt",
+                  "ro",
+                  "ru",
+                  "si",
+                  "sk",
+                  "sl",
+                  "sq",
+                  "sr-cyr",
+                  "sr",
+                  "sv",
+                  "th",
+                  "tr",
+                  "uk",
+                  "uz",
+                  "vn",
+                  "zh-tw",
+                  "zh",
+                ],
+              ],
+              "type": "oneOf",
+            },
           ],
         ],
-        "type": "oneOf",
+        "type": "oneOfType",
       },
       "maxDate": Object {
         "type": "string",
@@ -2625,17 +2644,7 @@ Map {
         "type": "oneOf",
       },
       "titleText": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "node",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
@@ -3523,6 +3532,7 @@ Map {
       "secondaryButtonText": Object {
         "type": "node",
       },
+      "secondaryButtons": [Function],
       "selectorPrimaryFocus": Object {
         "type": "string",
       },
@@ -4110,7 +4120,7 @@ Map {
         "type": "func",
       },
       "titleText": Object {
-        "type": "string",
+        "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
@@ -4801,7 +4811,7 @@ Map {
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
       "onChange": [Function],
-      "placeHolderText": "",
+      "placeholder": "",
       "type": "text",
     },
     "propTypes": Object {
@@ -4843,7 +4853,8 @@ Map {
       "onKeyDown": Object {
         "type": "func",
       },
-      "placeHolderText": Object {
+      "placeHolderText": [Function],
+      "placeholder": Object {
         "type": "string",
       },
       "size": Object {
@@ -7682,6 +7693,13 @@ Map {
       },
       "title": Object {
         "isRequired": true,
+        "type": "string",
+      },
+    },
+  },
+  "SideNavDivider" => Object {
+    "propTypes": Object {
+      "className": Object {
         "type": "string",
       },
     },

@@ -58,6 +58,7 @@
   $icon-02: map-get($theme, 'icon-02') !global;
   $icon-03: map-get($theme, 'icon-03') !global;
   $link-01: map-get($theme, 'link-01') !global;
+  $link-02: map-get($theme, 'link-02') !global;
   $inverse-link: map-get($theme, 'inverse-link') !global;
   $field-01: map-get($theme, 'field-01') !global;
   $field-02: map-get($theme, 'field-02') !global;
@@ -253,6 +254,10 @@
     $link-01: var(
       --#{$custom-property-prefix}-link-01,
       map-get($theme, 'link-01')
+    ) !global;
+    $link-02: var(
+      --#{$custom-property-prefix}-link-02,
+      map-get($theme, 'link-02')
     ) !global;
     $inverse-link: var(
       --#{$custom-property-prefix}-inverse-link,
@@ -709,6 +714,10 @@
 
     @if should-emit($theme, $parent-carbon-theme, 'link-01', $emit-difference) {
       @include custom-property('link-01', map-get($theme, 'link-01'));
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'link-02', $emit-difference) {
+      @include custom-property('link-02', map-get($theme, 'link-02'));
     }
 
     @if should-emit(

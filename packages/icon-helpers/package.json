@@ -34,7 +34,7 @@
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/cli": "^10.19.0",
+    "@carbon/cli": "^10.20.0",
     "rimraf": "^3.0.0"
   },
   "sideEffects": false

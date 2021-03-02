@@ -162,4 +162,13 @@ export {
   spacing,
 } from '@rocketsoftware/layout';
 export * from '@rocketsoftware/themes';
-export * from '@rocketsoftware/motion';
+export {
+  fast01,
+  fast02,
+  moderate01,
+  moderate02,
+  slow01,
+  slow02,
+  easings,
+  motion,
+} from '@rocketsoftware/motion';

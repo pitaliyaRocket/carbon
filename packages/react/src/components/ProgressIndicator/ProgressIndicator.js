@@ -74,7 +74,11 @@ export function ProgressStep({
   }) => {
     /* eslint-enable react/prop-types */
     if (invalid) {
-      return <Warning16 className={`${prefix}--progress__warning`} />;
+      return (
+        <Warning16 className={`${prefix}--progress__warning`}>
+          <title>{description}</title>
+        </Warning16>
+      );
     }
     if (skip) {
       return (
