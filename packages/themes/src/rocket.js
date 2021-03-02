@@ -1,5 +1,6 @@
 import {
   blue60,
+  blue70,
   red60,
   gray20,
   gray30,
@@ -33,6 +34,7 @@ export const icon02 = '#595959';
 export const icon03 = '#ffffff';
 
 export const link01 = '#025c53';
+export const link02 = blue70;
 
 export const inverseLink = blue60;
 
