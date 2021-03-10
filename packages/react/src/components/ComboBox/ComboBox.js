@@ -10,7 +10,11 @@ import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from '@rocketsoftware/carbon-components';
-import { Checkmark16, WarningFilled16 } from '@rocketsoftware/icons-react';
+import {
+  Checkmark16,
+  WarningAltFilled16,
+  WarningFilled16,
+} from '@rocketsoftware/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -187,7 +191,7 @@ export default class ComboBox extends React.Component {
      * Provide text to be used in a `<label>` element that is tied to the
      * combobox via ARIA attributes.
      */
-    titleText: PropTypes.string,
+    titleText: PropTypes.node,
 
     /**
      * Specify a custom translation function that takes in a message identifier
@@ -199,6 +203,16 @@ export default class ComboBox extends React.Component {
      * Currently supports either the default type, or an inline variant
      */
     type: ListBoxPropTypes.ListBoxType,
+
+    /**
+     * Specify whether the control is currently in warning state
+     */
+    warn: PropTypes.bool,
+
+    /**
+     * Provide the text that is displayed when the control is in warning state
+     */
+    warnText: PropTypes.node,
   };
 
   static defaultProps = {
@@ -335,12 +349,16 @@ export default class ComboBox extends React.Component {
       onToggleClick, // eslint-disable-line no-unused-vars
       downshiftProps,
       direction,
+      warn,
+      warnText,
       ...rest
     } = this.props;
 
     const { useFilter } = this.state;
+    const showWarning = !invalid && warn;
     const className = cx(`${prefix}--combo-box`, containerClassName, {
       [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--combo-box--warning`]: showWarning,
     });
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
@@ -396,7 +414,9 @@ export default class ComboBox extends React.Component {
               invalidText={invalidText}
               isOpen={isOpen}
               light={light}
-              size={size}>
+              size={size}
+              warn={warn}
+              warnText={warnText}>
               <ListBox.Field
                 {...getToggleButtonProps({
                   disabled,
@@ -428,6 +448,11 @@ export default class ComboBox extends React.Component {
                 {invalid && (
                   <WarningFilled16
                     className={`${prefix}--list-box__invalid-icon`}
+                  />
+                )}
+                {showWarning && (
+                  <WarningAltFilled16
+                    className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
                   />
                 )}
                 {inputValue && (
@@ -479,7 +504,7 @@ export default class ComboBox extends React.Component {
                 </ListBox.Menu>
               )}
             </ListBox>
-            {helperText && !invalid && (
+            {helperText && !invalid && !warn && (
               <div id={comboBoxHelperId} className={helperClasses}>
                 {helperText}
               </div>

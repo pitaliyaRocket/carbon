@@ -27,6 +27,7 @@ $carbon--theme--white: (
   icon-02: #525252,
   icon-03: #ffffff,
   link-01: #0f62fe,
+  link-02: #0043ce,
   inverse-link: #78a9ff,
   field-01: #f4f4f4,
   field-02: #ffffff,
@@ -303,13 +304,15 @@ $carbon--theme--white: (
     font-weight: 300,
     line-height: 1.334,
     letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 1.29,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 1.25,
+    breakpoints: (
+      lg: (
+        font-size: 1.75rem,
+        line-height: 1.29,
+      ),
+      max: (
+        font-size: 2rem,
+        line-height: 1.25,
+      ),
     ),
   ),
   quotation-01: (
@@ -535,6 +538,7 @@ $carbon--theme--g90: map-merge(
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
+    link-02: #a6c8ff,
     inverse-link: #0f62fe,
     field-01: #393939,
     field-02: #525252,
@@ -604,6 +608,7 @@ $carbon--theme--g100: map-merge(
     icon-01: #f4f4f4,
     icon-02: #c6c6c6,
     link-01: #78a9ff,
+    link-02: #a6c8ff,
     inverse-link: #0f62fe,
     field-01: #262626,
     field-02: #393939,
@@ -640,7 +645,7 @@ $carbon--theme--g100: map-merge(
     decorative-01: #525252,
     button-separator: #161616,
     skeleton-01: #353535,
-    skeleton-02: #393939,
+    skeleton-02: #525252,
     brand-02: #6f6f6f,
     brand-03: #ffffff,
     active-01: #525252,
@@ -673,6 +678,7 @@ $carbon--theme--v9: map-merge(
     icon-01: #3d70b2,
     icon-02: #5a6872,
     link-01: #3d70b2,
+    link-02: #3d70b2,
     inverse-link: #5596e6,
     field-01: #ffffff,
     field-02: #f4f7fb,
@@ -904,6 +910,12 @@ $carbon--theme: (
       global-variable-exists('link-01'),
       $link-01,
       map-get($carbon--theme--white, 'link-01')
+    ),
+  link-02:
+    if(
+      global-variable-exists('link-02'),
+      $link-02,
+      map-get($carbon--theme--white, 'link-02')
     ),
   inverse-link:
     if(

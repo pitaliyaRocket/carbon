@@ -2,7 +2,7 @@
   "name": "@carbon/icon-build-helpers",
   "private": true,
   "description": "Build helpers for the Carbon Design System icon library",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "repository": {
@@ -20,6 +20,9 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@babel/core": "^7.12.13"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.10.0",

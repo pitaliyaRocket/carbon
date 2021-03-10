@@ -224,6 +224,17 @@ $link-01: if(
   #0f62fe
 ) !default;
 
+/// Secondary link color for lower contrast backgrounds
+/// @type {undefined}
+/// @access public
+/// @group @carbon/themes
+$link-02: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'link-02'),
+  map-get($carbon--theme, 'link-02'),
+  #0043ce
+) !default;
+
 /// @type {undefined}
 /// @access public
 /// @group @carbon/themes
@@ -1227,13 +1238,15 @@ $expressive-paragraph-01: if(
     font-weight: 300,
     line-height: 1.334,
     letter-spacing: 0,
-    lg: (
-      font-size: 1.75rem,
-      line-height: 1.29,
-    ),
-    max: (
-      font-size: 2rem,
-      line-height: 1.25,
+    breakpoints: (
+      lg: (
+        font-size: 1.75rem,
+        line-height: 1.29,
+      ),
+      max: (
+        font-size: 2rem,
+        line-height: 1.25,
+      ),
     ),
   )
 ) !default;
