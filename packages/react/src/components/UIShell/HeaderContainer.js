@@ -22,8 +22,10 @@ const HeaderContainer = ({
   );
 
   const handleHeaderMenuButtonClick = useCallback(() => {
-    setIsSideNavExpandedState(!isSideNavExpandedState);
-  }, [isSideNavExpandedState, setIsSideNavExpandedState]);
+    setIsSideNavExpandedState(
+      (prevIsSideNavExpanded) => !prevIsSideNavExpanded
+    );
+  }, [setIsSideNavExpandedState]);
 
   const handleChangeGlobalAction = (globalAction) => {
     setActiveGlobalActionState(globalAction);
@@ -41,14 +43,14 @@ const HeaderContainer = ({
 
 HeaderContainer.propTypes = {
   /**
-   * Optionally provide initial state for expandable sidenav
-   */
-  isSideNavExpanded: PropTypes.bool,
-
-  /**
    * Optionally provide globalAction to be active initially
    */
   activeGlobalAction: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Optionally provide initial state for expandable sidenav
+   */
+  isSideNavExpanded: PropTypes.bool,
 };
 
 HeaderContainer.defaultProps = {

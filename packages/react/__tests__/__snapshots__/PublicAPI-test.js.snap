@@ -188,6 +188,9 @@ Map {
         "type": "string",
       },
       "iconDescription": [Function],
+      "isSelected": Object {
+        "type": "bool",
+      },
       "kind": Object {
         "args": Array [
           Array [
@@ -879,6 +882,9 @@ Map {
     },
     "propTypes": Object {
       "aria-label": Object {
+        "type": "string",
+      },
+      "aria-labelledby": Object {
         "type": "string",
       },
       "children": Object {
@@ -2378,15 +2384,15 @@ Map {
                   "sk",
                   "sl",
                   "sq",
-                  "sr-cyr",
                   "sr",
                   "sv",
                   "th",
                   "tr",
                   "uk",
                   "uz",
+                  "uz_latn",
                   "vn",
-                  "zh-tw",
+                  "zh_tw",
                   "zh",
                 ],
               ],
@@ -4739,6 +4745,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "legendText": Object {
+        "type": "node",
+      },
       "name": Object {
         "isRequired": true,
         "type": "string",
@@ -6679,7 +6688,6 @@ Map {
     "defaultProps": Object {
       "columnCount": 5,
       "compact": false,
-      "headers": Array [],
       "rowCount": 5,
       "showHeader": true,
       "showToolbar": true,
@@ -7441,6 +7449,16 @@ Map {
       },
       "onClick": Object {
         "type": "func",
+      },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
     "render": [Function],

@@ -95,7 +95,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const overlayClassName = cx({
     [`${prefix}--side-nav__overlay`]: true,
-    [`${prefix}--side-nav__overlay-active`]: expanded,
+    [`${prefix}--side-nav__overlay-active`]: expanded || expandedViaHoverState,
   });
 
   let childrenToRender = children;
@@ -135,6 +135,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     <>
       {isFixedNav ? null : <div className={overlayClassName} />}
       <nav
+        aria-hidden={!expanded}
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}

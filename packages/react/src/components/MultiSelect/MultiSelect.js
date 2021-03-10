@@ -95,7 +95,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       ...downshiftProps,
       highlightedIndex,
       isOpen,
-      itemToString,
+      itemToString: (items) => {
+        return items.map((item) => itemToString(item)).join(', ');
+      },
       onStateChange,
       selectedItem: controlledSelectedItems,
       items,
@@ -248,6 +250,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             sortItems(items, sortOptions).map((item, index) => {
               const itemProps = getItemProps({
                 item,
+                // we don't want Downshift to set aria-selected for us
+                // we also don't want to set 'false' for reader verbosity's sake
+                ['aria-selected']: isChecked ? true : null,
               });
               const itemText = itemToString(item);
               const isChecked =
@@ -257,6 +262,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
                 <ListBox.MenuItem
                   key={itemProps.id}
                   isActive={isChecked}
+                  aria-label={itemText}
                   isHighlighted={highlightedIndex === index}
                   title={itemText}
                   {...itemProps}>
