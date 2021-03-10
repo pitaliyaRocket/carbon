@@ -72,18 +72,6 @@ The `.bx--col-sm-1` class names tells us that this `<div>` should only span one
 column at our `sm` breakpoint. By default, as we scale beyond the breakpoint the
 layout will still take up a percentage of the overall width.
 
-<<<<<<< HEAD
-
-## 📖 API Documentation
-
-If you're looking for `@rocketsoftware/grid` API documentation, check out:
-
-- [Sass](./docs/sass.md)
-
-=======
-
-> > > > > > > v10.28.0
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
