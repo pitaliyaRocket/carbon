@@ -12,7 +12,7 @@ import OverflowMenu from '../OverflowMenu';
 import { OverflowMenu as OGOverflowMenu } from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import mdx from './OverflowMenu.mdx';
-import { Filter16 } from '@carbon/icons-react';
+import { Filter16 } from '@rocketsoftware/icons-react';
 
 const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
