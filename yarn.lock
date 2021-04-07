@@ -4021,6 +4021,7 @@ __metadata:
     react-dom: ^16.8.6
     react-is: ^16.8.6
     react-test-renderer: ^16.8.6
+    react-windowed-select: 2.0.2
     requestanimationframe: ^0.0.23
     rimraf: ^3.0.0
     rollup: ^2.38.0
@@ -21989,7 +21990,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memoize-one@npm:^5.0.0":
+"memoize-one@npm:>=3.1.1 <6, memoize-one@npm:^5.0.0":
   version: 5.1.1
   resolution: "memoize-one@npm:5.1.1"
   checksum: e7c4a9cceca71334bf09c38818c375a280dc6e8ec03a92701c16199763269ce756b7b0b370f4b464c071045349fb7b3e4a3cc7460a3f46a277f394d8634a6eb5
@@ -25634,7 +25635,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.10, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:15.7.2, prop-types@npm:^15.5.10, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -26479,7 +26480,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-select@npm:^3.0.8":
+"react-select@npm:3.0.8, react-select@npm:^3.0.8":
   version: 3.0.8
   resolution: "react-select@npm:3.0.8"
   dependencies:
@@ -26566,6 +26567,33 @@ __metadata:
     react: ">=15.0.0"
     react-dom: ">=15.0.0"
   checksum: eefed08c48a0d377b5fac3ac7fac54ed986d5dcdd4494f36075954c9d2d257072a9d18cc02c6d8e6698034722b1ff9419ad0c24ef068dea742edcff9f8ea4ba9
+  languageName: node
+  linkType: hard
+
+"react-window@npm:1.8.5":
+  version: 1.8.5
+  resolution: "react-window@npm:1.8.5"
+  dependencies:
+    "@babel/runtime": ^7.0.0
+    memoize-one: ">=3.1.1 <6"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0
+    react-dom: ^15.0.0 || ^16.0.0
+  checksum: b0bee0c769109337557dc4c1488d20e4e957f27082418b22d6dd28b62946623e31ad34936c8d836eb8c61734f2d2b0ff5c71ab2dbc40e71060c1124607e2a986
+  languageName: node
+  linkType: hard
+
+"react-windowed-select@npm:2.0.2":
+  version: 2.0.2
+  resolution: "react-windowed-select@npm:2.0.2"
+  dependencies:
+    prop-types: 15.7.2
+    react-select: 3.0.8
+    react-window: 1.8.5
+  peerDependencies:
+    react: ^16.8.0
+    react-dom: ^16.8.0
+  checksum: a0f35e9de724426338764189a7ea281a641eefc803046b9caaa314a08747787e5f6acc98fdf69032f7cde929ad1727796ddd3488a185f64e6d8cfddde7bdcb13
   languageName: node
   linkType: hard
 
