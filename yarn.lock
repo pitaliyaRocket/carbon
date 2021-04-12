@@ -3972,7 +3972,7 @@ __metadata:
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/test-utils": ^10.15.0
     "@percy/storybook": ^3.3.1
-    "@rocketsoftware/carbon-components": ^0.8.0
+    "@rocketsoftware/carbon-components": ^0.8.3
     "@rocketsoftware/icons-react": ^0.8.0
     "@rocketsoftware/walktour": 4.4.4
     "@rollup/plugin-babel": ^5.2.2
@@ -4039,14 +4039,14 @@ __metadata:
     whatwg-fetch: ^2.0.3
     window-or-global: ^1.0.1
   peerDependencies:
-    "@rocketsoftware/carbon-components": 0.7.0
+    "@rocketsoftware/carbon-components": 0.8.3
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
   languageName: unknown
   linkType: soft
 
-"@rocketsoftware/carbon-components@^0.8.0, @rocketsoftware/carbon-components@workspace:packages/components":
+"@rocketsoftware/carbon-components@^0.8.3, @rocketsoftware/carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "@rocketsoftware/carbon-components@workspace:packages/components"
   dependencies:
