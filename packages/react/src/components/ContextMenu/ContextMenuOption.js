@@ -8,8 +8,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
-import { CaretRight16 } from '@carbon/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
+import { CaretRight16 } from '@rocketsoftware/icons-react';
 import { keys, match } from '../../internal/keyboard';
 
 import {

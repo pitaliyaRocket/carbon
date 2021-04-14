@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Checkmark16 } from '@carbon/icons-react';
+import { Checkmark16 } from '@rocketsoftware/icons-react';
 import ContextMenuOption from './ContextMenuOption';
 
 function ContextMenuRadioGroupOptions({

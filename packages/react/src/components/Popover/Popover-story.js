@@ -11,7 +11,7 @@ import {
   CaretLeft32,
   CaretRight32,
   CaretUp32,
-} from '@carbon/icons-react';
+} from '@rocketsoftware/icons-react';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import React from 'react';
 import { Popover, PopoverContent } from '../Popover';

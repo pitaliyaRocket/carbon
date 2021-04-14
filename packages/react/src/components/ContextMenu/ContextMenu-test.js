@@ -13,7 +13,7 @@ import ContextMenu, {
   ContextMenuDivider,
 } from '../ContextMenu';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import { describe, expect } from 'window-or-global';
 
 const { prefix } = settings;
