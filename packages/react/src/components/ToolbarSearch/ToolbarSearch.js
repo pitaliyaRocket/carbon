@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { Search16 } from '@rocketsoftware/icons-react';
 import { settings } from '@rocketsoftware/carbon-components';
 import ClickListener from '../../internal/ClickListener';
-import warning from 'warning';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
 

@@ -456,6 +456,7 @@ class Tooltip extends Component {
       innerRef: ref,
       getViewport,
       selectorPrimaryFocus, // eslint-disable-line
+      tooltipId, //eslint-disable-line
       ...other
     } = this.props;
 
