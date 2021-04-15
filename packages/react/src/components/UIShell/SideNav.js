@@ -25,12 +25,13 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     children,
     onToggle,
     className: customClassName,
-    translateById: t,
+    // translateById: t,
     isFixedNav,
     isRail,
     isPersistent,
     addFocusListeners,
     addMouseListeners,
+    ...other
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -78,9 +79,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  const assistiveText = expanded
-    ? t('carbon.sidenav.state.open')
-    : t('carbon.sidenav.state.closed');
+  // const assistiveText = expanded
+  //   ? t('carbon.sidenav.state.open')
+  //   : t('carbon.sidenav.state.closed');
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
@@ -139,11 +140,12 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
-        {...eventHandlers}>
+        {...eventHandlers}
+        {...other}>
         {childrenToRender}
         {expandedProp !== undefined || isFixedNav ? null : (
           <SideNavFooter
-            assistiveText={assistiveText}
+            // assistiveText={assistiveText}
             expanded={toggleState}
             onToggle={handleToggle}
           />
@@ -154,13 +156,14 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 });
 
 SideNav.defaultProps = {
-  translateById: (id) => {
-    const translations = {
-      'carbon.sidenav.state.open': 'Close',
-      'carbon.sidenav.state.closed': 'Open',
-    };
-    return translations[id];
-  },
+  // TO-DO: comment back in when footer is added for rails
+  // translateById: (id) => {
+  //   const translations = {
+  //     'carbon.sidenav.state.open': 'Close',
+  //     'carbon.sidenav.state.closed': 'Open',
+  //   };
+  //   return translations[id];
+  // },
   defaultExpanded: false,
   isChildOfHeader: true,
   isFixedNav: false,

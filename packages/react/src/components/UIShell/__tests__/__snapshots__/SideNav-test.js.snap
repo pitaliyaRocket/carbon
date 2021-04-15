@@ -9,7 +9,6 @@ exports[`SideNav should render 1`] = `
   isChildOfHeader={true}
   isFixedNav={false}
   isPersistent={true}
-  translateById={[Function]}
 >
   <div
     className="bx--side-nav__overlay"
@@ -54,7 +53,7 @@ exports[`SideNav should render 1`] = `
       </SideNavItem>
     </ForwardRef(SideNavLink)>
     <SideNavFooter
-      assistiveText="Open"
+      assistiveText="Toggle opening or closing the side navigation"
       expanded={false}
       onToggle={[Function]}
     >
@@ -64,7 +63,7 @@ exports[`SideNav should render 1`] = `
         <button
           className="bx--side-nav__toggle"
           onClick={[Function]}
-          title="Open"
+          title="Toggle opening or closing the side navigation"
           type="button"
         >
           <div
@@ -99,7 +98,7 @@ exports[`SideNav should render 1`] = `
           <span
             className="bx--assistive-text"
           >
-            Open
+            Toggle opening or closing the side navigation
           </span>
         </button>
       </footer>

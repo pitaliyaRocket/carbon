@@ -23,6 +23,7 @@ import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
+import { keys, match } from '../../internal/keyboard';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -53,6 +54,8 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     initialSelectedItems,
     sortItems,
     compareItems,
+    clearSelectionText,
+    clearSelectionDescription,
     light,
     invalid,
     invalidText,
@@ -196,15 +199,26 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     }
   }
 
+  const onKeyDown = (e) => {
+    if (match(e, keys.Delete) && !disabled) {
+      clearSelection();
+      e.stopPropagation();
+    }
+  };
+
   const toggleButtonProps = getToggleButtonProps();
 
   return (
     <div className={wrapperClasses}>
-      {titleText && (
-        <label className={titleClasses} {...getLabelProps()}>
-          {titleText}
-        </label>
-      )}
+      <label className={titleClasses} {...getLabelProps()}>
+        {titleText && titleText}
+        {selectedItems.length > 0 && (
+          <span className={`${prefix}--visually-hidden`}>
+            {clearSelectionDescription} {selectedItems.length},
+            {clearSelectionText}
+          </span>
+        )}
+      </label>
       <ListBox
         type={type}
         size={size}
@@ -231,7 +245,8 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           disabled={disabled}
           aria-disabled={disabled}
           {...toggleButtonProps}
-          ref={mergeRefs(toggleButtonProps.ref, ref)}>
+          ref={mergeRefs(toggleButtonProps.ref, ref)}
+          onKeyDown={onKeyDown}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               clearSelection={!disabled ? clearSelection : noop}
@@ -292,6 +307,16 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 MultiSelect.displayName = 'MultiSelect';
 MultiSelect.propTypes = {
   ...sortingPropTypes,
+
+  /**
+   * Specify the text that should be read for screen readers that describes total items selected
+   */
+  clearSelectionDescription: PropTypes.string,
+
+  /**
+   * Specify the text that should be read for screen readers to clear selection.
+   */
+  clearSelectionText: PropTypes.string,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -434,6 +459,8 @@ MultiSelect.defaultProps = {
   open: false,
   selectionFeedback: 'top-after-reopen',
   direction: 'bottom',
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
+  clearSelectionDescription: 'Total items selected: ',
 };
 
 export default MultiSelect;
