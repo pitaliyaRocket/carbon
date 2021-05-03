@@ -1640,10 +1640,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@npm:^10.22.0":
-  version: 10.22.0
-  resolution: "@carbon/colors@npm:10.22.0"
-  checksum: d754d02ee2b5997fec06ad0ed384571a3da9c1f8cbe06e2bf63cc40b897bdd1dfa770275de07ec617b05fca4023ed4c4ec324c62a5721980cabf375368fc1369
+"@carbon/colors@npm:^10.22.0, @carbon/colors@npm:^10.24.0":
+  version: 10.24.0
+  resolution: "@carbon/colors@npm:10.24.0"
+  checksum: 5d8626e7d1ba95e724cd16e5013660f96712e2f7999f063c82a059780ad0abd10b34f0009c143169d9f87ff9e993f08f603016e09e63488567203a4bfb6f5ff9
   languageName: node
   linkType: hard
 
@@ -1664,13 +1664,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/grid@npm:^10.23.0":
-  version: 10.24.0
-  resolution: "@carbon/grid@npm:10.24.0"
+"@carbon/grid@npm:^10.24.0":
+  version: 10.26.0
+  resolution: "@carbon/grid@npm:10.26.0"
   dependencies:
     "@carbon/import-once": ^10.6.0
-    "@carbon/layout": ^10.22.0
-  checksum: ba0e232d5141cf1242aa2c9de14ce2157d67d010b9f8dbc4edbc3dec8804a2dbb3c60517559f7c05085346aa645b9a402631dbe12f7706bafdcb9781f87e4db8
+    "@carbon/layout": ^10.23.0
+  checksum: 5c8b238353492200daf4a33084d24a33c3dbe257bb2c495dc087b4291940e262fa7689f8fc6e45b895eedc22d6ed20cf9039ab93b6e697a7ba824cc8c195eedf
   languageName: node
   linkType: hard
 
@@ -1717,10 +1717,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/layout@npm:^10.21.0, @carbon/layout@npm:^10.22.0":
-  version: 10.22.0
-  resolution: "@carbon/layout@npm:10.22.0"
-  checksum: d3a8a6452707baf238a712d7fa0af59a780fa850a0cd3f98ab26cf2aac1352d0b1cf47cd49a793ff125fad3cc0b23c004f8c53d8a608eacc8ce5f7fd02ada66a
+"@carbon/layout@npm:^10.22.0, @carbon/layout@npm:^10.23.0":
+  version: 10.23.0
+  resolution: "@carbon/layout@npm:10.23.0"
+  checksum: c9949b1dd62f8722f314f925e2132aef8c4693ce6fb7d5d670e0c64e9639bed4a046560c889fe36faab3d0b52386bc847a229a99a8b1575c10f1805564114f33
   languageName: node
   linkType: hard
 
@@ -1737,7 +1737,7 @@ __metadata:
   dependencies:
     "@carbon/icon-build-helpers": ^0.18.0
     "@carbon/icon-helpers": ^10.15.0
-    "@carbon/pictograms": ^11.6.0
+    "@carbon/pictograms": ^11.7.0
     "@carbon/telemetry": 0.0.0-alpha.6
     prop-types: ^15.7.2
   peerDependencies:
@@ -1745,7 +1745,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@^11.6.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@^11.7.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
@@ -1785,12 +1785,12 @@ __metadata:
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
     "@carbon/colors": ^10.22.0
-    "@carbon/grid": ^10.23.0
-    "@carbon/layout": ^10.21.0
+    "@carbon/grid": ^10.24.0
+    "@carbon/layout": ^10.22.0
     "@carbon/motion": ^10.15.0
     "@carbon/test-utils": 10.15.0
-    "@carbon/themes": ^10.30.0
-    "@carbon/type": ^10.24.0
+    "@carbon/themes": ^10.31.0
+    "@carbon/type": ^10.25.0
   languageName: unknown
   linkType: soft
 
@@ -1831,25 +1831,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@npm:^10.30.0":
-  version: 10.31.0
-  resolution: "@carbon/themes@npm:10.31.0"
+"@carbon/themes@npm:^10.31.0":
+  version: 10.33.0
+  resolution: "@carbon/themes@npm:10.33.0"
   dependencies:
-    "@carbon/colors": ^10.22.0
-    "@carbon/layout": ^10.22.0
-    "@carbon/type": ^10.25.0
+    "@carbon/colors": ^10.24.0
+    "@carbon/layout": ^10.23.0
+    "@carbon/type": ^10.27.0
     color: ^3.1.2
-  checksum: 9d20d1de10ee8bcfdf38d503baf5b1db8768e7d0742eeba232ffdfcd0ba42f585c8dbd7c90c3a0773f7b6061be63cab3ca5f3fbbb2b171a452251565a4de5d36
+  checksum: d19b06c17d8697e4c525c8309b25953f35624e0cc47501ddade110a86c418a4dbb7cd7fd965ad1d7914b3fe8e2631f2fad144dc20b541ca335f961f6ce9474a2
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^10.24.0, @carbon/type@npm:^10.25.0":
-  version: 10.25.0
-  resolution: "@carbon/type@npm:10.25.0"
+"@carbon/type@npm:^10.25.0, @carbon/type@npm:^10.27.0":
+  version: 10.27.0
+  resolution: "@carbon/type@npm:10.27.0"
   dependencies:
     "@carbon/import-once": ^10.6.0
-    "@carbon/layout": ^10.22.0
-  checksum: d71ef10a1ff31a44e432f1a4b282cb14609ad8ffdd7e6c388638c3ad6cdcbf5bf23f9f306b35183f9427e932cc6aeb310edccb1809f941a7ffd8855de693ce82
+    "@carbon/layout": ^10.23.0
+  checksum: 505f77007b9dbe9f75d19d6a739308f7396ca29d5b1cc068f79542e01fa1f5fd1b9a8f6d14dbf8e90c11b8bf1897cb3647501e9f1374aed629a31f19f102994e
   languageName: node
   linkType: hard
 
@@ -3995,6 +3995,7 @@ __metadata:
     chalk: ^2.3.0
     classnames: 2.2.6
     cli-table: ^0.3.0
+    copy-to-clipboard: ^3.3.1
     core-js: ^3.6.5
     cross-env: ^5.2.0
     css-loader: ^3.4.2
@@ -10945,12 +10946,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-to-clipboard@npm:^3, copy-to-clipboard@npm:^3.0.8":
-  version: 3.2.0
-  resolution: "copy-to-clipboard@npm:3.2.0"
+"copy-to-clipboard@npm:^3, copy-to-clipboard@npm:^3.0.8, copy-to-clipboard@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "copy-to-clipboard@npm:3.3.1"
   dependencies:
     toggle-selection: ^1.0.6
-  checksum: b574ecaed1dcf116fd3578b2a46aad91b7a2891680645322641a8e1b1a07d155355e029c47f21ea1e2ec829c7cccb5e8d441f8b70b8e5507653356b395f0fcb3
+  checksum: 9707f2e405ca4019de1f4194565568acdf3d1dd8a59f7b8f63d0e7257648132b579461e7aeb6140169cb943cf4b6a243b377cf0437d8c10c6f5e5bb3935dea78
   languageName: node
   linkType: hard
 

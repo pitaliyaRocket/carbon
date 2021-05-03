@@ -49,6 +49,7 @@
     "@rocketsoftware/icons-react": "^0.8.0",
     "@rocketsoftware/walktour": "4.4.4",
     "classnames": "2.2.6",
+    "copy-to-clipboard": "^3.3.1",
     "downshift": "5.2.1",
     "flatpickr": "4.6.9",
     "ft-react": "^1.0.0",

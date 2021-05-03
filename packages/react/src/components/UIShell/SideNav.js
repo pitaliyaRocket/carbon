@@ -10,6 +10,7 @@ import { settings } from '@rocketsoftware/carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import { CARBON_SIDENAV_ITEMS } from './_utils';
 import SideNavFooter from './SideNavFooter';
 
 const { prefix } = settings;
@@ -105,9 +106,16 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   if (isRail) {
     childrenToRender = React.Children.map(children, (child) => {
       // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
-      let currentExpansionState = expanded;
+      let currentExpansionState = controlled
+        ? expandedViaHoverState || expanded
+        : expanded;
+      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
       return React.cloneElement(child, {
-        isSideNavExpanded: currentExpansionState,
+        ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
+          ? {
+              isSideNavExpanded: currentExpansionState,
+            }
+          : {}),
       });
     });
   }
