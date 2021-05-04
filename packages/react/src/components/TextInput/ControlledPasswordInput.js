@@ -31,6 +31,8 @@ const ControlledPasswordInput = React.forwardRef(
       togglePasswordVisibility,
       tooltipPosition = 'bottom',
       tooltipAlignment = 'center',
+      hidePasswordLabel = 'Hide password',
+      showPasswordLabel = 'Show password',
       size,
       ...other
     },
@@ -110,7 +112,7 @@ const ControlledPasswordInput = React.forwardRef(
           className={passwordVisibilityToggleClasses}
           onClick={togglePasswordVisibility}>
           <span className={`${prefix}--assistive-text`}>
-            {`${passwordIsVisible ? 'Hide' : 'Show'} password`}
+            {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
           </span>
           {passwordVisibilityIcon}
         </button>
@@ -168,6 +170,11 @@ ControlledPasswordInput.propTypes = {
   hideLabel: PropTypes.bool,
 
   /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel: PropTypes.string,
+
+  /**
    * Provide a unique identifier for the input field
    */
   id: PropTypes.string.isRequired,
@@ -209,6 +216,11 @@ ControlledPasswordInput.propTypes = {
    * Specify the placeholder attribute for the `<input>`
    */
   placeholder: PropTypes.string,
+
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  showPasswordLabel: PropTypes.string,
 
   /**
    * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size

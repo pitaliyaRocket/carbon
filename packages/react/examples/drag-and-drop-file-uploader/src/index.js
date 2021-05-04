@@ -7,7 +7,7 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
 import { render } from 'react-dom';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import {
   FileUploaderItem,
   FileUploaderDropContainer,
@@ -157,7 +157,7 @@ function ExampleDropContainerApp(props) {
 
   return (
     <FormItem>
-      <strong className={`${prefix}--file--label`}>Upload files</strong>
+      <p className={`${prefix}--file--label`}>Upload files</p>
       <p className={`${prefix}--label-description`}>
         Max file size is 500kb. Supported file types are .jpg and .png.
       </p>
