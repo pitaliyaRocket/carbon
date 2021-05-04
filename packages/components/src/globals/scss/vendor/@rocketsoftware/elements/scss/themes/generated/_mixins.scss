@@ -153,6 +153,7 @@
   $spacing-10: map-get($theme, 'spacing-10') !global;
   $spacing-11: map-get($theme, 'spacing-11') !global;
   $spacing-12: map-get($theme, 'spacing-12') !global;
+  $spacing-13: map-get($theme, 'spacing-13') !global;
   $fluid-spacing-01: map-get($theme, 'fluid-spacing-01') !global;
   $fluid-spacing-02: map-get($theme, 'fluid-spacing-02') !global;
   $fluid-spacing-03: map-get($theme, 'fluid-spacing-03') !global;
@@ -510,6 +511,10 @@
     $spacing-12: var(
       --#{$custom-property-prefix}-spacing-12,
       map-get($theme, 'spacing-12')
+    ) !global;
+    $spacing-13: var(
+      --#{$custom-property-prefix}-spacing-13,
+      map-get($theme, 'spacing-13')
     ) !global;
     $fluid-spacing-01: var(
       --#{$custom-property-prefix}-fluid-spacing-01,
@@ -1680,6 +1685,16 @@
     )
     {
       @include custom-property('spacing-12', map-get($theme, 'spacing-12'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'spacing-13',
+      $emit-difference
+    )
+    {
+      @include custom-property('spacing-13', map-get($theme, 'spacing-13'));
     }
 
     @if should-emit(
