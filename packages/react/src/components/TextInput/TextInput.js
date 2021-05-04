@@ -46,6 +46,7 @@ const TextInput = React.forwardRef(function TextInput(
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
+    [`${prefix}--text-input--warning`]: !invalid && warn,
     [`${prefix}--text-input--${size}`]: size,
   });
   const sharedTextInputProps = {
@@ -244,9 +245,10 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
+   * Specify the size of the Text Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * TODO V11: remove `xl` (replaced with lg)
    */
-  size: PropTypes.oneOf(['sm', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
   /**
    * Specify the type of the `<input>`
