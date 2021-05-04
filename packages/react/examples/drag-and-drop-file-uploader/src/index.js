@@ -7,7 +7,7 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
 import { render } from 'react-dom';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 import {
   FileUploaderItem,
   FileUploaderDropContainer,

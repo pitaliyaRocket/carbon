@@ -7,7 +7,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 import Search from '../Search';
 
