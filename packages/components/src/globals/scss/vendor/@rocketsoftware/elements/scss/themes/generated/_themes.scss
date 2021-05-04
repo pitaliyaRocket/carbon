@@ -478,6 +478,7 @@ $carbon--theme--white: (
   spacing-10: 4rem,
   spacing-11: 5rem,
   spacing-12: 6rem,
+  spacing-13: 10rem,
   fluid-spacing-01: 0,
   fluid-spacing-02: 2vw,
   fluid-spacing-03: 5vw,
@@ -1480,6 +1481,12 @@ $carbon--theme: (
       global-variable-exists('spacing-12'),
       $spacing-12,
       map-get($carbon--theme--white, 'spacing-12')
+    ),
+  spacing-13:
+    if(
+      global-variable-exists('spacing-13'),
+      $spacing-13,
+      map-get($carbon--theme--white, 'spacing-13')
     ),
   fluid-spacing-01:
     if(

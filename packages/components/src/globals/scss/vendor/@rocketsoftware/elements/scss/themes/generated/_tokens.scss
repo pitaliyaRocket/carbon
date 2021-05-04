@@ -1579,6 +1579,16 @@ $spacing-12: if(
 /// @type {Number}
 /// @access public
 /// @group @carbon/themes
+$spacing-13: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'spacing-13'),
+  map-get($carbon--theme, 'spacing-13'),
+  10rem
+) !default;
+
+/// @type {Number}
+/// @access public
+/// @group @carbon/themes
 $fluid-spacing-01: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'fluid-spacing-01'),
