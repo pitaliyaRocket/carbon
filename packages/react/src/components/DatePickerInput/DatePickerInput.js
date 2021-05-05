@@ -10,10 +10,10 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from '@rocketsoftware/carbon-components';
 import {
+  Calendar16,
   WarningFilled16,
   WarningAltFilled16,
 } from '@rocketsoftware/icons-react';
-import { Calendar16 } from '@rocketsoftware/icons-react';
 
 const { prefix } = settings;
 

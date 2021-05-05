@@ -251,8 +251,10 @@ Map {
             "field",
             "small",
             "sm",
+            "md",
             "lg",
             "xl",
+            "2xl",
           ],
         ],
         "type": "oneOf",
@@ -1213,6 +1215,11 @@ Map {
               "short",
               "normal",
               "tall",
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
             ],
           ],
           "type": "oneOf",
@@ -1781,6 +1788,11 @@ Map {
             "short",
             "normal",
             "tall",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
           ],
         ],
         "type": "oneOf",
@@ -1840,6 +1852,11 @@ Map {
             "short",
             "normal",
             "tall",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
           ],
         ],
         "type": "oneOf",
@@ -4903,6 +4920,38 @@ Map {
     },
   },
   "Search" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+      "Consumer": Object {
+        "$$typeof": Symbol(react.context),
+        "_calculateChangedBits": null,
+        "_context": [Circular],
+      },
+      "Provider": Object {
+        "$$typeof": Symbol(react.provider),
+        "_context": [Circular],
+      },
+      "_calculateChangedBits": null,
+      "_currentRenderer": null,
+      "_currentRenderer2": null,
+      "_currentValue": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-2021-release" => false,
+        },
+      },
+      "_currentValue2": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-2021-release" => false,
+        },
+      },
+      "_threadCount": 0,
+    },
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
       "onChange": [Function],
@@ -4956,6 +5005,7 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
             "lg",
             "xl",
           ],
@@ -5073,6 +5123,7 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
             "lg",
             "xl",
           ],
@@ -5831,6 +5882,9 @@ Map {
           "isRequired": true,
           "type": "string",
         },
+        "inline": Object {
+          "type": "bool",
+        },
         "invalid": Object {
           "type": "bool",
         },
@@ -5892,6 +5946,12 @@ Map {
             ],
           ],
           "type": "oneOfType",
+        },
+        "warn": Object {
+          "type": "bool",
+        },
+        "warnText": Object {
+          "type": "node",
         },
       },
       "render": [Function],
@@ -7762,6 +7822,9 @@ Map {
       },
       "isRail": Object {
         "type": "bool",
+      },
+      "onOverlayClick": Object {
+        "type": "func",
       },
       "onToggle": Object {
         "type": "func",
