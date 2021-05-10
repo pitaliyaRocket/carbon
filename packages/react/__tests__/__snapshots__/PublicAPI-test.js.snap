@@ -2599,6 +2599,7 @@ Map {
       "itemToElement": null,
       "itemToString": [Function],
       "light": false,
+      "open": false,
       "titleText": "",
       "type": "default",
     },
@@ -2684,6 +2685,9 @@ Map {
       },
       "onChange": Object {
         "type": "func",
+      },
+      "open": Object {
+        "type": "bool",
       },
       "selectedItem": Object {
         "args": Array [

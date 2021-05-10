@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelect } from 'downshift';
 import { settings } from '@rocketsoftware/carbon-components';
 import cx from 'classnames';
@@ -56,6 +56,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     initialSelectedItem,
     selectedItem: controlledSelectedItem,
     downshiftProps,
+    open,
     ...other
   },
   ref
@@ -80,11 +81,18 @@ const Dropdown = React.forwardRef(function Dropdown(
     getLabelProps,
     getMenuProps,
     getItemProps,
+    openMenu,
     highlightedIndex,
     selectedItem,
   } = useSelect(selectProps);
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
+
+  useEffect(() => {
+    if (open) {
+      openMenu();
+    }
+  }, [open, openMenu]);
 
   const className = cx(`${prefix}--dropdown`, containerClassName, {
     [`${prefix}--dropdown--invalid`]: invalid,
@@ -317,6 +325,11 @@ Dropdown.propTypes = {
   onChange: PropTypes.func,
 
   /**
+   * Optional prop to control open state of dropdown
+   */
+  open: PropTypes.bool,
+
+  /**
    * In the case you want to control the dropdown selection entirely.
    */
   selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -362,6 +375,7 @@ Dropdown.defaultProps = {
   titleText: '',
   helperText: '',
   direction: 'bottom',
+  open: false,
 };
 
 export default Dropdown;

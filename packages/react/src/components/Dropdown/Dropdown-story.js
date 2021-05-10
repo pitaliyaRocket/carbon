@@ -90,6 +90,7 @@ const props = () => ({
       'open.menu': 'Open menu',
     }
   ),
+  open: boolean('Toggle open', true),
 });
 
 export default {
