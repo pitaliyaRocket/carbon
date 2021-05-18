@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import SplitButton from '../SplitButton';
@@ -30,28 +29,19 @@ const props = {
 
 SplitButton.displayName = 'Button';
 
-storiesOf('Pattern|SplitButton', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const regularProps = props.regular();
-      const itemProps = props.items();
-      return (
-        <SplitButton {...regularProps}>
-          <OverflowMenuItem itemText={'Item 1'} {...itemProps} />
-          <OverflowMenuItem itemText={'Item 2'} {...itemProps} />
-          <OverflowMenuItem itemText={'Item 3'} {...itemProps} />
-          <OverflowMenuItem itemText={'Item 4'} {...itemProps} />
-        </SplitButton>
-      );
-    },
-    {
-      info: {
-        text: `
-        A split button can be used to group a series of actions together into a single location on the screen, providing 
-        the user with a single primary action and a small list of alternative actions. 
-        `,
-      },
-    }
-  );
+export default {
+  title: 'RocketPatterns/SplitButton',
+  decorators: [withKnobs],
+  parameters: {
+    component: SplitButton,
+  },
+};
+
+export const _Default = () => (
+  <SplitButton {...props.regular()}>
+    <OverflowMenuItem itemText={'Item 1'} {...props.items()} />
+    <OverflowMenuItem itemText={'Item 2'} {...props.items()} />
+    <OverflowMenuItem itemText={'Item 3'} {...props.items()} />
+    <OverflowMenuItem itemText={'Item 4'} {...props.items()} />
+  </SplitButton>
+);

@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import Tour from '../Tour';
 import Button from '../Button';
@@ -126,71 +125,82 @@ const steps = {
   ],
 };
 
-storiesOf('Pattern|Tour', module)
-  .add('default', () => (
-    <>
-      {targets}
-      <Tour steps={steps.default()} />
-    </>
-  ))
-  .add('no mask', () => (
-    <>
-      {targets}
-      <Tour steps={steps.default()} disableMask />
-    </>
-  ))
-  .addDecorator(withKnobs)
-  .add('with scrolling', () => (
-    <>
-      {targets}
-      <Tour
-        steps={steps.scroll()}
-        disableAutoScroll={boolean('disable auto scroll', false)}
-        disableSmoothScroll={boolean('disable smooth scroll', false)}
-      />
-    </>
-  ))
-  .add('hide buttons', () => (
-    <>
-      {targets}
-      <Tour steps={steps.default()} hidePrev hideNext />
-    </>
-  ))
-  .add('with flip', () => (
-    <>
-      {targets}
-      <Tour
-        enableFlip
-        steps={steps.default()}
-        flippedTitle={'Flipped Title'}
-        flippedDescription={
-          'Secondary description on the back side of the card. Currently, this is the same for all steps'
-        }
-      />
-    </>
-  ))
-  .add('with flip before close', () => (
-    <>
-      {targets}
-      <Tour
-        steps={steps.withFlipBeforeClose()}
-        flippedTitle={'Flipped Title'}
-        flippedDescription={
-          'Secondary description on the back side of the card. Currently, this is the same for all steps'
-        }
-      />
-    </>
-  ))
-  .add('with secondary selectors and flip before close', () => (
-    <>
-      {targets}
-      <Tour
-        flipBeforeClose
-        steps={steps.secondaryTargets()}
-        flippedTitle={'Thanks for touring'}
-        flippedDescription={
-          'Secondary description on the back side of the card. Currently, this is the same for all steps'
-        }
-      />
-    </>
-  ));
+export default {
+  title: 'RocketPatterns/Tour',
+  decorators: [withKnobs],
+  parameters: {
+    component: Tour,
+  },
+};
+
+export const _Default = () => (
+  <>
+    {targets}
+    <Tour steps={steps.default()} />
+  </>
+);
+
+export const NoMask = () => (
+  <>
+    {targets}
+    <Tour steps={steps.default()} disableMask />
+  </>
+);
+
+export const WithScrolling = () => (
+  <>
+    {targets}
+    <Tour
+      steps={steps.scroll()}
+      disableAutoScroll={boolean('disable auto scroll', false)}
+      disableSmoothScroll={boolean('disable smooth scroll', false)}
+    />
+  </>
+);
+export const HideButtons = () => (
+  <>
+    {targets}
+    <Tour steps={steps.default()} hidePrev hideNext />
+  </>
+);
+
+export const WithFlip = () => (
+  <>
+    {targets}
+    <Tour
+      enableFlip
+      steps={steps.default()}
+      flippedTitle={'Flipped Title'}
+      flippedDescription={
+        'Secondary description on the back side of the card. Currently, this is the same for all steps'
+      }
+    />
+  </>
+);
+
+export const WithFlipBeforeClose = () => (
+  <>
+    {targets}
+    <Tour
+      steps={steps.withFlipBeforeClose()}
+      flippedTitle={'Flipped Title'}
+      flippedDescription={
+        'Secondary description on the back side of the card. Currently, this is the same for all steps'
+      }
+    />
+  </>
+);
+
+export const WithSecondarySelectorsAndFlipBeforeClose = () => (
+  <>
+    {targets}
+    <Tour
+      flipBeforeClose
+      steps={steps.secondaryTargets()}
+      flippedTitle={'Thanks for touring'}
+      flippedDescription={
+        'Secondary description on the back side of the card. Currently, this is the same for all steps'
+      }
+    />
+  </>
+);

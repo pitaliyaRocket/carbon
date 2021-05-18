@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
 import ButtonGroup from '../ButtonGroup';
 import OverflowMenuItem from '../OverflowMenuItem';
@@ -28,25 +27,18 @@ const props = {
   },
 };
 
-storiesOf('Pattern|ButtonGroup', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const regularProps = props.regular();
-      return (
-        <ButtonGroup {...regularProps}>
-          <OverflowMenuItem primaryFocus itemText={'Item 1'} />
-          <OverflowMenuItem itemText={'Item 2'} />
-          <OverflowMenuItem itemText={'Item 3'} />
-        </ButtonGroup>
-      );
-    },
-    {
-      info: {
-        text: `
-        ButtonGroup Component
-        `,
-      },
-    }
-  );
+export default {
+  title: 'RocketPatterns/ButtonGroup',
+  decorators: [withKnobs],
+  parameters: {
+    component: ButtonGroup,
+  },
+};
+
+export const _Default = () => (
+  <ButtonGroup {...props.regular()}>
+    <OverflowMenuItem primaryFocus itemText={'Item 1'} />
+    <OverflowMenuItem itemText={'Item 2'} />
+    <OverflowMenuItem itemText={'Item 3'} />
+  </ButtonGroup>
+);

@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import FooterWrapper from './FooterWrapper';
@@ -121,132 +120,123 @@ const props = () => ({
   className: text('Classname', 'classname'),
 });
 
-storiesOf('FooterWrapper', module)
-  .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <div style={{ width: 200 + 'vh' }}>
-        <FooterWrapper {...props()}>
-          <Button kind="secondary">Button</Button>
-          <Button kind="primary">Button</Button>
+export default {
+  title: 'RocketPatterns/FooterWrapper',
+  decorators: [withKnobs],
+  parameters: {
+    component: FooterWrapper,
+  },
+};
+
+export const SetWidth = () => (
+  <div style={{ width: 200 + 'vh' }}>
+    <FooterWrapper {...props()}>
+      <Button kind="secondary">Button</Button>
+      <Button kind="primary">Button</Button>
+    </FooterWrapper>
+  </div>
+);
+
+export const SideNavRail = () => (
+  <HeaderContainer
+    render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+      <>
+        <Header aria-label="IBM Platform Name">
+          <SkipToContent />
+          <HeaderMenuButton
+            aria-label="Open menu"
+            isCollapsible
+            onClick={onClickSideNavExpand}
+            isActive={isSideNavExpanded}
+          />
+          <HeaderName href="#" prefix="IBM">
+            [Platform]
+          </HeaderName>
+          <HeaderNavigation aria-label="IBM [Platform]">
+            <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
+            <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+            <HeaderMenu aria-label="Link 4">
+              <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
+              <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
+              <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
+            </HeaderMenu>
+          </HeaderNavigation>
+          <HeaderGlobalBar>
+            <HeaderGlobalAction
+              aria-label="Search"
+              onClick={action('search click')}>
+              <Search20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="Notifications"
+              onClick={action('notification click')}>
+              <Notification20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction
+              aria-label="App Switcher"
+              onClick={action('app-switcher click')}>
+              <AppSwitcher20 />
+            </HeaderGlobalAction>
+          </HeaderGlobalBar>
+        </Header>
+        <SideNav
+          aria-label="Side navigation"
+          isRail
+          expanded={isSideNavExpanded}>
+          <SideNavItems>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem
+                isActive
+                aria-current="page"
+                href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem
+                aria-current="page"
+                isActive
+                href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+              <SideNavMenuItem
+                isActive
+                aria-current="page"
+                href="javascript:void(0)">
+                Link
+              </SideNavMenuItem>
+              <SideNavMenuItem href="javascript:void(0)">Link</SideNavMenuItem>
+            </SideNavMenu>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+            <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
+              Link
+            </SideNavLink>
+          </SideNavItems>
+        </SideNav>
+        <StoryContent />
+        <FooterWrapper {...props}>
+          <div style={{ textAlign: 'right' }}>
+            <Button kind="secondary">Button</Button>
+            <Button style={{ marginLeft: 1 + 'rem' }} kind="primary">
+              Button
+            </Button>
+          </div>
         </FooterWrapper>
-      </div>
-    ),
-    {
-      info: {
-        text: 'Placeholder',
-      },
-    }
-  )
-  .add('SideNav Rail w/Header', () => (
-    <HeaderContainer
-      render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-        <>
-          <Header aria-label="IBM Platform Name">
-            <SkipToContent />
-            <HeaderMenuButton
-              aria-label="Open menu"
-              isCollapsible
-              onClick={onClickSideNavExpand}
-              isActive={isSideNavExpanded}
-            />
-            <HeaderName href="#" prefix="IBM">
-              [Platform]
-            </HeaderName>
-            <HeaderNavigation aria-label="IBM [Platform]">
-              <HeaderMenuItem href="#">Link 1</HeaderMenuItem>
-              <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-              <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
-              <HeaderMenu aria-label="Link 4">
-                <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
-                <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
-                <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
-              </HeaderMenu>
-            </HeaderNavigation>
-            <HeaderGlobalBar>
-              <HeaderGlobalAction
-                aria-label="Search"
-                onClick={action('search click')}>
-                <Search20 />
-              </HeaderGlobalAction>
-              <HeaderGlobalAction
-                aria-label="Notifications"
-                onClick={action('notification click')}>
-                <Notification20 />
-              </HeaderGlobalAction>
-              <HeaderGlobalAction
-                aria-label="App Switcher"
-                onClick={action('app-switcher click')}>
-                <AppSwitcher20 />
-              </HeaderGlobalAction>
-            </HeaderGlobalBar>
-          </Header>
-          <SideNav
-            aria-label="Side navigation"
-            isRail
-            expanded={isSideNavExpanded}>
-            <SideNavItems>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
-                <SideNavMenuItem href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem
-                  isActive
-                  aria-current="page"
-                  href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
-                <SideNavMenuItem href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem
-                  aria-current="page"
-                  isActive
-                  href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
-                <SideNavMenuItem href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem
-                  isActive
-                  aria-current="page"
-                  href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem href="javascript:void(0)">
-                  Link
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                Link
-              </SideNavLink>
-              <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                Link
-              </SideNavLink>
-            </SideNavItems>
-          </SideNav>
-          <StoryContent />
-          <FooterWrapper {...props}>
-            <div style={{ textAlign: 'right' }}>
-              <Button kind="secondary">Button</Button>
-              <Button style={{ marginLeft: 1 + 'rem' }} kind="primary">
-                Button
-              </Button>
-            </div>
-          </FooterWrapper>
-        </>
-      )}
-    />
-  ));
+      </>
+    )}
+  />
+);
+
+SideNavRail.story = {
+  name: 'SideNav Rail w/ Header',
+};
