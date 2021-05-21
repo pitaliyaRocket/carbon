@@ -284,12 +284,18 @@ export default class Tabs extends React.Component {
 
   selectTabAt = (event, { index, onSelectionChange }) => {
     this.scrollTabIntoView(event, { index });
-    if (this.state.selected !== index) {
-      this.setState({
-        selected: index,
-      });
-      if (typeof onSelectionChange === 'function') {
-        onSelectionChange(index);
+    const returnValue =
+      typeof onSelectionChange === 'function' && onSelectionChange(index);
+    if (
+      !onSelectionChange ||
+      (typeof onSelectionChange === 'function' &&
+        typeof returnValue === 'undefined') ||
+      returnValue
+    ) {
+      if (this.state.selected !== index) {
+        this.setState({
+          selected: index,
+        });
       }
     }
   };
