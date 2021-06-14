@@ -9,7 +9,7 @@ import React from 'react';
 import Toggle from './Toggle';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { settings } from 'carbon-components';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 

@@ -40,7 +40,7 @@ import {
 
   // Tools
   rgba,
-} from '@carbon/colors';
+} from '@rocketsoftware/colors';
 
 // New color tokens
 // TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
