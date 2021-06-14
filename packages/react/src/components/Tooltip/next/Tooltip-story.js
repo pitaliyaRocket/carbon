@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Add24 } from '@carbon/icons-react';
+import { Add24 } from '@rocketsoftware/icons-react';
 import { select } from '@storybook/addon-knobs';
 import React from 'react';
 import { Tooltip } from './Tooltip';
