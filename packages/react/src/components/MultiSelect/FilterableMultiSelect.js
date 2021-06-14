@@ -223,9 +223,7 @@ export default class FilterableMultiSelect extends React.Component {
   };
 
   handleOnOuterClick = () => {
-    this.setState({
-      isOpen: false,
-    });
+    this.handleOnMenuChange(false);
   };
 
   handleOnStateChange = (changes, downshift) => {
@@ -250,9 +248,6 @@ export default class FilterableMultiSelect extends React.Component {
         if (stateChangeTypes.keyDownArrowDown === type && !this.state.isOpen) {
           this.handleOnMenuChange(true);
         }
-        break;
-      case stateChangeTypes.blurInput:
-        this.handleOnMenuChange(false);
         break;
       case stateChangeTypes.keyDownEscape:
         this.handleOnMenuChange(false);
