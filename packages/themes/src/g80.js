@@ -40,7 +40,7 @@ import {
 
   // Tools
   rgba,
-} from '@carbon/colors';
+} from '@rocketsoftware/colors';
 
 // New color tokens
 // TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
@@ -236,8 +236,11 @@ export const skeleton02 = skeletonElement;
 export {
   // Type
   caption01,
+  caption02,
   label01,
+  label02,
   helperText01,
+  helperText02,
   bodyShort01,
   bodyLong01,
   bodyShort02,

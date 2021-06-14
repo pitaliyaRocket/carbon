@@ -191,8 +191,11 @@
   $hover-field: map-get($theme, 'hover-field') !global;
   $danger: map-get($theme, 'danger') !global;
   $caption-01: map-get($theme, 'caption-01') !global;
+  $caption-02: map-get($theme, 'caption-02') !global;
   $label-01: map-get($theme, 'label-01') !global;
+  $label-02: map-get($theme, 'label-02') !global;
   $helper-text-01: map-get($theme, 'helper-text-01') !global;
+  $helper-text-02: map-get($theme, 'helper-text-02') !global;
   $body-short-01: map-get($theme, 'body-short-01') !global;
   $body-long-01: map-get($theme, 'body-long-01') !global;
   $body-short-02: map-get($theme, 'body-short-02') !global;
@@ -2493,9 +2496,24 @@
       @include custom-property('caption-01', map-get($theme, 'caption-01'));
     }
 
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'caption-02',
+      $emit-difference
+    )
+    {
+      @include custom-property('caption-02', map-get($theme, 'caption-02'));
+    }
+
     @if should-emit($theme, $parent-carbon-theme, 'label-01', $emit-difference)
     {
       @include custom-property('label-01', map-get($theme, 'label-01'));
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'label-02', $emit-difference)
+    {
+      @include custom-property('label-02', map-get($theme, 'label-02'));
     }
 
     @if should-emit(
@@ -2508,6 +2526,19 @@
       @include custom-property(
         'helper-text-01',
         map-get($theme, 'helper-text-01')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'helper-text-02',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'helper-text-02',
+        map-get($theme, 'helper-text-02')
       );
     }
 

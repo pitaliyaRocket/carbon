@@ -308,7 +308,7 @@ $support-02: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'support-02'),
   map-get($carbon--theme, 'support-02'),
-  #24a148
+  #198038
 ) !default;
 
 /// Warning
@@ -987,7 +987,7 @@ $support-success: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'support-success'),
   map-get($carbon--theme, 'support-success'),
-  #24a148
+  #198038
 ) !default;
 
 /// @type {undefined}
@@ -1548,6 +1548,21 @@ $caption-01: if(
 /// @type {Number}
 /// @access public
 /// @group @carbon/themes
+$caption-02: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'caption-02'),
+  map-get($carbon--theme, 'caption-02'),
+  (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.29,
+    letter-spacing: 0.32px,
+  )
+) !default;
+
+/// @type {Number}
+/// @access public
+/// @group @carbon/themes
 $label-01: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'label-01'),
@@ -1563,6 +1578,21 @@ $label-01: if(
 /// @type {Number}
 /// @access public
 /// @group @carbon/themes
+$label-02: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'label-02'),
+  map-get($carbon--theme, 'label-02'),
+  (
+    font-size: 0.875rem,
+    font-weight: 400,
+    line-height: 1.29,
+    letter-spacing: 0.32px,
+  )
+) !default;
+
+/// @type {Number}
+/// @access public
+/// @group @carbon/themes
 $helper-text-01: if(
   global-variable-exists('carbon--theme') and
     map-has-key($carbon--theme, 'helper-text-01'),
@@ -1570,6 +1600,20 @@ $helper-text-01: if(
   (
     font-size: 0.75rem,
     line-height: 1.34,
+    letter-spacing: 0.32px,
+  )
+) !default;
+
+/// @type {Number}
+/// @access public
+/// @group @carbon/themes
+$helper-text-02: if(
+  global-variable-exists('carbon--theme') and
+    map-has-key($carbon--theme, 'helper-text-02'),
+  map-get($carbon--theme, 'helper-text-02'),
+  (
+    font-size: 0.875rem,
+    line-height: 1.29,
     letter-spacing: 0.32px,
   )
 ) !default;
