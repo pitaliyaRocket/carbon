@@ -446,7 +446,6 @@ class FloatingMenu extends React.Component {
         ...styles,
         ...positioningStyle,
         position: 'absolute',
-        margin: 0,
         opacity: 1,
       },
     });
