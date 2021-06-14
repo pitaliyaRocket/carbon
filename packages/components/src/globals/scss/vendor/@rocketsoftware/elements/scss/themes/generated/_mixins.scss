@@ -107,6 +107,8 @@
   $background: map-get($theme, 'background') !global;
   $layer: map-get($theme, 'layer') !global;
   $layer-accent: map-get($theme, 'layer-accent') !global;
+  $layer-accent-hover: map-get($theme, 'layer-accent-hover') !global;
+  $layer-accent-active: map-get($theme, 'layer-accent-active') !global;
   $field: map-get($theme, 'field') !global;
   $background-inverse: map-get($theme, 'background-inverse') !global;
   $background-brand: map-get($theme, 'background-brand') !global;
@@ -253,6 +255,12 @@
   $container-03: map-get($theme, 'container-03') !global;
   $container-04: map-get($theme, 'container-04') !global;
   $container-05: map-get($theme, 'container-05') !global;
+  $size-xsmall: map-get($theme, 'size-xsmall') !global;
+  $size-small: map-get($theme, 'size-small') !global;
+  $size-medium: map-get($theme, 'size-medium') !global;
+  $size-large: map-get($theme, 'size-large') !global;
+  $size-xlarge: map-get($theme, 'size-xlarge') !global;
+  $size-2XLarge: map-get($theme, 'size-2XLarge') !global;
   $icon-size-01: map-get($theme, 'icon-size-01') !global;
   $icon-size-02: map-get($theme, 'icon-size-02') !global;
 
@@ -534,6 +542,14 @@
     $layer-accent: var(
       --#{$custom-property-prefix}-layer-accent,
       map-get($theme, 'layer-accent')
+    ) !global;
+    $layer-accent-hover: var(
+      --#{$custom-property-prefix}-layer-accent-hover,
+      map-get($theme, 'layer-accent-hover')
+    ) !global;
+    $layer-accent-active: var(
+      --#{$custom-property-prefix}-layer-accent-active,
+      map-get($theme, 'layer-accent-active')
     ) !global;
     $field: var(
       --#{$custom-property-prefix}-field,
@@ -958,6 +974,30 @@
     $container-05: var(
       --#{$custom-property-prefix}-container-05,
       map-get($theme, 'container-05')
+    ) !global;
+    $size-xsmall: var(
+      --#{$custom-property-prefix}-size-xsmall,
+      map-get($theme, 'size-xsmall')
+    ) !global;
+    $size-small: var(
+      --#{$custom-property-prefix}-size-small,
+      map-get($theme, 'size-small')
+    ) !global;
+    $size-medium: var(
+      --#{$custom-property-prefix}-size-medium,
+      map-get($theme, 'size-medium')
+    ) !global;
+    $size-large: var(
+      --#{$custom-property-prefix}-size-large,
+      map-get($theme, 'size-large')
+    ) !global;
+    $size-xlarge: var(
+      --#{$custom-property-prefix}-size-xlarge,
+      map-get($theme, 'size-xlarge')
+    ) !global;
+    $size-2XLarge: var(
+      --#{$custom-property-prefix}-size-2XLarge,
+      map-get($theme, 'size-2XLarge')
     ) !global;
     $icon-size-01: var(
       --#{$custom-property-prefix}-icon-size-01,
@@ -1590,6 +1630,32 @@
     )
     {
       @include custom-property('layer-accent', map-get($theme, 'layer-accent'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'layer-accent-hover',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'layer-accent-hover',
+        map-get($theme, 'layer-accent-hover')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'layer-accent-active',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'layer-accent-active',
+        map-get($theme, 'layer-accent-active')
+      );
     }
 
     @if should-emit($theme, $parent-carbon-theme, 'field', $emit-difference) {
@@ -3123,6 +3189,66 @@
     )
     {
       @include custom-property('container-05', map-get($theme, 'container-05'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'size-xsmall',
+      $emit-difference
+    )
+    {
+      @include custom-property('size-xsmall', map-get($theme, 'size-xsmall'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'size-small',
+      $emit-difference
+    )
+    {
+      @include custom-property('size-small', map-get($theme, 'size-small'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'size-medium',
+      $emit-difference
+    )
+    {
+      @include custom-property('size-medium', map-get($theme, 'size-medium'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'size-large',
+      $emit-difference
+    )
+    {
+      @include custom-property('size-large', map-get($theme, 'size-large'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'size-xlarge',
+      $emit-difference
+    )
+    {
+      @include custom-property('size-xlarge', map-get($theme, 'size-xlarge'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'size-2XLarge',
+      $emit-difference
+    )
+    {
+      @include custom-property('size-2XLarge', map-get($theme, 'size-2XLarge'));
     }
 
     @if should-emit(
