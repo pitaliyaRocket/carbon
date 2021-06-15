@@ -265,6 +265,85 @@
   $icon-size-02: map-get($theme, 'icon-size-02') !global;
 
   @if global-variable-exists('feature-flags') and
+    map-get($feature-flags, 'enable-v11-release') !=
+    true
+  {
+    $background: $ui-background !global;
+    $layer: $ui-01 !global;
+    $layer-accent: $ui-03 !global;
+    $field: $field-01 !global;
+    $background-inverse: $inverse-02 !global;
+    $background-brand: $interactive-01 !global;
+    $interactive: $interactive-04 !global;
+    $border-subtle: $ui-03 !global;
+    $border-strong: $ui-04 !global;
+    $border-inverse: $ui-05 !global;
+    $border-interactive: $interactive-04 !global;
+    $text-primary: $text-01 !global;
+    $text-secondary: $text-02 !global;
+    $text-placeholder: $text-03 !global;
+    $text-helper: $text-05 !global;
+    $text-on-color: $text-04 !global;
+    $text-inverse: $inverse-01 !global;
+    $link-primary: $link-01 !global;
+    $link-secondary: $link-02 !global;
+    $link-visited: $visited-link !global;
+    $link-inverse: $inverse-link !global;
+    $icon-primary: $icon-01 !global;
+    $icon-secondary: $icon-02 !global;
+    $icon-on-color: $icon-03 !global;
+    $icon-inverse: $inverse-01 !global;
+    $support-error: $support-01 !global;
+    $support-success: $support-02 !global;
+    $support-warning: $support-03 !global;
+    $support-info: $support-04 !global;
+    $support-error-inverse: $inverse-support-01 !global;
+    $support-success-inverse: $inverse-support-02 !global;
+    $support-warning-inverse: $inverse-support-03 !global;
+    $support-info-inverse: $inverse-support-04 !global;
+    $overlay: $overlay-01 !global;
+    $toggle-off: $ui-04 !global;
+    $button-primary: $interactive-01 !global;
+    $button-secondary: $interactive-02 !global;
+    $button-tertiary: $interactive-03 !global;
+    $button-danger-primary: $danger-01 !global;
+    $button-danger-secondary: $danger-02 !global;
+    $background-active: $active-ui !global;
+    $layer-active: $active-ui !global;
+    $button-danger-active: $active-danger !global;
+    $button-primary-active: $active-primary !global;
+    $button-secondary-active: $active-secondary !global;
+    $button-tertiary-active: $active-tertiary !global;
+    $focus-inset: $inverse-01 !global;
+    $focus-inverse: $inverse-focus-ui !global;
+    $background-hover: $hover-ui !global;
+    $layer-hover: $hover-ui !global;
+    $field-hover: $hover-ui !global;
+    $background-inverse-hover: $inverse-hover-ui !global;
+    $link-primary-hover: $hover-primary-text !global;
+    $button-danger-hover: $hover-danger !global;
+    $button-primary-hover: $hover-primary !global;
+    $button-secondary-hover: $hover-secondary !global;
+    $button-tertiary-hover: $hover-tertiary !global;
+    $background-selected: $selected-ui !global;
+    $background-selected-hover: $hover-selected-ui !global;
+    $layer-selected: $selected-ui !global;
+    $layer-selected-hover: $hover-selected-ui !global;
+    $layer-selected-inverse: $ui-05 !global;
+    $border-subtle-selected: $active-ui !global;
+    $layer-disabled: $disabled-01 !global;
+    $field-disabled: $disabled-01 !global;
+    $border-disabled: $disabled-01 !global;
+    $text-disabled: $disabled-02 !global;
+    $button-disabled: $disabled-02 !global;
+    $icon-disabled: $disabled-02 !global;
+    $text-on-color-disabled: $disabled-03 !global;
+    $icon-on-color-disabled: $disabled-03 !global;
+    $layer-selected-disabled: $disabled-03 !global;
+    $skeleton-background: $skeleton-01 !global;
+    $skeleton-element: $skeleton-02 !global;
+  }
+  @if global-variable-exists('feature-flags') and
     map-get($feature-flags, 'enable-css-custom-properties')
   {
     $interactive-01: var(
