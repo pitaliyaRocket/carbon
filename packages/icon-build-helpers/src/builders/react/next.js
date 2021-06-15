@@ -128,7 +128,7 @@ async function builder(metadata, { output }) {
 
   const bundle = await rollup({
     input,
-    external: ['@carbon/icon-helpers', 'react', 'prop-types'],
+    external: ['@rocketsoftware/icon-helpers', 'react', 'prop-types'],
     plugins: [
       // We use a "virtual" plugin to pass all of our components that we
       // created from our metadata to rollup instead of rollup trying to read
@@ -178,7 +178,7 @@ async function builder(metadata, { output }) {
   // one file: `index.esm.js`
   const esmBundle = await rollup({
     input: 'index.js',
-    external: ['@carbon/icon-helpers', 'react', 'prop-types'],
+    external: ['@rocketsoftware/icon-helpers', 'react', 'prop-types'],
     plugins: [
       virtual({
         ...defaultVirtualOptions,
@@ -303,9 +303,10 @@ function createIconSource(moduleName, sizes, preamble = []) {
   });
 
   // The "default" icon that will be rendered, based on the max size
-  const returnStatement = sizeVariants.find(({ size }) => {
-    return size === maxSize;
-  });
+  const returnStatement =
+    sizeVariants.find(({ size }) => {
+      return size === maxSize;
+    }) ?? sizeVariants[0];
 
   // We build up our component source by adding in any necessary deprecation
   // blocks along with conditionally rendering all asset sizes. We also use a

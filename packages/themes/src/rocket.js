@@ -1,9 +1,12 @@
+import { adjustLightness } from './tools';
+
 import {
   blue60,
   blue70,
   red60,
   gray20,
   gray30,
+  gray40,
   gray60,
   // Tools
   rgba,
@@ -118,6 +121,8 @@ export const danger = danger01;
 export const background = uiBackground;
 export const layer = ui01;
 export const layerAccent = ui03;
+export const layerAccentActive = gray40;
+export const layerAccentHover = adjustLightness(layerAccent, -6);
 export const field = field01;
 export const backgroundInverse = inverse02;
 export const backgroundBrand = interactive01;
@@ -278,6 +283,12 @@ export {
   container03,
   container04,
   container05,
+  sizeXSmall,
+  sizeSmall,
+  sizeMedium,
+  sizeLarge,
+  sizeXLarge,
+  size2XLarge,
   // Icon sizes
   iconSize01,
   iconSize02,

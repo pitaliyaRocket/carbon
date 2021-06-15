@@ -76,6 +76,8 @@ $carbon--theme--white: (
   background: #ffffff,
   layer: #f4f4f4,
   layer-accent: #e0e0e0,
+  layer-accent-active: #a8a8a8,
+  layer-accent-hover: #d1d1d1,
   field: #f4f4f4,
   background-inverse: #393939,
   background-brand: #0f62fe,
@@ -586,6 +588,12 @@ $carbon--theme--white: (
   container-03: 2.5rem,
   container-04: 3rem,
   container-05: 4rem,
+  size-xsmall: 1.5rem,
+  size-small: 2rem,
+  size-medium: 2.5rem,
+  size-large: 3rem,
+  size-xlarge: 4rem,
+  size-2XLarge: 5rem,
   icon-size-01: 1rem,
   icon-size-02: 1.25rem,
 ) !default;
@@ -622,6 +630,8 @@ $carbon--theme--g80: map-merge(
     background: #393939,
     layer: #525252,
     layer-accent: #6f6f6f,
+    layer-accent-active: #525252,
+    layer-accent-hover: #5e5e5e,
     field: #525252,
     background-inverse: #f4f4f4,
     interactive: #78a9ff,
@@ -811,6 +821,8 @@ $carbon--theme--g90: map-merge(
     background: #262626,
     layer: #393939,
     layer-accent: #525252,
+    layer-accent-active: #8d8d8d,
+    layer-accent-hover: #636363,
     field: #393939,
     background-inverse: #f4f4f4,
     interactive: #4589ff,
@@ -941,6 +953,8 @@ $carbon--theme--g100: map-merge(
     background: #161616,
     layer: #262626,
     layer-accent: #393939,
+    layer-accent-active: #6f6f6f,
+    layer-accent-hover: #474747,
     field: #262626,
     background-inverse: #f4f4f4,
     interactive: #4589ff,
@@ -1074,6 +1088,7 @@ $carbon--theme--v9: map-merge(
     background: #f4f7fb,
     layer: #ffffff,
     layer-accent: #dfe3e6,
+    layer-accent-hover: #ced4d9,
     field: #ffffff,
     background-inverse: #272d33,
     background-brand: #3d70b2,
@@ -1202,6 +1217,7 @@ $carbon--theme--rocket: map-merge(
     active-01: #bebebe,
     layer: #efefef,
     layer-accent: #dcdcdc,
+    layer-accent-hover: #cccccc,
     field: #efefef,
     background-inverse: #3d3d3d,
     background-brand: #025c53,
@@ -1678,6 +1694,18 @@ $carbon--theme: (
       global-variable-exists('layer-accent'),
       $layer-accent,
       map-get($carbon--theme--white, 'layer-accent')
+    ),
+  layer-accent-hover:
+    if(
+      global-variable-exists('layer-accent-hover'),
+      $layer-accent-hover,
+      map-get($carbon--theme--white, 'layer-accent-hover')
+    ),
+  layer-accent-active:
+    if(
+      global-variable-exists('layer-accent-active'),
+      $layer-accent-active,
+      map-get($carbon--theme--white, 'layer-accent-active')
     ),
   field:
     if(
@@ -2518,6 +2546,42 @@ $carbon--theme: (
       global-variable-exists('container-05'),
       $container-05,
       map-get($carbon--theme--white, 'container-05')
+    ),
+  size-xsmall:
+    if(
+      global-variable-exists('size-xsmall'),
+      $size-xsmall,
+      map-get($carbon--theme--white, 'size-xsmall')
+    ),
+  size-small:
+    if(
+      global-variable-exists('size-small'),
+      $size-small,
+      map-get($carbon--theme--white, 'size-small')
+    ),
+  size-medium:
+    if(
+      global-variable-exists('size-medium'),
+      $size-medium,
+      map-get($carbon--theme--white, 'size-medium')
+    ),
+  size-large:
+    if(
+      global-variable-exists('size-large'),
+      $size-large,
+      map-get($carbon--theme--white, 'size-large')
+    ),
+  size-xlarge:
+    if(
+      global-variable-exists('size-xlarge'),
+      $size-xlarge,
+      map-get($carbon--theme--white, 'size-xlarge')
+    ),
+  size-2XLarge:
+    if(
+      global-variable-exists('size-2XLarge'),
+      $size-2XLarge,
+      map-get($carbon--theme--white, 'size-2XLarge')
     ),
   icon-size-01:
     if(

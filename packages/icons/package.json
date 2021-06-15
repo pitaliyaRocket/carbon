@@ -39,8 +39,8 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/cli": "^10.23.0",
-    "@carbon/icon-build-helpers": "^0.21.0",
+    "@carbon/cli": "^10.24.0",
+    "@carbon/icon-build-helpers": "^0.22.0",
     "rimraf": "^3.0.2"
   }
 }
