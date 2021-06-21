@@ -86,7 +86,7 @@ const TooltipDefinition = ({
   }, []);
 
   return (
-    <div
+    <span
       {...rest}
       className={tooltipClassName}
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
@@ -99,10 +99,10 @@ const TooltipDefinition = ({
         onBlur={composeEventHandlers([onBlur, handleBlur])}>
         {children}
       </button>
-      <div className={assistiveTextClasses} id={tooltipId} role="tooltip">
+      <span className={assistiveTextClasses} id={tooltipId} role="tooltip">
         {tooltipText}
-      </div>
-    </div>
+      </span>
+    </span>
   );
 };
 
