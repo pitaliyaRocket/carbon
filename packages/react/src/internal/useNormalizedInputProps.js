@@ -10,8 +10,8 @@ import {
   WarningFilled16,
   WarningAltFilled16,
   EditOff16,
-} from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+} from '@rocketsoftware/icons-react';
+import { settings } from '@rocketsoftware/carbon-components';
 
 const { prefix } = settings;
 
