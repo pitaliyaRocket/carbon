@@ -28,8 +28,12 @@ export const defaultSortItems = (
   { selectedItems = [], itemToString, compareItems, locale = 'en' }
 ) =>
   items.sort((itemA, itemB) => {
-    const hasItemA = selectedItems.includes(itemA);
-    const hasItemB = selectedItems.includes(itemB);
+    const hasItemA = selectedItems.some(
+      (item) => JSON.stringify(item) === JSON.stringify(itemA)
+    );
+    const hasItemB = selectedItems.some(
+      (item) => JSON.stringify(item) === JSON.stringify(itemB)
+    );
 
     // Prefer whichever item is in the `selectedItems` array first
     if (hasItemA && !hasItemB) {
