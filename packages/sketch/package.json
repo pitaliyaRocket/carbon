@@ -28,11 +28,11 @@
     "skpm:link": "skpm-link"
   },
   "dependencies": {
-    "@rocketsoftware/colors": "^0.9.0",
-    "@rocketsoftware/icon-helpers": "^0.9.0",
-    "@rocketsoftware/icons": "^0.9.0",
-    "@rocketsoftware/themes": "^0.9.0",
-    "@rocketsoftware/type": "^0.9.0",
+    "@rocketsoftware/colors": "^0.10.0",
+    "@rocketsoftware/icon-helpers": "^0.10.0",
+    "@rocketsoftware/icons": "^0.10.0",
+    "@rocketsoftware/themes": "^0.10.0",
+    "@rocketsoftware/type": "^0.10.0",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",
     "core-js": "^3.11.1",
