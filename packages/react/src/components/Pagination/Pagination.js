@@ -378,6 +378,11 @@ export default class Pagination extends Component {
           </span>
         </div>
         <div className={`${prefix}--pagination__right`}>
+          <label
+            className={`${prefix}--visually-hidden`}
+            htmlFor={`${prefix}-pagination-select-${inputId}-right`}>
+            {statePage}
+          </label>
           <WindowedSelect
             id={`${prefix}-pagination-select-${inputId}-right`}
             options={selectItems}
