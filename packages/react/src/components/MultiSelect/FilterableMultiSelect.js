@@ -165,7 +165,7 @@ export default class FilterableMultiSelect extends React.Component {
     warnText: PropTypes.node,
   };
 
-  static getDerivedStateFromProps({ open }, state) {
+  static getDerivedStateFromProps({ open, initialSelectedItems }, state) {
     /**
      * programmatically control this `open` prop
      */
@@ -175,6 +175,7 @@ export default class FilterableMultiSelect extends React.Component {
       : {
           isOpen: open,
           prevOpen: open,
+          topItems: initialSelectedItems,
         };
   }
 
@@ -263,6 +264,10 @@ export default class FilterableMultiSelect extends React.Component {
         break;
       case stateChangeTypes.keyDownEscape:
         this.handleOnMenuChange(false);
+        break;
+
+      case stateChangeTypes.mouseUp:
+        this.setState({ topItems: downshift?.selectedItem });
         break;
     }
   };
