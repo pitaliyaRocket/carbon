@@ -350,3 +350,12 @@ Sync with upstream
 ### Bug Fixes
 
 * **modal:** removed 75% width constraint and added right padding of 3rem ([0bce879](https://github.com/RocketSoftware/carbon/commit/0bce879))
+
+                 _
+                | |
+   ___ __ _ _ __| |__   ___  _ __
+  / __/ _` | '__| '_ \ / _ \| '_ \
+ | (_| (_| | |  | |_) | (_) | | | |
+  \___\__,_|_|  |_.__/ \___/|_| |_|
+
+changelog ▐ ┏ Fetching latest git information from upstream
