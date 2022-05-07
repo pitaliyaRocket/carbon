@@ -2,7 +2,7 @@
   "name": "@carbon/react",
   "private": true,
   "description": "React components for the Carbon Design System",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -40,9 +40,9 @@
     "sass": "^1.32.12"
   },
   "dependencies": {
-    "@carbon/feature-flags": "^0.5.0",
+    "@carbon/feature-flags": "^0.5.1",
     "@carbon/icons-react": "^10.33.0",
-    "@carbon/styles": "^0.8.0",
+    "@carbon/styles": "^0.8.1",
     "@carbon/telemetry": "0.0.0-alpha.6",
     "@ibm/plex": "6.0.0-next.6",
     "carbon-components-react": "^7.37.0"
@@ -68,8 +68,8 @@
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
     "babel-plugin-dev-expression": "^0.2.2",
-    "babel-preset-carbon": "^0.1.0",
-    "browserslist-config-carbon": "^10.6.1",
+    "babel-preset-carbon": "^0.1.1",
+    "browserslist-config-carbon": "^10.6.2",
     "css-loader": "^5.2.4",
     "mini-css-extract-plugin": "^1.6.0",
     "postcss": "^8.2.14",

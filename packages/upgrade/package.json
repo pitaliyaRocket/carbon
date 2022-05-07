@@ -2,7 +2,7 @@
   "name": "@carbon/upgrade",
   "private": true,
   "description": "A tool for upgrading Carbon versions",
-  "version": "10.12.0",
+  "version": "10.12.1",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
