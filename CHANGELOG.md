@@ -368,3 +368,12 @@ changelog ▐ ┏ Fetching latest git information from upstream
   \___\__,_|_|  |_.__/ \___/|_| |_|
 
 changelog ▐ ┏ Fetching latest git information from upstream
+
+                 _
+                | |
+   ___ __ _ _ __| |__   ___  _ __
+  / __/ _` | '__| '_ \ / _ \| '_ \
+ | (_| (_| | |  | |_) | (_) | | | |
+  \___\__,_|_|  |_.__/ \___/|_| |_|
+
+changelog ▐ ┏ Fetching latest git information from upstream
