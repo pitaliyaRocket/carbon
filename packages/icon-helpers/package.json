@@ -1,7 +1,7 @@
 {
   "name": "@rocketsoftware/icon-helpers",
   "description": "Icon Helpers",
-  "version": "1.0.0",
+  "version": "0.10.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -34,7 +34,7 @@
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/cli": "^11.0.0",
+    "@carbon/cli": "^10.24.0",
     "rimraf": "^3.0.0"
   },
   "sideEffects": false
