@@ -2,7 +2,7 @@
   "name": "@carbon/import-once",
   "private": true,
   "description": "Sass helper for importing files only once. Used in the Carbon Design System",
-  "version": "11.0.0",
+  "version": "12.0.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
