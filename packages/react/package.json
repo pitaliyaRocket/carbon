@@ -45,7 +45,7 @@
     "react-dom": "^16.8.6 || ^17.0.1"
   },
   "dependencies": {
-    "@carbon/feature-flags": "^2.0.0",
+    "@carbon/feature-flags": "^0.7.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
     "@rocketsoftware/icons-react": "^2.0.0",
     "@rocketsoftware/walktour": "4.4.4",
