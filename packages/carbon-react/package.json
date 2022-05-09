@@ -40,7 +40,7 @@
     "sass": "^1.32.12"
   },
   "dependencies": {
-    "@carbon/feature-flags": "^2.0.0",
+    "@carbon/feature-flags": "^0.7.0",
     "@carbon/icons-react": "^10.33.0",
     "@carbon/styles": "^2.0.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
