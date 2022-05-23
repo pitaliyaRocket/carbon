@@ -18,6 +18,7 @@ describe('DataTable.TableExpandRow', () => {
       isExpanded: false,
       onExpand: jest.fn(),
       ariaLabel: 'Aria label',
+      scope: 'row',
     };
   });
 
