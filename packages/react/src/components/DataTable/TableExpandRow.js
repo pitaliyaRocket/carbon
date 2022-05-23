@@ -34,7 +34,8 @@ const TableExpandRow = ({
     rowClassName
   );
   const previousValue = isExpanded ? 'collapsed' : undefined;
-  const expandHeaderValue = expandHeader === 'expand' ? null : expandHeader;
+  const expandHeaderValue =
+    expandHeader === 'expand' ? undefined : expandHeader;
 
   return (
     <tr {...rest} className={className} data-parent-row>

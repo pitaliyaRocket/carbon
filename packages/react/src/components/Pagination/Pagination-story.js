@@ -22,6 +22,11 @@ const props = () => ({
   disabled: boolean('Disable page inputs (disabled)', false),
   page: number('The current page (page)', 1),
   totalItems: number('Total number of items (totalItems)', 103),
+  menuPlacement: array('Choices of `menuPlacement` (menuPlacement)', [
+    'auto',
+    'top',
+    'bottom',
+  ]),
   pagesUnknown: boolean('Total number of items unknown (pagesUnknown)', false),
   pageInputDisabled: boolean(
     'Disable page input (pageInputDisabled)',

@@ -100,7 +100,7 @@ export default class Pagination extends Component {
     itemsPerPageText: PropTypes.string,
 
     /**
-     * The placement of dropdwon either in top or bottom direction. By default its auto.
+     * The placement of dropdown either in top or bottom direction. By default its auto.
      */
     menuPlacement: PropTypes.oneOf(['auto', 'top', 'bottom']),
 

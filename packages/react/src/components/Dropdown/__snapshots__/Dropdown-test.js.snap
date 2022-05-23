@@ -278,6 +278,7 @@ exports[`Dropdown should render custom item components 1`] = `
         </button>
         <ListBoxMenu
           aria-labelledby="downshift-6-label"
+          aria-label="downshift-menu-6-label"
           id="downshift-6-menu"
           onBlur={[Function]}
           onKeyDown={[Function]}

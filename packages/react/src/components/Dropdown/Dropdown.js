@@ -140,11 +140,8 @@ const Dropdown = React.forwardRef(function Dropdown(
   }
 
   const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
-  const ariaLabelForMenu = ariaLabelMenu
-    ? ariaLabelMenu
-    : ariaLabel
-    ? `${ariaLabel}__menu`
-    : undefined;
+  const ariaLabelForMenu =
+    ariaLabelMenu || ariaLabel ? `${ariaLabel}__menu` : undefined;
 
   return (
     <div className={wrapperClasses} {...other}>

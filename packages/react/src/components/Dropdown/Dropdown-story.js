@@ -67,6 +67,10 @@ const props = () => ({
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   label: text('Label (label)', 'Dropdown menu options'),
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
+  ariaLabelMenu: text(
+    'Aria Label for Menu List (ariaLabelMenu)',
+    'Dropdown Menu'
+  ),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   titleText: text('Title (titleText)', 'Dropdown label'),

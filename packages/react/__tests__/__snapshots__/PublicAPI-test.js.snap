@@ -2625,6 +2625,9 @@ Map {
       "ariaLabel": Object {
         "type": "string",
       },
+      "ariaLabelMenu": Object {
+        "type": "string",
+      },
       "className": Object {
         "type": "string",
       },
