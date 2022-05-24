@@ -678,7 +678,8 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--highlighted {
     border-color: transparent;
-    background-color: $layer-hover;
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: $layer-hover !important;
     color: $text-primary;
   }
 
