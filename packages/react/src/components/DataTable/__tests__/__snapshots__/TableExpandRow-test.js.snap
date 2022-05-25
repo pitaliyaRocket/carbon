@@ -30,11 +30,11 @@ exports[`DataTable.TableExpandRow should render 1`] = `
             >
               <TableCell
                 className="bx--table-expand"
-                headers="expand"
+                scope="row"
               >
                 <td
                   className="bx--table-expand"
-                  headers="expand"
+                  scope="row"
                 >
                   <button
                     aria-label="Aria label"

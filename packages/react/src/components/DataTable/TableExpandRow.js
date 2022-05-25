@@ -34,13 +34,16 @@ const TableExpandRow = ({
     rowClassName
   );
   const previousValue = isExpanded ? 'collapsed' : undefined;
+  const expandHeaderValue =
+    expandHeader === 'expand' ? undefined : expandHeader;
 
   return (
     <tr {...rest} className={className} data-parent-row>
       <TableCell
         className={`${prefix}--table-expand`}
         data-previous-value={previousValue}
-        headers={expandHeader}>
+        headers={expandHeaderValue}
+        scope={'row'}>
         <button
           type="button"
           className={`${prefix}--table-expand__button`}

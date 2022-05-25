@@ -126,6 +126,7 @@ exports[`Dropdown should render 1`] = `
           </ListBoxMenuIcon>
         </button>
         <ListBoxMenu
+          aria-label="Dropdown menu list box"
           aria-labelledby="downshift-0-label"
           id="downshift-0-menu"
           onBlur={[Function]}
@@ -135,6 +136,7 @@ exports[`Dropdown should render 1`] = `
           tabIndex={-1}
         >
           <div
+            aria-label="Dropdown menu list box"
             aria-labelledby="downshift-0-label"
             className="bx--list-box__menu"
             id="downshift-0-menu"
@@ -277,6 +279,7 @@ exports[`Dropdown should render custom item components 1`] = `
           </ListBoxMenuIcon>
         </button>
         <ListBoxMenu
+          aria-label="Dropdown menu list box"
           aria-labelledby="downshift-6-label"
           id="downshift-6-menu"
           onBlur={[Function]}
@@ -286,6 +289,7 @@ exports[`Dropdown should render custom item components 1`] = `
           tabIndex={-1}
         >
           <div
+            aria-label="Dropdown menu list box"
             aria-labelledby="downshift-6-label"
             className="bx--list-box__menu"
             id="downshift-6-menu"
@@ -586,6 +590,7 @@ exports[`Dropdown should render with strings as items 1`] = `
           </ListBoxMenuIcon>
         </button>
         <ListBoxMenu
+          aria-label="Dropdown menu list box"
           aria-labelledby="downshift-4-label"
           id="downshift-4-menu"
           onBlur={[Function]}
@@ -595,6 +600,7 @@ exports[`Dropdown should render with strings as items 1`] = `
           tabIndex={-1}
         >
           <div
+            aria-label="Dropdown menu list box"
             aria-labelledby="downshift-4-label"
             className="bx--list-box__menu"
             id="downshift-4-menu"

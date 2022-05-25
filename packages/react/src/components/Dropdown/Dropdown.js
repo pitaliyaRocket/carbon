@@ -38,6 +38,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     items,
     label,
     ariaLabel,
+    ariaLabelMenu,
     itemToString,
     itemToElement,
     type,
@@ -139,6 +140,10 @@ const Dropdown = React.forwardRef(function Dropdown(
   }
 
   const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
+  const ariaLabelForMenu =
+    ariaLabelMenu || ariaLabel
+      ? `${ariaLabel}__menu`
+      : 'Dropdown menu list box';
 
   return (
     <div className={wrapperClasses} {...other}>
@@ -178,7 +183,7 @@ const Dropdown = React.forwardRef(function Dropdown(
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
-        <ListBox.Menu {...getMenuProps()}>
+        <ListBox.Menu aria-label={ariaLabelForMenu} {...getMenuProps()}>
           {isOpen &&
             items.map((item, index) => {
               const itemProps = getItemProps({ item, index });
@@ -223,6 +228,11 @@ Dropdown.propTypes = {
    * 'aria-label' of the ListBox component.
    */
   ariaLabel: PropTypes.string,
+
+  /**
+   * 'aria-label' of the ListBox Menu component.
+   */
+  ariaLabelMenu: PropTypes.string,
 
   /**
    * Provide a custom className to be applied on the bx--dropdown node
