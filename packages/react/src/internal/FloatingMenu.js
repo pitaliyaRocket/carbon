@@ -355,6 +355,32 @@ class FloatingMenu extends React.Component {
             position: getComputedStyle(this.props.target()).position,
           },
         });
+        let updatedMenuDirection = menuDirection;
+        if (
+          autoFlipped &&
+          menuDirection === DIRECTION_BOTTOM &&
+          this._menuOutOfBoundAtBottom(targetStyle, floatingPosition, menuSize)
+        ) {
+          updatedMenuDirection = DIRECTION_TOP;
+          floatingPosition = getFloatingPosition({
+            menuSize,
+            refPosition,
+            direction: updatedMenuDirection,
+            offset,
+            viewportOffset: {
+              ...(viewportSize && {
+                left: viewportSize.left,
+                top: viewportSize.top,
+              }),
+            },
+            scrollX: viewport ? viewport.scrollLeft : window.pageXOffset,
+            scrollY: viewport ? viewport.scrollTop : window.pageYOffset,
+            container: {
+              rect: this.props.target().getBoundingClientRect(),
+              position: getComputedStyle(this.props.target()).position,
+            },
+          });
+        }
         const targetStyle = getComputedStyle(this.props.target());
         if (
           autoFlipped &&
@@ -367,18 +393,6 @@ class FloatingMenu extends React.Component {
             (flipped &&
               this._menuOutOfBoundAtright(targetStyle, floatingPosition)))
         ) {
-          let updatedMenuDirection = menuDirection;
-          if (
-            autoFlipped &&
-            menuDirection === DIRECTION_BOTTOM &&
-            this._menuOutOfBoundAtBottom(
-              targetStyle,
-              floatingPosition,
-              menuSize
-            )
-          ) {
-            updatedMenuDirection = DIRECTION_TOP;
-          }
           offset =
             typeof menuOffset !== 'function'
               ? menuOffset
