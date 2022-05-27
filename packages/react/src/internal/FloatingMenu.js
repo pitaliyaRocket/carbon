@@ -367,35 +367,18 @@ class FloatingMenu extends React.Component {
             (flipped &&
               this._menuOutOfBoundAtright(targetStyle, floatingPosition)))
         ) {
-          offset =
-            typeof menuOffset !== 'function'
-              ? menuOffset
-              : menuOffset(menuBody, menuDirection, triggerEl, !flipped);
-          floatingPosition = getFloatingPosition({
-            menuSize,
-            refPosition,
-            direction: menuDirection,
-            offset,
-            viewportOffset: {
-              ...(viewportSize && {
-                left: viewportSize.left,
-                top: viewportSize.top,
-              }),
-            },
-            scrollX: viewport ? viewport.scrollLeft : window.pageXOffset,
-            scrollY: viewport ? viewport.scrollTop : window.pageYOffset,
-            container: {
-              rect: this.props.target().getBoundingClientRect(),
-              position: getComputedStyle(this.props.target()).position,
-            },
-          });
-        }
-        if (
-          autoFlipped &&
-          menuDirection === DIRECTION_BOTTOM &&
-          this._menuOutOfBoundAtBottom(targetStyle, floatingPosition, menuSize)
-        ) {
-          const updatedMenuDirection = DIRECTION_TOP;
+          let updatedMenuDirection = menuDirection;
+          if (
+            autoFlipped &&
+            menuDirection === DIRECTION_BOTTOM &&
+            this._menuOutOfBoundAtBottom(
+              targetStyle,
+              floatingPosition,
+              menuSize
+            )
+          ) {
+            updatedMenuDirection = DIRECTION_TOP;
+          }
           offset =
             typeof menuOffset !== 'function'
               ? menuOffset
