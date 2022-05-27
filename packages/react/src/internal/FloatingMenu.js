@@ -172,7 +172,7 @@ class FloatingMenu extends React.Component {
     autoFlipped: PropTypes.bool,
 
     /**
-     * `true` if the menu alignment should be flipped when menu overflows at top/bottom side of table.
+     * `true` if the menu alignment should be flipped when menu overflows at bottom side of table.
      */
     autoVerticalFlipped: PropTypes.bool,
 
@@ -470,17 +470,6 @@ class FloatingMenu extends React.Component {
    */
   _menuOutOfBoundAtBottom = (targetStyle, floatingPosition, menuSize) => {
     return window.innerHeight < floatingPosition.top + menuSize.height;
-  };
-
-  /**
-   * Change flip of menu smartly when its at top side.
-   * @param {object} targetStyle This is computed style of target element.
-   * @param {object} floatingPosition This contains left and top postion of menu.
-   * @param {object} menuSize This contains all info about overFlow menu.
-   * @returns {boolean}
-   */
-  _menuOutOfBoundAtTop = (targetStyle, floatingPosition, menuSize) => {
-    return 0 < floatingPosition.top + menuSize.height;
   };
 
   componentWillUnmount() {

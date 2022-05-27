@@ -108,7 +108,7 @@ class OverflowMenu extends Component {
     autoFlipped: PropTypes.bool,
 
     /**
-     * `true` if the menu alignment should be flipped when menu overflows at top/bottom side of table.
+     * `true` if the menu alignment should be flipped when menu overflows at bottom side of table.
      * by default its value is true
      */
     autoVerticalFlipped: PropTypes.bool,
