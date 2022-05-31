@@ -392,6 +392,7 @@ export default class Pagination extends Component {
             isDisabled={pageInputDisabled || disabled}
             onChange={this.handlePageInputChange}
             menuPlacement={menuPlacement}
+            aria-label={statePage}
           />
           <span className={`${prefix}--pagination__text`}>
             {pagesUnknown
