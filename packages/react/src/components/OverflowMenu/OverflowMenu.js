@@ -108,8 +108,7 @@ class OverflowMenu extends Component {
     autoFlipped: PropTypes.bool,
 
     /**
-     * `true` if the menu alignment should be flipped when menu overflows at bottom side of table.
-     * by default its value is true
+     * `true` if the menu alignment should be vertically flipped when menu overflows at bottom side of table.
      */
     autoVerticalFlipped: PropTypes.bool,
 
@@ -242,6 +241,8 @@ class OverflowMenu extends Component {
     open: false,
     direction: DIRECTION_BOTTOM,
     flipped: false,
+    autoVerticalFlipped: true,
+    autoFlipped: true,
     renderIcon: OverflowMenuVertical16,
     onClick: () => {},
     onKeyDown: () => {},
