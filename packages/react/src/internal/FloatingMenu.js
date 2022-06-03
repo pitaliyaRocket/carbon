@@ -167,12 +167,12 @@ const getFloatingPosition = ({
 class FloatingMenu extends React.Component {
   static propTypes = {
     /**
-     * `true` if the menu alignment should be flipped when menu overflows at leftmost/rightmost side of table.
+     * `true` if the menu alignment should be flipped when menu overflows at leftmost/rightmost side of viewport.
      */
     autoFlipped: PropTypes.bool,
 
     /**
-     * `true` if the menu alignment should be vertically flipped when menu overflows at bottom side of table.
+     * `true` if the menu alignment should be vertically flipped when menu overflows at bottom side of viewport.
      */
     autoVerticalFlipped: PropTypes.bool,
 
