@@ -241,8 +241,6 @@ class OverflowMenu extends Component {
     open: false,
     direction: DIRECTION_BOTTOM,
     flipped: false,
-    autoVerticalFlipped: true,
-    autoFlipped: true,
     renderIcon: OverflowMenuVertical16,
     onClick: () => {},
     onKeyDown: () => {},
@@ -467,6 +465,8 @@ class OverflowMenu extends Component {
       children,
       iconDescription,
       direction,
+      autoFlipped = true,
+      autoVerticalFlipped = true,
       flipped,
       menuOffset,
       menuOffsetFlip,
@@ -543,8 +543,8 @@ class OverflowMenu extends Component {
         getViewport={getViewport}
         menuRef={this._bindMenuBody}
         flipped={this.props.flipped}
-        autoFlipped={this.props.autoFlipped}
-        autoVerticalFlipped={this.props.autoVerticalFlipped}
+        autoFlipped={autoFlipped}
+        autoVerticalFlipped={autoVerticalFlipped}
         target={this._getTarget}
         onPlace={this._handlePlace}
         selectorPrimaryFocus={this.props.selectorPrimaryFocus}>
