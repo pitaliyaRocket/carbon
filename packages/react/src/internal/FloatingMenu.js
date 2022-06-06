@@ -167,9 +167,14 @@ const getFloatingPosition = ({
 class FloatingMenu extends React.Component {
   static propTypes = {
     /**
-     * `true` if the menu alignment should be flipped when menu overflows at leftmost/rightmost side of table.
+     * `true` if the menu alignment should be flipped when menu overflows at leftmost/rightmost side of viewport.
      */
     autoFlipped: PropTypes.bool,
+
+    /**
+     * `true` if the menu alignment should be vertically flipped when menu overflows at bottom side of viewport.
+     */
+    autoVerticalFlipped: PropTypes.bool,
 
     /**
      * Contents to put into the floating menu.
@@ -253,6 +258,8 @@ class FloatingMenu extends React.Component {
   static defaultProps = {
     menuOffset: {},
     menuDirection: DIRECTION_BOTTOM,
+    autoFlipped: true,
+    autoVerticalFlipped: true,
   };
 
   // `true` if the menu body is mounted and calculation of the position is in progress.
@@ -321,7 +328,12 @@ class FloatingMenu extends React.Component {
       oldMenuDirection !== menuDirection ||
       (oldGetViewport && oldGetViewport()) !== (getViewport && getViewport())
     ) {
-      const { flipped, triggerRef, autoFlipped = true } = this.props;
+      const {
+        flipped,
+        triggerRef,
+        autoFlipped,
+        autoVerticalFlipped,
+      } = this.props;
       const { current: triggerEl } = triggerRef;
       const menuSize = menuBody.getBoundingClientRect();
       const refPosition = triggerEl && triggerEl.getBoundingClientRect();
@@ -355,6 +367,31 @@ class FloatingMenu extends React.Component {
             position: getComputedStyle(this.props.target()).position,
           },
         });
+        let updatedMenuDirection = menuDirection;
+        if (
+          autoVerticalFlipped &&
+          this._menuOutOfBoundAtBottom(floatingPosition, menuSize)
+        ) {
+          updatedMenuDirection = DIRECTION_TOP;
+          floatingPosition = getFloatingPosition({
+            menuSize,
+            refPosition,
+            direction: updatedMenuDirection,
+            offset,
+            viewportOffset: {
+              ...(viewportSize && {
+                left: viewportSize.left,
+                top: viewportSize.top,
+              }),
+            },
+            scrollX: viewport ? viewport.scrollLeft : window.pageXOffset,
+            scrollY: viewport ? viewport.scrollTop : window.pageYOffset,
+            container: {
+              rect: this.props.target().getBoundingClientRect(),
+              position: getComputedStyle(this.props.target()).position,
+            },
+          });
+        }
         const targetStyle = getComputedStyle(this.props.target());
         if (
           autoFlipped &&
@@ -370,11 +407,11 @@ class FloatingMenu extends React.Component {
           offset =
             typeof menuOffset !== 'function'
               ? menuOffset
-              : menuOffset(menuBody, menuDirection, triggerEl, !flipped);
+              : menuOffset(menuBody, updatedMenuDirection, triggerEl, !flipped);
           floatingPosition = getFloatingPosition({
             menuSize,
             refPosition,
-            direction: menuDirection,
+            direction: updatedMenuDirection,
             offset,
             viewportOffset: {
               ...(viewportSize && {
@@ -424,6 +461,16 @@ class FloatingMenu extends React.Component {
       parseInt(targetStyle.paddingLeft) + parseInt(targetStyle.marginLeft) >
       floatingPosition.left
     );
+  };
+
+  /**
+   * Change flip of menu smartly when its at bottom side.
+   * @param {object} floatingPosition This contains left and top postion of menu.
+   * @param {object} menuSize This contains all info about overFlow menu.
+   * @returns {boolean}
+   */
+  _menuOutOfBoundAtBottom = (floatingPosition, menuSize) => {
+    return window.innerHeight < floatingPosition.top + menuSize.height;
   };
 
   componentWillUnmount() {

@@ -102,10 +102,15 @@ class OverflowMenu extends Component {
     ariaLabel: PropTypes.string,
 
     /**
-     * `true` if the menu alignment should be flipped dynamically when menu overflows at leftmost/rightmost side of table.
+     * `true` if the menu alignment should be flipped dynamically when menu overflows at leftmost/rightmost side of viewport.
      * by default its value is true
      */
     autoFlipped: PropTypes.bool,
+
+    /**
+     * `true` if the menu alignment should be vertically flipped when menu overflows at bottom side of viewport.
+     */
+    autoVerticalFlipped: PropTypes.bool,
 
     /**
      * The child nodes.
@@ -460,6 +465,8 @@ class OverflowMenu extends Component {
       children,
       iconDescription,
       direction,
+      autoFlipped = true,
+      autoVerticalFlipped = true,
       flipped,
       menuOffset,
       menuOffsetFlip,
@@ -536,7 +543,8 @@ class OverflowMenu extends Component {
         getViewport={getViewport}
         menuRef={this._bindMenuBody}
         flipped={this.props.flipped}
-        autoFlipped={this.props.autoFlipped}
+        autoFlipped={autoFlipped}
+        autoVerticalFlipped={autoVerticalFlipped}
         target={this._getTarget}
         onPlace={this._handlePlace}
         selectorPrimaryFocus={this.props.selectorPrimaryFocus}>
