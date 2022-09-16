@@ -210,7 +210,7 @@ describe('Checkbox accessibility', () => {
         <Checkbox labelText="Checkbox label" id="test_id" />
       </main>
     );
-    await expect(screen.getByLabelText('Checkbox label')).toHaveNoACViolations(
+    await expect(screen.getByText('Checkbox label')).toHaveNoACViolations(
       'Checkbox'
     );
   });

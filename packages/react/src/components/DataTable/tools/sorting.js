@@ -9,6 +9,13 @@ import { getCellId } from './cells';
 import { sortStates } from '../state/sortStates';
 
 /**
+ * Method to convert the numerical string input into fixed decimal point number type
+ * @param {number|string} n
+ * @returns {number}
+ */
+const convertNum = (n) => parseFloat(parseFloat(n).toFixed(6));
+
+/**
  * Compare two primitives to determine which comes first. Initially, this method
  * will try and figure out if both entries are the same type. If so, it will
  * apply the default sort algorithm for those types. Otherwise, it defaults to a
@@ -20,8 +27,8 @@ import { sortStates } from '../state/sortStates';
  * @returns {number}
  */
 export const compare = (a, b, locale = 'en') => {
-  if (typeof a === 'number' && typeof b === 'number') {
-    return a - b;
+  if (!isNaN(a) && !isNaN(b)) {
+    return convertNum(a) - convertNum(b);
   }
 
   if (typeof a === 'string' && typeof b === 'string') {

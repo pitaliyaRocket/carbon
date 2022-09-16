@@ -77,8 +77,12 @@ describe('Link', () => {
     it('should have no Accessibility Checker violations', async () => {
       render(
         <main>
-          <Link href="/" className="some-class">
-            A simple link
+          <Link
+            href="/"
+            className="some-class"
+            data-testid={'test-id'}
+            tabIndex={0}>
+            <span>A simple link</span>
           </Link>
         </main>
       );

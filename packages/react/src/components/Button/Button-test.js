@@ -425,11 +425,15 @@ describe('Button accessibility', () => {
   it('should have no Accessibility Checker violations', async () => {
     render(
       <main>
-        <Button>Button Label</Button>
+        <Button>
+          <span>Button Label</span>
+        </Button>
       </main>
     );
 
-    await expect(screen.getByRole('button')).toHaveNoACViolations('Button');
+    await expect(screen.getByText('Button Label')).toHaveNoACViolations(
+      'Button'
+    );
   });
 
   it('is keyboard accessible', () => {
