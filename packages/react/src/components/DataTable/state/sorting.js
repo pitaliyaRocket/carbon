@@ -73,21 +73,27 @@ export const getNextSortState = (props, state, { key }) => {
  */
 export const getSortedState = (props, state, key, sortDirection) => {
   const { rowIds, cellsById, initialRowOrder } = state;
-  const { locale, sortRow } = props;
-  const nextRowIds =
-    sortDirection !== sortStates.NONE
-      ? sortRows({
-          rowIds,
-          cellsById,
-          sortDirection,
-          key,
-          locale,
-          sortRow,
-        })
-      : initialRowOrder;
-  return {
+  const { locale, sortRow, disableDefaultSort } = props;
+  let sortState = {
     sortHeaderKey: key,
     sortDirection: sortDirection,
-    rowIds: nextRowIds,
   };
+  if (!disableDefaultSort) {
+    const nextRowIds =
+      sortDirection !== sortStates.NONE
+        ? sortRows({
+            rowIds,
+            cellsById,
+            sortDirection,
+            key,
+            locale,
+            sortRow,
+          })
+        : initialRowOrder;
+    sortState = {
+      ...sortState,
+      rowIds: nextRowIds,
+    };
+  }
+  return sortState;
 };

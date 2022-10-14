@@ -77,6 +77,7 @@ describe('DataTable', () => {
         },
       ],
       locale: 'en',
+      disableDefaultSort: false,
       render: jest.fn(
         ({
           rows,
@@ -247,6 +248,7 @@ describe('DataTable', () => {
           },
         ],
         locale: 'en',
+        disableDefaultSort: false,
         render: jest.fn(
           ({ rows, headers, getHeaderProps, getSelectionProps }) => (
             <TableContainer title="DataTable with selection">
@@ -373,6 +375,7 @@ describe('DataTable', () => {
           },
         ],
         locale: 'en',
+        disableDefaultSort: false,
         render: jest.fn(
           ({
             rows,
@@ -549,6 +552,7 @@ describe('DataTable', () => {
         ],
         locale: 'en',
         radio: true,
+        disableDefaultSort: false,
         render: jest.fn(
           ({ rows, headers, getHeaderProps, getSelectionProps }) => (
             <TableContainer title="DataTable with selection">
@@ -684,6 +688,7 @@ describe('DataTable', () => {
           },
         ],
         locale: 'en',
+        disableDefaultSort: false,
         render: jest.fn(
           ({
             rows,

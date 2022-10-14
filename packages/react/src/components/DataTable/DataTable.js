@@ -56,6 +56,12 @@ const translateWithId = (id) => defaultTranslations[id];
 export default class DataTable extends React.Component {
   static propTypes = {
     /**
+     * Flag to disable the default sorting of the data table in case of client side sorting.
+     * default value is false.
+     */
+    disableDefaultSort: PropTypes.bool,
+
+    /**
      * Optional hook to manually control filtering of the rows from the
      * TableToolbarSearch component
      */
@@ -166,6 +172,7 @@ export default class DataTable extends React.Component {
     size: 'normal',
     overflowMenuOnHover: true,
     translateWithId,
+    disableDefaultSort: false,
   };
 
   static translationKeys = Object.values(translationKeys);

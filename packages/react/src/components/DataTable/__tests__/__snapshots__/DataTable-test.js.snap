@@ -2,6 +2,7 @@
 
 exports[`DataTable selection -- radio buttons should not have select-all checkbox 1`] = `
 <DataTable
+  disableDefaultSort={false}
   filterRows={[Function]}
   headers={
     Array [
@@ -192,6 +193,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
 
 exports[`DataTable selection -- radio buttons should render 1`] = `
 <DataTable
+  disableDefaultSort={false}
   filterRows={[Function]}
   headers={
     Array [
@@ -802,6 +804,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
 
 exports[`DataTable selection should have select-all default to un-checked if no rows are present 1`] = `
 <DataTable
+  disableDefaultSort={false}
   filterRows={[Function]}
   headers={
     Array [
@@ -1047,6 +1050,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
 
 exports[`DataTable selection should render 1`] = `
 <DataTable
+  disableDefaultSort={false}
   filterRows={[Function]}
   headers={
     Array [
@@ -1661,6 +1665,7 @@ exports[`DataTable selection should render 1`] = `
 
 exports[`DataTable should render 1`] = `
 <DataTable
+  disableDefaultSort={false}
   filterRows={[Function]}
   headers={
     Array [
@@ -2718,6 +2723,7 @@ exports[`DataTable should render 1`] = `
 
 exports[`DataTable sticky header should render 1`] = `
 <DataTable
+  disableDefaultSort={false}
   filterRows={[Function]}
   headers={
     Array [
