@@ -37,7 +37,11 @@ const getDerivedStateFromProps = (props, prevState) => {
     shouldShowBatchActions: prevState.shouldShowBatchActions || false,
   };
 
-  if (prevState.sortDirection && prevState.sortHeaderKey) {
+  if (
+    !props.disableDefaultSort &&
+    prevState.sortDirection &&
+    prevState.sortHeaderKey
+  ) {
     const { rowIds } = getSortedState(
       props,
       state,

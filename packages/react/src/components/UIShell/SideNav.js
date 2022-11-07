@@ -8,6 +8,7 @@
 import React, { useState, useRef } from 'react';
 import { settings } from '@rocketsoftware/carbon-components';
 import cx from 'classnames';
+import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
@@ -65,10 +66,12 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   };
 
   const handleHover = (value) => {
-    if (controlled || isRail) {
+    if (expandedViaHoverState !== value && (controlled || isRail)) {
       setExpandedViaHoverState(value);
     }
   };
+
+  const debounceHandleHover = debounce((value) => handleHover(value), 500);
 
   const handleFocus = (value) => {
     if (controlled || isRail) {
@@ -137,8 +140,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   }
 
   if (addMouseListeners && isRail) {
-    eventHandlers.onMouseEnter = () => handleHover(true);
-    eventHandlers.onMouseLeave = () => handleHover(false);
+    eventHandlers.onMouseEnter = () => debounceHandleHover(true);
+    eventHandlers.onMouseLeave = () => debounceHandleHover(false);
   }
 
   return (

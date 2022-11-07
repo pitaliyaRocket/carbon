@@ -1714,6 +1714,7 @@ Map {
       },
     },
     "defaultProps": Object {
+      "disableDefaultSort": false,
       "filterRows": [Function],
       "locale": "en",
       "overflowMenuOnHover": true,
@@ -1722,6 +1723,9 @@ Map {
       "translateWithId": [Function],
     },
     "propTypes": Object {
+      "disableDefaultSort": Object {
+        "type": "bool",
+      },
       "filterRows": Object {
         "type": "func",
       },

@@ -115,6 +115,7 @@
   .#{$prefix}--side-nav.bx--side-nav--rail:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
+    transition-delay: 500ms;
   }
 
   .#{$prefix}--side-nav__overlay {
