@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { settings } from '@rocketsoftware/carbon-components';
 import cx from 'classnames';
 import debounce from 'lodash.debounce';
@@ -65,13 +65,18 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     }
   };
 
-  const handleHover = (value) => {
-    if (expandedViaHoverState !== value && (controlled || isRail)) {
-      setExpandedViaHoverState(value);
-    }
-  };
-
-  const debounceHandleHover = debounce((value) => handleHover(value), 500);
+  const debounceHandleHover = useCallback(
+    () =>
+      debounce(
+        (value) => {
+          if (expandedViaHoverState !== value && (controlled || isRail)) {
+            setExpandedViaHoverState(value);
+          }
+        },
+        expandedViaHoverState ? 100 : 250
+      ),
+    [expandedViaHoverState, controlled, isRail]
+  );
 
   const handleFocus = (value) => {
     if (controlled || isRail) {
@@ -91,6 +96,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const className = cx({
     [`${prefix}--side-nav`]: true,
     [`${prefix}--side-nav--expanded`]: expanded,
+    [`${prefix}--side-nav--expanded-hover`]: expandedViaHoverState,
     [`${prefix}--side-nav--collapsed`]:
       (!expanded && isFixedNav) || (controlled && !expanded && !isRail),
     [`${prefix}--side-nav--rail`]: isRail,
